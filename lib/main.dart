@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dart_counter/app_state.dart';
-import 'package:dart_counter/view/android/screen/home_screen.dart' as android;
-import 'package:dart_counter/view/ios/screen/home_screen.dart' as ios;
+import 'package:dart_counter/view/android/screens.dart' as android;
+import 'package:dart_counter/view/ios/screens.dart' as ios;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,21 +17,52 @@ class DartCounter extends StatelessWidget {
       // Init IOS App
       return CupertinoApp(
         home: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => AppState())
-          ],
+          providers: [ChangeNotifierProvider(create: (context) => AppState())],
           child: ios.HomeScreen(),
-        )
+        ),
+        routes: {
+          'loading': (context) => ios.LoadingScreen(),
+          'signIn': (context) => ios.SignInScreen(),
+          'signUp': (context) => ios.SignUpScreen(),
+          'home': (context) => ios.HomeScreen(),
+          'profile': (context) => ios.ProfileScreen(),
+          'invite': (context) => ios.InvitesScreen(),
+          'gameHistory': (context) => ios.GameHistoryScreen(),
+          'friends': (context) => ios.FriendsScreen(),
+          'settings': (context) => ios.SettingsScreen(),
+          'aboutUs': (context) => ios.AboutUsScreen(),
+          'socialMedia': (context) => ios.SocialMediaScreen(),
+          'createGame': (context) => ios.CreateGameScreen(),
+          'inGame': (context) => ios.InGameScreen(),
+          'checkoutDetails': (context) => ios.CheckoutDetailsScreen(),
+          'stats': (context) => ios.StatsScreen(),
+        },
+        theme: CupertinoThemeData(primaryColor: Colors.black),
       );
     } else {
       // Init Android App
       return MaterialApp(
-          home: MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (context) => AppState())
-            ],
-            child: android.HomeScreen(),
-          )
+        home: MultiProvider(
+          providers: [ChangeNotifierProvider(create: (context) => AppState())],
+          child: android.HomeScreen(),
+        ),
+        routes: {
+          'loading': (context) => android.LoadingScreen(),
+          'signIn': (context) => android.SignInScreen(),
+          'signUp': (context) => android.SignUpScreen(),
+          'home': (context) => android.HomeScreen(),
+          'profile': (context) => android.ProfileScreen(),
+          'invite': (context) => android.InvitesScreen(),
+          'gameHistory': (context) => android.GameHistoryScreen(),
+          'friends': (context) => android.FriendsScreen(),
+          'settings': (context) => android.SettingsScreen(),
+          'aboutUs': (context) => android.AboutUsScreen(),
+          'socialMedia': (context) => android.SocialMediaScreen(),
+          'createGame': (context) => android.CreateGameScreen(),
+          'inGame': (context) => android.InGameScreen(),
+          'checkoutDetails': (context) => android.CheckoutDetailsScreen(),
+          'stats': (context) => android.StatsScreen(),
+        },
       );
     }
   }
