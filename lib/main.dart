@@ -19,7 +19,7 @@ class DartCounterApp extends StatelessWidget {
       return MultiProvider(
         providers: [ChangeNotifierProvider(create: (context) => AppState())],
         child: CupertinoApp(
-          home: ios.LoadingScreen(),
+          home: ios.HomeScreen(),
           routes: {
             Routes.loading: (context) => ios.LoadingScreen(),
             Routes.signIn: (context) => ios.SignInScreen(),
