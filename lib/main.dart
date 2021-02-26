@@ -4,13 +4,27 @@ import 'package:dart_counter/app_state.dart';
 import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/android/screens.dart' as android;
 import 'package:dart_counter/view/ios/screens.dart' as ios;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(DartCounterApp());
+
+final serviceLocator = GetIt.instance;
+
+void setup() {
+  serviceLocator.registerLazySingleton<AppState>(() => AppState());
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(DartCounterApp());
+}
 
 class DartCounterApp extends StatelessWidget {
+  final Future<FirebaseApp> _initFirebase = Firebase.initializeApp();
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,7 +33,18 @@ class DartCounterApp extends StatelessWidget {
       return MultiProvider(
         providers: [ChangeNotifierProvider(create: (context) => AppState())],
         child: CupertinoApp(
-          home: ios.HomeScreen(),
+          home: FutureBuilder(
+              future: _initFirebase,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text("App crashed");
+                } else {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ios.SignInScreen();
+                  }
+                  return ios.LoadingScreen();
+                }
+              }),
           routes: {
             Routes.loading: (context) => ios.LoadingScreen(),
             Routes.signIn: (context) => ios.SignInScreen(),

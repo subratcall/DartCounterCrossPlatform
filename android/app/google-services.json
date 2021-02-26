@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "591318061900",
+    "firebase_url": "https://dartcounterapi.firebaseio.com",
+    "project_id": "dartcounterapi",
+    "storage_bucket": "dartcounterapi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591318061900:android:749564b6dbd6b9e93875e9",
+        "android_client_info": {
+          "package_name": "com.jtdlab.dart_counter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591318061900-fj5egacq9i0p2pjme1ueec19j3e84gep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7r-vcVtIl9Tl-OMDSf75WBH0UxG6Lm2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591318061900-fj5egacq9i0p2pjme1ueec19j3e84gep.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "591318061900-83vrlpij89v1220tm50n43f3jpancmc0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jtdLab.DartCounter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
