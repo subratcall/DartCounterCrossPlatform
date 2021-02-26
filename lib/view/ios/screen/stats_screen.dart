@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class StatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text(this.toStringShort() + " -- IOS")),
+    return CupertinoPageScaffold(
+      child: Center(child: Text(this.toStringShort() + " -- IOS")),
     );
   }
 }
