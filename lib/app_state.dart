@@ -2,7 +2,6 @@ import 'package:dart_counter/app_settings.dart';
 import 'package:flutter/foundation.dart';
 
 class AppState extends ChangeNotifier {
-
   AppSettings _settings;
 
   AppState() : _settings = AppSettings();
@@ -13,5 +12,4 @@ class AppState extends ChangeNotifier {
     _settings = settings;
     notifyListeners();
   }
-
 }

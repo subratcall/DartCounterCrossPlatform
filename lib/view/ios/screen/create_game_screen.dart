@@ -17,7 +17,7 @@ class CreateGameScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(state.settings.language.createGame),
+          middle: Text(state.settings.language.titleCreateGame),
         ),
         child: SafeArea(
             child: Column(children: [

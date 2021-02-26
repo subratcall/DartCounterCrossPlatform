@@ -15,5 +15,3 @@ export 'screen/sign_in_screen.dart';
 export 'screen/sign_up_screen.dart';
 export 'screen/social_media_screen.dart';
 export 'screen/stats_screen.dart';
-
-

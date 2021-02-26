@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/MyFlutterApp.ttf
 ///
-/// 
+///
 /// * Linearicons Free, Copyright (C) Linearicons.com
 ///         Author:    Perxis
 ///         License:   CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
@@ -29,8 +29,12 @@ class MyFlutterApp {
   static const _kFontFam = 'MyFlutterApp';
   static const String _kFontPkg = null;
 
-  static const IconData menu = IconData(0xe871, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData facebook = IconData(0xf082, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData instagram = IconData(0xf16d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData google = IconData(0xf1a0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu =
+      IconData(0xe871, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData facebook =
+      IconData(0xf082, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData instagram =
+      IconData(0xf16d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData google =
+      IconData(0xf1a0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

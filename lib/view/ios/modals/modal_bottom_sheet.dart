@@ -20,9 +20,9 @@ class ModalWithScroll extends StatelessWidget {
               context: context,
               tiles: List.generate(
                   100,
-                      (index) => ListTile(
-                    title: Text('Item'),
-                  )),
+                  (index) => ListTile(
+                        title: Text('Item'),
+                      )),
             ).toList(),
           ),
         ),

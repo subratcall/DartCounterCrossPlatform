@@ -1,5 +1,4 @@
 class Routes {
-
   static const loading = 'loading';
   static const signIn = 'signIn';
   static const signUp = 'signUp';
@@ -15,5 +14,4 @@ class Routes {
   static const inGame = 'inGame';
   static const checkoutDetails = 'checkoutDetails';
   static const stats = 'stats';
-
 }

@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             child: Icon(MyFlutterApp.menu, size: 35),
             onPressed: () {},
           ),
-          middle: Text(state.settings.language.home),
+          middle: Text(state.settings.language.titleHome),
         ),
         child: SafeArea(
             child: Column(children: [
