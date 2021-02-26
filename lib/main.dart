@@ -1,9 +1,11 @@
 import 'dart:io';
 
-import 'package:dart_counter/view/android/screen/loading_screen.dart' as android;
-import 'package:dart_counter/view/ios/screen/loading_screen.dart' as ios;
+import 'package:dart_counter/app_state.dart';
+import 'package:dart_counter/view/android/screen/home_screen.dart' as android;
+import 'package:dart_counter/view/ios/screen/home_screen.dart' as ios;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(DartCounter());
 
@@ -14,12 +16,22 @@ class DartCounter extends StatelessWidget {
     if (Platform.isIOS) {
       // Init IOS App
       return CupertinoApp(
-        home: ios.LoadingScreen(),
+        home: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => AppState())
+          ],
+          child: ios.HomeScreen(),
+        )
       );
     } else {
       // Init Android App
       return MaterialApp(
-        home: android.LoadingScreen(),
+          home: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context) => AppState())
+            ],
+            child: android.HomeScreen(),
+          )
       );
     }
   }
