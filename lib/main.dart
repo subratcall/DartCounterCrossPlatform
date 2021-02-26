@@ -1,20 +1,27 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_counter/api/database.dart';
+import 'package:dart_counter/api/authentication.dart';
+import 'package:dart_counter/api/playing.dart';
 import 'package:dart_counter/app_state.dart';
 import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/android/screens.dart' as android;
 import 'package:dart_counter/view/ios/screens.dart' as ios;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-
 final serviceLocator = GetIt.instance;
 
 void setup() {
   serviceLocator.registerLazySingleton<AppState>(() => AppState());
+  serviceLocator.registerLazySingleton<AuthenticationService>(() => AuthenticationService(FirebaseAuth.instance));
+  serviceLocator.registerLazySingleton<DatabaseService>(() => DatabaseService(FirebaseFirestore.instance));
+  serviceLocator.registerLazySingleton(() => PlayingService());
 }
 
 Future<void> main() async {
