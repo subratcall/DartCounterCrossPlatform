@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_counter/api/database.dart';
 import 'package:dart_counter/api/authentication.dart';
 import 'package:dart_counter/api/playing.dart';
-import 'package:dart_counter/app_state.dart';
+import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/android/screens.dart' as android;
 import 'package:dart_counter/view/ios/screens.dart' as ios;
@@ -15,68 +15,62 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-final serviceLocator = GetIt.instance;
-
-void setup() {
-  serviceLocator.registerLazySingleton<AppState>(() => AppState());
-  serviceLocator.registerLazySingleton<AuthenticationService>(() => AuthenticationService(FirebaseAuth.instance));
-  serviceLocator.registerLazySingleton<DatabaseService>(() => DatabaseService(FirebaseFirestore.instance));
-  serviceLocator.registerLazySingleton(() => PlayingService());
+void registerServices() {
+  GetIt.instance.registerLazySingleton<AppModel>(() => AppModel());
+  GetIt.instance.registerLazySingleton<AuthenticationService>(() => AuthenticationService(FirebaseAuth.instance));
+  GetIt.instance.registerLazySingleton<DatabaseService>(() => DatabaseService(FirebaseFirestore.instance));
+  GetIt.instance.registerLazySingleton(() => PlayingService());
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(DartCounterApp());
 }
 
 class DartCounterApp extends StatelessWidget {
-  final Future<FirebaseApp> _initFirebase = Firebase.initializeApp();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      // Init IOS App
-      return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (context) => AppState())],
-        child: CupertinoApp(
-          home: FutureBuilder(
-              future: _initFirebase,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text("App crashed");
-                } else {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return ios.SignInScreen();
-                  }
-                  return ios.LoadingScreen();
-                }
-              }),
-          routes: {
-            Routes.loading: (context) => ios.LoadingScreen(),
-            Routes.signIn: (context) => ios.SignInScreen(),
-            Routes.signUp: (context) => ios.SignUpScreen(),
-            Routes.home: (context) => ios.HomeScreen(),
-            Routes.profile: (context) => ios.ProfileScreen(),
-            Routes.invite: (context) => ios.InvitesScreen(),
-            Routes.gameHistory: (context) => ios.GameHistoryScreen(),
-            Routes.friends: (context) => ios.FriendsScreen(),
-            Routes.settings: (context) => ios.SettingsScreen(),
-            Routes.aboutUs: (context) => ios.AboutUsScreen(),
-            Routes.socialMedia: (context) => ios.SocialMediaScreen(),
-            Routes.createGame: (context) => ios.CreateGameScreen(),
-            Routes.inGame: (context) => ios.InGameScreen(),
-            Routes.checkoutDetails: (context) => ios.CheckoutDetailsScreen(),
-            Routes.stats: (context) => ios.StatsScreen(),
-          },
-          theme: CupertinoThemeData(primaryColor: Colors.black),
+      return CupertinoApp(
+        home: ChangeNotifierProvider(
+          create: (context) => AppModel(),
+          child: Consumer<AppModel>(
+            builder: (context, model, child) {
+              if(model.isLoading) {
+                return ios.LoadingScreen();
+              } else {
+                return ios.SignInScreen();
+              }
+            }
+          ),
         ),
+        routes: {
+          Routes.loading: (context) => ios.LoadingScreen(),
+          Routes.signIn: (context) => ios.SignInScreen(),
+          Routes.signUp: (context) => ios.SignUpScreen(),
+          Routes.home: (context) => ios.HomeScreen(),
+          Routes.profile: (context) => ios.ProfileScreen(),
+          Routes.invite: (context) => ios.InvitesScreen(),
+          Routes.gameHistory: (context) => ios.GameHistoryScreen(),
+          Routes.friends: (context) => ios.FriendsScreen(),
+          Routes.settings: (context) => ios.SettingsScreen(),
+          Routes.aboutUs: (context) => ios.AboutUsScreen(),
+          Routes.socialMedia: (context) => ios.SocialMediaScreen(),
+          Routes.createGame: (context) => ios.CreateGameScreen(),
+          Routes.inGame: (context) => ios.InGameScreen(),
+          Routes.checkoutDetails: (context) => ios.CheckoutDetailsScreen(),
+          Routes.stats: (context) => ios.StatsScreen(),
+        },
+        theme: CupertinoThemeData(primaryColor: Colors.black),
       );
     } else {
       // Init Android App
       return MaterialApp(
         home: MultiProvider(
-          providers: [ChangeNotifierProvider(create: (context) => AppState())],
+          providers: [ChangeNotifierProvider(create: (context) => AppModel())],
           child: android.HomeScreen(),
         ),
         routes: {
