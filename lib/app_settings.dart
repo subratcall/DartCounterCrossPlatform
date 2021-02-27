@@ -4,4 +4,5 @@ class AppSettings {
   AppLanguage language;
 
   AppSettings([this.language = AppLanguage.english]);
+
 }

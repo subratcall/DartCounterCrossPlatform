@@ -5,9 +5,10 @@ import 'package:dart_counter/api/database.dart';
 import 'package:dart_counter/api/authentication.dart';
 import 'package:dart_counter/api/playing.dart';
 import 'package:dart_counter/app_model.dart';
+import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/routes.dart';
-import 'package:dart_counter/view/android/screens.dart' as android;
-import 'package:dart_counter/view/ios/screens.dart' as ios;
+import 'package:dart_counter/view/android/screen/screens.dart' as android;
+import 'package:dart_counter/view/ios/screen/screens.dart' as ios;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,16 +16,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-void registerServices() {
-  GetIt.instance.registerLazySingleton<AppModel>(() => AppModel());
-  GetIt.instance.registerLazySingleton<AuthenticationService>(() => AuthenticationService(FirebaseAuth.instance));
-  GetIt.instance.registerLazySingleton<DatabaseService>(() => DatabaseService(FirebaseFirestore.instance));
-  GetIt.instance.registerLazySingleton(() => PlayingService());
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  setupLocator();
   runApp(DartCounterApp());
 }
 
@@ -35,18 +31,7 @@ class DartCounterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return CupertinoApp(
-        home: ChangeNotifierProvider(
-          create: (context) => AppModel(),
-          child: Consumer<AppModel>(
-            builder: (context, model, child) {
-              if(model.isLoading) {
-                return ios.LoadingScreen();
-              } else {
-                return ios.SignInScreen();
-              }
-            }
-          ),
-        ),
+        home: ios.SignInScreen(),
         routes: {
           Routes.loading: (context) => ios.LoadingScreen(),
           Routes.signIn: (context) => ios.SignInScreen(),
@@ -69,10 +54,7 @@ class DartCounterApp extends StatelessWidget {
     } else {
       // Init Android App
       return MaterialApp(
-        home: MultiProvider(
-          providers: [ChangeNotifierProvider(create: (context) => AppModel())],
-          child: android.HomeScreen(),
-        ),
+        home: android.SignInScreen(),
         routes: {
           Routes.loading: (context) => android.LoadingScreen(),
           Routes.signIn: (context) => android.SignInScreen(),

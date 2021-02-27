@@ -1,7 +1,7 @@
 import 'package:dart_counter/app_language.dart';
 import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/routes.dart';
-import 'package:dart_counter/view/ios/modals/modal_fit.dart';
+import 'package:dart_counter/view/ios/modal/modal_fit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

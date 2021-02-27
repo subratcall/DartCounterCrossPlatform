@@ -5,8 +5,6 @@ class AppModel extends ChangeNotifier {
 
   AppSettings _settings;
 
-  bool isLoading = false;
-
   AppModel() : _settings = AppSettings();
 
   AppSettings get settings => _settings;
