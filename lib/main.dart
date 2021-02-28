@@ -20,6 +20,7 @@ class DartCounterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
+      // Init IOS App
       return CupertinoApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
