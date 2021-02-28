@@ -16,7 +16,7 @@ class InvitesScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleInvites),
+          middle: Text(AppLocalizations.of(context).invites),
         ),
         child: Center(child: Text(this.toStringShort() + " -- IOS")),
       );

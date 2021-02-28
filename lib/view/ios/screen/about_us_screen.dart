@@ -16,7 +16,7 @@ class AboutUsScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleAboutUs),
+          middle: Text(AppLocalizations.of(context).aboutUs),
         ),
         child: Center(child: Text(this.toStringShort() + " -- IOS")),
       );

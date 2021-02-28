@@ -16,7 +16,7 @@ class GameHistoryScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleGameHistory),
+          middle: Text(AppLocalizations.of(context).gameHistory),
         ),
         child: Center(child: Text(this.toStringShort() + " -- IOS")),
       );

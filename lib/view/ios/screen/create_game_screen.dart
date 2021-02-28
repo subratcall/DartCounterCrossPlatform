@@ -20,7 +20,7 @@ class CreateGameScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleCreateGame),
+          middle: Text(AppLocalizations.of(context).createGame),
         ),
         child: SafeArea(
             child: Column(children: [

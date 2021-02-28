@@ -16,7 +16,7 @@ class FriendsScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleFriends),
+          middle: Text(AppLocalizations.of(context).friends),
         ),
         child: Center(child: Text(this.toStringShort() + " -- IOS")),
       );

@@ -1,12 +1,17 @@
 {
-  "titleAboutUs": "Über uns",
-  "titleCreateGame": "Spiel erstellen",
-  "titleFriends": "Freunde",
-  "titleGameHistory": "Spielverlauf",
-  "titleHome": "Home",
-  "titleInvites": "Einladungen",
-  "titleProfile": "Profil",
-  "titleSettings": "Einstellungen",
-  "titleSocialMedia": "Social Media",
-  "titleStats": "Statistiken"
+  "aboutUs": "Über uns",
+  "createGame": "Spiel erstellen",
+  "forgotPassword": "Forgot Password?",
+  "friends": "Freunde",
+  "gameHistory": "Spielverlauf",
+  "home": "Home",
+  "invites": "Einladungen",
+  "login": "Einloggen",
+  "password": "Passwort",
+  "profile": "Profil",
+  "registerNow": "Jetzt Registrieren",
+  "settings": "Einstellungen",
+  "socialMedia": "Social Media",
+  "stats": "Statistiken",
+  "username": "Benutzername"
 }

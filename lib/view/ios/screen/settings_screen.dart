@@ -10,7 +10,7 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, model, child) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            middle: Text(AppLocalizations.of(context).titleSettings),
+            middle: Text(AppLocalizations.of(context).settings),
           ),
           child: Center(child: Text(this.toStringShort() + " -- IOS")),
         );

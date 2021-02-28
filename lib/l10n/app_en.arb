@@ -1,42 +1,63 @@
 {
-  "titleAboutUs": "About Us",
-  "@titleAboutUs": {
-    "description": "The title of the AboutUs screen"
+  "@aboutUs": {
+    "description": "word"
   },
-  "titleCreateGame": "Create Game",
-  "@titleCreateGame": {
-    "description": "The title of the CreateGame screen"
+  "@createGame": {
+    "description": "word"
   },
-  "titleFriends": "Friends",
-  "@titleFriends": {
-    "description": "The title of the Friends screen"
+  "@forgotPassword": {
+    "description": "phrase"
   },
-  "titleGameHistory": "Game History",
-  "@titleGameHistory": {
-    "description": "The title of the GameHistory screen"
+  "@friends": {
+    "description": "word"
   },
-  "titleHome": "Home",
-  "@titleHome": {
-    "description": "The title of the Home screen"
+  "@gameHistory": {
+    "description": "word"
   },
-  "titleInvites": "Invites",
-  "@titleInvites": {
-    "description": "The title of the Invites screen"
+  "@home": {
+    "description": "word"
   },
-  "titleProfile": "Profile",
-  "@titleProfile": {
-    "description": "The title of the Profile screen"
+  "@invites": {
+    "description": "word"
   },
-  "titleSettings": "Settings",
-  "@titleSettings": {
-    "description": "The title of the Settings screen"
+  "@login": {
+    "description": "word"
   },
-  "titleSocialMedia": "Social Media",
-  "@titleSocialMedia": {
-    "description": "The title of the SocialMedia screen"
+  "@password": {
+    "description": "word"
   },
-  "titleStats": "Stats",
-  "@titleStats": {
-    "description": "The title of the Stats screen"
-  }
+  "@profile": {
+    "description": "word"
+  },
+  "@registerNow": {
+    "description": "phrase"
+  },
+  "@settings": {
+    "description": "word"
+  },
+  "@socialMedia": {
+    "description": "word"
+  },
+  "@stats": {
+    "description": "word"
+  },
+  "@username": {
+    "description": "word"
+  },
+
+  "aboutUs": "About Us",
+  "createGame": "Create Game",
+  "forgotPassword": "Forgot Password?",
+  "friends": "Friends",
+  "gameHistory": "Game History",
+  "home": "Home",
+  "invites": "Invites",
+  "login": "Login",
+  "password": "Password",
+  "profile": "Profile",
+  "registerNow": "Register now",
+  "settings": "Settings",
+  "socialMedia": "Social Media",
+  "stats": "Stats",
+  "username": "Username"
 }

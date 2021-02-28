@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             child: Icon(AppIcons.menu, size: 35),
             onPressed: () {},
           ),
-          middle: Text(AppLocalizations.of(context).titleHome),
+          middle: Text(AppLocalizations.of(context).home),
         ),
         child: SafeArea(
             child: Column(children: [

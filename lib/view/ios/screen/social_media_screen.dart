@@ -16,7 +16,7 @@ class SocialMediaScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleSocialMedia),
+          middle: Text(AppLocalizations.of(context).socialMedia),
         ),
         child: Center(child: Text(this.toStringShort() + " -- IOS")),
       );

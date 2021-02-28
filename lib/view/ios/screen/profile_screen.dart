@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          middle: Text(AppLocalizations.of(context).titleProfile),
+          middle: Text(AppLocalizations.of(context).profile),
         ),
         child: Center(child: Text(this.toStringShort() + " -- IOS")),
       );
