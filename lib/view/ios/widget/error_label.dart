@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,9 +9,11 @@ class ErrorLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
         text,
-        style: TextStyle(fontSize: 9.0, color: AppColors.red),
+        minFontSize: 6,
+        maxLines: 1,
+        style: TextStyle(color: AppColors.red),
     );
   }
 }
