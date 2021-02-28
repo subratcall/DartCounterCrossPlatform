@@ -5,6 +5,9 @@
   "@createGame": {
     "description": "word"
   },
+  "@connectionErrorMessage": {
+    "description": "phrase"
+  },
   "@forgotPassword": {
     "description": "phrase"
   },
@@ -47,6 +50,7 @@
 
   "aboutUs": "About Us",
   "createGame": "Create Game",
+  "connectionErrorMessage": "Check your internet connection!",
   "forgotPassword": "Forgot Password?",
   "friends": "Friends",
   "gameHistory": "Game History",

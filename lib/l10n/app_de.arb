@@ -1,6 +1,7 @@
 {
   "aboutUs": "Über uns",
   "createGame": "Spiel erstellen",
+  "connectionErrorMessage": "Internetverbindung überprüfen!",
   "forgotPassword": "Forgot Password?",
   "friends": "Freunde",
   "gameHistory": "Spielverlauf",

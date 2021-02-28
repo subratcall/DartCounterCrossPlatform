@@ -1,5 +1,7 @@
+import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/routes.dart';
+import 'package:dart_counter/view/ios/widget/error_label.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/social_media_button.dart';
@@ -9,7 +11,17 @@ import 'package:dart_counter/viewmodel/authentication/sign_in_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Screen<SignInViewModel>(builder: (context, model, child) {
@@ -31,31 +43,67 @@ class SignInScreen extends StatelessWidget {
                         flex: 8,
                       ),
                       Flexible(
-                        child: TextField(),
+                        child: TextField(
+                          placeholder: AppLocalizations.of(context).username,
+                          controller: emailController,
+                        ),
                         flex: 36,
                       ),
                       Spacer(
                         flex: 16,
                       ),
-                      Flexible(child: TextField(), flex: 36),
+                      Flexible(
+                        child: TextField(
+                          placeholder: AppLocalizations.of(context).password,
+                          controller: passwordController,
+                        ),
+                        flex: 36,
+                      ),
                       Spacer(
                         flex: 4,
                       ),
                       Flexible(
-                          child: Center(
-                            child: Text('Error'),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // TODO make children scale with device
+                            // TODO align icon to text center vertically
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2.0),
+                                child: Icon(
+                                  CupertinoIcons.xmark_circle_fill,
+                                  color: AppColors.red,
+                                  size: 9.0,
+                                ),
+                              ),
+                              ErrorLabel(
+                                text: AppLocalizations.of(context).connectionErrorMessage,
+                              )
+                            ],
                           ),
                           flex: 8),
                       Spacer(
                         flex: 8,
                       ),
-                      Flexible(child: PrimaryButton(), flex: 48),
+                      Flexible(
+                          child: PrimaryButton(
+                            text: AppLocalizations.of(context).login,
+                            onPressed: () =>
+                                model.onSignPressed(email: emailController.text, password: passwordController.text),
+                          ),
+                          flex: 48),
                       Spacer(
                         flex: 16,
                       ),
                       Flexible(
-                          child: Center(
-                            child: Text('Forgot password'),
+                          child: LinkButton(
+                            text: AppLocalizations.of(context).forgotPassword,
+                            onPressed: () {
+                              // TODO
+                              // Navigator.pushNamed(context, Routes.signUp);
+                            },
                           ),
                           flex: 16),
                       Spacer(
@@ -104,5 +152,12 @@ class SignInScreen extends StatelessWidget {
         ),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
