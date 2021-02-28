@@ -30,13 +30,18 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: [
                 Flexible(
-                  child: Center(
-                    // TODO make image esponsible
-                    child: Container(
-                        child: Image.asset(AppImages.logo),
-                      width: 135,
-                      height: 165,
-                    ),
+                  child: Column(
+                    children: [
+                      Spacer(flex: 120,),
+                      Row(
+                        children: [
+                          Spacer(flex: 120,),
+                          Flexible(child: Image.asset(AppImages.logo), flex: 135,),
+                          Spacer(flex: 120,),
+                        ],
+                      ),
+                      Spacer(flex: 120,),
+                    ],
                   ),
                 ),
                 Flexible(
