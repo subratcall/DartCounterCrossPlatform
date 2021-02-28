@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 enum ViewState { Idle, Busy }
 
 class ViewModel extends ChangeNotifier {
-
   /**
    *  final SessionService sessionService = locator<SessionService>();
 
@@ -41,5 +40,4 @@ class ViewModel extends ChangeNotifier {
     _state = viewState;
     notifyListeners();
   }
-
 }

@@ -1,5 +1,5 @@
-import 'package:dart_counter/viewmodel/settings_viewmodel.dart';
 import 'package:dart_counter/view/screen.dart';
+import 'package:dart_counter/viewmodel/settings_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

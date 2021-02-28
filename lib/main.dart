@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/android/screen/screens.dart' as android;
@@ -8,6 +7,7 @@ import 'package:dart_counter/view/ios/screen/screens.dart' as ios;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +17,13 @@ Future<void> main() async {
 }
 
 class DartCounterApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return CupertinoApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: ios.SignInScreen(),
+        home: ios.HomeScreen(),
         routes: {
           Routes.loading: (context) => ios.LoadingScreen(),
           Routes.signIn: (context) => ios.SignInScreen(),

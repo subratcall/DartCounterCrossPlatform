@@ -3,11 +3,8 @@ import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class SignInViewModel extends ViewModel {
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
 
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
-
-  Future<bool> signIn() async {
-
-  }
-
+  Future<bool> signIn() async {}
 }

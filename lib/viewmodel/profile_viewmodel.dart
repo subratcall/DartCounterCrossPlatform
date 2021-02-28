@@ -1,5 +1,3 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-class ProfileViewModel extends ViewModel {
-
-}
+class ProfileViewModel extends ViewModel {}

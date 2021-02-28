@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class Screen<T extends ViewModel> extends StatefulWidget {
-
   final Widget Function(BuildContext context, T model, Widget child) builder;
   final Function(T) onModelReady;
 
@@ -15,7 +14,6 @@ class Screen<T extends ViewModel> extends StatefulWidget {
 }
 
 class _ScreenState<T extends ViewModel> extends State<Screen<T>> {
-
   T model = locator<T>();
 
   @override
