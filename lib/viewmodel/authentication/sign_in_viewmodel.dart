@@ -10,7 +10,7 @@ class SignInViewModel extends ViewModel {
   }
 
   void onSignInFacebookPressed() {
-    _authenticationService.signInFacebook()
+    _authenticationService.signInFacebook();
   }
 
   void onSignInGooglePressed() {

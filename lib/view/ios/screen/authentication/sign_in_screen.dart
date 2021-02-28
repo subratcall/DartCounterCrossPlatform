@@ -52,7 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       Flexible(
                         child: TextField(
-                          placeholder: AppLocalizations.of(context).username,
+                          placeholder: AppLocalizations.of(context).email,
                           controller: emailController,
                         ),
                         flex: 36,

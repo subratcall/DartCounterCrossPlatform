@@ -5,7 +5,19 @@
   "@createGame": {
     "description": "word"
   },
+  "@checkMailAccountForPasswordResetLink": {
+    "description": "phrase"
+  },
   "@connectionErrorMessage": {
+    "description": "phrase"
+  },
+  "@confirm": {
+    "description": "word"
+  },
+  "@email": {
+    "description": "word"
+  },
+  "@emailSent": {
     "description": "phrase"
   },
   "@forgotPassword": {
@@ -20,6 +32,9 @@
   "@home": {
     "description": "word"
   },
+  "@insertEmailToResetPassword": {
+    "description": "phrase"
+  },
   "@invites": {
     "description": "word"
   },
@@ -29,11 +44,17 @@
   "@password": {
     "description": "word"
   },
+  "@passwordAgain": {
+    "description": "word"
+  },
   "@profile": {
     "description": "word"
   },
   "@registerNow": {
     "description": "phrase"
+  },
+  "@register": {
+    "description": "word"
   },
   "@settings": {
     "description": "word"
@@ -49,16 +70,23 @@
   },
 
   "aboutUs": "About Us",
+  "confirm": "Confirm",
+  "checkMailAccountForPasswordResetLink": "Check your email account to reset your password.",
   "createGame": "Create Game",
   "connectionErrorMessage": "Check your internet connection!",
+  "email": "Email",
+  "emailSent": "Email sent!",
   "forgotPassword": "Forgot Password?",
   "friends": "Friends",
   "gameHistory": "Game History",
   "home": "Home",
+  "insertEmailToResetPassword": "Enter your user account's email and we will send you a password reset link.",
   "invites": "Invites",
   "login": "Login",
   "password": "Password",
+  "passwordAgain": "Password again",
   "profile": "Profile",
+  "register": "Register",
   "registerNow": "Register now",
   "settings": "Settings",
   "socialMedia": "Social Media",
