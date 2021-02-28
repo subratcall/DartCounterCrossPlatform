@@ -1,3 +1,4 @@
+import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -31,6 +32,8 @@ class ViewModel extends ChangeNotifier {
       notifyListeners();
       }
    */
+
+  AppModel app = locator<AppModel>();
 
   ViewState _state = ViewState.Idle;
 

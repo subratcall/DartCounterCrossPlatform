@@ -2,6 +2,7 @@ import 'dart:ui' show Color;
 
 class AppColors {
 
+  static const Color transparent = Color(0x00000000);
   static const Color black = Color.fromRGBO(0, 0, 0, 1.0);
   static const Color black1 = Color.fromRGBO(22, 20, 20, 1.0);
   static const Color black2 = Color.fromRGBO(52, 52, 50, 1.0);

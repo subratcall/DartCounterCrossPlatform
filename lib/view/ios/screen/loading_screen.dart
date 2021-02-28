@@ -1,4 +1,4 @@
-import 'package:dart_counter/res/app_animations.dart';
+import 'package:dart_counter/assets/app_animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lottie/lottie.dart';
 

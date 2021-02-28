@@ -1,21 +1,13 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dart_counter/api/database.dart';
-import 'package:dart_counter/api/authentication.dart';
-import 'package:dart_counter/api/playing.dart';
-import 'package:dart_counter/app_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/android/screen/screens.dart' as android;
 import 'package:dart_counter/view/ios/screen/screens.dart' as ios;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,11 +18,12 @@ Future<void> main() async {
 
 class DartCounterApp extends StatelessWidget {
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return CupertinoApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: ios.SignInScreen(),
         routes: {
           Routes.loading: (context) => ios.LoadingScreen(),
@@ -72,6 +65,7 @@ class DartCounterApp extends StatelessWidget {
           Routes.checkoutDetails: (context) => android.CheckoutDetailsScreen(),
           Routes.stats: (context) => android.StatsScreen(),
         },
+        // TODO further bootstrapping
       );
     }
   }

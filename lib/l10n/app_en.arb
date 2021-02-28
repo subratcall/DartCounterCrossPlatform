@@ -1,0 +1,42 @@
+{
+  "titleAboutUs": "About Us",
+  "@titleAboutUs": {
+    "description": "The title of the AboutUs screen"
+  },
+  "titleCreateGame": "Create Game",
+  "@titleCreateGame": {
+    "description": "The title of the CreateGame screen"
+  },
+  "titleFriends": "Friends",
+  "@titleFriends": {
+    "description": "The title of the Friends screen"
+  },
+  "titleGameHistory": "Game History",
+  "@titleGameHistory": {
+    "description": "The title of the GameHistory screen"
+  },
+  "titleHome": "Home",
+  "@titleHome": {
+    "description": "The title of the Home screen"
+  },
+  "titleInvites": "Invites",
+  "@titleInvites": {
+    "description": "The title of the Invites screen"
+  },
+  "titleProfile": "Profile",
+  "@titleProfile": {
+    "description": "The title of the Profile screen"
+  },
+  "titleSettings": "Settings",
+  "@titleSettings": {
+    "description": "The title of the Settings screen"
+  },
+  "titleSocialMedia": "Social Media",
+  "@titleSocialMedia": {
+    "description": "The title of the SocialMedia screen"
+  },
+  "titleStats": "Stats",
+  "@titleStats": {
+    "description": "The title of the Stats screen"
+  }
+}

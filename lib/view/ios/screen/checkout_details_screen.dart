@@ -1,14 +1,17 @@
-import 'package:dart_counter/app_model.dart';
+import 'package:dart_counter/view/screen.dart';
+import 'package:dart_counter/viewmodel/checkout_details_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+
 
 class CheckoutDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppModel>(builder: (context, state, child) {
-      return CupertinoPageScaffold(
-        child: Center(child: Text(this.toStringShort() + " -- IOS")),
-      );
-    });
+    return Screen<CheckoutDetailsViewModel>(
+        builder: (context, model, child) {
+          return CupertinoPageScaffold(
+            child: Center(child: Text(this.toStringShort() + " -- IOS")),
+          );
+        }
+    );
   }
 }

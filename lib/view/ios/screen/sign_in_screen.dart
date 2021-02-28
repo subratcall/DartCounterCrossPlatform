@@ -13,7 +13,7 @@ class SignInScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(this.toStringShort() + " -- IOS"),
-                      CupertinoButton(child: Text("Print"), onPressed: () => model.printSome())
+                      CupertinoButton(child: Text("Press me"), onPressed: () {})
                     ],
                   )
               ),

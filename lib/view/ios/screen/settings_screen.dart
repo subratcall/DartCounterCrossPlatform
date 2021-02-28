@@ -1,18 +1,20 @@
-import 'package:dart_counter/app_language.dart';
-import 'package:dart_counter/app_model.dart';
+import 'package:dart_counter/viewmodel/settings_viewmodel.dart';
+import 'package:dart_counter/view/screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppModel>(builder: (context, state, child) {
-      return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text(state.settings.language.titleSettings),
-        ),
-        child: Center(child: Text(this.toStringShort() + " -- IOS")),
-      );
-    });
+    return Screen<SettingsViewModel>(
+      builder: (context, model, child) {
+        return CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text(AppLocalizations.of(context).titleSettings),
+          ),
+          child: Center(child: Text(this.toStringShort() + " -- IOS")),
+        );
+      },
+    );
   }
 }
