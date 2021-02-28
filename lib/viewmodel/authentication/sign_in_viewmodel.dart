@@ -10,15 +10,15 @@ class SignInViewModel extends ViewModel {
   }
 
   void onSignInFacebookPressed() {
-    // TODO implement
+    _authenticationService.signInFacebook()
   }
 
   void onSignInGooglePressed() {
-    // TODO implement
+    _authenticationService.signInGoogle();
   }
 
   void onSignInInstagramPressed() {
-    // TODO implement
+    _authenticationService.signIn();
   }
 
 }

@@ -27,6 +27,19 @@ class AuthenticationService {
     }
   }
 
+  Future<dynamic> signInFacebook() {
+    // TODO implement
+  }
+
+  Future<dynamic> signInGoogle() {
+    // TODO implement
+  }
+
+  Future<dynamic> signInInstagram() {
+    // TODO implement
+  }
+
+
   Future<void> signOut() async {
     _firebaseAuth.signOut();
   }
