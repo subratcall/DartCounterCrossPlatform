@@ -1,7 +1,5 @@
-import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/routes.dart';
-import 'package:dart_counter/view/ios/widget/error_label.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/social_media_button.dart';
@@ -33,6 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 Flexible(
                   child: Center(
+                    // TODO make image esponsible
                     child: Container(
                         child: Image.asset(AppImages.logo),
                       width: 135,
@@ -64,32 +63,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         flex: 36,
                       ),
                       Spacer(
-                        flex: 4,
-                      ),
-                      Flexible(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            // TODO make children scale with device
-                            // TODO align icon to text center vertically
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 2.0),
-                                child: Icon(
-                                  CupertinoIcons.xmark_circle_fill,
-                                  color: AppColors.red,
-                                  size: 9.0,
-                                ),
-                              ),
-                              ErrorLabel(
-                                text: AppLocalizations.of(context).connectionErrorMessage,
-                              )
-                            ],
-                          ),
-                          flex: 8),
-                      Spacer(
-                        flex: 8,
+                        flex: 16,
                       ),
                       Flexible(
                           child: PrimaryButton(
@@ -105,8 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: LinkButton(
                             text: AppLocalizations.of(context).forgotPassword,
                             onPressed: () {
-                              // TODO
-                              // Navigator.pushNamed(context, Routes.signUp);
+                              Navigator.pushNamed(context, Routes.resetPassword);
                             },
                           ),
                           flex: 16),

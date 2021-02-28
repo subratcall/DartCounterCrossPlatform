@@ -21,5 +21,4 @@ class SignInViewModel extends ViewModel {
     // TODO implement
   }
 
-
 }

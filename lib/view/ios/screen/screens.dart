@@ -15,3 +15,4 @@ export 'authentication/sign_in_screen.dart';
 export 'authentication/sign_up_screen.dart';
 export 'social_media_screen.dart';
 export 'stats_screen.dart';
+export 'authentication/reset_password_screen.dart';

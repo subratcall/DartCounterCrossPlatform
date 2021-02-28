@@ -1,4 +1,5 @@
 import 'package:dart_counter/viewmodel/about_us_viewmodel.dart';
+import 'package:dart_counter/viewmodel/authentication/reset_password_viewmodel.dart';
 import 'package:dart_counter/viewmodel/checkout_details_viewmodel.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
 import 'package:dart_counter/viewmodel/friends_viewmodel.dart';
@@ -46,4 +47,5 @@ void setupLocator() {
   locator.registerFactory(() => SignUpViewModel());
   locator.registerFactory(() => SocialMediaViewModel());
   locator.registerFactory(() => StatsViewModel());
+  locator.registerFactory(() => ResetPasswordViewModel());
 }

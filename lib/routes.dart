@@ -14,4 +14,5 @@ class Routes {
   static const inGame = 'inGame';
   static const checkoutDetails = 'checkoutDetails';
   static const stats = 'stats';
+  static const resetPassword = 'resetPassword';
 }

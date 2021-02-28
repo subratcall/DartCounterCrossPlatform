@@ -46,6 +46,7 @@ class DartCounterApp extends StatelessWidget {
               Routes.inGame: (context) => ios.InGameScreen(),
               Routes.checkoutDetails: (context) => ios.CheckoutDetailsScreen(),
               Routes.stats: (context) => ios.StatsScreen(),
+              Routes.resetPassword: (context) => ios.ResetPasswordScreen(),
             },
             theme: CupertinoThemeData(primaryColor: Colors.black),
           );
@@ -69,6 +70,7 @@ class DartCounterApp extends StatelessWidget {
               Routes.inGame: (context) => android.InGameScreen(),
               Routes.checkoutDetails: (context) => android.CheckoutDetailsScreen(),
               Routes.stats: (context) => android.StatsScreen(),
+              Routes.resetPassword: (context) => android.ResetPasswordScreen(),
             },
             // TODO further bootstrapping
           );
