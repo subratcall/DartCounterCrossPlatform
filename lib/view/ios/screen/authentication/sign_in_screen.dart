@@ -33,7 +33,11 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 Flexible(
                   child: Center(
-                    child: Image.asset(AppImages.logo),
+                    child: Container(
+                        child: Image.asset(AppImages.logo),
+                      width: 135,
+                      height: 165,
+                    ),
                   ),
                 ),
                 Flexible(
