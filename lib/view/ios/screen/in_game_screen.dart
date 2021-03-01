@@ -4,7 +4,7 @@ import 'package:dart_counter/view/ios/screen/stats_screen.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/in_game_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Scaffold;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class InGameScreen extends StatelessWidget {

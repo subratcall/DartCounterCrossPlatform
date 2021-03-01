@@ -11,7 +11,7 @@ class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
     viewState = ResetPasswordViewState.loading;
 
     // TODO process data
-    await Future.delayed(const Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 1), () {});
 
     viewState = ResetPasswordViewState.successful;
   }
