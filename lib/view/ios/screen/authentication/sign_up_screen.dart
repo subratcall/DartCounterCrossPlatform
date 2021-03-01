@@ -21,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
+
     return Screen<SignUpViewModel>(builder: (context, model, child) {
       return CupertinoPageScaffold(
         child: SafeArea(
@@ -65,6 +67,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextField(
                         placeholder: AppLocalizations.of(context).email,
                         controller: emailController,
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () => node.nextFocus(),
                       ),
                       flex: 36,
                     ),
@@ -75,6 +79,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextField(
                         placeholder: AppLocalizations.of(context).username,
                         controller: usernameController,
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () => node.nextFocus(),
                       ),
                       flex: 36,
                     ),
@@ -86,6 +92,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         placeholder: AppLocalizations.of(context).password,
                         controller: passwordController,
                         obscureText: true,
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () => node.nextFocus(),
                       ),
                       flex: 36,
                     ),
@@ -97,6 +105,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         placeholder: AppLocalizations.of(context).passwordAgain,
                         controller: passwordAgainController,
                         obscureText: true,
+                        textInputAction: TextInputAction.done,
+                        onEditingComplete: () => node.unfocus(),
                       ),
                       flex: 36,
                     ),

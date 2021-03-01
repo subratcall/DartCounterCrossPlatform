@@ -23,6 +23,8 @@ class _SignInScreenState extends State<SignInScreen> {
   final passwordController = TextEditingController();
 
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
+
     return Screen<SignInViewModel>(builder: (context, model, child) {
       return Scaffold(
         body: CupertinoScaffold(
@@ -70,6 +72,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: TextField(
                                 placeholder: AppLocalizations.of(context).email,
                                 controller: emailController,
+                                textInputAction: TextInputAction.next,
+                                onEditingComplete: () => node.nextFocus(),
                               ),
                               flex: 36,
                             ),
@@ -81,6 +85,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 placeholder: AppLocalizations.of(context).password,
                                 controller: passwordController,
                                 obscureText: true,
+                                textInputAction: TextInputAction.done,
+                                onEditingComplete: () => node.unfocus(),
                               ),
                               flex: 36,
                             ),
