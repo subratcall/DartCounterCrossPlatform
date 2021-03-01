@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Spacer(flex: 143,),
+                      Spacer(flex: 105,),
                       Expanded(
                         child: Row(
                           children: [
@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         flex: 17,
                       ),
-                      Spacer(flex: 147,),
+                      Spacer(flex: 109,),
                     ],
                   ),
               ),

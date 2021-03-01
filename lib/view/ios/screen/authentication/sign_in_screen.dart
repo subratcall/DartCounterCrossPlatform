@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Spacer(
-                      flex: 143,
+                      flex: 105,
                     ),
                     Expanded(
                         child: Row(
