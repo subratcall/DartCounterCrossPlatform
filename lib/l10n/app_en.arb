@@ -68,6 +68,12 @@
   "@username": {
     "description": "word"
   },
+  "@resetPassword": {
+    "description": "word"
+  },
+  "@cancel": {
+    "description": "word"
+  },
 
   "aboutUs": "About Us",
   "confirm": "Confirm",
@@ -91,5 +97,7 @@
   "settings": "Settings",
   "socialMedia": "Social Media",
   "stats": "Stats",
-  "username": "Username"
+  "username": "Username",
+  "resetPassword" : "Reset Password",
+  "cancel" : "Cancel"
 }

@@ -21,5 +21,7 @@
   "settings": "Einstellungen",
   "socialMedia": "Social Media",
   "stats": "Statistiken",
-  "username": "Benutzername"
+  "username": "Benutzername",
+  "resetPassword" : "Passwort zurücksetzen",
+  "cancel" : "Abbrechen"
 }

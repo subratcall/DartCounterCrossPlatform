@@ -8,6 +8,7 @@ import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/authentication/reset_password_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   @override
@@ -42,6 +43,16 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        leading: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Text(AppLocalizations.of(context).cancel),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        middle: Text(AppLocalizations.of(context).resetPassword),
+      ),
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),

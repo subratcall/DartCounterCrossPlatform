@@ -12,7 +12,7 @@ class LinkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.zero,
       onPressed: onPressed,
       child: AutoSizeText(
         text,

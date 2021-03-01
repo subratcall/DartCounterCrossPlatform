@@ -13,7 +13,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       color: AppColors.black,
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.zero,
       onPressed: onPressed,
       child: Center(
         child: AutoSizeText(

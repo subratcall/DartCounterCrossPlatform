@@ -17,7 +17,7 @@ class SocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.zero,
       onPressed: onPressed,
       child: AspectRatio(
         aspectRatio: 1,
