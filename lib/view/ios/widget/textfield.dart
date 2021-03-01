@@ -10,16 +10,12 @@ class TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
-      width:  double.infinity,
-      child: CupertinoTextField(
-        controller: controller,
-        placeholder: placeholder,
-        decoration: BoxDecoration(
-          color: AppColors.gray,
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        ),
+    return CupertinoTextField(
+      controller: controller,
+      placeholder: placeholder,
+      decoration: BoxDecoration(
+        color: AppColors.gray,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
     );
   }

@@ -15,15 +15,11 @@ class PrimaryButton extends StatelessWidget {
       color: AppColors.black,
       padding: EdgeInsets.all(0.0),
       onPressed: onPressed,
-      child: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Center(
-          child: AutoSizeText(
-            text,
-            maxLines: 1,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+      child: Center(
+        child: AutoSizeText(
+          text,
+          maxLines: 1,
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

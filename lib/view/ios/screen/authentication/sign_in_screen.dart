@@ -20,115 +20,130 @@ class _SignInScreenState extends State<SignInScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  @override
   Widget build(BuildContext context) {
     return Screen<SignInViewModel>(builder: (context, model, child) {
       return CupertinoPageScaffold(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              children: [
-                Flexible(
-                  child: Column(
-                    children: [
-                      Spacer(flex: 120,),
-                      Row(
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width,
+                maxHeight: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Column(
                         children: [
                           Spacer(flex: 120,),
-                          Flexible(child: Image.asset(AppImages.logo), flex: 135,),
+                          Row(
+                            children: [
+                              Spacer(flex: 120,),
+                              Flexible(child: Image.asset(AppImages.logo), flex: 135,),
+                              Spacer(flex: 120,),
+                            ],
+                          ),
                           Spacer(flex: 120,),
                         ],
                       ),
-                      Spacer(flex: 120,),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Column(
-                    children: [
-                      Spacer(
-                        flex: 8,
-                      ),
-                      Flexible(
-                        child: TextField(
-                          placeholder: AppLocalizations.of(context).email,
-                          controller: emailController,
-                        ),
-                        flex: 36,
-                      ),
-                      Spacer(
-                        flex: 16,
-                      ),
-                      Flexible(
-                        child: TextField(
-                          placeholder: AppLocalizations.of(context).password,
-                          controller: passwordController,
-                        ),
-                        flex: 36,
-                      ),
-                      Spacer(
-                        flex: 16,
-                      ),
-                      Flexible(
-                          child: PrimaryButton(
-                            text: AppLocalizations.of(context).login,
-                            onPressed: () =>
-                                model.onSignPressed(email: emailController.text, password: passwordController.text),
-                          ),
-                          flex: 48),
-                      Spacer(
-                        flex: 16,
-                      ),
-                      Flexible(
-                          child: LinkButton(
-                            text: AppLocalizations.of(context).forgotPassword,
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.resetPassword);
-                            },
-                          ),
-                          flex: 16),
-                      Spacer(
-                        flex: 56,
-                      ),
-                      Flexible(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SocialMediaButton(
-                              type: SocialMediaButtonType.facebook,
-                              onPressed: () => model.onSignInFacebookPressed(),
+                    ),
+                    Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Spacer(
+                              flex: 10,
                             ),
-                            SocialMediaButton(
-                              type: SocialMediaButtonType.google,
-                              onPressed: () => model.onSignInGooglePressed(),
+                            Expanded(
+                              child: TextField(
+                                placeholder: AppLocalizations.of(context).email,
+                                controller: emailController,
+                              ),
+                              flex: 36,
                             ),
-                            SocialMediaButton(
-                              type: SocialMediaButtonType.instagram,
-                              onPressed: () => model.onSignInInstagramPressed(),
+                            Spacer(
+                              flex: 16,
+                            ),
+                            Expanded(
+                              child: TextField(
+                                placeholder: AppLocalizations.of(context).password,
+                                controller: passwordController,
+                              ),
+                              flex: 36,
+                            ),
+                            Spacer(
+                              flex: 25,
+                            ),
+                            Expanded(
+                              child: PrimaryButton(
+                                text: AppLocalizations.of(context).login,
+                                onPressed: () => model.onSignPressed(email: emailController.text, password: passwordController.text),
+                              ),
+                              flex: 50,
+                            ),
+                            Spacer(
+                              flex: 16,
+                            ),
+                            Flexible(
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(6.0, 0, 0, 0),
+                                    child: LinkButton(
+                                      text: AppLocalizations.of(context).forgotPassword,
+                                      onPressed: () => Navigator.pushNamed(context, Routes.resetPassword),
+                                    ),
+                                  ),
+                                ),
+                                flex: 17,
+                            ),
+                            Spacer(
+                              flex: 53,
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SocialMediaButton(
+                                    type: SocialMediaButtonType.facebook,
+                                    onPressed: () => model.onSignInFacebookPressed(),
+                                  ),
+                                  SocialMediaButton(
+                                    type: SocialMediaButtonType.google,
+                                    onPressed: () => model.onSignInGooglePressed(),
+                                  ),
+                                  SocialMediaButton(
+                                    type: SocialMediaButtonType.instagram,
+                                    onPressed: () => model.onSignInInstagramPressed(),
+                                  ),
+                                ],
+                              ),
+                              flex: 48,
+                            ),
+                            Spacer(
+                              flex: 30,
+                            ),
+                            Flexible(
+                                child: LinkButton(
+                                  text: AppLocalizations.of(context).registerNow,
+                                  onPressed: () => Navigator.pushNamed(context, Routes.signUp),
+                                ),
+                                flex: 17,
+                            ),
+                            Spacer(
+                              flex: 16,
                             ),
                           ],
                         ),
-                        flex: 48,
-                      ),
-                      Spacer(
-                        flex: 28,
-                      ),
-                      Flexible(
-                          child: LinkButton(
-                            text: AppLocalizations.of(context).registerNow,
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.signUp);
-                            },
-                          ),
-                          flex: 16),
-                      Spacer(
-                        flex: 16,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                    ),
+                  ],
+                )
+              ),
             ),
           ),
         ),
