@@ -15,7 +15,7 @@ class SignInViewModel extends ViewModel<SignInViewState> {
   }
 
   Future<void> onSignPressed({String email, String password}) async {
-    if (!EmailValidator.validate(email.trim()) || !PasswordValidator.validate(password.trim())) {
+    if (!EmailValidator.validate(email) || !PasswordValidator.validate(password)) {
       throw InvalidEmailAddressOrPasswordError();
     }
 

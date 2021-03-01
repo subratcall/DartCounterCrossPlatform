@@ -33,7 +33,7 @@ class AuthenticationService {
       if(e.code == 'network-request-failed') {
         throw NetworkError();
       } else {
-        throw InvalidEmailAddressOrPasswordError();
+        throw EmailAddressAlreadyInUseError();
       }
     }
   }
