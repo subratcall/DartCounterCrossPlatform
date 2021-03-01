@@ -36,11 +36,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     MediaQuery.of(context).padding.bottom,
               ),
               child: Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Column(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      Spacer(flex: 120,),
-                      Flexible(child: Image.asset(AppImages.logo), flex: 164,),
+                      Spacer(flex: 143,),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Spacer(flex: 120,),
+                            Flexible(child: Image.asset(AppImages.logo), flex: 135,),
+                            Spacer(flex: 120,),
+                          ],
+                        ),
+                        flex: 166,
+                      ),
                       Spacer(flex: 58,),
                       Expanded(
                         child: TextField(
@@ -81,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         flex: 50,
                       ),
-                      Spacer(flex: 16,),
+                      Spacer(flex: 19,),
                       Flexible(
                         child: LinkButton(
                           text: AppLocalizations.of(context).login,

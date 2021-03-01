@@ -37,7 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
+                  children: [
                     Spacer(
                       flex: 143,
                     ),
