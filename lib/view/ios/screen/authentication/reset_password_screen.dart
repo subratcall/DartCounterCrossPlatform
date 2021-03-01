@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/screen/loading_screen.dart';
+import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/textfield.dart';
 import 'package:dart_counter/view/screen.dart';
@@ -206,10 +207,17 @@ class ResetPasswordSuccess extends StatelessWidget {
                 flex: 32,
               ),
               Spacer(
-                flex: 71,
+                flex: 81,
+              ),
+              Flexible(
+                child: LinkButton(
+                  text: AppLocalizations.of(context).login,
+                  onPressed: () => Navigator.pop(context),
+                ),
+                flex: 17,
               ),
               Spacer(
-                flex: 188,
+                flex: 158,
               ),
             ],
           ),
