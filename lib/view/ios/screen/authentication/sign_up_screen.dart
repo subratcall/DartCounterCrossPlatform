@@ -12,6 +12,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
+
+  final PageController pageController;
+
+  SignUpScreen(this.pageController);
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -135,9 +140,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           };
 
                           model.onRegisterPressed(email: emailController.text, password: passwordController.text, passwordAgain: passwordAgainController.text)
-                              .then((_) {
-                                Navigator.pop(context);
-                              })
                               .catchError((error) {
                             if(error is InvalidEmailAddressError) {
                               Toast.showToast(errorMessages['errorInvalidEmailAddress']);
@@ -164,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: LinkButton(
                         text: AppLocalizations.of(context).login,
                         onPressed: () =>
-                            Navigator.pop(context),
+                            widget.pageController.animateToPage(0, duration: Duration(milliseconds: 500), curve: Curves.easeIn),
                       ),
                       flex: 17,
                     ),

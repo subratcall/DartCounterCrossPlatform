@@ -19,6 +19,10 @@ Future<void> main() async {
 }
 
 class DartCounterApp extends StatelessWidget {
+  final controller = PageController(
+    initialPage: 0,
+  );
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User>(
@@ -29,11 +33,15 @@ class DartCounterApp extends StatelessWidget {
           return CupertinoApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: snapshot.data != null ? ios.HomeScreen() : ios.SignInScreen(),
+            home: snapshot.data != null ? ios.HomeScreen() : PageView(
+              controller: controller,
+              children: [
+                ios.SignInScreen(controller),
+                ios.SignUpScreen(controller),
+              ],
+            ),
             routes: {
               AppRoutes.loading: (context) => ios.LoadingScreen(),
-              AppRoutes.signIn: (context) => ios.SignInScreen(),
-              AppRoutes.signUp: (context) => ios.SignUpScreen(),
               AppRoutes.home: (context) => ios.HomeScreen(),
               AppRoutes.profile: (context) => ios.ProfileScreen(),
               AppRoutes.invite: (context) => ios.InvitesScreen(),

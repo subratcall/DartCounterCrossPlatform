@@ -18,6 +18,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SignInScreen extends StatefulWidget {
+
+  final PageController pageController;
+
+  SignInScreen(this.pageController);
+
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
@@ -177,8 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             Flexible(
                               child: LinkButton(
                                 text: AppLocalizations.of(context).registerNow,
-                                onPressed: () => Navigator.pushNamed(
-                                    context, AppRoutes.signUp),
+                                onPressed: () => widget.pageController.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.easeIn),
                               ),
                               flex: 17,
                             ),
