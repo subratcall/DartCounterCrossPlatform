@@ -75,6 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextField(
                         placeholder: AppLocalizations.of(context).email,
                         controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
                         isValid: model.emailIsValid,

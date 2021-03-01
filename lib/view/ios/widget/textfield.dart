@@ -3,16 +3,22 @@ import 'package:flutter/cupertino.dart';
 
 class TextField extends StatelessWidget {
   final TextEditingController controller;
+  final bool autofocus;
+  final bool autocorrect;
   final String placeholder;
   final bool obscureText;
+  final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final VoidCallback onEditingComplete;
   final bool isValid;
 
   TextField(
       {this.controller,
+        this.autofocus = false,
+        this.autocorrect: false,
       this.placeholder,
       this.obscureText = false,
+      this.keyboardType,
       this.textInputAction,
       this.onEditingComplete,
       this.isValid = true});
@@ -22,8 +28,11 @@ class TextField extends StatelessWidget {
     if(isValid) {
       return CupertinoTextField(
         controller: controller,
+        autofocus: autofocus,
+        autocorrect: autocorrect,
         placeholder: placeholder,
         obscureText: obscureText,
+        keyboardType: keyboardType,
         textInputAction: textInputAction,
         onEditingComplete: onEditingComplete,
         decoration: BoxDecoration(
@@ -37,8 +46,11 @@ class TextField extends StatelessWidget {
         children: [
           CupertinoTextField(
             controller: controller,
+            autofocus: autofocus,
+            autocorrect: autocorrect,
             placeholder: placeholder,
             obscureText: obscureText,
+            keyboardType: keyboardType,
             textInputAction: textInputAction,
             onEditingComplete: onEditingComplete,
             decoration: BoxDecoration(

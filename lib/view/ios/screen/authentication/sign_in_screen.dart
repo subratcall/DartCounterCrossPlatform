@@ -82,6 +82,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: TextField(
                                 placeholder: AppLocalizations.of(context).email,
                                 controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 onEditingComplete: () => node.nextFocus(),
                               ),

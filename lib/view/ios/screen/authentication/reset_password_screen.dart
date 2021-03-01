@@ -118,6 +118,7 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
                   Expanded(
                     child: TextField(
                       placeholder: AppLocalizations.of(context).email,
+                      keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                     ),
                     flex: 36,
