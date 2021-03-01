@@ -1,5 +1,7 @@
 import 'package:dart_counter/viewmodel/about_us_viewmodel.dart';
 import 'package:dart_counter/viewmodel/authentication/reset_password_viewmodel.dart';
+import 'package:dart_counter/viewmodel/authentication/sign_in_viewmodel.dart';
+import 'package:dart_counter/viewmodel/authentication/sign_up_viewmodel.dart';
 import 'package:dart_counter/viewmodel/checkout_details_viewmodel.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
 import 'package:dart_counter/viewmodel/friends_viewmodel.dart';
@@ -9,8 +11,6 @@ import 'package:dart_counter/viewmodel/in_game_viewmodel.dart';
 import 'package:dart_counter/viewmodel/invites_viewmodel.dart';
 import 'package:dart_counter/viewmodel/profile_viewmodel.dart';
 import 'package:dart_counter/viewmodel/settings_viewmodel.dart';
-import 'package:dart_counter/viewmodel/authentication/sign_in_viewmodel.dart';
-import 'package:dart_counter/viewmodel/authentication/sign_up_viewmodel.dart';
 import 'package:dart_counter/viewmodel/social_media_viewmodel.dart';
 import 'package:dart_counter/viewmodel/stats_viewmodel.dart';
 import 'package:get_it/get_it.dart';

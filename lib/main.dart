@@ -29,7 +29,7 @@ class DartCounterApp extends StatelessWidget {
           return CupertinoApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: snapshot.data != null ? ios.HomeScreen() : ios.SignInScreen() ,
+            home: snapshot.data != null ? ios.HomeScreen() : ios.SignInScreen(),
             routes: {
               Routes.loading: (context) => ios.LoadingScreen(),
               Routes.signIn: (context) => ios.SignInScreen(),
@@ -68,7 +68,8 @@ class DartCounterApp extends StatelessWidget {
               Routes.socialMedia: (context) => android.SocialMediaScreen(),
               Routes.createGame: (context) => android.CreateGameScreen(),
               Routes.inGame: (context) => android.InGameScreen(),
-              Routes.checkoutDetails: (context) => android.CheckoutDetailsScreen(),
+              Routes.checkoutDetails: (context) =>
+                  android.CheckoutDetailsScreen(),
               Routes.stats: (context) => android.StatsScreen(),
               Routes.resetPassword: (context) => android.ResetPasswordScreen(),
             },
@@ -79,6 +80,3 @@ class DartCounterApp extends StatelessWidget {
     );
   }
 }
-
-
-

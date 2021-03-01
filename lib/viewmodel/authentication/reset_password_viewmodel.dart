@@ -1,12 +1,8 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-enum ResetPasswordViewState {
-  initial, loading, successful
-}
-
+enum ResetPasswordViewState { initial, loading, successful }
 
 class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
-
   ResetPasswordViewModel() {
     viewState = ResetPasswordViewState.initial;
   }
@@ -15,9 +11,8 @@ class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
     viewState = ResetPasswordViewState.loading;
 
     // TODO process data
-    await Future.delayed(const Duration(seconds: 2), (){});
+    await Future.delayed(const Duration(seconds: 2), () {});
 
     viewState = ResetPasswordViewState.successful;
   }
-
 }

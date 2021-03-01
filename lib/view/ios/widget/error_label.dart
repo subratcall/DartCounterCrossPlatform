@@ -10,10 +10,10 @@ class ErrorLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
-        text,
-        minFontSize: 6,
-        maxLines: 1,
-        style: TextStyle(color: AppColors.red),
+      text,
+      minFontSize: 6,
+      maxLines: 1,
+      style: TextStyle(color: AppColors.red),
     );
   }
 }

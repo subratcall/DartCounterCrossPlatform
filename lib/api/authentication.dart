@@ -39,7 +39,6 @@ class AuthenticationService {
     // TODO implement
   }
 
-
   Future<void> signOut() async {
     _firebaseAuth.signOut();
   }

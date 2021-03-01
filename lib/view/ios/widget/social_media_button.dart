@@ -1,4 +1,3 @@
-import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

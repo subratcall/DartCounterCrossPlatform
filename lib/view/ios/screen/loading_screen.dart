@@ -7,11 +7,10 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: Center(
-        child: Column(
-          children: [
-            Lottie.asset(AppAnimations.loading),
-          ],
-        ),
+        child: Container(
+            width: 100,
+            height: 100,
+            child: Lottie.asset(AppAnimations.loading)),
       ),
     );
   }

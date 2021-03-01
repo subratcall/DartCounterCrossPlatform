@@ -2,7 +2,6 @@ import 'package:dart_counter/assets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class TextField extends StatelessWidget {
-
   String placeholder;
   TextEditingController controller;
 

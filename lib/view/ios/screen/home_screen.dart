@@ -56,11 +56,11 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, Routes.aboutUs);
               }),
-              CupertinoButton(
-                  child: Text('Log out'),
-                  onPressed: () {
-                    model.signOut();
-                  }),
+          CupertinoButton(
+              child: Text('Log out'),
+              onPressed: () {
+                model.signOut();
+              }),
         ])),
       );
     });

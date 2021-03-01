@@ -10,13 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInScreen extends StatefulWidget {
-
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -34,108 +32,118 @@ class _SignInScreenState extends State<SignInScreen> {
                     MediaQuery.of(context).padding.bottom,
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Spacer(
-                      flex: 105,
-                    ),
-                    Expanded(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Spacer(
+                        flex: 105,
+                      ),
+                      Expanded(
                         child: Row(
                           children: [
-                            Spacer(flex: 120,),
-                            Flexible(child: Image.asset(AppImages.logo), flex: 135,),
-                            Spacer(flex: 120,),
+                            Spacer(
+                              flex: 120,
+                            ),
+                            Flexible(
+                              child: Image.asset(AppImages.logo),
+                              flex: 135,
+                            ),
+                            Spacer(
+                              flex: 120,
+                            ),
                           ],
                         ),
-                      flex: 166,
-                    ),
-                    Spacer(
-                      flex: 107,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        placeholder: AppLocalizations.of(context).email,
-                        controller: emailController,
+                        flex: 166,
                       ),
-                      flex: 36,
-                    ),
-                    Spacer(
-                      flex: 16,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        placeholder: AppLocalizations.of(context).password,
-                        controller: passwordController,
+                      Spacer(
+                        flex: 107,
                       ),
-                      flex: 36,
-                    ),
-                    Spacer(
-                      flex: 25,
-                    ),
-                    Expanded(
-                      child: PrimaryButton(
-                        text: AppLocalizations.of(context).login,
-                        onPressed: () => model.onSignPressed(email: emailController.text, password: passwordController.text),
+                      Expanded(
+                        child: TextField(
+                          placeholder: AppLocalizations.of(context).email,
+                          controller: emailController,
+                        ),
+                        flex: 36,
                       ),
-                      flex: 50,
-                    ),
-                    Spacer(
-                      flex: 15,
-                    ),
-                    Flexible(
+                      Spacer(
+                        flex: 16,
+                      ),
+                      Expanded(
+                        child: TextField(
+                          placeholder: AppLocalizations.of(context).password,
+                          controller: passwordController,
+                        ),
+                        flex: 36,
+                      ),
+                      Spacer(
+                        flex: 25,
+                      ),
+                      Expanded(
+                        child: PrimaryButton(
+                          text: AppLocalizations.of(context).login,
+                          onPressed: () => model.onSignPressed(
+                              email: emailController.text,
+                              password: passwordController.text),
+                        ),
+                        flex: 50,
+                      ),
+                      Spacer(
+                        flex: 15,
+                      ),
+                      Flexible(
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(6.0, 0, 0, 0),
                             child: LinkButton(
                               text: AppLocalizations.of(context).forgotPassword,
-                              onPressed: () => Navigator.pushNamed(context, Routes.resetPassword),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, Routes.resetPassword),
                             ),
                           ),
                         ),
                         flex: 17,
-                    ),
-                    Spacer(
-                      flex: 53,
-                    ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SocialMediaButton(
-                            type: SocialMediaButtonType.facebook,
-                            onPressed: () => model.onSignInFacebookPressed(),
-                          ),
-                          SocialMediaButton(
-                            type: SocialMediaButtonType.google,
-                            onPressed: () => model.onSignInGooglePressed(),
-                          ),
-                          SocialMediaButton(
-                            type: SocialMediaButtonType.instagram,
-                            onPressed: () => model.onSignInInstagramPressed(),
-                          ),
-                        ],
                       ),
-                      flex: 48,
-                    ),
-                    Spacer(
-                      flex: 30,
-                    ),
-                    Flexible(
+                      Spacer(
+                        flex: 53,
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SocialMediaButton(
+                              type: SocialMediaButtonType.facebook,
+                              onPressed: () => model.onSignInFacebookPressed(),
+                            ),
+                            SocialMediaButton(
+                              type: SocialMediaButtonType.google,
+                              onPressed: () => model.onSignInGooglePressed(),
+                            ),
+                            SocialMediaButton(
+                              type: SocialMediaButtonType.instagram,
+                              onPressed: () => model.onSignInInstagramPressed(),
+                            ),
+                          ],
+                        ),
+                        flex: 48,
+                      ),
+                      Spacer(
+                        flex: 30,
+                      ),
+                      Flexible(
                         child: LinkButton(
                           text: AppLocalizations.of(context).registerNow,
-                          onPressed: () => Navigator.pushNamed(context, Routes.signUp),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.signUp),
                         ),
                         flex: 17,
-                    ),
-                    Spacer(
-                      flex: 16,
-                    ),
-                  ],
-                )
-              ),
+                      ),
+                      Spacer(
+                        flex: 16,
+                      ),
+                    ],
+                  )),
             ),
           ),
         ),

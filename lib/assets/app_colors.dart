@@ -1,7 +1,6 @@
 import 'dart:ui' show Color;
 
 class AppColors {
-
   AppColors._();
 
   static const Color transparent = Color(0x00000000);

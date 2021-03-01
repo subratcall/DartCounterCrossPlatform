@@ -4,7 +4,6 @@ import 'package:dart_counter/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class ViewModel<T> extends ChangeNotifier {
   /**
    *  final SessionService sessionService = locator<SessionService>();
@@ -51,7 +50,6 @@ class ViewModel<T> extends ChangeNotifier {
         timeInSecForIosWeb: 1,
         backgroundColor: AppColors.red,
         textColor: AppColors.white,
-        fontSize: fontSize
-    );
+        fontSize: fontSize);
   }
 }
