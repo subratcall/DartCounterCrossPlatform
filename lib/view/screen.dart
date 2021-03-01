@@ -3,6 +3,8 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
+final globalScreenKey = GlobalKey();
+
 class Screen<T extends ViewModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;
   final Function(T) onModelReady;
@@ -27,6 +29,7 @@ class _ScreenState<T extends ViewModel> extends State<Screen<T>> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
+        key: globalScreenKey,
         create: (context) => model,
         child: Consumer<T>(builder: widget.builder));
   }
