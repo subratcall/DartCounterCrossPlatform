@@ -1,8 +1,6 @@
 import 'package:dart_counter/app_model.dart';
-import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ViewModel<T> extends ChangeNotifier {
   /**
@@ -42,14 +40,4 @@ class ViewModel<T> extends ChangeNotifier {
     notifyListeners();
   }
 
-  void showToast(String msg, {double fontSize = 16}) {
-    Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: AppColors.red,
-        textColor: AppColors.white,
-        fontSize: fontSize);
-  }
 }
