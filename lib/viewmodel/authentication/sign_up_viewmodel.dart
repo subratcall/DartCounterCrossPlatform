@@ -6,7 +6,7 @@ class SignUpViewModel extends ViewModel {
 
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
-  void onConfirmPressed({String email, String username, String password, String passwordAgain}) {
+  void onRegisterPressed({String email, String username, String password, String passwordAgain}) {
     // TODO validate inputs
     _authenticationService.signUp(email: email, password: password);
   }

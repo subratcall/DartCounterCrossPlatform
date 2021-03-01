@@ -8,7 +8,14 @@ import 'package:dart_counter/viewmodel/authentication/sign_up_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -19,105 +26,86 @@ class SignUpScreen extends StatelessWidget {
     return Screen<SignUpViewModel>(builder: (context, model, child) {
       return CupertinoPageScaffold(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              children: [
-                Flexible(
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width,
+                maxHeight: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom,
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.all(25.0),
                   child: Column(
                     children: [
                       Spacer(flex: 120,),
-                      Row(
-                        children: [
-                          Spacer(flex: 120,),
-                          Flexible(child: Image.asset(AppImages.logo), flex: 135,),
-                          Spacer(flex: 120,),
-                        ],
-                      ),
-                      Spacer(flex: 120,),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Column(
-                    children: [
-                      Spacer(
-                        flex: 8,
-                      ),
-                      Flexible(
+                      Flexible(child: Image.asset(AppImages.logo), flex: 164,),
+                      Spacer(flex: 58,),
+                      Expanded(
                         child: TextField(
                           placeholder: AppLocalizations.of(context).email,
                           controller: emailController,
                         ),
                         flex: 36,
                       ),
-                      Spacer(
-                        flex: 16,
-                      ),
-                      Flexible(
+                      Spacer(flex: 15,),
+                      Expanded(
                         child: TextField(
                           placeholder: AppLocalizations.of(context).username,
                           controller: usernameController,
                         ),
                         flex: 36,
                       ),
-                      Spacer(
-                        flex: 16,
-                      ),
-                      Flexible(
+                      Spacer(flex: 15,),
+                      Expanded(
                         child: TextField(
                           placeholder: AppLocalizations.of(context).password,
                           controller: passwordController,
                         ),
                         flex: 36,
                       ),
-                      Spacer(
-                        flex: 16,
-                      ),
-                      Flexible(
+                      Spacer(flex: 15,),
+                      Expanded(
                         child: TextField(
                           placeholder: AppLocalizations.of(context).passwordAgain,
                           controller: passwordAgainController,
                         ),
                         flex: 36,
                       ),
-                      Spacer(
-                        flex: 16,
+                      Spacer(flex: 25,),
+                      Expanded(
+                        child: PrimaryButton(
+                          text: AppLocalizations.of(context).register,
+                          onPressed: () => model.onRegisterPressed(email: emailController.text, password: passwordController.text),
+                        ),
+                        flex: 50,
                       ),
+                      Spacer(flex: 16,),
                       Flexible(
-                          child: PrimaryButton(
-                            text: AppLocalizations.of(context).register,
-                            onPressed: () =>
-                                model.onConfirmPressed(
-                                    email: emailController.text,
-                                    username: usernameController.text,
-                                    password:  passwordController.text,
-                                    passwordAgain: passwordAgainController.text
-                                ),
-                          ),
-                          flex: 48),
-                      Spacer(
-                        flex: 16,
+                        child: LinkButton(
+                          text: AppLocalizations.of(context).login,
+                          onPressed: () => Navigator.pushNamed(context, Routes.signIn),
+                        ),
+                        flex: 17,
                       ),
-                      Flexible(
-                          child: LinkButton(
-                            text: AppLocalizations.of(context).login,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          flex: 16),
-                      Spacer(
-                        flex: 100,
-                      ),
+                      Spacer(flex: 147,),
                     ],
                   ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    passwordAgainController.dispose();
+    super.dispose();
   }
 }
