@@ -8,9 +8,6 @@
   "@checkMailAccountForPasswordResetLink": {
     "description": "phrase"
   },
-  "@connectionErrorMessage": {
-    "description": "phrase"
-  },
   "@confirm": {
     "description": "word"
   },
@@ -74,7 +71,7 @@
   "@cancel": {
     "description": "word"
   },
-  "@errorInvalidEmailOrPassword": {
+  "@errorInvalidEmailAddressOrPassword": {
     "description": "phrase"
   },
   "@errorInvalidEmailAddress": {
@@ -92,7 +89,7 @@
   "@errorConnection": {
     "description": "phrase"
   },
-  "@errorEmailAlreadyInUse": {
+  "@errorEmailAddressAlreadyInUse": {
     "description": "phrase"
   },
   "@errorUsernameAlreadyInUse": {
@@ -103,7 +100,6 @@
   "confirm": "Confirm",
   "checkMailAccountForPasswordResetLink": "Check your email account to reset your password.",
   "createGame": "Create Game",
-  "connectionErrorMessage": "Check your internet connection!",
   "email": "Email",
   "emailSent": "Email sent!",
   "forgotPassword": "Forgot Password?",
@@ -124,12 +120,12 @@
   "username": "Username",
   "resetPassword" : "Reset Password",
   "cancel" : "Cancel",
-  "errorInvalidEmailOrPassword" : "Invalid email.",
+  "errorInvalidEmailAddressOrPassword" : "Invalid email.",
   "errorInvalidEmailAddress" : "Invalid email address.",
   "errorInvalidUsername" : "Invalid username - TODO.",
   "errorInvalidPassword" : "Invalid password - TODO.",
   "errorPasswordNotEqualPasswordAgain" : "Passwords don't match.",
   "errorConnection" : "No internet connection!.",
-  "errorEmailAlreadyInUse" : "This email is already in use.",
+  "errorEmailAddressAlreadyInUse" : "This email is already in use.",
   "errorUsernameAlreadyInUse" : "This username is already in use."
 }

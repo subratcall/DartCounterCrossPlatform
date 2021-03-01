@@ -19,7 +19,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Screen<ResetPasswordViewModel>(builder: (context, model, child) {
-      return model.viewState == ResetPasswordViewState.initial
+      return model.viewState == ResetPasswordViewState.idle
           ? ResetPasswordInitial(model)
           : model.viewState == ResetPasswordViewState.successful
               ? ResetPasswordSuccess()

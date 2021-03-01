@@ -3,11 +3,13 @@ import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/screen/authentication/reset_password_screen.dart';
+import 'package:dart_counter/view/ios/screen/loading_screen.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/social_media_button.dart';
 import 'package:dart_counter/view/ios/widget/textfield.dart';
 import 'package:dart_counter/view/screen.dart';
+import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/authentication/sign_in_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show Scaffold;
@@ -20,6 +22,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -27,7 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final node = FocusScope.of(context);
 
     return Screen<SignInViewModel>(builder: (context, model, child) {
-      return Scaffold(
+      return model.viewState == SignInViewState.idle ? Scaffold(
         body: CupertinoScaffold(
           body: Builder(
             builder: (context) => CupertinoPageScaffold(
@@ -84,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             Expanded(
                               child: TextField(
                                 placeholder:
-                                    AppLocalizations.of(context).password,
+                                AppLocalizations.of(context).password,
                                 controller: passwordController,
                                 obscureText: true,
                                 textInputAction: TextInputAction.done,
@@ -99,12 +103,14 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: PrimaryButton(
                                   text: AppLocalizations.of(context).login,
                                   onPressed: () async {
-                                    try {
-                                      await model.onSignPressed(
-                                          email: emailController.text,
-                                          password: passwordController
-                                              .text); // TODO ctach errors and do stuff display
-                                    } on InvalidEmailOrPasswordError {}
+                                    model.onSignPressed(email: emailController.text, password: passwordController.text)
+                                        .catchError((error) {
+                                          if(error is InvalidEmailAddressOrPasswordError) {
+                                            Toast.showToast(AppLocalizations.of(globalScreenKey.currentContext).errorInvalidEmailAddressOrPassword);
+                                          } else {
+                                            Toast.showToast(AppLocalizations.of(globalScreenKey.currentContext).errorConnection);
+                                          }
+                                    });
                                   }),
                               flex: 50,
                             ),
@@ -116,18 +122,18 @@ class _SignInScreenState extends State<SignInScreen> {
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(6.0, 0, 0, 0),
+                                  const EdgeInsets.fromLTRB(6.0, 0, 0, 0),
                                   child: LinkButton(
                                       text: AppLocalizations.of(context)
                                           .forgotPassword,
                                       onPressed: () => CupertinoScaffold
                                           .showCupertinoModalBottomSheet(
-                                              expand: true,
-                                              context: context,
-                                              backgroundColor:
-                                                  AppColors.transparent,
-                                              builder: (context) =>
-                                                  ResetPasswordScreen())),
+                                          expand: true,
+                                          context: context,
+                                          backgroundColor:
+                                          AppColors.transparent,
+                                          builder: (context) =>
+                                              ResetPasswordScreen())),
                                 ),
                               ),
                               flex: 17,
@@ -138,7 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             Expanded(
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SocialMediaButton(
                                     type: SocialMediaButtonType.facebook,
@@ -181,7 +187,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-      );
+      ) : LoadingScreen();
     });
   }
 

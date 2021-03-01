@@ -1,10 +1,10 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-enum ResetPasswordViewState { initial, loading, successful }
+enum ResetPasswordViewState { idle, loading, successful }
 
 class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
   ResetPasswordViewModel() {
-    viewState = ResetPasswordViewState.initial;
+    viewState = ResetPasswordViewState.idle;
   }
 
   void onConfirmPressed({String email}) async {

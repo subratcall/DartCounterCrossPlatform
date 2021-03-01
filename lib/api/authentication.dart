@@ -1,3 +1,4 @@
+import 'package:dart_counter/app_errors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
@@ -7,23 +8,25 @@ class AuthenticationService {
 
   Stream<User> get authStateChanged => _firebaseAuth.authStateChanges();
 
-  Future<String> signIn({String email, String password}) async {
+  Future<void> signIn({String email, String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return 'Signed in';
-    } on FirebaseAuthException catch (e) {
-      return e.message;
+      return null;
+    } on FirebaseAuthException catch(e) {
+      // TODO use code to map to app_errors
+      print("${e.message} ${e.code}");
+      throw InvalidEmailAddressOrPasswordError();
     }
   }
 
-  Future<String> signUp({String email, String password}) async {
+  Future<void> signUp({String email, String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return 'Signed up';
-    } on FirebaseAuthException catch (e) {
-      return e.message;
+      return null;
+    } on FirebaseAuthException {
+      throw EmailAddressAlreadyInUseError();
     }
   }
 

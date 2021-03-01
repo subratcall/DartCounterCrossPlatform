@@ -3,7 +3,6 @@
   "confirm": "Bestätigen",
   "checkMailAccountForPasswordResetLink": "Checke dein Postfach und setze dein Passwort zurück.",
   "createGame": "Spiel erstellen",
-  "connectionErrorMessage": "Internetverbindung überprüfen!",
   "email": "Email",
   "emailSent": "E-Mail wurde gesendet!",
   "forgotPassword": "Passwort vergessen?",
@@ -24,12 +23,12 @@
   "username": "Benutzername",
   "resetPassword" : "Passwort zurücksetzen",
   "cancel" : "Abbrechen",
-  "errorInvalidEmailOrPassword" : "Ungültige E-Mail-Adresse oder Passwort.",
+  "errorInvalidEmailAddressOrPassword" : "Ungültige E-Mail-Adresse oder Passwort.",
   "errorInvalidEmailAddress" : "Ungültige E-Mail-Adresse.",
   "errorInvalidUsername" : "Ungültiger Benutzername - TODO.",
   "errorInvalidPassword" : "Ungültiges Passwort - TODO.",
   "errorPasswordNotEqualPasswordAgain" : "Passwörter stimmen nicht überein.",
   "errorConnection" : "Keine Internetverbindung!",
-  "errorEmailAlreadyInUse" : "E-Mail-Adresse bereits vergeben.",
+  "errorEmailAddressAlreadyInUse" : "E-Mail-Adresse bereits vergeben.",
   "errorUsernameAlreadyInUse" : "Benutzername bereits vergeben."
 }
