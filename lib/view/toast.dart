@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart' as t;
 
 class Toast {
 
-  void showToast(String msg, {double fontSize = 16}) {
+  static void showToast(String msg, {double fontSize = 16}) {
     t.Fluttertoast.showToast(
         msg: msg,
         toastLength: t.Toast.LENGTH_SHORT,
