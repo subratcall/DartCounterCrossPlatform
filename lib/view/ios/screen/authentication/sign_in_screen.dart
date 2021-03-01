@@ -24,7 +24,6 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
 
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 

@@ -27,7 +27,6 @@ class SignInViewModel extends ViewModel<SignInViewState> {
       viewState = SignInViewState.idle;
       throw e;
     }
-    //await Future.delayed(const Duration(seconds: 1), () {});
   }
 
   void onSignInFacebookPressed() {

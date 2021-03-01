@@ -1,6 +1,7 @@
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/view/ios/screen/loading_screen.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/textfield.dart';
@@ -26,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final node = FocusScope.of(context);
 
     return Screen<SignUpViewModel>(builder: (context, model, child) {
-      return CupertinoPageScaffold(
+      return model.viewState == SignUpViewState.idle ? CupertinoPageScaffold(
         child: SafeArea(
           child: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
@@ -134,6 +135,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           };
 
                           model.onRegisterPressed(email: emailController.text, password: passwordController.text, passwordAgain: passwordAgainController.text)
+                              .then((_) {
+                                Navigator.pop(context);
+                              })
                               .catchError((error) {
                             if(error is InvalidEmailAddressError) {
                               Toast.showToast(errorMessages['errorInvalidEmailAddress']);
@@ -160,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: LinkButton(
                         text: AppLocalizations.of(context).login,
                         onPressed: () =>
-                            Navigator.pushNamed(context, AppRoutes.signIn),
+                            Navigator.pop(context),
                       ),
                       flex: 17,
                     ),
@@ -173,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-      );
+      ) : LoadingScreen();
     });
   }
 

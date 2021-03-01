@@ -4,7 +4,9 @@ import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-class SignUpViewModel extends ViewModel {
+enum SignUpViewState { idle, loading }
+
+class SignUpViewModel extends ViewModel<SignUpViewState> {
 
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
@@ -13,6 +15,10 @@ class SignUpViewModel extends ViewModel {
   bool _passwordIsValid = true;
   bool _passwordAgainIsValid = true;
 
+  SignUpViewModel() {
+    viewState = SignUpViewState.idle;
+  }
+
   Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain}) async {
     emailIsValid = EmailValidator.validate(email);
     usernameIsValid = UsernameValidator.validate(username);
@@ -20,7 +26,14 @@ class SignUpViewModel extends ViewModel {
     passwordAgainIsValid = PasswordValidator.validate(password, passwordAgain);
 
     if(emailIsValid && usernameIsValid && passwordIsValid && passwordAgainIsValid) {
-      await _authenticationService.signUp(email: email, password: password);
+      viewState = SignUpViewState.loading;
+      try {
+        await _authenticationService.signUp(email: email, password: password);
+        viewState = SignUpViewState.idle;
+      } on Error catch(e) {
+        viewState = SignUpViewState.idle;
+        throw e;
+      }
     } else {
       if(!emailIsValid) {
         throw InvalidEmailAddressError();
