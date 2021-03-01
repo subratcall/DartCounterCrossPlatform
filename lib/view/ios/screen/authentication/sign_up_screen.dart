@@ -85,6 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextField(
                         placeholder: AppLocalizations.of(context).password,
                         controller: passwordController,
+                        obscureText: true,
                       ),
                       flex: 36,
                     ),
@@ -95,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextField(
                         placeholder: AppLocalizations.of(context).passwordAgain,
                         controller: passwordAgainController,
+                        obscureText: true,
                       ),
                       flex: 36,
                     ),

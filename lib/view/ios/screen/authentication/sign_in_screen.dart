@@ -80,6 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: TextField(
                                 placeholder: AppLocalizations.of(context).password,
                                 controller: passwordController,
+                                obscureText: true,
                               ),
                               flex: 36,
                             ),
