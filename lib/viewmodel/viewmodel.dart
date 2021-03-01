@@ -4,9 +4,8 @@ import 'package:dart_counter/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-enum ViewState { Idle, Busy }
 
-class ViewModel extends ChangeNotifier {
+class ViewModel<T> extends ChangeNotifier {
   /**
    *  final SessionService sessionService = locator<SessionService>();
 
@@ -33,13 +32,14 @@ class ViewModel extends ChangeNotifier {
       notifyListeners();
       }
    */
-
   AppModel app = locator<AppModel>();
 
-  ViewState _state = ViewState.Idle;
+  T _viewState;
 
-  void setState(ViewState viewState) {
-    _state = viewState;
+  get viewState => _viewState;
+
+  set viewState(T viewState) {
+    _viewState = viewState;
     notifyListeners();
   }
 
