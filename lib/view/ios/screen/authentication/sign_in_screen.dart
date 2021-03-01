@@ -1,6 +1,7 @@
+import 'package:dart_counter/app_errors.dart';
+import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/ios/screen/authentication/reset_password_screen.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
@@ -82,7 +83,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             Expanded(
                               child: TextField(
-                                placeholder: AppLocalizations.of(context).password,
+                                placeholder:
+                                    AppLocalizations.of(context).password,
                                 controller: passwordController,
                                 obscureText: true,
                                 textInputAction: TextInputAction.done,
@@ -95,11 +97,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             Expanded(
                               child: PrimaryButton(
-                                text: AppLocalizations.of(context).login,
-                                onPressed: () => model.onSignPressed(
-                                    email: emailController.text,
-                                    password: passwordController.text),
-                              ),
+                                  text: AppLocalizations.of(context).login,
+                                  onPressed: () async {
+                                    try {
+                                      await model.onSignPressed(
+                                          email: emailController.text,
+                                          password: passwordController
+                                              .text); // TODO ctach errors and do stuff display
+                                    } on InvalidEmailOrPasswordError {}
+                                  }),
                               flex: 50,
                             ),
                             Spacer(
@@ -109,15 +115,19 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(6.0, 0, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(6.0, 0, 0, 0),
                                   child: LinkButton(
-                                      text: AppLocalizations.of(context).forgotPassword,
-                                      onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
-                                          expand: true,
-                                          context: context,
-                                          backgroundColor: AppColors.transparent,
-                                          builder: (context) => ResetPasswordScreen())
-                                  ),
+                                      text: AppLocalizations.of(context)
+                                          .forgotPassword,
+                                      onPressed: () => CupertinoScaffold
+                                          .showCupertinoModalBottomSheet(
+                                              expand: true,
+                                              context: context,
+                                              backgroundColor:
+                                                  AppColors.transparent,
+                                              builder: (context) =>
+                                                  ResetPasswordScreen())),
                                 ),
                               ),
                               flex: 17,
@@ -127,19 +137,23 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             Expanded(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SocialMediaButton(
                                     type: SocialMediaButtonType.facebook,
-                                    onPressed: () => model.onSignInFacebookPressed(),
+                                    onPressed: () =>
+                                        model.onSignInFacebookPressed(),
                                   ),
                                   SocialMediaButton(
                                     type: SocialMediaButtonType.google,
-                                    onPressed: () => model.onSignInGooglePressed(),
+                                    onPressed: () =>
+                                        model.onSignInGooglePressed(),
                                   ),
                                   SocialMediaButton(
                                     type: SocialMediaButtonType.instagram,
-                                    onPressed: () => model.onSignInInstagramPressed(),
+                                    onPressed: () =>
+                                        model.onSignInInstagramPressed(),
                                   ),
                                 ],
                               ),
@@ -151,8 +165,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             Flexible(
                               child: LinkButton(
                                 text: AppLocalizations.of(context).registerNow,
-                                onPressed: () =>
-                                    Navigator.pushNamed(context, Routes.signUp),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, AppRoutes.signUp),
                               ),
                               flex: 17,
                             ),

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dart_counter/api/authentication.dart';
+import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/android/screen/screens.dart' as android;
 import 'package:dart_counter/view/ios/screen/screens.dart' as ios;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,22 +31,23 @@ class DartCounterApp extends StatelessWidget {
             supportedLocales: AppLocalizations.supportedLocales,
             home: snapshot.data != null ? ios.HomeScreen() : ios.SignInScreen(),
             routes: {
-              Routes.loading: (context) => ios.LoadingScreen(),
-              Routes.signIn: (context) => ios.SignInScreen(),
-              Routes.signUp: (context) => ios.SignUpScreen(),
-              Routes.home: (context) => ios.HomeScreen(),
-              Routes.profile: (context) => ios.ProfileScreen(),
-              Routes.invite: (context) => ios.InvitesScreen(),
-              Routes.gameHistory: (context) => ios.GameHistoryScreen(),
-              Routes.friends: (context) => ios.FriendsScreen(),
-              Routes.settings: (context) => ios.SettingsScreen(),
-              Routes.aboutUs: (context) => ios.AboutUsScreen(),
-              Routes.socialMedia: (context) => ios.SocialMediaScreen(),
-              Routes.createGame: (context) => ios.CreateGameScreen(),
-              Routes.inGame: (context) => ios.InGameScreen(),
-              Routes.checkoutDetails: (context) => ios.CheckoutDetailsScreen(),
-              Routes.stats: (context) => ios.StatsScreen(),
-              Routes.resetPassword: (context) => ios.ResetPasswordScreen(),
+              AppRoutes.loading: (context) => ios.LoadingScreen(),
+              AppRoutes.signIn: (context) => ios.SignInScreen(),
+              AppRoutes.signUp: (context) => ios.SignUpScreen(),
+              AppRoutes.home: (context) => ios.HomeScreen(),
+              AppRoutes.profile: (context) => ios.ProfileScreen(),
+              AppRoutes.invite: (context) => ios.InvitesScreen(),
+              AppRoutes.gameHistory: (context) => ios.GameHistoryScreen(),
+              AppRoutes.friends: (context) => ios.FriendsScreen(),
+              AppRoutes.settings: (context) => ios.SettingsScreen(),
+              AppRoutes.aboutUs: (context) => ios.AboutUsScreen(),
+              AppRoutes.socialMedia: (context) => ios.SocialMediaScreen(),
+              AppRoutes.createGame: (context) => ios.CreateGameScreen(),
+              AppRoutes.inGame: (context) => ios.InGameScreen(),
+              AppRoutes.checkoutDetails: (context) =>
+                  ios.CheckoutDetailsScreen(),
+              AppRoutes.stats: (context) => ios.StatsScreen(),
+              AppRoutes.resetPassword: (context) => ios.ResetPasswordScreen(),
             },
             theme: CupertinoThemeData(primaryColor: Colors.black),
           );
@@ -55,23 +56,24 @@ class DartCounterApp extends StatelessWidget {
           return MaterialApp(
             home: android.SignInScreen(),
             routes: {
-              Routes.loading: (context) => android.LoadingScreen(),
-              Routes.signIn: (context) => android.SignInScreen(),
-              Routes.signUp: (context) => android.SignUpScreen(),
-              Routes.home: (context) => android.HomeScreen(),
-              Routes.profile: (context) => android.ProfileScreen(),
-              Routes.invite: (context) => android.InvitesScreen(),
-              Routes.gameHistory: (context) => android.GameHistoryScreen(),
-              Routes.friends: (context) => android.FriendsScreen(),
-              Routes.settings: (context) => android.SettingsScreen(),
-              Routes.aboutUs: (context) => android.AboutUsScreen(),
-              Routes.socialMedia: (context) => android.SocialMediaScreen(),
-              Routes.createGame: (context) => android.CreateGameScreen(),
-              Routes.inGame: (context) => android.InGameScreen(),
-              Routes.checkoutDetails: (context) =>
+              AppRoutes.loading: (context) => android.LoadingScreen(),
+              AppRoutes.signIn: (context) => android.SignInScreen(),
+              AppRoutes.signUp: (context) => android.SignUpScreen(),
+              AppRoutes.home: (context) => android.HomeScreen(),
+              AppRoutes.profile: (context) => android.ProfileScreen(),
+              AppRoutes.invite: (context) => android.InvitesScreen(),
+              AppRoutes.gameHistory: (context) => android.GameHistoryScreen(),
+              AppRoutes.friends: (context) => android.FriendsScreen(),
+              AppRoutes.settings: (context) => android.SettingsScreen(),
+              AppRoutes.aboutUs: (context) => android.AboutUsScreen(),
+              AppRoutes.socialMedia: (context) => android.SocialMediaScreen(),
+              AppRoutes.createGame: (context) => android.CreateGameScreen(),
+              AppRoutes.inGame: (context) => android.InGameScreen(),
+              AppRoutes.checkoutDetails: (context) =>
                   android.CheckoutDetailsScreen(),
-              Routes.stats: (context) => android.StatsScreen(),
-              Routes.resetPassword: (context) => android.ResetPasswordScreen(),
+              AppRoutes.stats: (context) => android.StatsScreen(),
+              AppRoutes.resetPassword: (context) =>
+                  android.ResetPasswordScreen(),
             },
             // TODO further bootstrapping
           );

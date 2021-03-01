@@ -1,5 +1,5 @@
+import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_icons.dart';
-import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,37 +24,37 @@ class HomeScreen extends StatelessWidget {
           CupertinoButton(
               child: Text('Profile'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.profile);
+                Navigator.pushNamed(context, AppRoutes.profile);
               }),
           CupertinoButton(
               child: Text('CreateGame'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.createGame);
+                Navigator.pushNamed(context, AppRoutes.createGame);
               }),
           CupertinoButton(
               child: Text('SocialMedia'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.socialMedia);
+                Navigator.pushNamed(context, AppRoutes.socialMedia);
               }),
           CupertinoButton(
               child: Text('Settings'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.settings);
+                Navigator.pushNamed(context, AppRoutes.settings);
               }),
           CupertinoButton(
               child: Text('Invite'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.invite);
+                Navigator.pushNamed(context, AppRoutes.invite);
               }),
           CupertinoButton(
               child: Text('Friends'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.friends);
+                Navigator.pushNamed(context, AppRoutes.friends);
               }),
           CupertinoButton(
               child: Text('AboutUs'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.aboutUs);
+                Navigator.pushNamed(context, AppRoutes.aboutUs);
               }),
           CupertinoButton(
               child: Text('Log out'),

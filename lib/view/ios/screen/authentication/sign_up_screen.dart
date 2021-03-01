@@ -1,5 +1,5 @@
+import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/routes.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/textfield.dart';
@@ -129,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: LinkButton(
                         text: AppLocalizations.of(context).login,
                         onPressed: () =>
-                            Navigator.pushNamed(context, Routes.signIn),
+                            Navigator.pushNamed(context, AppRoutes.signIn),
                       ),
                       flex: 17,
                     ),

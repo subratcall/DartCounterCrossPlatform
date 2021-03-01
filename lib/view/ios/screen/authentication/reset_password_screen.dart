@@ -95,7 +95,8 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
                     child: AutoSizeText(
                       AppLocalizations.of(context).forgotPassword,
                       maxLines: 1,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
                     ),
                     flex: 21,
                   ),

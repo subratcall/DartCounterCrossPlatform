@@ -39,5 +39,4 @@ class ViewModel<T> extends ChangeNotifier {
     _viewState = viewState;
     notifyListeners();
   }
-
 }

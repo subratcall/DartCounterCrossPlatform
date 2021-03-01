@@ -8,7 +8,12 @@ class TextField extends StatelessWidget {
   final TextInputAction textInputAction;
   final VoidCallback onEditingComplete;
 
-  TextField({this.controller, this.placeholder, this.obscureText = false, this.textInputAction, this.onEditingComplete});
+  TextField(
+      {this.controller,
+      this.placeholder,
+      this.obscureText = false,
+      this.textInputAction,
+      this.onEditingComplete});
 
   @override
   Widget build(BuildContext context) {

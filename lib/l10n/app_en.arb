@@ -74,6 +74,30 @@
   "@cancel": {
     "description": "word"
   },
+  "@errorInvalidEmailOrPassword": {
+    "description": "phrase"
+  },
+  "@errorInvalidEmailAddress": {
+    "description": "phrase"
+  },
+  "@errorInvalidUsername": {
+    "description": "phrase"
+  },
+  "@errorInvalidPassword": {
+    "description": "phrase"
+  },
+  "@errorPasswordNotEqualPasswordAgain": {
+    "description": "phrase"
+  },
+  "@errorConnection": {
+    "description": "phrase"
+  },
+  "@errorEmailAlreadyInUse": {
+    "description": "phrase"
+  },
+  "@errorUsernameAlreadyInUse": {
+    "description": "phrase"
+  },
 
   "aboutUs": "About Us",
   "confirm": "Confirm",
@@ -99,5 +123,13 @@
   "stats": "Stats",
   "username": "Username",
   "resetPassword" : "Reset Password",
-  "cancel" : "Cancel"
+  "cancel" : "Cancel",
+  "errorInvalidEmailOrPassword" : "Invalid email.",
+  "errorInvalidEmailAddress" : "Invalid email address.",
+  "errorInvalidUsername" : "Invalid username - TODO.",
+  "errorInvalidPassword" : "Invalid password - TODO.",
+  "errorPasswordNotEqualPasswordAgain" : "Passwords don't match.",
+  "errorConnection" : "No internet connection!.",
+  "errorEmailAlreadyInUse" : "This email is already in use.",
+  "errorUsernameAlreadyInUse" : "This username is already in use."
 }

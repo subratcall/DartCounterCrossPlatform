@@ -1,4 +1,4 @@
-class Routes {
+class AppRoutes {
   static const loading = 'loading';
   static const signIn = 'signIn';
   static const signUp = 'signUp';

@@ -1,4 +1,4 @@
-import 'package:dart_counter/routes.dart';
+import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/view/ios/modal/modal_fit.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
@@ -27,7 +27,7 @@ class CreateGameScreen extends StatelessWidget {
           CupertinoButton(
               child: Text('InGame'),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.inGame);
+                Navigator.pushNamed(context, AppRoutes.inGame);
               }),
           CupertinoButton(
               child: Text('Advanced Settings'),

@@ -23,5 +23,13 @@
   "stats": "Statistiken",
   "username": "Benutzername",
   "resetPassword" : "Passwort zurücksetzen",
-  "cancel" : "Abbrechen"
+  "cancel" : "Abbrechen",
+  "errorInvalidEmailOrPassword" : "Ungültige E-Mail-Adresse oder Passwort.",
+  "errorInvalidEmailAddress" : "Ungültige E-Mail-Adresse.",
+  "errorInvalidUsername" : "Ungültiger Benutzername - TODO.",
+  "errorInvalidPassword" : "Ungültiges Passwort - TODO.",
+  "errorPasswordNotEqualPasswordAgain" : "Passwörter stimmen nicht überein.",
+  "errorConnection" : "Keine Internetverbindung!",
+  "errorEmailAlreadyInUse" : "E-Mail-Adresse bereits vergeben.",
+  "errorUsernameAlreadyInUse" : "Benutzername bereits vergeben."
 }
