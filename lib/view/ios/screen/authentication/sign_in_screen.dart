@@ -2,6 +2,7 @@ import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/main.dart';
 import 'package:dart_counter/view/ios/screen/authentication/reset_password_screen.dart';
 import 'package:dart_counter/view/ios/screen/loading_screen.dart';
 import 'package:dart_counter/view/ios/widget/link_button.dart';
@@ -102,13 +103,19 @@ class _SignInScreenState extends State<SignInScreen> {
                             Expanded(
                               child: PrimaryButton(
                                   text: AppLocalizations.of(context).login,
-                                  onPressed: () async {
+                                  onPressed: () {
+                                    // TODO this is only a workaround find a better solution for this e.g with global key
+                                    var errorMessages = {
+                                       'errorInvalidEmailAddressOrPassword' : AppLocalizations.of(context).errorInvalidEmailAddressOrPassword,
+                                       'errorNetwork' : AppLocalizations.of(context).errorNetwork,
+                                    };
+
                                     model.onSignPressed(email: emailController.text, password: passwordController.text)
                                         .catchError((error) {
                                           if(error is InvalidEmailAddressOrPasswordError) {
-                                            Toast.showToast(AppLocalizations.of(globalScreenKey.currentContext).errorInvalidEmailAddressOrPassword);
+                                            Toast.showToast(errorMessages['errorInvalidEmailAddressOrPassword']);
                                           } else {
-                                            Toast.showToast(AppLocalizations.of(globalScreenKey.currentContext).errorConnection);
+                                            Toast.showToast(errorMessages['errorNetwork']);
                                           }
                                     });
                                   }),

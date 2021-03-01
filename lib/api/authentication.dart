@@ -14,9 +14,12 @@ class AuthenticationService {
           email: email, password: password);
       return null;
     } on FirebaseAuthException catch(e) {
-      // TODO use code to map to app_errors
       print("${e.message} ${e.code}");
-      throw InvalidEmailAddressOrPasswordError();
+      if(e.code == 'network-request-failed') {
+        throw NetworkError();
+      } else {
+        throw InvalidEmailAddressOrPasswordError();
+      }
     }
   }
 
@@ -25,8 +28,13 @@ class AuthenticationService {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       return null;
-    } on FirebaseAuthException {
-      throw EmailAddressAlreadyInUseError();
+    } on FirebaseAuthException catch(e) {
+      print("${e.message} ${e.code}");
+      if(e.code == 'network-request-failed') {
+        throw NetworkError();
+      } else {
+        throw InvalidEmailAddressOrPasswordError();
+      }
     }
   }
 

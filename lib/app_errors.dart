@@ -8,7 +8,7 @@ class InvalidPasswordError extends Error {}
 
 class PasswordNotEqualPasswordAgainError extends Error {}
 
-class ConnectionError extends Error {}
+class NetworkError extends Error {}
 
 class EmailAddressAlreadyInUseError extends Error {}
 

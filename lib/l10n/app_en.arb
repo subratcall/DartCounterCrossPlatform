@@ -86,7 +86,7 @@
   "@errorPasswordNotEqualPasswordAgain": {
     "description": "phrase"
   },
-  "@errorConnection": {
+  "@errorNetwork": {
     "description": "phrase"
   },
   "@errorEmailAddressAlreadyInUse": {
@@ -125,7 +125,7 @@
   "errorInvalidUsername" : "Invalid username - TODO.",
   "errorInvalidPassword" : "Invalid password - TODO.",
   "errorPasswordNotEqualPasswordAgain" : "Passwords don't match.",
-  "errorConnection" : "No internet connection!.",
+  "errorNetwork" : "Network error - No internet connection!",
   "errorEmailAddressAlreadyInUse" : "This email is already in use.",
   "errorUsernameAlreadyInUse" : "This username is already in use."
 }

@@ -23,12 +23,12 @@
   "username": "Benutzername",
   "resetPassword" : "Passwort zurücksetzen",
   "cancel" : "Abbrechen",
-  "errorInvalidEmailAddressOrPassword" : "Ungültige E-Mail-Adresse oder Passwort.",
+  "errorInvalidEmailAddressOrPassword" : "E-Mail-Adresse oder Passwort falsch.",
   "errorInvalidEmailAddress" : "Ungültige E-Mail-Adresse.",
   "errorInvalidUsername" : "Ungültiger Benutzername - TODO.",
   "errorInvalidPassword" : "Ungültiges Passwort - TODO.",
   "errorPasswordNotEqualPasswordAgain" : "Passwörter stimmen nicht überein.",
-  "errorConnection" : "Keine Internetverbindung!",
+  "errorNetwork" : "Netzwerkfehler - Keine Internetverbindung!",
   "errorEmailAddressAlreadyInUse" : "E-Mail-Adresse bereits vergeben.",
   "errorUsernameAlreadyInUse" : "Benutzername bereits vergeben."
 }
