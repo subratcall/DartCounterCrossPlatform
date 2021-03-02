@@ -1,9 +1,12 @@
+import 'package:dart_counter/app_routes.dart';
+import 'package:dart_counter/view/ios/widget/button/action_button.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/profile_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Screen<ProfileViewModel>(builder: (context, model, child) {
@@ -18,7 +21,16 @@ class ProfileScreen extends StatelessWidget {
           ),
           middle: Text(AppLocalizations.of(context).profile),
         ),
-        child: Center(child: Text(this.toStringShort() + " -- IOS")),
+        child: SafeArea(
+          child: Column(
+            children: [
+              ActionButton(
+                text:  'Last 10 Games',
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.gameHistory),
+              ),
+            ],
+          ),
+        ),
       );
     });
   }
