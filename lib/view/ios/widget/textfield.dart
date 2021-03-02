@@ -14,8 +14,8 @@ class TextField extends StatelessWidget {
 
   TextField(
       {this.controller,
-        this.autofocus = false,
-        this.autocorrect: false,
+      this.autofocus = false,
+      this.autocorrect: false,
       this.placeholder,
       this.obscureText = false,
       this.keyboardType,
@@ -25,7 +25,7 @@ class TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(isValid) {
+    if (isValid) {
       return CupertinoTextField(
         controller: controller,
         autofocus: autofocus,

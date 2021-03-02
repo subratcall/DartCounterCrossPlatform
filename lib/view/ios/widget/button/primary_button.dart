@@ -1,15 +1,16 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class PrimaryButton extends StatelessWidget {
-
   final Widget child;
   final VoidCallback onPressed;
   final BorderRadius borderRadius;
 
-  PrimaryButton({this.child, this.onPressed, this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+  PrimaryButton(
+      {this.child,
+      this.onPressed,
+      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
       : assert(child != null);
 
   @override
@@ -19,8 +20,11 @@ class PrimaryButton extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       onPressed: onPressed,
       borderRadius: borderRadius,
-      child: Center(
-        child: child,
+      child: Container(
+        color: AppColors.red,
+        child: Center(
+          child: child,
+        ),
       ),
     );
   }
@@ -31,7 +35,10 @@ class PrimaryTextButton extends StatelessWidget {
   final VoidCallback onPressed;
   final BorderRadius borderRadius;
 
-  PrimaryTextButton({this.text, this.onPressed, this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+  PrimaryTextButton(
+      {this.text,
+      this.onPressed,
+      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
       : assert(text != null && text.length > 0);
 
   @override
@@ -47,5 +54,3 @@ class PrimaryTextButton extends StatelessWidget {
     );
   }
 }
-
-

@@ -13,9 +13,9 @@ class AuthenticationService {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return null;
-    } on FirebaseAuthException catch(e) {
+    } on FirebaseAuthException catch (e) {
       print("${e.message} ${e.code}");
-      if(e.code == 'network-request-failed') {
+      if (e.code == 'network-request-failed') {
         throw NetworkError();
       } else {
         throw InvalidEmailAddressOrPasswordError();
@@ -25,12 +25,11 @@ class AuthenticationService {
 
   Future<void> resetPassword({String email}) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(
-          email: email);
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
       return null;
-    } on FirebaseAuthException catch(e) {
+    } on FirebaseAuthException catch (e) {
       print("${e.message} ${e.code}");
-      if(e.code == 'network-request-failed') {
+      if (e.code == 'network-request-failed') {
         throw NetworkError();
       } else {
         // TODO map errors
@@ -44,9 +43,9 @@ class AuthenticationService {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       return null;
-    } on FirebaseAuthException catch(e) {
+    } on FirebaseAuthException catch (e) {
       print("${e.message} ${e.code}");
-      if(e.code == 'network-request-failed') {
+      if (e.code == 'network-request-failed') {
         throw NetworkError();
       } else {
         throw EmailAddressAlreadyInUseError();

@@ -95,7 +95,6 @@
   "@errorUsernameAlreadyInUse": {
     "description": "phrase"
   },
-
   "aboutUs": "About Us",
   "confirm": "Confirm",
   "checkMailAccountForPasswordResetLink": "Check your email account to reset your password.",
@@ -118,14 +117,14 @@
   "socialMedia": "Social Media",
   "stats": "Stats",
   "username": "Username",
-  "resetPassword" : "Reset Password",
-  "cancel" : "Cancel",
-  "errorInvalidEmailAddressOrPassword" : "Invalid email.",
-  "errorInvalidEmailAddress" : "Invalid email address.",
-  "errorInvalidUsername" : "Invalid username - TODO.",
-  "errorInvalidPassword" : "Invalid password - TODO.",
-  "errorPasswordNotEqualPasswordAgain" : "Passwords don't match.",
-  "errorNetwork" : "Network error - No internet connection!",
-  "errorEmailAddressAlreadyInUse" : "This email is already in use.",
-  "errorUsernameAlreadyInUse" : "This username is already in use."
+  "resetPassword": "Reset Password",
+  "cancel": "Cancel",
+  "errorInvalidEmailAddressOrPassword": "Invalid email.",
+  "errorInvalidEmailAddress": "Invalid email address.",
+  "errorInvalidUsername": "Invalid username - TODO.",
+  "errorInvalidPassword": "Invalid password - TODO.",
+  "errorPasswordNotEqualPasswordAgain": "Passwords don't match.",
+  "errorNetwork": "Network error - No internet connection!",
+  "errorEmailAddressAlreadyInUse": "This email is already in use.",
+  "errorUsernameAlreadyInUse": "This username is already in use."
 }

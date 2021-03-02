@@ -7,14 +7,15 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 enum ResetPasswordViewState { idle, loading, successful }
 
 class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
 
   ResetPasswordViewModel() {
     viewState = ResetPasswordViewState.idle;
   }
 
   Future<void> onConfirmPressed({String email}) async {
-    if(!EmailValidator.validate(email)) {
+    if (!EmailValidator.validate(email)) {
       throw InvalidEmailAddressError();
     }
 
@@ -22,10 +23,9 @@ class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
     try {
       await _authenticationService.resetPassword(email: email);
       viewState = ResetPasswordViewState.successful;
-    } on Error catch(e) {
+    } on Error catch (e) {
       viewState = ResetPasswordViewState.idle;
       throw e;
     }
-
   }
 }

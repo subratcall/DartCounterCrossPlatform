@@ -33,13 +33,15 @@ class DartCounterApp extends StatelessWidget {
           return CupertinoApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: snapshot.data != null ? ios.HomeScreen() : PageView(
-              controller: controller,
-              children: [
-                ios.SignInScreen(controller),
-                ios.SignUpScreen(controller),
-              ],
-            ),
+            home: snapshot.data != null
+                ? ios.HomeScreen()
+                : PageView(
+                    controller: controller,
+                    children: [
+                      ios.SignInScreen(controller),
+                      ios.SignUpScreen(controller),
+                    ],
+                  ),
             routes: {
               AppRoutes.loading: (context) => ios.LoadingScreen(),
               AppRoutes.home: (context) => ios.HomeScreen(),

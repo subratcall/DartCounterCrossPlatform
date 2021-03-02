@@ -1,5 +1,6 @@
 import 'package:dart_counter/app_routes.dart';
-import 'package:dart_counter/assets/app_icons.dart';
+import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/view/ios/widget/button/primary_button.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,56 +13,105 @@ class HomeScreen extends StatelessWidget {
     return Screen<HomeViewModel>(builder: (context, model, child) {
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(AppIcons.menu, size: 35),
-            onPressed: () {},
-          ),
           middle: Text(AppLocalizations.of(context).home),
         ),
         child: SafeArea(
-            child: Column(children: [
-          CupertinoButton(
-              child: Text('Profile'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.profile);
-              }),
-          CupertinoButton(
-              child: Text('CreateGame'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.createGame);
-              }),
-          CupertinoButton(
-              child: Text('SocialMedia'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.socialMedia);
-              }),
-          CupertinoButton(
-              child: Text('Settings'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.settings);
-              }),
-          CupertinoButton(
-              child: Text('Invite'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.invite);
-              }),
-          CupertinoButton(
-              child: Text('Friends'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.friends);
-              }),
-          CupertinoButton(
-              child: Text('AboutUs'),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.aboutUs);
-              }),
-          CupertinoButton(
-              child: Text('Log out'),
-              onPressed: () {
-                model.signOut();
-              }),
-        ])),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: PrimaryButton(
+                    child: Text('Profile'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.profile),
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          child: Text('Invites'),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, AppRoutes.invite),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Expanded(
+                        child: PrimaryButton(
+                          child: Text('Friends'),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, AppRoutes.friends),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: PrimaryButton(
+                    child: Text('Offline'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.createGame),
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: PrimaryButton(
+                    child: Text('Online'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.createGame),
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          child: Text('About Us'),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, AppRoutes.aboutUs),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Expanded(
+                        child: PrimaryButton(
+                          child: Text('Settings'),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, AppRoutes.settings),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(AppImages.adBanner),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     });
   }

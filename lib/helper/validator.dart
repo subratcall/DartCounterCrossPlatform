@@ -8,7 +8,7 @@ class EmailValidator {
 
 class PasswordValidator {
   static bool validate(String password, [String passwordAgain]) {
-    if(password == null) return false;
+    if (password == null) return false;
 
     var trimmedPassword = password.trim();
 
@@ -31,7 +31,6 @@ class PasswordValidator {
 }
 
 class UsernameValidator {
-
   static bool validate(String username) {
     // TODO implement: min 3 Zeichen aus [A-z][0-9]
     return true;

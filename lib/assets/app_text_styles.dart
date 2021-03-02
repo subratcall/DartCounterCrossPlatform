@@ -1,5 +1,5 @@
 class AppTextStyles {
   AppTextStyles._();
 
-  // TODO add textstyles for the app here
+// TODO add textstyles for the app here
 }
