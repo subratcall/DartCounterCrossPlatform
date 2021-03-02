@@ -18,8 +18,7 @@ class CreateGameView extends StatelessWidget {
           ),
           middle: Text(AppLocalizations.of(context).createGame),
         ),
-        child: SafeArea(
-            child: Text('TODO')),
+        child: SafeArea(child: Text('TODO')),
       );
     });
   }

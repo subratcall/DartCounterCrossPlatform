@@ -1,7 +1,7 @@
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/view/ios/widgets/button/primary_button.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
+import 'package:dart_counter/view/ios/widgets/button/primary_button.dart';
 import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

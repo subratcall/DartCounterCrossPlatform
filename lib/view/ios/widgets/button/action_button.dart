@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +9,8 @@ class ActionButton extends StatelessWidget {
 
   ActionButton(
       {this.text,
-        this.onPressed,
-        this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+      this.onPressed,
+      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
       : assert(text != null && text.length > 0);
 
   @override

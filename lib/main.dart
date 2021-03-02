@@ -54,8 +54,7 @@ class DartCounterApp extends StatelessWidget {
               AppRoutes.socialMedia: (context) => ios.SocialMediaView(),
               AppRoutes.createGame: (context) => ios.CreateGameView(),
               AppRoutes.inGame: (context) => ios.InGameView(),
-              AppRoutes.checkoutDetails: (context) =>
-                  ios.CheckoutDetailsView(),
+              AppRoutes.checkoutDetails: (context) => ios.CheckoutDetailsView(),
               AppRoutes.stats: (context) => ios.StatsView(),
               AppRoutes.resetPassword: (context) => ios.ResetPasswordView(),
             },
@@ -80,8 +79,7 @@ class DartCounterApp extends StatelessWidget {
               AppRoutes.checkoutDetails: (context) =>
                   android.CheckoutDetailsView(),
               AppRoutes.stats: (context) => android.StatsView(),
-              AppRoutes.resetPassword: (context) =>
-                  android.ResetPasswordView(),
+              AppRoutes.resetPassword: (context) => android.ResetPasswordView(),
             },
             // TODO further bootstrapping
           );

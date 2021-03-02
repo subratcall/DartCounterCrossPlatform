@@ -38,9 +38,7 @@ class Card extends StatelessWidget {
           Container(
             color: AppColors.gray,
             child: Row(
-              children: [
-                Expanded(child: body)
-              ],
+              children: [Expanded(child: body)],
             ),
             padding: const EdgeInsets.all(8.0),
           ),
