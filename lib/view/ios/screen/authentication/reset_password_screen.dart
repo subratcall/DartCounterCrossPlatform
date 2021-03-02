@@ -53,95 +53,98 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
         ),
         middle: Text(AppLocalizations.of(context).resetPassword),
       ),
-      child: SafeArea(
-        child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).padding.top -
-                  MediaQuery.of(context).padding.bottom,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Spacer(
-                    flex: 105,
-                  ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Spacer(
-                          flex: 120,
-                        ),
-                        Flexible(
-                          child: Image.asset(AppImages.logo),
-                          flex: 135,
-                        ),
-                        Spacer(
-                          flex: 120,
-                        ),
-                      ],
+      child: GestureDetector(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width,
+                maxHeight: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Spacer(
+                      flex: 105,
                     ),
-                    flex: 166,
-                  ),
-                  Spacer(
-                    flex: 67,
-                  ),
-                  Expanded(
-                    child: AutoSizeText(
-                      AppLocalizations.of(context).forgotPassword,
-                      maxLines: 1,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Spacer(
+                            flex: 120,
+                          ),
+                          Flexible(
+                            child: Image.asset(AppImages.logo),
+                            flex: 135,
+                          ),
+                          Spacer(
+                            flex: 120,
+                          ),
+                        ],
+                      ),
+                      flex: 166,
                     ),
-                    flex: 21,
-                  ),
-                  Spacer(
-                    flex: 28,
-                  ),
-                  Expanded(
-                    child: AutoSizeText(
-                      AppLocalizations.of(context).insertEmailToResetPassword,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14),
-                      maxLines: 2,
+                    Spacer(
+                      flex: 67,
                     ),
-                    flex: 32,
-                  ),
-                  Spacer(
-                    flex: 28,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      placeholder: AppLocalizations.of(context).email,
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailController,
+                    Expanded(
+                      child: AutoSizeText(
+                        AppLocalizations.of(context).forgotPassword,
+                        maxLines: 1,
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                      ),
+                      flex: 21,
                     ),
-                    flex: 36,
-                  ),
-                  Spacer(
-                    flex: 47,
-                  ),
-                  Expanded(
-                    child: PrimaryButton(
-                      text: AppLocalizations.of(context).confirm,
-                      onPressed: () => widget.model
-                          .onConfirmPressed(email: emailController.text),
+                    Spacer(
+                      flex: 28,
                     ),
-                    flex: 50,
-                  ),
-                  Spacer(
-                    flex: 158,
-                  ),
-                ],
+                    Expanded(
+                      child: AutoSizeText(
+                        AppLocalizations.of(context).insertEmailToResetPassword,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14),
+                        maxLines: 2,
+                      ),
+                      flex: 32,
+                    ),
+                    Spacer(
+                      flex: 28,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        placeholder: AppLocalizations.of(context).email,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
+                      ),
+                      flex: 36,
+                    ),
+                    Spacer(
+                      flex: 47,
+                    ),
+                    Expanded(
+                      child: PrimaryButton(
+                        text: AppLocalizations.of(context).confirm,
+                        onPressed: () => widget.model
+                            .onConfirmPressed(email: emailController.text),
+                      ),
+                      flex: 50,
+                    ),
+                    Spacer(
+                      flex: 158,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
+        onTap: () => FocusScope.of(context).unfocus(),
       ),
     );
   }
