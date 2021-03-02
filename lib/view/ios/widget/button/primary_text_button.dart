@@ -1,23 +1,21 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/view/ios/widget/button/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 
-class ActionButton extends StatelessWidget {
+class PrimaryTextButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final BorderRadius borderRadius;
 
-  ActionButton(
+  PrimaryTextButton(
       {this.text,
-        this.onPressed,
-        this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+      this.onPressed,
+      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
       : assert(text != null && text.length > 0);
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
+    return PrimaryButton(
       onPressed: onPressed,
       child: AutoSizeText(
         text,
@@ -25,7 +23,6 @@ class ActionButton extends StatelessWidget {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       borderRadius: borderRadius,
-      color: AppColors.green,
     );
   }
 }
