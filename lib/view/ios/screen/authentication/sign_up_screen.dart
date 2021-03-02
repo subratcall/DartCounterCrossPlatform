@@ -2,7 +2,7 @@ import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/screen/loading_screen.dart';
 import 'package:dart_counter/view/ios/widget/button/link_button.dart';
-import 'package:dart_counter/view/ios/widget/button/primary_button.dart';
+import 'package:dart_counter/view/ios/widget/button/primary_text_button.dart';
 import 'package:dart_counter/view/ios/widget/textfield.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/view/toast.dart';
