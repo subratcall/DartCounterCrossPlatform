@@ -18,11 +18,12 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
+      padding: EdgeInsets.all(16.0),
       onPressed: onPressed,
       child: AutoSizeText(
         text,
         maxLines: 1,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 37),
       ),
       borderRadius: borderRadius,
       color: AppColors.green,

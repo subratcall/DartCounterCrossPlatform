@@ -12,4 +12,5 @@ class AppImages {
   static const trendUp = 'assets/images/png/trend_up.png';
   static const trendDown = 'assets/images/png/trend_down.png';
   static const delete = 'assets/images/png/delete.png';
+  static const photoPlaceholder = 'assets/images/png/photoPlaceholder.png';
 }
