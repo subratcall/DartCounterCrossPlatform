@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/screen/loading_screen.dart';
@@ -6,6 +7,7 @@ import 'package:dart_counter/view/ios/widget/link_button.dart';
 import 'package:dart_counter/view/ios/widget/primary_button.dart';
 import 'package:dart_counter/view/ios/widget/textfield.dart';
 import 'package:dart_counter/view/screen.dart';
+import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/authentication/reset_password_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -131,8 +133,23 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
                     Expanded(
                       child: PrimaryTextButton(
                         text: AppLocalizations.of(context).confirm,
-                        onPressed: () => widget.model
-                            .onConfirmPressed(email: emailController.text),
+                        onPressed: () {
+                          // TODO this is only a workaround find a better solution for this e.g with global key
+                          var errorMessages = {
+                            'errorInvalidEmailAddress' : AppLocalizations.of(context).errorInvalidEmailAddress,
+                            'errorNetwork' : AppLocalizations.of(context).errorNetwork,
+                          };
+
+                          widget.model.onConfirmPressed(email: emailController.text)
+                              .catchError((error) {
+                            if(error is InvalidEmailAddressError) {
+                              Toast.showToast(errorMessages['errorInvalidEmailAddress']);
+                            } else {
+                              Toast.showToast(errorMessages['errorNetwork']);
+                            }
+                          });
+
+                        },
                       ),
                       flex: 50,
                     ),

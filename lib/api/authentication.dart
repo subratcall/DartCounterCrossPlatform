@@ -34,7 +34,7 @@ class AuthenticationService {
         throw NetworkError();
       } else {
         // TODO map errors
-        throw NetworkError();
+        throw InvalidEmailAddressError();
       }
     }
   }

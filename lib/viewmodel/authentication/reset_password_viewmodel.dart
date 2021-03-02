@@ -1,4 +1,6 @@
 import 'package:dart_counter/api/authentication.dart';
+import 'package:dart_counter/app_errors.dart';
+import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
@@ -11,7 +13,11 @@ class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
     viewState = ResetPasswordViewState.idle;
   }
 
-  void onConfirmPressed({String email}) async {
+  Future<void> onConfirmPressed({String email}) async {
+    if(!EmailValidator.validate(email)) {
+      throw InvalidEmailAddressError();
+    }
+
     viewState = ResetPasswordViewState.loading;
     try {
       await _authenticationService.resetPassword(email: email);
