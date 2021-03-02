@@ -67,8 +67,6 @@ class DartCounterApp extends StatelessWidget {
             home: android.SignInScreen(),
             routes: {
               AppRoutes.loading: (context) => android.LoadingScreen(),
-              AppRoutes.signIn: (context) => android.SignInScreen(),
-              AppRoutes.signUp: (context) => android.SignUpScreen(),
               AppRoutes.home: (context) => android.HomeScreen(),
               AppRoutes.profile: (context) => android.ProfileScreen(),
               AppRoutes.invite: (context) => android.InvitesScreen(),

@@ -1,7 +1,5 @@
 class AppRoutes {
   static const loading = 'loading';
-  static const signIn = 'signIn';
-  static const signUp = 'signUp';
   static const home = 'home';
   static const profile = 'profile';
   static const invite = 'invite';
