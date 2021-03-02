@@ -23,6 +23,22 @@ class AuthenticationService {
     }
   }
 
+  Future<void> resetPassword({String email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(
+          email: email);
+      return null;
+    } on FirebaseAuthException catch(e) {
+      print("${e.message} ${e.code}");
+      if(e.code == 'network-request-failed') {
+        throw NetworkError();
+      } else {
+        // TODO map errors
+        throw NetworkError();
+      }
+    }
+  }
+
   Future<void> signUp({String email, String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
