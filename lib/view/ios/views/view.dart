@@ -3,7 +3,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-/// RootWidget of every ios view
+/// root widget of every ios view
 
 class View<T extends ViewModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;

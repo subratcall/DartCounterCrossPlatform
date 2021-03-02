@@ -3,7 +3,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-/// RootWidget of every android view
+/// root widget of every android view
 
 class View<T extends ViewModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;
