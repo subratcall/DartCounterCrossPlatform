@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
+import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/widget/button/action_button.dart';
 import 'package:dart_counter/view/screen.dart';
 import 'package:dart_counter/viewmodel/profile_viewmodel.dart';
@@ -30,26 +32,59 @@ class ProfileScreen extends StatelessWidget {
                   flex: 4,
                 ),
                 Expanded(
-                  child: Container(
-                    color: AppColors.red,
-                  ),
+                  child: Placeholder(),
                   flex: 234,
                 ),
                 Spacer(
                   flex: 4,
                 ),
                 Expanded(
-                  child: Container(
-                    color: AppColors.red,
-                  ),
+                  child: Placeholder(),
                   flex: 68,
                 ),
                 Spacer(
                   flex: 4,
                 ),
                 Expanded(
-                  child: Container(
-                    color: AppColors.red,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Placeholder(),
+                            ),
+                            Expanded(
+                              child: Placeholder(),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Placeholder(),
+                            ),
+                            Expanded(
+                              child: Placeholder(),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Placeholder(),
+                            ),
+                            Expanded(
+                              child: Placeholder(),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   flex: 275,
                 ),
@@ -57,11 +92,7 @@ class ProfileScreen extends StatelessWidget {
                   flex: 12,
                 ),
                 Expanded(
-                  child: ActionButton(
-                    text: 'Last 10 Games',
-                    onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.gameHistory),
-                  ),
+                  child: Placeholder(),
                   flex: 75,
                 ),
                 Spacer(
@@ -77,4 +108,63 @@ class ProfileScreen extends StatelessWidget {
 }
 
 // Screen specific widgets
+class StatsCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
 
+/**
+    ClipRRect(
+    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+    child: Container(
+    color: AppColors.black,
+    child: Column(
+    children: [
+    Image.asset(AppImages.photoPlaceholder),
+    SizedBox(height: 16,),
+    AutoSizeText(
+    'Spielername',
+    maxLines: 1,
+    style: TextStyle(
+    color: AppColors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 23,
+    ),
+    ),
+    ],
+    ),
+    ),
+    ),
+*/
+
+/**
+    ClipRRect(
+    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+    child: Container(
+    color: AppColors.black,
+    child: Column(
+    children: [
+    AutoSizeText(
+    'Karriere Statistiken',
+    maxLines: 1,
+    style: TextStyle(
+    color: AppColors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 37,
+    ),
+    ),
+    ],
+    ),
+    ),
+    )
+*/
+
+/**
+    ActionButton(
+    text: 'Last 10 Games',
+    onPressed: () =>
+    Navigator.pushNamed(context, AppRoutes.gameHistory),
+    )
+*/
