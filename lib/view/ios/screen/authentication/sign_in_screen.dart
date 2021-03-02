@@ -107,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 flex: 25,
                               ),
                               Expanded(
-                                child: PrimaryButton(
+                                child: PrimaryTextButton(
                                     text: AppLocalizations.of(context).login,
                                     onPressed: () {
                                       // TODO this is only a workaround find a better solution for this e.g with global key

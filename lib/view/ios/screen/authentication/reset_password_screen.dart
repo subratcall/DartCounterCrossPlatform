@@ -129,7 +129,7 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
                       flex: 47,
                     ),
                     Expanded(
-                      child: PrimaryButton(
+                      child: PrimaryTextButton(
                         text: AppLocalizations.of(context).confirm,
                         onPressed: () => widget.model
                             .onConfirmPressed(email: emailController.text),

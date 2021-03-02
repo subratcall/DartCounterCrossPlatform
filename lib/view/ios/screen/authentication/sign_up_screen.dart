@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_images.dart';
@@ -128,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         flex: 25,
                       ),
                       Expanded(
-                        child: PrimaryButton(
+                        child: PrimaryTextButton(
                           text: AppLocalizations.of(context).register,
                           onPressed: () {
                             // TODO this is only a workaround find a better solution for this e.g with global key
