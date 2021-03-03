@@ -22,6 +22,7 @@ class HomeView extends StatelessWidget {
                     size: 35,
                     color: AppColors.black,
                   ),
+                  onPressed: () => model.signOut(),
                 ),
               ),
               child: Column(
