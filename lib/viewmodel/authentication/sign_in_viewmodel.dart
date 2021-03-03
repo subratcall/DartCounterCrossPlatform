@@ -13,7 +13,7 @@ class SignInViewModel extends ViewModel<SignInViewState> {
     viewState = SignInViewState.idle;
   }
 
-  Future<void> onSignPressed({String email, String password}) async {
+  Future<void> onSignInPressed({String email, String password}) async {
     if (!EmailValidator.validate(email) || !PasswordValidator.validate(password)) {
       throw InvalidEmailAddressOrPasswordError();
     }
@@ -37,6 +37,6 @@ class SignInViewModel extends ViewModel<SignInViewState> {
   }
 
   void onSignInInstagramPressed() {
-    _authenticationService.signIn();
+    _authenticationService..signInInstagram();
   }
 }

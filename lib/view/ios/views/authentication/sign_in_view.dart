@@ -106,7 +106,7 @@ class _SignInViewState extends State<SignInView> {
                                 'errorNetwork': AppLocalizations.of(context).errorNetwork,
                               };
 
-                              model.onSignPressed(email: emailController.text, password: passwordController.text).catchError((error) {
+                              model.onSignInPressed(email: emailController.text, password: passwordController.text).catchError((error) {
                                 if (error is InvalidEmailAddressOrPasswordError) {
                                   Toast.showToast(errorMessages['errorInvalidEmailAddressOrPassword']);
                                 } else {

@@ -51,15 +51,15 @@ class AuthenticationService {
     }
   }
 
-  Future<dynamic> signInFacebook() {
+  Future<void> signInFacebook() {
     // TODO implement
   }
 
-  Future<dynamic> signInGoogle() {
+  Future<void> signInGoogle() {
     // TODO implement
   }
 
-  Future<dynamic> signInInstagram() {
+  Future<void> signInInstagram() {
     // TODO implement
   }
 
