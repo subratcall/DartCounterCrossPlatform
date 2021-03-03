@@ -1,4 +1,5 @@
 import 'package:dart_counter/app_routes.dart';
+import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/primary_button.dart';
@@ -12,6 +13,10 @@ class HomeView extends StatelessWidget {
     return View<HomeViewModel>(
       navigationBar: CupertinoNavigationBar(
         middle: Text(AppLocalizations.of(context).home),
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Icon(CupertinoIcons.square_arrow_right, size: 35, color: AppColors.black,),
+        ),
       ),
         builder: (context, model, child) {
       return Column(

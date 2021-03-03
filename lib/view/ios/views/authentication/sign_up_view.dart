@@ -33,7 +33,7 @@ class _SignUpViewState extends State<SignUpView> {
 
     return View<SignUpViewModel>(
       padding: EdgeInsets.symmetric(horizontal: 35.0),
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => node.unfocus(),
       builder: (context, model, child) => model.viewState == SignUpViewState.idle
           ? SingleChildScrollView(
               physics: ClampingScrollPhysics(),

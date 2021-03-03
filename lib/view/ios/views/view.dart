@@ -35,30 +35,28 @@ class _ViewState<T extends ViewModel> extends State<View<T>> {
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
-      body: Builder(
-          builder: (context) => CupertinoPageScaffold(
-            navigationBar: widget.navigationBar,
-            child: GestureDetector(
-              onTap: widget.onTap,
-              child: SafeArea(
-                child: Padding(
-                  padding: widget.padding,
-                  child: ChangeNotifierProvider<T>(
-                      create: (context) => model,
-                      child: Consumer<T>(builder: widget.builder)),
-                ),
-              ),
+      body: CupertinoPageScaffold(
+        navigationBar: widget.navigationBar,
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: SafeArea(
+            child: Padding(
+              padding: widget.padding,
+              child: ChangeNotifierProvider<T>(
+                  create: (context) => model,
+                  child: Consumer<T>(builder: widget.builder)),
             ),
-          )
+          ),
+        ),
       ),
     );
+
   }
 }
 
 class ModalView<T extends ViewModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;
   final Function(T) onModelReady;
-
 
   ModalView({this.builder, this.onModelReady});
 
