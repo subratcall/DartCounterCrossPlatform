@@ -10,7 +10,9 @@ class PrimaryTextButton extends StatelessWidget {
   PrimaryTextButton(
       {this.text,
       this.onPressed,
-      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+      this.borderRadius = const BorderRadius.all(
+        Radius.circular(8.0),
+      )})
       : assert(text != null && text.length > 0);
 
   @override

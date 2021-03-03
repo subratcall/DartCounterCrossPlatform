@@ -13,7 +13,9 @@ class Card extends StatelessWidget {
       this.middle = const Spacer(),
       this.trailing = const Spacer(),
       this.body,
-      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+      this.borderRadius = const BorderRadius.all(
+        Radius.circular(8.0),
+      )})
       : assert(body != null);
 
   @override

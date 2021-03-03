@@ -27,8 +27,7 @@ void setupLocator() {
   locator.registerLazySingleton<AppModel>(() => AppModel());
 
   /// Register Services here
-  locator.registerLazySingleton<AuthenticationService>(
-      () => AuthenticationService());
+  locator.registerLazySingleton<AuthenticationService>(() => AuthenticationService());
   locator.registerLazySingleton<DatabaseService>(() => DatabaseService());
   locator.registerLazySingleton<PlayingService>(() => PlayingService());
 

@@ -8,6 +8,7 @@ import 'package:dart_counter/view/ios/widgets/button/link_button.dart';
 import 'package:dart_counter/view/ios/widgets/button/primary_text_button.dart';
 import 'package:dart_counter/view/ios/widgets/textfield.dart';
 import 'package:dart_counter/view/toast.dart';
+import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/authentication/reset_password_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,10 +21,9 @@ class ResetPasswordView extends StatefulWidget {
 class _ResetPasswordViewState extends State<ResetPasswordView> {
   @override
   Widget build(BuildContext context) {
-    return ModalView<ResetPasswordViewModel>(
-        builder: (context, model, child) {
+    return ViewModelProvider<ResetPasswordViewModel>(builder: (context, model, child) {
       return model.viewState == ResetPasswordViewState.idle
-          ? ResetPasswordInitial(model)
+          ? ResetPasswordIdle(model)
           : model.viewState == ResetPasswordViewState.successful
               ? ResetPasswordSuccess()
               : LoadingView();
@@ -31,21 +31,23 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   }
 }
 
-class ResetPasswordInitial extends StatefulWidget {
+class ResetPasswordIdle extends StatefulWidget {
   final ResetPasswordViewModel model;
 
-  ResetPasswordInitial(this.model);
+  ResetPasswordIdle(this.model);
 
   @override
-  _ResetPasswordInitialState createState() => _ResetPasswordInitialState();
+  _ResetPasswordIdleState createState() => _ResetPasswordIdleState();
 }
 
-class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
+class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
   final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
+    final node = FocusScope.of(context);
+
+    return CupertinoView(
       navigationBar: CupertinoNavigationBar(
         leading: CupertinoButton(
           padding: EdgeInsets.zero,
@@ -56,121 +58,110 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
         ),
         middle: Text(AppLocalizations.of(context).resetPassword),
       ),
-      child: Builder(
-        builder: (context) {
-          final double maxWidth = MediaQuery.of(context).size.width;
-          final double maxHeight = MediaQuery.of(context).size.height - 2*MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom - 10;
-          return GestureDetector(
-            child: SafeArea(
-              child: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 35.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Spacer(
-                          flex: 105,
-                        ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Spacer(
-                                flex: 120,
-                              ),
-                              Flexible(
-                                child: Image.asset(AppImages.logo),
-                                flex: 135,
-                              ),
-                              Spacer(
-                                flex: 120,
-                              ),
-                            ],
-                          ),
-                          flex: 166,
-                        ),
-                        Spacer(
-                          flex: 67,
-                        ),
-                        Expanded(
-                          child: AutoSizeText(
-                            AppLocalizations.of(context).forgotPassword,
-                            maxLines: 1,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 23),
-                          ),
-                          flex: 21,
-                        ),
-                        Spacer(
-                          flex: 28,
-                        ),
-                        Expanded(
-                          child: AutoSizeText(
-                            AppLocalizations.of(context).insertEmailToResetPassword,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 14),
-                            maxLines: 2,
-                          ),
-                          flex: 32,
-                        ),
-                        Spacer(
-                          flex: 28,
-                        ),
-                        Expanded(
-                          child: TextField(
-                            placeholder: AppLocalizations.of(context).email,
-                            keyboardType: TextInputType.emailAddress,
-                            controller: emailController,
-                          ),
-                          flex: 36,
-                        ),
-                        Spacer(
-                          flex: 47,
-                        ),
-                        Expanded(
-                          child: PrimaryTextButton(
-                            text: AppLocalizations.of(context).confirm,
-                            onPressed: () {
-                              // TODO this is only a workaround find a better solution for this e.g with global key
-                              var errorMessages = {
-                                'errorInvalidEmailAddress':
-                                AppLocalizations.of(context)
-                                    .errorInvalidEmailAddress,
-                                'errorNetwork':
-                                AppLocalizations.of(context).errorNetwork,
-                              };
-
-                              widget.model
-                                  .onConfirmPressed(email: emailController.text)
-                                  .catchError((error) {
-                                if (error is InvalidEmailAddressError) {
-                                  Toast.showToast(
-                                      errorMessages['errorInvalidEmailAddress']);
-                                } else {
-                                  Toast.showToast(errorMessages['errorNetwork']);
-                                }
-                              });
-                            },
-                          ),
-                          flex: 50,
-                        ),
-                        Spacer(
-                          flex: 158,
-                        ),
-                      ],
-                    ),
-                  ),
+      onTap: () => node.unfocus(),
+      child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: ConstrainedBox(
+          // TODO calc correctly
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width,
+            maxHeight: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).padding.top -
+                2 * CupertinoNavigationBar().preferredSize.height -
+                MediaQuery.of(context).padding.bottom,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Spacer(
+                  flex: 105,
                 ),
-              ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Spacer(
+                        flex: 120,
+                      ),
+                      Flexible(
+                        child: Image.asset(AppImages.logo),
+                        flex: 135,
+                      ),
+                      Spacer(
+                        flex: 120,
+                      ),
+                    ],
+                  ),
+                  flex: 166,
+                ),
+                Spacer(
+                  flex: 67,
+                ),
+                Expanded(
+                  child: AutoSizeText(
+                    AppLocalizations.of(context).forgotPassword,
+                    maxLines: 1,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                  ),
+                  flex: 21,
+                ),
+                Spacer(
+                  flex: 28,
+                ),
+                Expanded(
+                  child: AutoSizeText(
+                    AppLocalizations.of(context).insertEmailToResetPassword,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14),
+                    maxLines: 2,
+                  ),
+                  flex: 32,
+                ),
+                Spacer(
+                  flex: 28,
+                ),
+                Expanded(
+                  child: TextField(
+                    placeholder: AppLocalizations.of(context).email,
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    textInputAction: TextInputAction.done,
+                    onEditingComplete: () => node.unfocus(),
+                  ),
+                  flex: 36,
+                ),
+                Spacer(
+                  flex: 47,
+                ),
+                Expanded(
+                  child: PrimaryTextButton(
+                    text: AppLocalizations.of(context).confirm,
+                    onPressed: () {
+                      // TODO this is only a workaround find a better solution for this e.g with global key
+                      var errorMessages = {
+                        'errorInvalidEmailAddress': AppLocalizations.of(context).errorInvalidEmailAddress,
+                        'errorNetwork': AppLocalizations.of(context).errorNetwork,
+                      };
+
+                      widget.model.onConfirmPressed(email: emailController.text).catchError((error) {
+                        if (error is InvalidEmailAddressError) {
+                          Toast.showToast(errorMessages['errorInvalidEmailAddress']);
+                        } else {
+                          Toast.showToast(errorMessages['errorNetwork']);
+                        }
+                      });
+                    },
+                  ),
+                  flex: 50,
+                ),
+                Spacer(
+                  flex: 158,
+                ),
+              ],
             ),
-            onTap: () => FocusScope.of(context).unfocus(),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
@@ -185,83 +176,80 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
 class ResetPasswordSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Spacer(
-                flex: 105,
+    return CupertinoView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Spacer(
+              flex: 105,
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Spacer(
+                    flex: 120,
+                  ),
+                  Flexible(
+                    child: Image.asset(AppImages.logo),
+                    flex: 135,
+                  ),
+                  Spacer(
+                    flex: 120,
+                  ),
+                ],
               ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Spacer(
-                      flex: 120,
-                    ),
-                    Flexible(
-                      child: Image.asset(AppImages.logo),
-                      flex: 135,
-                    ),
-                    Spacer(
-                      flex: 120,
-                    ),
-                  ],
-                ),
-                flex: 166,
+              flex: 166,
+            ),
+            Spacer(
+              flex: 64,
+            ),
+            Expanded(
+              child: Icon(
+                CupertinoIcons.checkmark_alt_circle,
+                color: AppColors.green,
+                size: 60,
               ),
-              Spacer(
-                flex: 64,
+              flex: 44,
+            ),
+            Spacer(
+              flex: 22,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                AppLocalizations.of(context).emailSent,
+                maxLines: 1,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
               ),
-              Expanded(
-                child: Icon(
-                  CupertinoIcons.checkmark_alt_circle,
-                  color: AppColors.green,
-                  size: 60,
-                ),
-                flex: 44,
+              flex: 21,
+            ),
+            Spacer(
+              flex: 28,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                AppLocalizations.of(context).checkMailAccountForPasswordResetLink,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14),
+                maxLines: 2,
               ),
-              Spacer(
-                flex: 22,
+              flex: 32,
+            ),
+            Spacer(
+              flex: 81,
+            ),
+            Flexible(
+              child: LinkButton(
+                text: AppLocalizations.of(context).login,
+                onPressed: () => Navigator.pop(context),
               ),
-              Expanded(
-                child: AutoSizeText(
-                  AppLocalizations.of(context).emailSent,
-                  maxLines: 1,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-                ),
-                flex: 21,
-              ),
-              Spacer(
-                flex: 28,
-              ),
-              Expanded(
-                child: AutoSizeText(
-                  AppLocalizations.of(context)
-                      .checkMailAccountForPasswordResetLink,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14),
-                  maxLines: 2,
-                ),
-                flex: 32,
-              ),
-              Spacer(
-                flex: 81,
-              ),
-              Flexible(
-                child: LinkButton(
-                  text: AppLocalizations.of(context).login,
-                  onPressed: () => Navigator.pop(context),
-                ),
-                flex: 17,
-              ),
-              Spacer(
-                flex: 158,
-              ),
-            ],
-          ),
+              flex: 17,
+            ),
+            Spacer(
+              flex: 158,
+            ),
+          ],
         ),
       ),
     );

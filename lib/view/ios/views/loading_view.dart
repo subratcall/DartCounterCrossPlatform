@@ -8,9 +8,10 @@ class LoadingView extends StatelessWidget {
     return CupertinoPageScaffold(
       child: Center(
         child: Container(
-            width: 100,
-            height: 100,
-            child: Lottie.asset(AppAnimations.loading)),
+          width: 100,
+          height: 100,
+          child: Lottie.asset(AppAnimations.loading),
+        ),
       ),
     );
   }

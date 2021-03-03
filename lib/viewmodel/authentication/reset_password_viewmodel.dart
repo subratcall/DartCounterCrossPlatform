@@ -7,8 +7,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 enum ResetPasswordViewState { idle, loading, successful }
 
 class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
   ResetPasswordViewModel() {
     viewState = ResetPasswordViewState.idle;

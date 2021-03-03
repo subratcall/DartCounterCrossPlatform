@@ -1,4 +1,5 @@
 import 'package:dart_counter/view/ios/views/view.dart';
+import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/profile_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,8 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return View<ProfileViewModel>(builder: (context, model, child) {
-      return CupertinoPageScaffold(
+    return ViewModelProvider<ProfileViewModel>(
+      builder: (context, model, child) => CupertinoView(
         navigationBar: CupertinoNavigationBar(
           leading: CupertinoButton(
             padding: EdgeInsets.zero,
@@ -18,87 +19,85 @@ class ProfileView extends StatelessWidget {
           ),
           middle: Text(AppLocalizations.of(context).profile),
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 0),
-            child: Column(
-              children: [
-                Spacer(
-                  flex: 4,
-                ),
-                Expanded(
-                  child: Placeholder(),
-                  flex: 234,
-                ),
-                Spacer(
-                  flex: 4,
-                ),
-                Expanded(
-                  child: Placeholder(),
-                  flex: 68,
-                ),
-                Spacer(
-                  flex: 4,
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Placeholder(),
-                            ),
-                            Expanded(
-                              child: Placeholder(),
-                            )
-                          ],
-                        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 0),
+          child: Column(
+            children: [
+              Spacer(
+                flex: 4,
+              ),
+              Expanded(
+                child: Placeholder(),
+                flex: 234,
+              ),
+              Spacer(
+                flex: 4,
+              ),
+              Expanded(
+                child: Placeholder(),
+                flex: 68,
+              ),
+              Spacer(
+                flex: 4,
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Placeholder(),
+                          ),
+                          Expanded(
+                            child: Placeholder(),
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Placeholder(),
-                            ),
-                            Expanded(
-                              child: Placeholder(),
-                            )
-                          ],
-                        ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Placeholder(),
+                          ),
+                          Expanded(
+                            child: Placeholder(),
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Placeholder(),
-                            ),
-                            Expanded(
-                              child: Placeholder(),
-                            )
-                          ],
-                        ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Placeholder(),
+                          ),
+                          Expanded(
+                            child: Placeholder(),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                  flex: 275,
+                    ),
+                  ],
                 ),
-                Spacer(
-                  flex: 12,
-                ),
-                Expanded(
-                  child: Placeholder(),
-                  flex: 75,
-                ),
-                Spacer(
-                  flex: 22,
-                ),
-              ],
-            ),
+                flex: 275,
+              ),
+              Spacer(
+                flex: 12,
+              ),
+              Expanded(
+                child: Placeholder(),
+                flex: 75,
+              ),
+              Spacer(
+                flex: 22,
+              ),
+            ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }
 
@@ -112,7 +111,7 @@ class StatsCard extends StatelessWidget {
 
 /**
     ClipRRect(
-    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+    borderRadius: const BorderRadius.all(Radius.circular(8.0),),
     child: Container(
     color: AppColors.black,
     child: Column(
@@ -132,11 +131,11 @@ class StatsCard extends StatelessWidget {
     ),
     ),
     ),
-*/
+ */
 
 /**
     ClipRRect(
-    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+    borderRadius: const BorderRadius.all(Radius.circular(8.0),),
     child: Container(
     color: AppColors.black,
     child: Column(
@@ -154,7 +153,7 @@ class StatsCard extends StatelessWidget {
     ),
     ),
     )
-*/
+ */
 
 /**
     ActionButton(
@@ -162,4 +161,4 @@ class StatsCard extends StatelessWidget {
     onPressed: () =>
     Navigator.pushNamed(context, AppRoutes.gameHistory),
     )
-*/
+ */

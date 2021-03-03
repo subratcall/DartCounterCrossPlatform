@@ -7,16 +7,14 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 enum SignInViewState { idle, loading }
 
 class SignInViewModel extends ViewModel<SignInViewState> {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
   SignInViewModel() {
     viewState = SignInViewState.idle;
   }
 
   Future<void> onSignPressed({String email, String password}) async {
-    if (!EmailValidator.validate(email) ||
-        !PasswordValidator.validate(password)) {
+    if (!EmailValidator.validate(email) || !PasswordValidator.validate(password)) {
       throw InvalidEmailAddressOrPasswordError();
     }
 

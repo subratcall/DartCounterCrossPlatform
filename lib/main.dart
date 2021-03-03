@@ -76,8 +76,7 @@ class DartCounterApp extends StatelessWidget {
               AppRoutes.socialMedia: (context) => android.SocialMediaView(),
               AppRoutes.createGame: (context) => android.CreateGameView(),
               AppRoutes.inGame: (context) => android.InGameView(),
-              AppRoutes.checkoutDetails: (context) =>
-                  android.CheckoutDetailsView(),
+              AppRoutes.checkoutDetails: (context) => android.CheckoutDetailsView(),
               AppRoutes.stats: (context) => android.StatsView(),
               AppRoutes.resetPassword: (context) => android.ResetPasswordView(),
             },

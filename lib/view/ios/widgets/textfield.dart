@@ -37,7 +37,9 @@ class TextField extends StatelessWidget {
         onEditingComplete: onEditingComplete,
         decoration: BoxDecoration(
           color: AppColors.gray,
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.0),
+          ),
         ),
       );
     } else {
@@ -55,7 +57,9 @@ class TextField extends StatelessWidget {
             onEditingComplete: onEditingComplete,
             decoration: BoxDecoration(
               color: AppColors.gray,
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(5.0),
+              ),
               border: Border.all(
                 color: AppColors.red,
                 width: 1,

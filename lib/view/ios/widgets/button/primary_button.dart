@@ -9,7 +9,9 @@ class PrimaryButton extends StatelessWidget {
   PrimaryButton(
       {this.child,
       this.onPressed,
-      this.borderRadius = const BorderRadius.all(Radius.circular(8.0))})
+      this.borderRadius = const BorderRadius.all(
+        Radius.circular(8.0),
+      )})
       : assert(child != null);
 
   @override

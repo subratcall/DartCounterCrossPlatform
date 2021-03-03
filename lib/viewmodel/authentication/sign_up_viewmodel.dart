@@ -7,8 +7,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 enum SignUpViewState { idle, loading }
 
 class SignUpViewModel extends ViewModel<SignUpViewState> {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
   bool _emailIsValid = true;
   bool _usernameIsValid = true;
@@ -19,20 +18,13 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
     viewState = SignUpViewState.idle;
   }
 
-  Future<void> onRegisterPressed(
-      {String email,
-      String username,
-      String password,
-      String passwordAgain}) async {
+  Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain}) async {
     emailIsValid = EmailValidator.validate(email);
     usernameIsValid = UsernameValidator.validate(username);
     passwordIsValid = PasswordValidator.validate(password);
     passwordAgainIsValid = PasswordValidator.validate(password, passwordAgain);
 
-    if (emailIsValid &&
-        usernameIsValid &&
-        passwordIsValid &&
-        passwordAgainIsValid) {
+    if (emailIsValid && usernameIsValid && passwordIsValid && passwordAgainIsValid) {
       viewState = SignUpViewState.loading;
       try {
         await _authenticationService.signUp(email: email, password: password);
