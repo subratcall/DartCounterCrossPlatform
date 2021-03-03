@@ -19,11 +19,8 @@ class PrimaryButton extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       onPressed: onPressed,
       borderRadius: borderRadius,
-      child: Container(
-        color: AppColors.red,
-        child: Center(
-          child: child,
-        ),
+      child: Center(
+        child: child,
       ),
     );
   }

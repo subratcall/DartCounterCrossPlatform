@@ -20,7 +20,8 @@ class ResetPasswordView extends StatefulWidget {
 class _ResetPasswordViewState extends State<ResetPasswordView> {
   @override
   Widget build(BuildContext context) {
-    return View<ResetPasswordViewModel>(builder: (context, model, child) {
+    return ModalView<ResetPasswordViewModel>(
+        builder: (context, model, child) {
       return model.viewState == ResetPasswordViewState.idle
           ? ResetPasswordInitial(model)
           : model.viewState == ResetPasswordViewState.successful
@@ -55,118 +56,121 @@ class _ResetPasswordInitialState extends State<ResetPasswordInitial> {
         ),
         middle: Text(AppLocalizations.of(context).resetPassword),
       ),
-      child: GestureDetector(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: ConstrainedBox(
-              // TODO fix scrollable should not be calc right size here
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width,
-                maxHeight: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top -
-                    MediaQuery.of(context).padding.bottom,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Spacer(
-                      flex: 105,
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Spacer(
-                            flex: 120,
+      child: Builder(
+        builder: (context) {
+          final double maxWidth = MediaQuery.of(context).size.width;
+          final double maxHeight = MediaQuery.of(context).size.height - 2*MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom - 10;
+          return GestureDetector(
+            child: SafeArea(
+              child: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Spacer(
+                          flex: 105,
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Spacer(
+                                flex: 120,
+                              ),
+                              Flexible(
+                                child: Image.asset(AppImages.logo),
+                                flex: 135,
+                              ),
+                              Spacer(
+                                flex: 120,
+                              ),
+                            ],
                           ),
-                          Flexible(
-                            child: Image.asset(AppImages.logo),
-                            flex: 135,
+                          flex: 166,
+                        ),
+                        Spacer(
+                          flex: 67,
+                        ),
+                        Expanded(
+                          child: AutoSizeText(
+                            AppLocalizations.of(context).forgotPassword,
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 23),
                           ),
-                          Spacer(
-                            flex: 120,
+                          flex: 21,
+                        ),
+                        Spacer(
+                          flex: 28,
+                        ),
+                        Expanded(
+                          child: AutoSizeText(
+                            AppLocalizations.of(context).insertEmailToResetPassword,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 14),
+                            maxLines: 2,
                           ),
-                        ],
-                      ),
-                      flex: 166,
-                    ),
-                    Spacer(
-                      flex: 67,
-                    ),
-                    Expanded(
-                      child: AutoSizeText(
-                        AppLocalizations.of(context).forgotPassword,
-                        maxLines: 1,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 23),
-                      ),
-                      flex: 21,
-                    ),
-                    Spacer(
-                      flex: 28,
-                    ),
-                    Expanded(
-                      child: AutoSizeText(
-                        AppLocalizations.of(context).insertEmailToResetPassword,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 14),
-                        maxLines: 2,
-                      ),
-                      flex: 32,
-                    ),
-                    Spacer(
-                      flex: 28,
-                    ),
-                    Expanded(
-                      child: TextField(
-                        placeholder: AppLocalizations.of(context).email,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: emailController,
-                      ),
-                      flex: 36,
-                    ),
-                    Spacer(
-                      flex: 47,
-                    ),
-                    Expanded(
-                      child: PrimaryTextButton(
-                        text: AppLocalizations.of(context).confirm,
-                        onPressed: () {
-                          // TODO this is only a workaround find a better solution for this e.g with global key
-                          var errorMessages = {
-                            'errorInvalidEmailAddress':
+                          flex: 32,
+                        ),
+                        Spacer(
+                          flex: 28,
+                        ),
+                        Expanded(
+                          child: TextField(
+                            placeholder: AppLocalizations.of(context).email,
+                            keyboardType: TextInputType.emailAddress,
+                            controller: emailController,
+                          ),
+                          flex: 36,
+                        ),
+                        Spacer(
+                          flex: 47,
+                        ),
+                        Expanded(
+                          child: PrimaryTextButton(
+                            text: AppLocalizations.of(context).confirm,
+                            onPressed: () {
+                              // TODO this is only a workaround find a better solution for this e.g with global key
+                              var errorMessages = {
+                                'errorInvalidEmailAddress':
                                 AppLocalizations.of(context)
                                     .errorInvalidEmailAddress,
-                            'errorNetwork':
+                                'errorNetwork':
                                 AppLocalizations.of(context).errorNetwork,
-                          };
+                              };
 
-                          widget.model
-                              .onConfirmPressed(email: emailController.text)
-                              .catchError((error) {
-                            if (error is InvalidEmailAddressError) {
-                              Toast.showToast(
-                                  errorMessages['errorInvalidEmailAddress']);
-                            } else {
-                              Toast.showToast(errorMessages['errorNetwork']);
-                            }
-                          });
-                        },
-                      ),
-                      flex: 50,
+                              widget.model
+                                  .onConfirmPressed(email: emailController.text)
+                                  .catchError((error) {
+                                if (error is InvalidEmailAddressError) {
+                                  Toast.showToast(
+                                      errorMessages['errorInvalidEmailAddress']);
+                                } else {
+                                  Toast.showToast(errorMessages['errorNetwork']);
+                                }
+                              });
+                            },
+                          ),
+                          flex: 50,
+                        ),
+                        Spacer(
+                          flex: 158,
+                        ),
+                      ],
                     ),
-                    Spacer(
-                      flex: 158,
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-        onTap: () => FocusScope.of(context).unfocus(),
+            onTap: () => FocusScope.of(context).unfocus(),
+          );
+        },
       ),
     );
   }
@@ -184,7 +188,7 @@ class ResetPasswordSuccess extends StatelessWidget {
     return CupertinoPageScaffold(
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          padding: const EdgeInsets.symmetric(horizontal: 35.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

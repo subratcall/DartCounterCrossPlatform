@@ -6,20 +6,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SocialMediaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return View<SocialMediaViewModel>(builder: (context, model, child) {
-      return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(CupertinoIcons.chevron_back, size: 35),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          middle: Text(AppLocalizations.of(context).socialMedia),
+    return View<SocialMediaViewModel>(
+      navigationBar: CupertinoNavigationBar(
+        leading: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Icon(CupertinoIcons.chevron_back, size: 35),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        child: Center(child: Text(this.toStringShort() + " -- IOS")),
-      );
+        middle: Text(AppLocalizations.of(context).socialMedia),
+      ),
+        builder: (context, model, child) {
+        return Center(child: Text(this.toStringShort() + " -- IOS"));
     });
   }
 }
