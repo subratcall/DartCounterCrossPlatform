@@ -48,36 +48,60 @@ class ProfileView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Placeholder(),
+                            flex: 178,
+                          ),
+                          Spacer(
+                            flex: 4,
                           ),
                           Expanded(
                             child: Placeholder(),
+                            flex: 178,
                           )
                         ],
                       ),
+                      flex: 90,
+                    ),
+                    Spacer(
+                      flex: 4,
                     ),
                     Expanded(
                       child: Row(
                         children: [
                           Expanded(
                             child: Placeholder(),
+                            flex: 178,
+                          ),
+                          Spacer(
+                            flex: 4,
                           ),
                           Expanded(
                             child: Placeholder(),
+                            flex: 178,
                           )
                         ],
                       ),
+                      flex: 90,
+                    ),
+                    Spacer(
+                      flex: 4,
                     ),
                     Expanded(
                       child: Row(
                         children: [
                           Expanded(
                             child: Placeholder(),
+                            flex: 178,
+                          ),
+                          Spacer(
+                            flex: 4,
                           ),
                           Expanded(
                             child: Placeholder(),
+                            flex: 178,
                           )
                         ],
                       ),
+                      flex: 90,
                     ),
                   ],
                 ),
