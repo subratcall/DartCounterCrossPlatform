@@ -26,36 +26,59 @@ class GameHistoryView extends StatelessWidget {
           ),
           middle: Text(AppLocalizations.of(context).gameHistory),
         ),
-        child: FutureBuilder(
-            future: model.fetchGames(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<Game> games = snapshot.data;
-                return ListView.builder(
-                  itemCount: games.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, index == games.length - 1 ? 0 : 4),
-                    child: CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      child: GameHistoryCard(games[index]),
-                      onPressed: () => Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => GameHistoryDetailsView(games[index]),
-                        ),
-                      ),
-                    ),
+        child: Row(
+          children: [
+            Spacer(flex: 8,),
+            Expanded(
+              flex: 259,
+              child: Column(
+                children: [
+                  Spacer(flex: 4,),
+                  Expanded(
+                    flex: 607,
+                    child: FutureBuilder(
+                        future: model.fetchGames(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<Game> games = snapshot.data;
+                            // TODO no hardcoded stuff
+                            return ListView.builder(
+                              itemCount: games.length,
+                              itemBuilder: (context, index) => Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 0, index == games.length - 1 ? 0 : 4),
+                                child: CupertinoButton(
+                                  padding: EdgeInsets.zero,
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: (MediaQuery.of(context).size.height-34)/7,
+                                    child: GameHistoryCard(games[index]),
+                                  ),
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => GameHistoryDetailsView(games[index]),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            // TODO generic feedback eng, ger
+                            return Center(
+                              child: Text('No games found'),
+                            );
+                          } else {
+                            return LoadingView();
+                          }
+                        }),
                   ),
-                );
-              } else if (snapshot.hasError) {
-                // TODO generic feedback eng, ger
-                return Center(
-                  child: Text('No games found'),
-                );
-              } else {
-                return LoadingView();
-              }
-            }),
+                  Spacer(flex: 4,),
+                ],
+              ),
+            ),
+            Spacer(flex: 8,),
+          ],
+        ),
       ),
     );
   }

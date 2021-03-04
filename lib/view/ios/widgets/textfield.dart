@@ -38,7 +38,7 @@ class TextField extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.gray,
           borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
+            Radius.circular(10.0),
           ),
         ),
       );
@@ -58,7 +58,7 @@ class TextField extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.gray,
               borderRadius: BorderRadius.all(
-                Radius.circular(5.0),
+                Radius.circular(10.0),
               ),
               border: Border.all(
                 color: AppColors.red,

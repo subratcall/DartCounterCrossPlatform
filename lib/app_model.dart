@@ -1,1 +1,5 @@
-class AppModel {}
+class AppModel {
+
+  String uid;
+
+}

@@ -11,7 +11,7 @@ class ActionButton extends StatelessWidget {
       {this.text,
       this.onPressed,
       this.borderRadius = const BorderRadius.all(
-        Radius.circular(8.0),
+        Radius.circular(24.0),
       )})
       : assert(text != null && text.length > 0);
 
@@ -20,10 +20,12 @@ class ActionButton extends StatelessWidget {
     return CupertinoButton(
       padding: EdgeInsets.all(16.0),
       onPressed: onPressed,
-      child: AutoSizeText(
-        text,
-        maxLines: 1,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 37),
+      child: Center(
+        child: AutoSizeText(
+          text,
+          maxLines: 1,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 37),
+        ),
       ),
       borderRadius: borderRadius,
       color: AppColors.green,

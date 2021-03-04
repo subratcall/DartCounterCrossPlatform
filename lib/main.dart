@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'app_model.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -33,15 +35,25 @@ class DartCounterApp extends StatelessWidget {
           return CupertinoApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: snapshot.data != null
-                ? ios.HomeView()
-                : PageView(
+            home: Builder(
+              builder: (context) {
+                var appModel = locator<AppModel>();
+                var user = snapshot.data;
+                if(user != null) {
+                  appModel.uid = user.uid;
+                  return ios.HomeView();
+                } else {
+                  appModel.uid = null;
+                  return PageView(
                     controller: controller,
                     children: [
                       ios.SignInView(controller),
                       ios.SignUpView(controller),
                     ],
-                  ),
+                  );
+                }
+              }
+            ),
             routes: {
               AppRoutes.loading: (context) => ios.LoadingView(),
               AppRoutes.home: (context) => ios.HomeView(),

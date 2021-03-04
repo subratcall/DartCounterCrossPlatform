@@ -12,9 +12,8 @@ class HomeViewModel extends ViewModel {
   int newInvites;
   int newFriendRequests;
 
-  Stream<Profile> profile() {
-    return _databaseService.profile('JOAVDAkIiyfOswHtNjquCbe7fyh2');
-  }
+  Stream<Profile> profile() => _databaseService.profile(appModel.uid);
+
 
   void signOut() {
     _authenticationService.signOut();

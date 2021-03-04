@@ -138,6 +138,7 @@ class ProfileButton extends StatelessWidget {
                             ),
                           ],
                         ),
+                        flex: 2,
                       ),
                       Spacer(),
                       Flexible(
@@ -211,7 +212,6 @@ class ProfileButton extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Spacer(),
                     ],
                   ),
                   flex: 155,

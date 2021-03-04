@@ -7,8 +7,6 @@ class ProfileViewModel extends ViewModel {
 
   final DatabaseService _databaseService = locator<DatabaseService>();
 
-  Stream<Profile> profile() {
-    return _databaseService.profile('JOAVDAkIiyfOswHtNjquCbe7fyh2');
-  }
+  Stream<Profile> profile() => _databaseService.profile(appModel.uid);
 
 }

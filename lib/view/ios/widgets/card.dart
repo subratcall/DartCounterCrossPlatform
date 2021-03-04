@@ -24,25 +24,31 @@ class Card extends StatelessWidget {
       borderRadius: borderRadius,
       child: Column(
         children: [
-          Container(
-            color: AppColors.black,
-            child: Row(
-              children: [
-                leading,
-                Spacer(),
-                middle,
-                Spacer(),
-                trailing,
-              ],
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: AppColors.black,
+              child: Row(
+                children: [
+                  leading,
+                  Spacer(),
+                  middle,
+                  Spacer(),
+                  trailing,
+                ],
+              ),
+              padding: const EdgeInsets.all(8.0),
             ),
-            padding: const EdgeInsets.all(8.0),
           ),
-          Container(
-            color: AppColors.gray,
-            child: Row(
-              children: [Expanded(child: body)],
+          Expanded(
+            flex: 5,
+            child: Container(
+              color: AppColors.gray,
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: body,
+              ),
             ),
-            padding: const EdgeInsets.all(8.0),
           ),
         ],
       ),
