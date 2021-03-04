@@ -29,7 +29,7 @@ class ViewModel<T> extends ChangeNotifier {
       notifyListeners();
       }
    */
-  AppModel app = locator<AppModel>();
+  AppModel appModel = locator<AppModel>();
 
   T _viewState;
 

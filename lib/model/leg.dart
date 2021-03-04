@@ -1,1 +1,3 @@
-class Leg {}
+class Leg {
+
+}

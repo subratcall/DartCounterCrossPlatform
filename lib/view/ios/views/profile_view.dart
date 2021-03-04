@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/model/carrer_stats.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
@@ -28,11 +29,9 @@ class ProfileView extends StatelessWidget {
           ),
           middle: Text(AppLocalizations.of(context).profile),
         ),
-        child: FutureBuilder(
-          future: model.fetchProfile(),
-          builder: (context, snapshot) => snapshot.hasData ? ProfileViewSuccess(snapshot.data)
-              : snapshot.hasError ? ProfileViewError()
-              : LoadingView(),
+        child: StreamBuilder(
+          stream: model.profile(),
+          builder: (context, snapshot) => snapshot.hasData ? ProfileViewSuccess(snapshot.data) : ProfileViewError(),
         ),
       ),
     );
@@ -191,7 +190,7 @@ class ProfileViewError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('No games found'),
+      child: Text('No profile found'),
     );
   }
 }

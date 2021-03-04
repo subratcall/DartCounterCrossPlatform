@@ -8,10 +8,16 @@ class Profile {
 
   Profile(this.photoUrl, this.username, this.carrerStats);
 
+  Profile.dummy() {
+    photoUrl = 'www.example.com';
+    username = 'dummyUsername';
+    carrerStats = CarrerStats.dummy();
+  }
+
   Profile.fromJson(Map<String, dynamic> json) {
     photoUrl = json['photoUrl'];
     username = json['username'];
-    carrerStats = json['carrerStats'];
+    carrerStats = CarrerStats.fromJson(json['carrerStats']);
   }
 
   Map<String, dynamic> toJson() => {

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Game {
 
   DateTime date;
@@ -8,8 +10,16 @@ class Game {
 
   Game(this.date, this.description, this.average, this.checkoutPercentage, this.won);
 
+  Game.dummy() {
+    date = DateTime.now();
+    description = 'Best of 99 legs';
+    average = 99.33;
+    checkoutPercentage = 43.5;
+    won = Random().nextBool();
+  }
+
   Game.fromJson(Map<String, dynamic> json) {
-    date = json['date'];
+    date = DateTime.parse(json['date']);
     description = json['description'];
     average = json['average'];
     checkoutPercentage = json['checkoutPercentage'];
@@ -17,7 +27,7 @@ class Game {
   }
 
   Map<String, dynamic> toJson() => {
-    'date' : date,
+    'date' : date.toIso8601String(),
     'description' : description,
     'average' : average,
     'checkoutPercentage' : checkoutPercentage,
