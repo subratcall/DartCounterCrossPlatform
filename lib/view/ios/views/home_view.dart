@@ -3,12 +3,14 @@ import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_icons.dart';
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/view/ios/modals/modal_fit.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/primary_button.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -16,6 +18,18 @@ class HomeView extends StatelessWidget {
     return ViewModelProvider<HomeViewModel>(
       builder: (context, model, child) => CupertinoView(
         navigationBar: CupertinoNavigationBar(
+          leading: Builder(
+            builder: (context) => CupertinoButton(
+              padding: EdgeInsets.zero,
+              child: Text('More'),
+              onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                expand: false,
+                context: context,
+                backgroundColor: AppColors.transparent,
+                builder: (context) => ModalFit(),
+              ),
+            ),
+          ),
           middle: Text(AppLocalizations.of(context).home),
           trailing: CupertinoButton(
             padding: EdgeInsets.zero,
