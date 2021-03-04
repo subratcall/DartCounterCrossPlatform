@@ -36,7 +36,8 @@ dependencies:
   path_provider: ^1.6.27
   fluttertoast: ^7.1.6
   auto_size_text: ^2.1.0
-  email_validator: '^1.0.5'
+  email_validator: ^1.0.5
+  timeago: ^2.0.30
 
 dev_dependencies:
   flutter_test:

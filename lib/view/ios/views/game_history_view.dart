@@ -9,6 +9,7 @@ import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/game_history_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class GameHistoryView extends StatelessWidget {
   @override
@@ -25,39 +26,36 @@ class GameHistoryView extends StatelessWidget {
           ),
           middle: Text(AppLocalizations.of(context).gameHistory),
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-          child: FutureBuilder(
-              future: model.fetchGames(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  var games = snapshot.data;
-                  return ListView.builder(
-                    itemCount: games.length,
-                    itemBuilder: (context, index) => Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, index == games.length - 1 ? 0 : 4),
-                      child: CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        child: GameHistoryCard(games[index]),
-                        onPressed: () => Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => GameHistoryDetailsView(games[index]),
-                          ),
+        child: FutureBuilder(
+            future: model.fetchGames(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<Game> games = snapshot.data;
+                return ListView.builder(
+                  itemCount: games.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, index == games.length - 1 ? 0 : 4),
+                    child: CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      child: GameHistoryCard(games[index]),
+                      onPressed: () => Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => GameHistoryDetailsView(games[index]),
                         ),
                       ),
                     ),
-                  );
-                } else if (snapshot.hasError) {
-                  // TODO generic feedback eng, ger
-                  return Center(
-                    child: Text('No games found'),
-                  );
-                } else {
-                  return LoadingView();
-                }
-              }),
-        ),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                // TODO generic feedback eng, ger
+                return Center(
+                  child: Text('No games found'),
+                );
+              } else {
+                return LoadingView();
+              }
+            }),
       ),
     );
   }
@@ -80,7 +78,7 @@ class GameHistoryDetailsView extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        middle: Text(AppLocalizations.of(context).gameHistory),
+        middle: Text('Best of 5 legs'),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
@@ -94,7 +92,7 @@ class GameHistoryDetailsView extends StatelessWidget {
 
 // View specific widgets
 
-// TODO display provided game
+// TODO time ago and descrip in diff language
 // TODO make the widget responsive
 class GameHistoryCard extends StatelessWidget {
   final Game game;
@@ -105,12 +103,12 @@ class GameHistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       middle: AutoSizeText(
-        'Best of 5 legs',
+        game.description,
         maxLines: 1,
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
       trailing: AutoSizeText(
-        '4 weeks ago',
+        timeago.format(game.date),
         maxLines: 1,
         style: TextStyle(fontSize: 9, color: AppColors.white),
       ),
@@ -118,7 +116,7 @@ class GameHistoryCard extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              AppImages.win,
+              game.won ? AppImages.win : AppImages.defeat,
             ),
           ),
           Expanded(
@@ -134,7 +132,7 @@ class GameHistoryCard extends StatelessWidget {
                     ),
                     Spacer(),
                     AutoSizeText(
-                      '85.1',
+                      game.average.toString(),
                       maxLines: 1,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
@@ -154,7 +152,7 @@ class GameHistoryCard extends StatelessWidget {
                     ),
                     Spacer(),
                     AutoSizeText(
-                      '40.19',
+                      game.checkoutPercentage.toString(),
                       maxLines: 1,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
