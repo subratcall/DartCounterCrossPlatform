@@ -15,7 +15,7 @@ class GameHistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<GameHistoryViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           leading: CupertinoButton(
             padding: EdgeInsets.zero,
@@ -69,7 +69,7 @@ class GameHistoryDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoView(
+    return View(
       navigationBar: CupertinoNavigationBar(
         leading: CupertinoButton(
           padding: EdgeInsets.zero,

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class CupertinoView extends StatelessWidget {
+class View extends StatelessWidget {
   final CupertinoNavigationBar navigationBar;
   final Widget child;
   final VoidCallback onTap;
 
-  CupertinoView({this.navigationBar, this.child, this.onTap});
+  View({this.navigationBar, this.child, this.onTap});
 
   @override
   Widget build(BuildContext context) {

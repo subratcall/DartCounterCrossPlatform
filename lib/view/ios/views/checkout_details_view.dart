@@ -7,7 +7,7 @@ class CheckoutDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<CheckoutDetailsViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         child: Center(
           child: Text(this.toStringShort() + " -- IOS"),
         ),

@@ -8,7 +8,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<SettingsViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           middle: Text(AppLocalizations.of(context).settings),
         ),

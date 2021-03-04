@@ -15,8 +15,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return ViewModelProvider<HomeViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           leading: Builder(
             builder: (context) => CupertinoButton(
@@ -41,321 +42,325 @@ class HomeView extends StatelessWidget {
             onPressed: () => model.signOut(),
           ),
         ),
-        child: Column(
+        child: Row(
           children: [
+            Spacer(flex: 8,),
             Expanded(
-              child: PrimaryButton(
-                child: Row(
-                  children: [
-                    Spacer(flex: 14,),
-                    Image.asset(AppImages.photoPlaceholder),
-                    Spacer(flex: 50,),
-                    Flexible(
-                      child: Column(
-                        children: [
-                          Flexible(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AutoSizeText(
-                                    'Spielername',
-                                    maxLines: 1,
-                                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-                                  ),
-                                ],
-                              ),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: Row(
-                              children: [
-                                AutoSizeText(
-                                  'Averrage:',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                                Spacer(),
-                                AutoSizeText(
-                                  '35',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: Row(
-                              children: [
-                                AutoSizeText(
-                                  'Checkout%:',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                                Spacer(),
-                                AutoSizeText(
-                                  '54.75',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: Row(
-                              children: [
-                                AutoSizeText(
-                                  'Wins:',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                                Spacer(),
-                                AutoSizeText(
-                                  '126',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(),
-                          Flexible(
-                            child: Row(
-                              children: [
-                                AutoSizeText(
-                                  'Defeats:',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                                Spacer(),
-                                AutoSizeText(
-                                  '16',
-                                  maxLines: 1,
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                      flex: 155,
-                    ),
-                    Spacer(flex: 60,),
-                  ],
-                ),
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.profile),
-              ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Expanded(
-              child: Row(
+              flex: 359,
+              child: Column(
                 children: [
+                  Spacer(flex: 4,),
                   Expanded(
+                    flex: 116,
                     child: PrimaryButton(
-                      child: Column(
+                      child: Row(
                         children: [
-                          Spacer(),
-                          Icon(
-                            AppIcons.mail,
-                            size: 50,
-                            color: AppColors.white,
+                          Spacer(flex: 14,),
+                          Image.asset(AppImages.photoPlaceholder),
+                          Spacer(flex: 50,),
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Flexible(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AutoSizeText(
+                                        'Spielername',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Spacer(),
+                                Flexible(
+                                  child: Row(
+                                    children: [
+                                      AutoSizeText(
+                                        'Averrage:',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                      Spacer(),
+                                      AutoSizeText(
+                                        '35',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Spacer(),
+                                Flexible(
+                                  child: Row(
+                                    children: [
+                                      AutoSizeText(
+                                        'Checkout%:',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                      Spacer(),
+                                      AutoSizeText(
+                                        '54.75',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Spacer(),
+                                Flexible(
+                                  child: Row(
+                                    children: [
+                                      AutoSizeText(
+                                        'Wins:',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                      Spacer(),
+                                      AutoSizeText(
+                                        '126',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Spacer(),
+                                Flexible(
+                                  child: Row(
+                                    children: [
+                                      AutoSizeText(
+                                        'Defeats:',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                      Spacer(),
+                                      AutoSizeText(
+                                        '16',
+                                        maxLines: 1,
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            flex: 155,
                           ),
-                          Spacer(),
-                          AutoSizeText(
-                            'EINLADUNGEN',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-                          ),
-                          Spacer(),
+                          Spacer(flex: 60,),
                         ],
                       ),
-                      onPressed: () => Navigator.pushNamed(context, AppRoutes.invite),
+                      onPressed: () => Navigator.pushNamed(context, AppRoutes.profile),
                     ),
                   ),
-                  SizedBox(
-                    width: 4,
-                  ),
+                  Spacer(flex: 4,),
                   Expanded(
+                    flex: 116,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                            child: Column(
+                              children: [
+                                Spacer(),
+                                Icon(
+                                  AppIcons.mail,
+                                  size: 50,
+                                  color: AppColors.white,
+                                ),
+                                Spacer(),
+                                AutoSizeText(
+                                  'EINLADUNGEN',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.invite),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Expanded(
+                          child: PrimaryButton(
+                            child: Column(
+                              children: [
+                                Spacer(),
+                                Icon(
+                                  AppIcons.users,
+                                  size: 50,
+                                  color: AppColors.white,
+                                ),
+                                Spacer(),
+                                AutoSizeText(
+                                  'FREUNDE',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.friends),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 4,),
+                  Expanded(
+                    flex: 116,
                     child: PrimaryButton(
-                      child: Column(
+                      child: Row(
                         children: [
-                          Spacer(),
-                          Icon(
-                            AppIcons.users,
-                            size: 50,
-                            color: AppColors.white,
+                          Spacer(flex: 14,),
+                          Image.asset(AppImages.target),
+                          Spacer(flex: 25,),
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Spacer(),
+                                AutoSizeText(
+                                  'OFFLINE',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: AppColors.white),
+                                ),
+                                AutoSizeText(
+                                  'SPIELEN',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.red),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            flex: 193,
                           ),
-                          Spacer(),
-                          AutoSizeText(
-                            'FREUNDE',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-                          ),
-                          Spacer(),
+                          Spacer(flex: 14,),
                         ],
                       ),
-                      onPressed: () => Navigator.pushNamed(context, AppRoutes.friends),
+                      onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
                     ),
                   ),
+                  Spacer(flex: 4,),
+                  Expanded(
+                    flex: 116,
+                    child: PrimaryButton(
+                      child: Row(
+                        children: [
+                          Spacer(flex: 14,),
+                          Image.asset(AppImages.target),
+                          Spacer(flex: 25,),
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Spacer(),
+                                AutoSizeText(
+                                  'OFFLINE',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: AppColors.white),
+                                ),
+                                AutoSizeText(
+                                  'SPIELEN',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.yellow),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            flex: 193,
+                          ),
+                          Spacer(flex: 14,),
+                        ],
+                      ),
+                      onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
+                    ),
+                  ),
+                  Spacer(flex: 4,),
+                  Expanded(
+                    flex: 116,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                            child: Column(
+                              children: [
+                                Spacer(),
+                                Padding(
+                                    padding: const EdgeInsets.all(7.5),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Icon(
+                                          AppIcons.facebook,
+                                          size: 35,
+                                          color: AppColors.white,
+                                        ),
+                                        Icon(
+                                          AppIcons.instagram,
+                                          size: 35,
+                                          color: AppColors.white,
+                                        ),
+                                        Icon(
+                                          AppIcons.youtube,
+                                          size: 35,
+                                          color: AppColors.white,
+                                        ),
+                                      ],
+                                    )),
+                                Spacer(),
+                                AutoSizeText(
+                                  'SOCIAL MEDIA',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.socialMedia),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Expanded(
+                          child: PrimaryButton(
+                            child: Column(
+                              children: [
+                                Spacer(),
+                                Icon(
+                                  CupertinoIcons.settings,
+                                  size: 50,
+                                  color: AppColors.white,
+                                ),
+                                Spacer(),
+                                AutoSizeText(
+                                  'EINSTELLUNGEN',
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+                                ),
+                                Spacer(),
+                              ],
+                            ),
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.settings),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 4,),
+                  Expanded(
+                    flex: 82,
+                    child: Image.asset(AppImages.adBanner),
+                  ),
+                  Spacer(flex: 4,),
                 ],
               ),
             ),
-            SizedBox(
-              height: 4,
-            ),
-            Expanded(
-              child: PrimaryButton(
-                child: Row(
-                  children: [
-                    Spacer(flex: 14,),
-                    Image.asset(AppImages.target),
-                    Spacer(flex: 25,),
-                    Flexible(
-                      child: Column(
-                        children: [
-                          Spacer(),
-                          AutoSizeText(
-                            'OFFLINE',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: AppColors.white),
-                          ),
-                          AutoSizeText(
-                            'SPIELEN',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.red),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                      flex: 193,
-                    ),
-                    Spacer(flex: 14,),
-                  ],
-                ),
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
-              ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Expanded(
-              child: PrimaryButton(
-                child: Row(
-                  children: [
-                    Spacer(flex: 14,),
-                    Image.asset(AppImages.target),
-                    Spacer(flex: 25,),
-                    Flexible(
-                      child: Column(
-                        children: [
-                          Spacer(),
-                          AutoSizeText(
-                            'OFFLINE',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: AppColors.white),
-                          ),
-                          AutoSizeText(
-                            'SPIELEN',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.yellow),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                      flex: 193,
-                    ),
-                    Spacer(flex: 14,),
-                  ],
-                ),
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
-              ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      child: Column(
-                        children: [
-                          Spacer(),
-                          Padding(
-                              padding: const EdgeInsets.all(7.5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Icon(
-                                    AppIcons.facebook,
-                                    size: 35,
-                                    color: AppColors.white,
-                                  ),
-                                  Icon(
-                                    AppIcons.instagram,
-                                    size: 35,
-                                    color: AppColors.white,
-                                  ),
-                                  Icon(
-                                    AppIcons.youtube,
-                                    size: 35,
-                                    color: AppColors.white,
-                                  ),
-                                ],
-                              )),
-                          Spacer(),
-                          AutoSizeText(
-                            'SOCIAL MEDIA',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                      onPressed: () => Navigator.pushNamed(context, AppRoutes.socialMedia),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Expanded(
-                    child: PrimaryButton(
-                      child: Column(
-                        children: [
-                          Spacer(),
-                          Icon(
-                            CupertinoIcons.settings,
-                            size: 50,
-                            color: AppColors.white,
-                          ),
-                          Spacer(),
-                          AutoSizeText(
-                            'EINSTELLUNGEN',
-                            maxLines: 1,
-                            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                      onPressed: () => Navigator.pushNamed(context, AppRoutes.settings),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(AppImages.adBanner),
-              ),
-            ),
+            Spacer(flex: 8,),
           ],
         ),
       ),

@@ -17,8 +17,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<ProfileViewModel>(
-      builder: (context, model, child) => CupertinoView(
-        padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 0),
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           leading: CupertinoButton(
             padding: EdgeInsets.zero,
@@ -31,158 +30,173 @@ class ProfileView extends StatelessWidget {
         ),
         child: FutureBuilder(
           future: model.fetchProfile(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            Profile profile = snapshot.data;
-            return Column(
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0),),
-                    child: Container(
-                      color: AppColors.black,
-                      child: Column(
-                        children: [
-                          Image.asset(AppImages.photoPlaceholder),
-                          SizedBox(height: 16,),
-                          AutoSizeText(
-                            profile.username,
-                            maxLines: 1,
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 23,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  flex: 234,
-                ),
-                Spacer(
-                  flex: 4,
-                ),
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0),),
-                    child: Container(
-                      color: AppColors.black,
-                      child: Column(
-                        children: [
-                          AutoSizeText(
-                            'Karriere Statistiken',
-                            maxLines: 1,
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 37,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  flex: 68,
-                ),
-                Spacer(
-                  flex: 4,
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: StatsCard(title: 'Average', value: profile.carrerStats.average, trend: profile.carrerStats.averageTrend),
-                              flex: 178,
-                            ),
-                            Spacer(
-                              flex: 4,
-                            ),
-                            Expanded(
-                              child: StatsCard(title: 'Checkout%', value: profile.carrerStats.checkoutPercentage, trend: profile.carrerStats.checkoutPercentageTrend),
-                              flex: 178,
-                            )
-                          ],
-                        ),
-                        flex: 90,
-                      ),
-                      Spacer(
-                        flex: 4,
-                      ),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: StatsCard(title: 'First 9', value: profile.carrerStats.firstNine, trend: profile.carrerStats.firstNineTrend),
-                              flex: 178,
-                            ),
-                            Spacer(
-                              flex: 4,
-                            ),
-                            Expanded(
-                              child: StatsCard(title: 'Games', value: profile.carrerStats.games),
-                              flex: 178,
-                            )
-                          ],
-                        ),
-                        flex: 90,
-                      ),
-                      Spacer(
-                        flex: 4,
-                      ),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: StatsCard(title: 'Wins', value: profile.carrerStats.wins),
-                              flex: 178,
-                            ),
-                            Spacer(
-                              flex: 4,
-                            ),
-                            Expanded(
-                              child: StatsCard(title: 'Defeats', value: profile.carrerStats.defeats),
-                              flex: 178,
-                            )
-                          ],
-                        ),
-                        flex: 90,
-                      ),
-                    ],
-                  ),
-                  flex: 275,
-                ),
-                Spacer(
-                  flex: 12,
-                ),
-                Expanded(
-                  child: ActionButton(
-                    text: 'Last 10 Games',
-                    onPressed: () => Navigator.pushNamed(context, AppRoutes.gameHistory),
-                  ),
-                  flex: 75,
-                ),
-                Spacer(
-                  flex: 12,
-                ),
-              ],
-            );
-          } else if (snapshot.hasError) {
-            // TODO generic feedback eng, ger
-            return Center(
-              child: Text('No games found'),
-            );
-          } else {
-            return LoadingView();
-          }
-        }),
+          builder: (context, snapshot) => snapshot.hasData ? ProfileViewSuccess(snapshot.data)
+              : snapshot.hasError ? ProfileViewError()
+              : LoadingView(),
+        ),
       ),
     );
   }
 }
+
+class ProfileViewSuccess extends StatelessWidget {
+
+  final Profile profile;
+
+  ProfileViewSuccess(this.profile);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          flex: 234,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8.0),),
+            child: Container(
+              color: AppColors.black,
+              child: Column(
+                children: [
+                  Image.asset(AppImages.photoPlaceholder),
+                  SizedBox(height: 16,),
+                  AutoSizeText(
+                    profile.username,
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Spacer(
+          flex: 4,
+        ),
+        Expanded(
+          flex: 68,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8.0),),
+            child: Container(
+              color: AppColors.black,
+              child: Column(
+                children: [
+                  AutoSizeText(
+                    'Karriere Statistiken',
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 37,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Spacer(
+          flex: 4,
+        ),
+        Expanded(
+          flex: 275,
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: StatsCard(title: 'Average', value: profile.carrerStats.average, trend: profile.carrerStats.averageTrend),
+                      flex: 178,
+                    ),
+                    Spacer(
+                      flex: 4,
+                    ),
+                    Expanded(
+                      child: StatsCard(title: 'Checkout%', value: profile.carrerStats.checkoutPercentage, trend: profile.carrerStats.checkoutPercentageTrend),
+                      flex: 178,
+                    )
+                  ],
+                ),
+                flex: 90,
+              ),
+              Spacer(
+                flex: 4,
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: StatsCard(title: 'First 9', value: profile.carrerStats.firstNine, trend: profile.carrerStats.firstNineTrend),
+                      flex: 178,
+                    ),
+                    Spacer(
+                      flex: 4,
+                    ),
+                    Expanded(
+                      child: StatsCard(title: 'Games', value: profile.carrerStats.games),
+                      flex: 178,
+                    )
+                  ],
+                ),
+                flex: 90,
+              ),
+              Spacer(
+                flex: 4,
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: StatsCard(title: 'Wins', value: profile.carrerStats.wins),
+                      flex: 178,
+                    ),
+                    Spacer(
+                      flex: 4,
+                    ),
+                    Expanded(
+                      child: StatsCard(title: 'Defeats', value: profile.carrerStats.defeats),
+                      flex: 178,
+                    )
+                  ],
+                ),
+                flex: 90,
+              ),
+            ],
+          ),
+        ),
+        Spacer(
+          flex: 12,
+        ),
+        Expanded(
+          flex: 75,
+          child: ActionButton(
+            text: 'Last 10 Games',
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.gameHistory),
+          ),
+        ),
+        Spacer(
+          flex: 12,
+        ),
+      ],
+    );
+  }
+}
+
+// TODO
+class ProfileViewError extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('No games found'),
+    );
+  }
+}
+
+
 
 // View specific widgets
 class StatsCard extends StatelessWidget {

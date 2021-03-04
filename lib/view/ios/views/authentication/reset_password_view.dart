@@ -47,7 +47,7 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
 
-    return CupertinoView(
+    return View(
       navigationBar: CupertinoNavigationBar(
         leading: CupertinoButton(
           padding: EdgeInsets.zero,
@@ -181,7 +181,7 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
 class ResetPasswordSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoView(
+    return View(
       child: Row(
         children: [
           Spacer(flex: 38,),

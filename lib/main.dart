@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:dart_counter/api/authentication.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/view/android/views/views.dart' as android;
-import 'package:dart_counter/view/ios/views/views.dart' as ios;
+import 'package:dart_counter/view/android/export.dart' as android;
+import 'package:dart_counter/view/ios/export.dart' as ios;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,7 +58,7 @@ class DartCounterApp extends StatelessWidget {
               AppRoutes.stats: (context) => ios.StatsView(),
               AppRoutes.resetPassword: (context) => ios.ResetPasswordView(),
             },
-            theme: CupertinoThemeData(primaryColor: Colors.black),
+            theme: ios.Theme.theme,
           );
         } else {
           // Init Android App

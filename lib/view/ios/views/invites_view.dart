@@ -8,7 +8,7 @@ class InvitesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<InvitesViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           leading: CupertinoButton(
             padding: EdgeInsets.zero,

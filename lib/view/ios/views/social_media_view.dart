@@ -8,7 +8,7 @@ class SocialMediaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<SocialMediaViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           middle: Text(AppLocalizations.of(context).socialMedia),
         ),

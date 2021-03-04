@@ -8,7 +8,7 @@ class StatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<StatsViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
           middle: Text(AppLocalizations.of(context).stats),
         ),

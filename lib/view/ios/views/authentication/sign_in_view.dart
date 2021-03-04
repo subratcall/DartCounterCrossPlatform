@@ -32,7 +32,7 @@ class _SignInViewState extends State<SignInView> {
     final node = FocusScope.of(context);
 
     return ViewModelProvider<SignInViewModel>(
-      builder: (context, model, child) => CupertinoView(
+      builder: (context, model, child) => View(
         onTap: () => node.unfocus(),
         child: model.viewState == SignInViewState.idle
             ? SingleChildScrollView(
