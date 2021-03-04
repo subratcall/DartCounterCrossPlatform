@@ -61,7 +61,7 @@ class _SignInViewState extends State<SignInView> {
                                     Spacer(
                                       flex: 120,
                                     ),
-                                    Flexible(
+                                    Expanded(
                                       child: Image.asset(AppImages.logo),
                                       flex: 135,
                                     ),

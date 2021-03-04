@@ -70,10 +70,124 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
                 2 * CupertinoNavigationBar().preferredSize.height -
                 MediaQuery.of(context).padding.bottom,
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 35.0),
+          child: Row(
+            children: [
+              Spacer(flex: 38,),
+              Expanded(
+                flex: 299,
+                child: Column(
+                  children: [
+                    Spacer(
+                      flex: 105,
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Spacer(
+                            flex: 120,
+                          ),
+                          Flexible(
+                            child: Image.asset(AppImages.logo),
+                            flex: 135,
+                          ),
+                          Spacer(
+                            flex: 120,
+                          ),
+                        ],
+                      ),
+                      flex: 166,
+                    ),
+                    Spacer(
+                      flex: 67,
+                    ),
+                    Expanded(
+                      child: AutoSizeText(
+                        AppLocalizations.of(context).forgotPassword,
+                        maxLines: 1,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                      ),
+                      flex: 21,
+                    ),
+                    Spacer(
+                      flex: 28,
+                    ),
+                    Expanded(
+                      child: AutoSizeText(
+                        AppLocalizations.of(context).insertEmailToResetPassword,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14),
+                        maxLines: 2,
+                      ),
+                      flex: 32,
+                    ),
+                    Spacer(
+                      flex: 28,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        placeholder: AppLocalizations.of(context).email,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
+                        textInputAction: TextInputAction.done,
+                        onEditingComplete: () => node.unfocus(),
+                      ),
+                      flex: 36,
+                    ),
+                    Spacer(
+                      flex: 47,
+                    ),
+                    Expanded(
+                      child: PrimaryTextButton(
+                        text: AppLocalizations.of(context).confirm,
+                        onPressed: () {
+                          // TODO this is only a workaround find a better solution for this e.g with global key
+                          var errorMessages = {
+                            'errorInvalidEmailAddress': AppLocalizations.of(context).errorInvalidEmailAddress,
+                            'errorNetwork': AppLocalizations.of(context).errorNetwork,
+                          };
+
+                          widget.model.onConfirmPressed(email: emailController.text).catchError((error) {
+                            if (error is InvalidEmailAddressError) {
+                              Toast.showToast(errorMessages['errorInvalidEmailAddress']);
+                            } else {
+                              Toast.showToast(errorMessages['errorNetwork']);
+                            }
+                          });
+                        },
+                      ),
+                      flex: 50,
+                    ),
+                    Spacer(
+                      flex: 158,
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(flex: 38,),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+}
+
+class ResetPasswordSuccess extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoView(
+      child: Row(
+        children: [
+          Spacer(flex: 38,),
+          Expanded(
+            flex: 299,
             child: Column(
-              mainAxisSize: MainAxisSize.max,
               children: [
                 Spacer(
                   flex: 105,
@@ -96,11 +210,22 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
                   flex: 166,
                 ),
                 Spacer(
-                  flex: 67,
+                  flex: 64,
+                ),
+                Expanded(
+                  child: Icon(
+                    CupertinoIcons.checkmark_alt_circle,
+                    color: AppColors.green,
+                    size: 60,
+                  ),
+                  flex: 44,
+                ),
+                Spacer(
+                  flex: 22,
                 ),
                 Expanded(
                   child: AutoSizeText(
-                    AppLocalizations.of(context).forgotPassword,
+                    AppLocalizations.of(context).emailSent,
                     maxLines: 1,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
                   ),
@@ -111,7 +236,7 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
                 ),
                 Expanded(
                   child: AutoSizeText(
-                    AppLocalizations.of(context).insertEmailToResetPassword,
+                    AppLocalizations.of(context).checkMailAccountForPasswordResetLink,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14),
                     maxLines: 2,
@@ -119,41 +244,14 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
                   flex: 32,
                 ),
                 Spacer(
-                  flex: 28,
+                  flex: 81,
                 ),
-                Expanded(
-                  child: TextField(
-                    placeholder: AppLocalizations.of(context).email,
-                    keyboardType: TextInputType.emailAddress,
-                    controller: emailController,
-                    textInputAction: TextInputAction.done,
-                    onEditingComplete: () => node.unfocus(),
+                Flexible(
+                  child: LinkButton(
+                    text: AppLocalizations.of(context).login,
+                    onPressed: () => Navigator.pop(context),
                   ),
-                  flex: 36,
-                ),
-                Spacer(
-                  flex: 47,
-                ),
-                Expanded(
-                  child: PrimaryTextButton(
-                    text: AppLocalizations.of(context).confirm,
-                    onPressed: () {
-                      // TODO this is only a workaround find a better solution for this e.g with global key
-                      var errorMessages = {
-                        'errorInvalidEmailAddress': AppLocalizations.of(context).errorInvalidEmailAddress,
-                        'errorNetwork': AppLocalizations.of(context).errorNetwork,
-                      };
-
-                      widget.model.onConfirmPressed(email: emailController.text).catchError((error) {
-                        if (error is InvalidEmailAddressError) {
-                          Toast.showToast(errorMessages['errorInvalidEmailAddress']);
-                        } else {
-                          Toast.showToast(errorMessages['errorNetwork']);
-                        }
-                      });
-                    },
-                  ),
-                  flex: 50,
+                  flex: 17,
                 ),
                 Spacer(
                   flex: 158,
@@ -161,96 +259,8 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
-  }
-}
-
-class ResetPasswordSuccess extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Spacer(
-              flex: 105,
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Spacer(
-                    flex: 120,
-                  ),
-                  Flexible(
-                    child: Image.asset(AppImages.logo),
-                    flex: 135,
-                  ),
-                  Spacer(
-                    flex: 120,
-                  ),
-                ],
-              ),
-              flex: 166,
-            ),
-            Spacer(
-              flex: 64,
-            ),
-            Expanded(
-              child: Icon(
-                CupertinoIcons.checkmark_alt_circle,
-                color: AppColors.green,
-                size: 60,
-              ),
-              flex: 44,
-            ),
-            Spacer(
-              flex: 22,
-            ),
-            Expanded(
-              child: AutoSizeText(
-                AppLocalizations.of(context).emailSent,
-                maxLines: 1,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-              ),
-              flex: 21,
-            ),
-            Spacer(
-              flex: 28,
-            ),
-            Expanded(
-              child: AutoSizeText(
-                AppLocalizations.of(context).checkMailAccountForPasswordResetLink,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14),
-                maxLines: 2,
-              ),
-              flex: 32,
-            ),
-            Spacer(
-              flex: 81,
-            ),
-            Flexible(
-              child: LinkButton(
-                text: AppLocalizations.of(context).login,
-                onPressed: () => Navigator.pop(context),
-              ),
-              flex: 17,
-            ),
-            Spacer(
-              flex: 158,
-            ),
-          ],
-        ),
+          Spacer(flex: 38,),
+        ],
       ),
     );
   }
