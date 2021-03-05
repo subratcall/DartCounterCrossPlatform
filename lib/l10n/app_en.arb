@@ -2,7 +2,7 @@
   "@aboutUs": {
     "description": "word"
   },
-  "@createGame": {
+  "@cancel": {
     "description": "word"
   },
   "@checkMailAccountForPasswordResetLink": {
@@ -11,10 +11,37 @@
   "@confirm": {
     "description": "word"
   },
+  "@createGame": {
+    "description": "word"
+  },
   "@email": {
     "description": "word"
   },
   "@emailSent": {
+    "description": "phrase"
+  },
+  "@errorEmailAddressAlreadyInUse": {
+    "description": "phrase"
+  },
+  "@errorInvalidEmailAddress": {
+    "description": "phrase"
+  },
+  "@errorInvalidEmailAddressOrPassword": {
+    "description": "phrase"
+  },
+  "@errorInvalidPassword": {
+    "description": "phrase"
+  },
+  "@errorInvalidUsername": {
+    "description": "phrase"
+  },
+  "@errorNetwork": {
+    "description": "phrase"
+  },
+  "@errorPasswordNotEqualPasswordAgain": {
+    "description": "phrase"
+  },
+  "@errorUsernameAlreadyInUse": {
     "description": "phrase"
   },
   "@forgotPassword": {
@@ -32,9 +59,6 @@
   "@insertEmailToResetPassword": {
     "description": "phrase"
   },
-  "@invites": {
-    "description": "word"
-  },
   "@login": {
     "description": "word"
   },
@@ -47,10 +71,13 @@
   "@profile": {
     "description": "word"
   },
+  "@register": {
+    "description": "word"
+  },
   "@registerNow": {
     "description": "phrase"
   },
-  "@register": {
+  "@resetPassword": {
     "description": "word"
   },
   "@settings": {
@@ -65,66 +92,96 @@
   "@username": {
     "description": "word"
   },
-  "@resetPassword": {
+  "@average": {
     "description": "word"
   },
-  "@cancel": {
+  "@checkoutPercentage": {
     "description": "word"
   },
-  "@errorInvalidEmailAddressOrPassword": {
+  "@wins": {
+    "description": "word"
+  },
+  "@defeats": {
+    "description": "word"
+  },
+  "@offline": {
+    "description": "word"
+  },
+  "@play": {
+    "description": "word"
+  },
+  "@online": {
+    "description": "word"
+  },
+  "@invitations": {
+    "description": "word"
+  },
+  "@careerStats": {
+    "description": "word"
+  },
+  "@showGameHistory": {
     "description": "phrase"
   },
-  "@errorInvalidEmailAddress": {
+
+  "@firstNine": {
+    "description": "word"
+  },
+  "@games": {
+    "description": "word"
+  },
+  "@errorLoadingProfile": {
     "description": "phrase"
   },
-  "@errorInvalidUsername": {
+  "@noGamesFound": {
     "description": "phrase"
   },
-  "@errorInvalidPassword": {
-    "description": "phrase"
-  },
-  "@errorPasswordNotEqualPasswordAgain": {
-    "description": "phrase"
-  },
-  "@errorNetwork": {
-    "description": "phrase"
-  },
-  "@errorEmailAddressAlreadyInUse": {
-    "description": "phrase"
-  },
-  "@errorUsernameAlreadyInUse": {
-    "description": "phrase"
-  },
+
+
   "aboutUs": "About Us",
-  "confirm": "Confirm",
+  "cancel": "Cancel",
   "checkMailAccountForPasswordResetLink": "Check your email account to reset your password.",
+  "confirm": "Confirm",
   "createGame": "Create Game",
   "email": "Email",
   "emailSent": "Email sent!",
+  "errorEmailAddressAlreadyInUse": "This email is already in use.",
+  "errorInvalidEmailAddress": "Invalid email address.",
+  "errorInvalidEmailAddressOrPassword": "Invalid email.",
+  "errorInvalidPassword": "Invalid password - TODO.",
+  "errorInvalidUsername": "Invalid username - TODO.",
+  "errorNetwork": "Network error - No internet connection!",
+  "errorPasswordNotEqualPasswordAgain": "Passwords don't match.",
+  "errorUsernameAlreadyInUse": "This username is already in use.",
   "forgotPassword": "Forgot Password?",
   "friends": "Friends",
   "gameHistory": "Game History",
   "home": "Home",
   "insertEmailToResetPassword": "Enter your user account's email and we will send you a password reset link.",
-  "invites": "Invites",
   "login": "Login",
   "password": "Password",
   "passwordAgain": "Password again",
   "profile": "Profile",
   "register": "Register",
   "registerNow": "Register now",
+  "resetPassword": "Reset Password",
   "settings": "Settings",
   "socialMedia": "Social Media",
   "stats": "Stats",
   "username": "Username",
-  "resetPassword": "Reset Password",
-  "cancel": "Cancel",
-  "errorInvalidEmailAddressOrPassword": "Invalid email.",
-  "errorInvalidEmailAddress": "Invalid email address.",
-  "errorInvalidUsername": "Invalid username - TODO.",
-  "errorInvalidPassword": "Invalid password - TODO.",
-  "errorPasswordNotEqualPasswordAgain": "Passwords don't match.",
-  "errorNetwork": "Network error - No internet connection!",
-  "errorEmailAddressAlreadyInUse": "This email is already in use.",
-  "errorUsernameAlreadyInUse": "This username is already in use."
+
+  "average": "Average",
+  "checkoutPercentage": "Checkout%",
+  "wins": "Wins",
+  "defeats": "Defeats",
+  "offline": "Offline",
+  "play": "Play",
+  "online": "Online",
+  "invitations": "Invitations",
+  "careerStats": "Career Stats",
+  "showGameHistory": "Show History",
+
+  "firstNine": "First 9",
+  "games": "Games",
+  "errorLoadingProfile": "Error loading profile",
+  "noGamesFound": "No games found"
 }

@@ -10,13 +10,6 @@ class CreateGameView extends StatelessWidget {
     return ViewModelProvider<CreateGameViewModel>(
       builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(CupertinoIcons.chevron_back, size: 35),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
           middle: Text(AppLocalizations.of(context).createGame),
         ),
         child: Center(

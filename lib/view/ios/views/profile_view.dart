@@ -17,13 +17,6 @@ class ProfileView extends StatelessWidget {
     return ViewModelProvider<ProfileViewModel>(
       builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(CupertinoIcons.chevron_back, size: 35),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
           middle: Text(AppLocalizations.of(context).profile),
         ),
         child: StreamBuilder(
@@ -108,7 +101,7 @@ class ProfileViewSuccess extends StatelessWidget {
                             Spacer(),
                             Center(
                               child: AutoSizeText(
-                                'Karriere Statistiken',
+                                AppLocalizations.of(context).careerStats,
                                 maxLines: 1,
                                 style: TextStyle(
                                   color: AppColors.white,
@@ -134,7 +127,7 @@ class ProfileViewSuccess extends StatelessWidget {
                           children: [
                             Expanded(
                               child:
-                                  StatsCard(title: 'Average', value: profile.carrerStats.average, trend: profile.carrerStats.averageTrend),
+                                  StatsCard(title: AppLocalizations.of(context).average, value: profile.carrerStats.average, trend: profile.carrerStats.averageTrend),
                               flex: 178,
                             ),
                             Spacer(
@@ -142,7 +135,7 @@ class ProfileViewSuccess extends StatelessWidget {
                             ),
                             Expanded(
                               child: StatsCard(
-                                  title: 'Checkout%',
+                                  title: AppLocalizations.of(context).checkoutPercentage,
                                   value: profile.carrerStats.checkoutPercentage,
                                   trend: profile.carrerStats.checkoutPercentageTrend),
                               flex: 178,
@@ -159,14 +152,14 @@ class ProfileViewSuccess extends StatelessWidget {
                           children: [
                             Expanded(
                               child: StatsCard(
-                                  title: 'First 9', value: profile.carrerStats.firstNine, trend: profile.carrerStats.firstNineTrend),
+                                  title: AppLocalizations.of(context).firstNine, value: profile.carrerStats.firstNine, trend: profile.carrerStats.firstNineTrend),
                               flex: 178,
                             ),
                             Spacer(
                               flex: 4,
                             ),
                             Expanded(
-                              child: StatsCard(title: 'Games', value: profile.carrerStats.games),
+                              child: StatsCard(title: AppLocalizations.of(context).games, value: profile.carrerStats.games),
                               flex: 178,
                             )
                           ],
@@ -180,14 +173,14 @@ class ProfileViewSuccess extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                              child: StatsCard(title: 'Wins', value: profile.carrerStats.wins),
+                              child: StatsCard(title: AppLocalizations.of(context).wins, value: profile.carrerStats.wins),
                               flex: 178,
                             ),
                             Spacer(
                               flex: 4,
                             ),
                             Expanded(
-                              child: StatsCard(title: 'Defeats', value: profile.carrerStats.defeats),
+                              child: StatsCard(title: AppLocalizations.of(context).defeats, value: profile.carrerStats.defeats),
                               flex: 178,
                             )
                           ],
@@ -203,7 +196,7 @@ class ProfileViewSuccess extends StatelessWidget {
                 Expanded(
                   flex: 75,
                   child: ActionButton(
-                    text: 'Last 10 Games',
+                    text: AppLocalizations.of(context).showGameHistory,
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.gameHistory),
                   ),
                 ),
@@ -225,7 +218,7 @@ class ProfileViewError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('No profile found'),
+      child: Text(AppLocalizations.of(context).errorLoadingProfile),
     );
   }
 }

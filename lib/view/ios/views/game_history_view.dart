@@ -17,13 +17,6 @@ class GameHistoryView extends StatelessWidget {
     return ViewModelProvider<GameHistoryViewModel>(
       builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(CupertinoIcons.chevron_back, size: 35),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
           middle: Text(AppLocalizations.of(context).gameHistory),
         ),
         child: Row(
@@ -65,7 +58,7 @@ class GameHistoryView extends StatelessWidget {
                           } else if (snapshot.hasError) {
                             // TODO generic feedback eng, ger
                             return Center(
-                              child: Text('No games found'),
+                              child: Text(AppLocalizations.of(context).noGamesFound),
                             );
                           } else {
                             return LoadingView();
@@ -101,7 +94,7 @@ class GameHistoryDetailsView extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        middle: Text('Best of 5 legs'),
+        middle: Text(game.description),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
@@ -149,7 +142,7 @@ class GameHistoryCard extends StatelessWidget {
                   children: [
                     Spacer(),
                     AutoSizeText(
-                      'Average:',
+                      AppLocalizations.of(context).average + ':',
                       maxLines: 1,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
@@ -169,7 +162,7 @@ class GameHistoryCard extends StatelessWidget {
                   children: [
                     Spacer(),
                     AutoSizeText(
-                      'Checkout:',
+                      AppLocalizations.of(context).checkoutPercentage + ':',
                       maxLines: 1,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),

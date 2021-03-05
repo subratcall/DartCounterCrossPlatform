@@ -3,10 +3,7 @@ import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_icons.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/carrer_stats.dart';
 import 'package:dart_counter/model/profile.dart';
-import 'package:dart_counter/view/ios/export.dart';
-import 'package:dart_counter/view/ios/modals/modal_fit.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/primary_button.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
@@ -145,7 +142,7 @@ class ProfileButton extends StatelessWidget {
                         child: Row(
                           children: [
                             AutoSizeText(
-                              'Averrage:',
+                              AppLocalizations.of(context).average + ':',
                               maxLines: 1,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
                             ),
@@ -163,7 +160,7 @@ class ProfileButton extends StatelessWidget {
                         child: Row(
                           children: [
                             AutoSizeText(
-                              'Checkout%:',
+                              AppLocalizations.of(context).checkoutPercentage + ':',
                               maxLines: 1,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
                             ),
@@ -181,7 +178,7 @@ class ProfileButton extends StatelessWidget {
                         child: Row(
                           children: [
                             AutoSizeText(
-                              'Wins:',
+                              AppLocalizations.of(context).wins +':',
                               maxLines: 1,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
                             ),
@@ -199,7 +196,7 @@ class ProfileButton extends StatelessWidget {
                         child: Row(
                           children: [
                             AutoSizeText(
-                              'Defeats:',
+                              AppLocalizations.of(context).defeats + ':',
                               maxLines: 1,
                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
                             ),
@@ -226,58 +223,6 @@ class ProfileButton extends StatelessWidget {
   }
 }
 
-class InvitesButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return PrimaryButton(
-      child: Column(
-        children: [
-          Spacer(),
-          Icon(
-            AppIcons.mail,
-            size: 50,
-            color: AppColors.white,
-          ),
-          Spacer(),
-          AutoSizeText(
-            'EINLADUNGEN',
-            maxLines: 1,
-            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-          ),
-          Spacer(),
-        ],
-      ),
-      onPressed: () => Navigator.pushNamed(context, AppRoutes.invite),
-    );
-  }
-}
-
-class FriendsButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return PrimaryButton(
-      child: Column(
-        children: [
-          Spacer(),
-          Icon(
-            AppIcons.users,
-            size: 50,
-            color: AppColors.white,
-          ),
-          Spacer(),
-          AutoSizeText(
-            'FREUNDE',
-            maxLines: 1,
-            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
-          ),
-          Spacer(),
-        ],
-      ),
-      onPressed: () => Navigator.pushNamed(context, AppRoutes.friends),
-    );
-  }
-}
-
 class PlayOnlineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -292,12 +237,12 @@ class PlayOnlineButton extends StatelessWidget {
               children: [
                 Spacer(),
                 AutoSizeText(
-                  'OFFLINE',
+                  AppLocalizations.of(context).offline.toUpperCase(),
                   maxLines: 1,
                   style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: AppColors.white),
                 ),
                 AutoSizeText(
-                  'SPIELEN',
+                  AppLocalizations.of(context).play.toUpperCase(),
                   maxLines: 1,
                   style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.red),
                 ),
@@ -328,12 +273,12 @@ class PlayOfflineButton extends StatelessWidget {
               children: [
                 Spacer(),
                 AutoSizeText(
-                  'ONLINE',
+                  AppLocalizations.of(context).online.toUpperCase(),
                   maxLines: 1,
                   style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: AppColors.white),
                 ),
                 AutoSizeText(
-                  'SPIELEN',
+                  AppLocalizations.of(context).play.toUpperCase(),
                   maxLines: 1,
                   style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.yellow),
                 ),
@@ -346,6 +291,58 @@ class PlayOfflineButton extends StatelessWidget {
         ],
       ),
       onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
+    );
+  }
+}
+
+class InvitesButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PrimaryButton(
+      child: Column(
+        children: [
+          Spacer(),
+          Icon(
+            AppIcons.mail,
+            size: 50,
+            color: AppColors.white,
+          ),
+          Spacer(),
+          AutoSizeText(
+            AppLocalizations.of(context).invitations.toUpperCase(),
+            maxLines: 1,
+            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+          ),
+          Spacer(),
+        ],
+      ),
+      onPressed: () => Navigator.pushNamed(context, AppRoutes.invite),
+    );
+  }
+}
+
+class FriendsButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PrimaryButton(
+      child: Column(
+        children: [
+          Spacer(),
+          Icon(
+            AppIcons.users,
+            size: 50,
+            color: AppColors.white,
+          ),
+          Spacer(),
+          AutoSizeText(
+            AppLocalizations.of(context).friends.toUpperCase(),
+            maxLines: 1,
+            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
+          ),
+          Spacer(),
+        ],
+      ),
+      onPressed: () => Navigator.pushNamed(context, AppRoutes.friends),
     );
   }
 }
@@ -381,7 +378,7 @@ class SocialMediaButton extends StatelessWidget {
               )),
           Spacer(),
           AutoSizeText(
-            'SOCIAL MEDIA',
+            AppLocalizations.of(context).socialMedia.toUpperCase(),
             maxLines: 1,
             style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
           ),
@@ -407,7 +404,7 @@ class SettingsButton extends StatelessWidget {
           ),
           Spacer(),
           AutoSizeText(
-            'EINSTELLUNGEN',
+            AppLocalizations.of(context).settings.toUpperCase(),
             maxLines: 1,
             style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
           ),

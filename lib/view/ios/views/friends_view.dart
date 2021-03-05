@@ -10,13 +10,6 @@ class FriendsView extends StatelessWidget {
     return ViewModelProvider<FriendsViewModel>(
       builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(CupertinoIcons.chevron_back, size: 35),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
           middle: Text(AppLocalizations.of(context).friends),
         ),
         child: Center(

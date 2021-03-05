@@ -10,14 +10,7 @@ class InvitesView extends StatelessWidget {
     return ViewModelProvider<InvitesViewModel>(
       builder: (context, model, child) => View(
         navigationBar: CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(CupertinoIcons.chevron_back, size: 35),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          middle: Text(AppLocalizations.of(context).invites),
+          middle: Text(AppLocalizations.of(context).invitations),
         ),
         child: Center(
           child: Text(this.toStringShort() + " -- IOS"),
