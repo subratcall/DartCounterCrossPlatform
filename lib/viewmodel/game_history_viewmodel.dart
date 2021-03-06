@@ -4,7 +4,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 class GameHistoryViewModel extends ViewModel {
   Future<List<Game>> fetchGames() async {
     // TODO fetch data
-    await Future.delayed(const Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 1), () {});
     return [
       Game(DateTime.utc(2021, 3, 1),'Best of 15 legs', 43.95, 13.73, true),
       Game(DateTime.utc(2021, 2, 23),'First to 11 legs', 84.38, 32.89, true),

@@ -23,24 +23,24 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   Widget build(BuildContext context) {
     return ViewModelProvider<ResetPasswordViewModel>(builder: (context, model, child) {
       return model.viewState == ResetPasswordViewState.idle
-          ? ResetPasswordIdle(model)
+          ? ResetPasswordViewIdle(model)
           : model.viewState == ResetPasswordViewState.successful
-              ? ResetPasswordSuccess()
+              ? ResetPasswordViewSuccess()
               : LoadingView();
     });
   }
 }
 
-class ResetPasswordIdle extends StatefulWidget {
+class ResetPasswordViewIdle extends StatefulWidget {
   final ResetPasswordViewModel model;
 
-  ResetPasswordIdle(this.model);
+  ResetPasswordViewIdle(this.model);
 
   @override
-  _ResetPasswordIdleState createState() => _ResetPasswordIdleState();
+  _ResetPasswordViewIdleState createState() => _ResetPasswordViewIdleState();
 }
 
-class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
+class _ResetPasswordViewIdleState extends State<ResetPasswordViewIdle> {
   final emailController = TextEditingController();
 
   @override
@@ -178,7 +178,7 @@ class _ResetPasswordIdleState extends State<ResetPasswordIdle> {
   }
 }
 
-class ResetPasswordSuccess extends StatelessWidget {
+class ResetPasswordViewSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return View(

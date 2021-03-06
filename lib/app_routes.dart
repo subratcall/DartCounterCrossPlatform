@@ -10,7 +10,5 @@ class AppRoutes {
   static const socialMedia = 'socialMedia';
   static const createGame = 'createGame';
   static const inGame = 'inGame';
-  static const checkoutDetails = 'checkoutDetails';
-  static const stats = 'stats';
-  static const resetPassword = 'resetPassword';
+  static const postGame = 'postGame';
 }

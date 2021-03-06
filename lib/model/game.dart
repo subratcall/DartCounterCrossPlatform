@@ -10,9 +10,9 @@ class Game {
 
   Game(this.date, this.description, this.average, this.checkoutPercentage, this.won);
 
-  Game.dummy() {
+  Game.dummy({String description}) {
     date = DateTime.now();
-    description = 'Best of 99 legs';
+    description = description ?? 'Best of 99 legs';
     average = 99.33;
     checkoutPercentage = 43.5;
     won = Random().nextBool();

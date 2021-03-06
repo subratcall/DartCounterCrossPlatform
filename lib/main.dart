@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dart_counter/api/authentication.dart';
+import 'package:dart_counter/api/authentication_service.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/view/android/export.dart' as android;
@@ -66,9 +66,7 @@ class DartCounterApp extends StatelessWidget {
               AppRoutes.socialMedia: (context) => ios.SocialMediaView(),
               AppRoutes.createGame: (context) => ios.CreateGameView(),
               AppRoutes.inGame: (context) => ios.InGameView(),
-              AppRoutes.checkoutDetails: (context) => ios.CheckoutDetailsView(),
-              AppRoutes.stats: (context) => ios.StatsView(),
-              AppRoutes.resetPassword: (context) => ios.ResetPasswordView(),
+              AppRoutes.postGame: (context) => ios.PostGameView(),
             },
             theme: ios.Theme.theme,
           );
@@ -88,9 +86,7 @@ class DartCounterApp extends StatelessWidget {
               AppRoutes.socialMedia: (context) => android.SocialMediaView(),
               AppRoutes.createGame: (context) => android.CreateGameView(),
               AppRoutes.inGame: (context) => android.InGameView(),
-              AppRoutes.checkoutDetails: (context) => android.CheckoutDetailsView(),
-              AppRoutes.stats: (context) => android.StatsView(),
-              AppRoutes.resetPassword: (context) => android.ResetPasswordView(),
+              AppRoutes.postGame: (context) => android.PostGameView(),
             },
             // TODO further bootstrapping
           );

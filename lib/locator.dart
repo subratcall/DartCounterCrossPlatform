@@ -15,9 +15,9 @@ import 'package:dart_counter/viewmodel/social_media_viewmodel.dart';
 import 'package:dart_counter/viewmodel/stats_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 
-import 'api/authentication.dart';
-import 'api/database.dart';
-import 'api/playing.dart';
+import 'api/authentication_service.dart';
+import 'api/database_service.dart';
+import 'api/playing/playing_service.dart';
 import 'app_model.dart';
 
 GetIt locator = GetIt.instance;

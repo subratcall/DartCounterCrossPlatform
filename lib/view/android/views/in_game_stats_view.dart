@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class StatsView extends StatelessWidget {
+class InGameStatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

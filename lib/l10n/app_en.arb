@@ -136,6 +136,10 @@
     "description": "phrase"
   },
 
+  "@startGame": {
+    "description": "word"
+  },
+
 
   "aboutUs": "About Us",
   "cancel": "Cancel",
@@ -183,5 +187,7 @@
   "firstNine": "First 9",
   "games": "Games",
   "errorLoadingProfile": "Error loading profile",
-  "noGamesFound": "No games found"
+  "noGamesFound": "No games found",
+
+  "startGame": "Start Game"
 }

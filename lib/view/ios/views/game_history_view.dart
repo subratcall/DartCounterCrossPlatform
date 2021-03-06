@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'game_history_details_view.dart';
+
 class GameHistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -71,35 +73,6 @@ class GameHistoryView extends StatelessWidget {
             ),
             Spacer(flex: 8,),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// TODO
-class GameHistoryDetailsView extends StatelessWidget {
-  final Game game;
-
-  GameHistoryDetailsView(this.game);
-
-  @override
-  Widget build(BuildContext context) {
-    return View(
-      navigationBar: CupertinoNavigationBar(
-        leading: CupertinoButton(
-          padding: EdgeInsets.zero,
-          child: Icon(CupertinoIcons.chevron_back, size: 35),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        middle: Text(game.description),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-        child: Center(
-          child: Text('Game details'),
         ),
       ),
     );

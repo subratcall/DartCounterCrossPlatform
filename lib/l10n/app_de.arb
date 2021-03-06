@@ -45,5 +45,7 @@
   "firstNine": "First 9",
   "games": "Spiele",
   "errorLoadingProfile": "Error - Profil konnte nicht geladen werden.",
-  "noGamesFound": "Keine Spiele gefunden"
+  "noGamesFound": "Keine Spiele gefunden",
+
+  "startGame": "Spiel starten"
 }
