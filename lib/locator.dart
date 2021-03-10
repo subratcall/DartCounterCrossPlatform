@@ -1,5 +1,8 @@
 import 'package:dart_counter/viewmodel/about_us_viewmodel.dart';
 import 'package:dart_counter/viewmodel/authentication/reset_password_viewmodel.dart';
+import 'package:dart_counter/viewmodel/authentication/sign_in_facebook_viewmodel.dart';
+import 'package:dart_counter/viewmodel/authentication/sign_in_google_viewmodel.dart';
+import 'package:dart_counter/viewmodel/authentication/sign_in_instagram_viewmodel.dart';
 import 'package:dart_counter/viewmodel/authentication/sign_in_viewmodel.dart';
 import 'package:dart_counter/viewmodel/authentication/sign_up_viewmodel.dart';
 import 'package:dart_counter/viewmodel/checkout_details_viewmodel.dart';
@@ -47,4 +50,7 @@ void setupLocator() {
   locator.registerFactory(() => SocialMediaViewModel());
   locator.registerFactory(() => StatsViewModel());
   locator.registerFactory(() => ResetPasswordViewModel());
+  locator.registerFactory(() => SignInFacebookViewModel());
+  locator.registerFactory(() => SignInGoogleViewModel());
+  locator.registerFactory(() => SignInInstagramViewModel());
 }
