@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
@@ -25,24 +25,18 @@ class ProfileView extends StatelessWidget {
         child: StreamBuilder(
           stream: model.profile(),
           builder: (context, snapshot) =>
-              snapshot.hasData ? ProfileViewSuccess(snapshot.data) : ProfileViewError(),
+              snapshot.hasData ? ProfileViewSuccess(model, snapshot.data) : ProfileViewError(),
         ),
       ),
     );
   }
 }
 
-class ProfileViewSuccess extends StatefulWidget {
+class ProfileViewSuccess extends StatelessWidget {
+  final ProfileViewModel model;
   final Profile profile;
 
-  ProfileViewSuccess(this.profile);
-
-  @override
-  _ProfileViewSuccessState createState() => _ProfileViewSuccessState();
-}
-
-class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
-  File image;
+  ProfileViewSuccess(this.model, this.profile);
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +69,14 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                               Expanded(
                                 child: CupertinoButton(
                                   padding: EdgeInsets.zero,
-                                  onPressed: () async {
-                                    var pickedImage =
-                                        await ImagePicker().getImage(source: ImageSource.gallery);
-                                    setState(() {
-                                      image = File(pickedImage.path);
-                                    });
-                                  },
+                                  onPressed: () => model.pickImage(),
                                   child: Container(
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.circle,
-                                      image: image == null ? DecorationImage(image: AssetImage(AppImages.photoPlaceholder)): DecorationImage(image: FileImage(image)),
+                                      image: profile.photoUrl != null ? DecorationImage(image: NetworkImage(profile.photoUrl))
+                                          : model.pickedImage == null ? DecorationImage(image: AssetImage(AppImages.photoPlaceholder))
+                                          : DecorationImage(image: FileImage(model.pickedImage)),
                                     ),
-
                                   ),
                                 ),
                                 flex: 163,
@@ -96,7 +85,7 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                                 flex: 17,
                               ),
                               AutoSizeText(
-                                widget.profile.username,
+                                profile.username,
                                 maxLines: 1,
                                 style: TextStyle(
                                   color: AppColors.white,
@@ -155,8 +144,8 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).average,
-                                  value: widget.profile.carrerStats.average,
-                                  trend: widget.profile.carrerStats.averageTrend),
+                                  value: profile.carrerStats.average,
+                                  trend: profile.carrerStats.averageTrend),
                               flex: 178,
                             ),
                             Spacer(
@@ -165,8 +154,8 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).checkoutPercentage,
-                                  value: widget.profile.carrerStats.checkoutPercentage,
-                                  trend: widget.profile.carrerStats.checkoutPercentageTrend),
+                                  value: profile.carrerStats.checkoutPercentage,
+                                  trend: profile.carrerStats.checkoutPercentageTrend),
                               flex: 178,
                             )
                           ],
@@ -182,8 +171,8 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).firstNine,
-                                  value: widget.profile.carrerStats.firstNine,
-                                  trend: widget.profile.carrerStats.firstNineTrend),
+                                  value: profile.carrerStats.firstNine,
+                                  trend: profile.carrerStats.firstNineTrend),
                               flex: 178,
                             ),
                             Spacer(
@@ -192,7 +181,7 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).games,
-                                  value: widget.profile.carrerStats.games),
+                                  value: profile.carrerStats.games),
                               flex: 178,
                             )
                           ],
@@ -208,7 +197,7 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).wins,
-                                  value: widget.profile.carrerStats.wins),
+                                  value: profile.carrerStats.wins),
                               flex: 178,
                             ),
                             Spacer(
@@ -217,7 +206,7 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).defeats,
-                                  value: widget.profile.carrerStats.defeats),
+                                  value: profile.carrerStats.defeats),
                               flex: 178,
                             )
                           ],
@@ -248,7 +237,10 @@ class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
       ],
     );
   }
+
 }
+
+
 
 // TODO
 class ProfileViewError extends StatelessWidget {
