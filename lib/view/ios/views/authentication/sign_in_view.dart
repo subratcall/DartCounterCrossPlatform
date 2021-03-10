@@ -2,6 +2,9 @@ import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/views/authentication/reset_password_view.dart';
+import 'package:dart_counter/view/ios/views/authentication/sign_in_facebook_view.dart';
+import 'package:dart_counter/view/ios/views/authentication/sign_in_google_view.dart';
+import 'package:dart_counter/view/ios/views/authentication/sign_in_instagram_view.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/link_button.dart';
@@ -154,17 +157,38 @@ class _SignInViewState extends State<SignInView> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    SocialMediaButton(
-                                      type: SocialMediaButtonType.facebook,
-                                      onPressed: () => model.onSignInFacebookPressed(),
+                                    Builder(
+                                        builder: (context) => SocialMediaButton(
+                                          type: SocialMediaButtonType.facebook,
+                                          onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                                            expand: true,
+                                            context: context,
+                                            backgroundColor: AppColors.transparent,
+                                            builder: (context) => SignInFacebookView(),
+                                          ),
+                                        ),
                                     ),
-                                    SocialMediaButton(
-                                      type: SocialMediaButtonType.google,
-                                      onPressed: () => model.onSignInGooglePressed(),
+                                    Builder(
+                                      builder: (context) => SocialMediaButton(
+                                        type: SocialMediaButtonType.google,
+                                        onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                                          expand: true,
+                                          context: context,
+                                          backgroundColor: AppColors.transparent,
+                                          builder: (context) => SignInGoogleView(),
+                                        ),
+                                      ),
                                     ),
-                                    SocialMediaButton(
-                                      type: SocialMediaButtonType.instagram,
-                                      onPressed: () => model.onSignInInstagramPressed(),
+                                    Builder(
+                                      builder: (context) => SocialMediaButton(
+                                        type: SocialMediaButtonType.instagram,
+                                        onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                                          expand: true,
+                                          context: context,
+                                          backgroundColor: AppColors.transparent,
+                                          builder: (context) => SignInInstagramView(),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),

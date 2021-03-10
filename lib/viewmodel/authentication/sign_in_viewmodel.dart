@@ -28,15 +28,4 @@ class SignInViewModel extends ViewModel<SignInViewState> {
     }
   }
 
-  void onSignInFacebookPressed() {
-    _authenticationService.signInFacebook();
-  }
-
-  void onSignInGooglePressed() {
-    _authenticationService.signInGoogle();
-  }
-
-  void onSignInInstagramPressed() {
-    _authenticationService..signInInstagram();
-  }
 }
