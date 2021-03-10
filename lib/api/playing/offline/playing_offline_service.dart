@@ -9,6 +9,10 @@ class PlayingOfflineService {
 
   }
 
+  void changeGameConfig() {
+
+  }
+
   void joinGame(String gameId) {
 
   }

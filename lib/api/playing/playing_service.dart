@@ -9,9 +9,13 @@ class PlayingService {
 
   bool _online;
 
-
   // TODO remove dummy data;
-  final dummyData = [Game.dummy(description: 'Game 1'), Game.dummy(description: 'Game 2'), Game.dummy(description: 'Game 3')];
+  final dummyData = [
+    Game.dummy(mode: GameMode.FIRST_TO, size: 10, type: GameType.LEGS),
+    Game.dummy(mode: GameMode.FIRST_TO, size: 4, type: GameType.SETS),
+    Game.dummy(mode: GameMode.BEST_OF, size: 99, type: GameType.LEGS)
+  ];
+
   Stream<Game> get games => Stream.periodic(Duration(seconds: 2), (x) => dummyData[x%dummyData.length]);
 
   bool get online => _online;
@@ -37,6 +41,14 @@ class PlayingService {
       _playingOnlineService.createGame();
     } else {
       _playingOfflineService.createGame();
+    }
+  }
+
+  void changeGameConfig() {
+    if(online) {
+      _playingOnlineService.changeGameConfig();
+    } else {
+      _playingOfflineService.changeGameConfig();
     }
   }
 

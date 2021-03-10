@@ -16,6 +16,10 @@ class PlayingOnlineService {
 
   }
 
+  void changeGameConfig() {
+
+  }
+
   void joinGame(String gameId) {
 
   }

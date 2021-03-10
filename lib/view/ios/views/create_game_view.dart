@@ -32,7 +32,7 @@ class CreateGameView extends StatelessWidget {
                   ),
                   Spacer(flex: 4,),
                   Expanded(
-                    flex: 284,
+                    flex: 281,
                     child: GameSettingsCard(),
                   ),
                   Spacer(flex: 45,),
