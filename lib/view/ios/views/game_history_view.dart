@@ -58,7 +58,6 @@ class GameHistoryView extends StatelessWidget {
                               ),
                             );
                           } else if (snapshot.hasError) {
-                            // TODO generic feedback eng, ger
                             return Center(
                               child: Text(AppLocalizations.of(context).noGamesFound),
                             );
@@ -105,7 +104,8 @@ class GameHistoryCard extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              game.won ? AppImages.win : AppImages.defeat,
+              // TODO won
+              true ? AppImages.win : AppImages.defeat,
             ),
           ),
           Expanded(
@@ -121,7 +121,9 @@ class GameHistoryCard extends StatelessWidget {
                     ),
                     Spacer(),
                     AutoSizeText(
-                      game.average.toString(),
+                      // TODO read owner average
+                      'Average TODO',
+                      //game.average.toString(),
                       maxLines: 1,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
@@ -141,7 +143,8 @@ class GameHistoryCard extends StatelessWidget {
                     ),
                     Spacer(),
                     AutoSizeText(
-                      game.checkoutPercentage.toString(),
+                      // TODO read owner Checkout%
+                      'Checkout% TODO',
                       maxLines: 1,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),

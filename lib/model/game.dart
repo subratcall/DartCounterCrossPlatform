@@ -16,14 +16,9 @@ class Game {
   int size;
   int startingPoints;
 
-  String winner;
-
   List<Player> players;
 
-  List<Set> sets;
-
-  Game(this.date, this.status, this.mode, this.type, this.size, this.startingPoints, this.winner,
-      this.players, this.sets);
+  Game(this.date, this.status, this.mode, this.type, this.size, this.startingPoints, this.players);
 
   Game.dummy({
     this.status = GameStatus.PENDING,
@@ -31,10 +26,8 @@ class Game {
     this.type = GameType.SETS,
     this.size = 7,
     this.startingPoints = 501,
-    this.winner,
   }) : date = DateTime.now(),
-        players = [Player.dummy(name: 'Larry'), Player.dummy(name: 'Jeffry')],
-        sets =[Set.dummy(),Set.dummy()];
+        players = [Player.dummy(name: 'Larry'), Player.dummy(name: 'Jeffry')];
 
   Game.fromJson(Map<String, dynamic> json) {
     date = DateTime.parse(json['date']);
@@ -43,9 +36,7 @@ class Game {
     type = json['type'];
     size = json['size'];
     startingPoints = json['startingPoints'];
-    winner = json['winner'];
     players = json['players'] != null ? json['players'].map((value) => Player.fromJson(value)).toList() : null;
-    sets = json['sets'] != null ? json['sets'].map((value) => Set.fromJson(value)).toList() : null;
   }
 
   Map<String, dynamic> toJson() => {
@@ -55,12 +46,27 @@ class Game {
     'type' : type == GameType.LEGS ? 'legs' : 'sets',
     'size' : size,
     'startingPoints' : startingPoints,
-    'winner' : winner,
     'players' : players != null ? players.map((player) => player.toJson()).toList() : null,
-    'sets' : sets != null ? sets.map((set) => set.toJson()).toList() : null,
   };
 
-  // TODO
-  String get description => 'TODO description';
+  String get description {
+    String modeString = mode == GameMode.FIRST_TO ? 'First to' : 'Best of';
+    String typeString;
+    if(type == GameType.LEGS) {
+      if(size == 1) {
+        typeString = 'Leg';
+      } else {
+        typeString = 'Legs';
+      }
+    } else {
+      if(size == 1) {
+        typeString = 'Set';
+      } else {
+        typeString = 'Sets';
+      }
+    }
+
+    return modeString + ' ${size.toString()} ' + typeString;
+  }
 
 }

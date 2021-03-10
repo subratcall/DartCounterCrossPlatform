@@ -1,3 +1,4 @@
+import 'package:dart_counter/model/advanced_stats.dart';
 import 'package:dart_counter/model/throw.dart';
 
 class Leg {
@@ -15,7 +16,5 @@ class Leg {
   Map<String, dynamic> toJson() => {
     'throws' : throws != null ? throws.map((t) => t.toJson()).toList() : null,
   };
-
-
   
 }

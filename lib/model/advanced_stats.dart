@@ -69,4 +69,20 @@ class AdvancedStats {
     hundredEighty = json['hundredEighty'];
   }
 
+  Map<String, dynamic> toJson() => {
+    'firstNineAverage' : firstNineAverage,
+    'bestLegDarts' : bestLegDarts,
+    'bestLegAverage' : bestLegAverage,
+    'worstLegDarts' : worstLegDarts,
+    'averageDartsPerLeg' : averageDartsPerLeg,
+    'highestFinish' : highestFinish,
+    'fourtyPlus' : fourtyPlus,
+    'sixtyPlus' : sixtyPlus,
+    'eightyPlus' : eightyPlus,
+    'hundredPlus' : hundredPlus,
+    'hundredTwentyPlus' : hundredTwentyPlus,
+    'hundredFourtyPlus' : hundredFourtyPlus,
+    'hundredSixtyPlus' : hundredSixtyPlus,
+    'hundredEighty' : hundredEighty,
+  };
 }

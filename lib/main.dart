@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dart_counter/api/authentication_service.dart';
+import 'package:dart_counter/api/database_service.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/view/android/export.dart' as android;
@@ -14,9 +15,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'app_model.dart';
 
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
+  DatabaseService().insertDummyData('testUID');
   runApp(DartCounterApp());
 }
 

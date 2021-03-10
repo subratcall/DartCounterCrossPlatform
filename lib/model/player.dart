@@ -1,3 +1,5 @@
+import 'package:dart_counter/model/set.dart';
+
 import 'advanced_stats.dart';
 
 class Player {
@@ -11,6 +13,7 @@ class Player {
   double average;
   double checkoutPercentage;
   AdvancedStats advancedStats;
+  List<Set> setsList;
 
   Player(
       this.name,
@@ -22,7 +25,8 @@ class Player {
       this.dartsThrownThisLeg,
       this.average,
       this.checkoutPercentage,
-      this.advancedStats
+      this.advancedStats,
+      this.setsList
       );
 
   Player.dummy({
@@ -35,7 +39,7 @@ class Player {
     this.dartsThrownThisLeg = 18,
     this.average = 56.93,
     this.checkoutPercentage = 27.67,
-  }) : advancedStats = AdvancedStats.dummy();
+  }) : advancedStats = AdvancedStats.dummy(), setsList = [Set.dummy(), Set.dummy(), Set.dummy()];
 
   Player.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -48,6 +52,7 @@ class Player {
     average = json['average'];
     checkoutPercentage = json['checkoutPercentage'];
     advancedStats = AdvancedStats.fromJson(json['advancedStats']);
+    setsList = json['setsList'] != null ? json['setsList'].map((value) => Set.fromJson(value)).toList() : null;
   }
 
   Map<String, dynamic> toJson() => {
@@ -60,7 +65,8 @@ class Player {
     'dartsThrownThisLeg' : dartsThrownThisLeg,
     'average' : average,
     'checkoutPercentage' : checkoutPercentage,
-    'advancedStats' : advancedStats,
+    'advancedStats' : advancedStats.toJson(),
+    'setsList' : setsList != null ? setsList.map((set) => set.toJson()).toList() : null,
   };
 
 }
