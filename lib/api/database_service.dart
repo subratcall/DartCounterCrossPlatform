@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_counter/model/carrer_stats.dart';
@@ -7,11 +8,13 @@ import 'package:dart_counter/model/friend_request.dart';
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/model/invitation.dart';
 import 'package:dart_counter/model/profile.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final FirebaseFirestore _firestore;
+  final FirebaseStorage _firebaseStorage;
 
-  DatabaseService() : this._firestore = FirebaseFirestore.instance;
+  DatabaseService() : this._firestore = FirebaseFirestore.instance, this._firebaseStorage = FirebaseStorage.instance;
 
   /// IN
   Stream<Profile> profile(String uid) {
@@ -53,6 +56,13 @@ class DatabaseService {
   void createUser(String uid, String username) {
     Profile profile = Profile(null, username, CarrerStats());
     _firestore.collection('profiles').doc(uid).set(profile.toJson());
+  }
+
+  void updatePhotoUrl(String uid, File data) async {
+    var ref = _firebaseStorage.ref('profilePhotos/$uid');
+    await ref.putFile(data);
+    String photoUrl = await ref.getDownloadURL();
+    _firestore.collection('profiles').doc(uid).update({'photoUrl' : photoUrl}, );
   }
 
 

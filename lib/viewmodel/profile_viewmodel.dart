@@ -13,12 +13,10 @@ class ProfileViewModel extends ViewModel {
 
   Stream<Profile> profile() => _databaseService.profile(appModel.uid);
 
-  File pickedImage;
-
   void pickImage() async {
-    var i = await ImagePicker().getImage(source: ImageSource.gallery);
-    pickedImage = File(i.path);
-    notifyListeners();
+    var pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    // TODO update database
+    _databaseService.updatePhotoUrl(appModel.uid, File(pickedImage.path));
   }
 
 }

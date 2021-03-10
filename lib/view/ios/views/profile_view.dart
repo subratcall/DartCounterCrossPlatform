@@ -73,9 +73,8 @@ class ProfileViewSuccess extends StatelessWidget {
                                   child: Container(
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.circle,
-                                      image: profile.photoUrl != null ? DecorationImage(image: NetworkImage(profile.photoUrl))
-                                          : model.pickedImage == null ? DecorationImage(image: AssetImage(AppImages.photoPlaceholder))
-                                          : DecorationImage(image: FileImage(model.pickedImage)),
+                                      image: profile.photoUrl != null ? DecorationImage(image: NetworkImage(profile.photoUrl),)
+                                          : DecorationImage(image: AssetImage(AppImages.photoPlaceholder),),
                                     ),
                                   ),
                                 ),
