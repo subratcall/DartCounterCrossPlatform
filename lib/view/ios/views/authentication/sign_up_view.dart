@@ -145,6 +145,7 @@ class _SignUpViewState extends State<SignUpView> {
                                     model
                                         .onRegisterPressed(
                                         email: emailController.text,
+                                        username: usernameController.text,
                                         password: passwordController.text,
                                         passwordAgain: passwordAgainController.text)
                                         .catchError((error) {

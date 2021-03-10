@@ -1,10 +1,13 @@
+import 'package:dart_counter/api/database_service.dart';
 import 'package:dart_counter/app_errors.dart';
+import 'package:dart_counter/locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
 
   AuthenticationService() : this._firebaseAuth = FirebaseAuth.instance;
+
 
   Stream<User> get authStateChanged => _firebaseAuth.authStateChanges();
 
@@ -25,7 +28,6 @@ class AuthenticationService {
   Future<void> resetPassword({String email}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
-      return null;
     } on FirebaseAuthException catch (e) {
       print("${e.message} ${e.code}");
       if (e.code == 'network-request-failed') {
@@ -37,10 +39,11 @@ class AuthenticationService {
     }
   }
 
-  Future<void> signUp({String email, String password}) async {
+  Future<void> signUp({String email, String password, onSuccess(String uid)}) async {
     try {
+      // Try to create user
       await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-      return null;
+      onSuccess(_firebaseAuth.currentUser.uid);
     } on FirebaseAuthException catch (e) {
       print("${e.message} ${e.code}");
       if (e.code == 'network-request-failed') {

@@ -1,4 +1,5 @@
 import 'package:dart_counter/api/authentication_service.dart';
+import 'package:dart_counter/api/database_service.dart';
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
@@ -8,6 +9,7 @@ enum SignUpViewState { idle, loading }
 
 class SignUpViewModel extends ViewModel<SignUpViewState> {
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final DatabaseService _databaseService = locator<DatabaseService>();
 
   bool _emailIsValid = true;
   bool _usernameIsValid = true;
@@ -27,7 +29,10 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
     if (emailIsValid && usernameIsValid && passwordIsValid && passwordAgainIsValid) {
       viewState = SignUpViewState.loading;
       try {
-        await _authenticationService.signUp(email: email, password: password);
+        await _authenticationService.signUp(email: email, password: password, onSuccess: (uid) {
+          _databaseService.createUser(uid, username);
+        });
+
         viewState = SignUpViewState.idle;
       } on Error catch (e) {
         viewState = SignUpViewState.idle;

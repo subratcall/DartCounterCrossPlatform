@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_counter/model/carrer_stats.dart';
 import 'package:dart_counter/model/friend.dart';
 import 'package:dart_counter/model/friend_request.dart';
 import 'package:dart_counter/model/game.dart';
@@ -49,6 +50,14 @@ class DatabaseService {
 
   /// OUT
 
+  void createUser(String uid, String username) {
+    Profile profile = Profile(null, username, CarrerStats());
+    _firestore.collection('profiles').doc(uid).set(profile.toJson());
+  }
+
+
+
+
   void insertDummyData(String uid) async {
     Profile profile = Profile.dummy();
     List<Invitation> invitations = [Invitation.dummy(), Invitation.dummy(), Invitation.dummy()];
@@ -61,5 +70,6 @@ class DatabaseService {
     _firestore.collection('friends').doc(uid).set({'data': friends.map((e) => e.toJson()).toList()});
     _firestore.collection('friendRequests').doc(uid).set({'data': friendRequests.map((e) => e.toJson()).toList()});
     _firestore.collection('gameHistory').doc(uid).set({'data': games.map((e) => e.toJson()).toList()});
+    _firestore.collection('isOnline').doc(uid).set({'data': true});
   }
 }

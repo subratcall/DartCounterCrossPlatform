@@ -12,7 +12,6 @@ class Game {
   GameStatus status;
   GameMode mode;
   GameType type;
-
   int size;
   int startingPoints;
 

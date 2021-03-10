@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
@@ -10,6 +12,7 @@ import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/profile_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileView extends StatelessWidget {
   @override
@@ -21,17 +24,25 @@ class ProfileView extends StatelessWidget {
         ),
         child: StreamBuilder(
           stream: model.profile(),
-          builder: (context, snapshot) => snapshot.hasData ? ProfileViewSuccess(snapshot.data) : ProfileViewError(),
+          builder: (context, snapshot) =>
+              snapshot.hasData ? ProfileViewSuccess(snapshot.data) : ProfileViewError(),
         ),
       ),
     );
   }
 }
 
-class ProfileViewSuccess extends StatelessWidget {
+class ProfileViewSuccess extends StatefulWidget {
   final Profile profile;
 
   ProfileViewSuccess(this.profile);
+
+  @override
+  _ProfileViewSuccessState createState() => _ProfileViewSuccessState();
+}
+
+class _ProfileViewSuccessState extends State<ProfileViewSuccess> {
+  File image;
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +73,30 @@ class ProfileViewSuccess extends StatelessWidget {
                                 flex: 13,
                               ),
                               Expanded(
-                                child: Image.asset(AppImages.photoPlaceholder),
+                                child: CupertinoButton(
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () async {
+                                    var pickedImage =
+                                        await ImagePicker().getImage(source: ImageSource.gallery);
+                                    setState(() {
+                                      image = File(pickedImage.path);
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: image == null ? DecorationImage(image: AssetImage(AppImages.photoPlaceholder)): DecorationImage(image: FileImage(image)),
+                                    ),
+
+                                  ),
+                                ),
                                 flex: 163,
                               ),
                               Spacer(
                                 flex: 17,
                               ),
                               AutoSizeText(
-                                profile.username,
+                                widget.profile.username,
                                 maxLines: 1,
                                 style: TextStyle(
                                   color: AppColors.white,
@@ -126,8 +153,10 @@ class ProfileViewSuccess extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                              child:
-                                  StatsCard(title: AppLocalizations.of(context).average, value: profile.carrerStats.average, trend: profile.carrerStats.averageTrend),
+                              child: StatsCard(
+                                  title: AppLocalizations.of(context).average,
+                                  value: widget.profile.carrerStats.average,
+                                  trend: widget.profile.carrerStats.averageTrend),
                               flex: 178,
                             ),
                             Spacer(
@@ -136,8 +165,8 @@ class ProfileViewSuccess extends StatelessWidget {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).checkoutPercentage,
-                                  value: profile.carrerStats.checkoutPercentage,
-                                  trend: profile.carrerStats.checkoutPercentageTrend),
+                                  value: widget.profile.carrerStats.checkoutPercentage,
+                                  trend: widget.profile.carrerStats.checkoutPercentageTrend),
                               flex: 178,
                             )
                           ],
@@ -152,14 +181,18 @@ class ProfileViewSuccess extends StatelessWidget {
                           children: [
                             Expanded(
                               child: StatsCard(
-                                  title: AppLocalizations.of(context).firstNine, value: profile.carrerStats.firstNine, trend: profile.carrerStats.firstNineTrend),
+                                  title: AppLocalizations.of(context).firstNine,
+                                  value: widget.profile.carrerStats.firstNine,
+                                  trend: widget.profile.carrerStats.firstNineTrend),
                               flex: 178,
                             ),
                             Spacer(
                               flex: 4,
                             ),
                             Expanded(
-                              child: StatsCard(title: AppLocalizations.of(context).games, value: profile.carrerStats.games),
+                              child: StatsCard(
+                                  title: AppLocalizations.of(context).games,
+                                  value: widget.profile.carrerStats.games),
                               flex: 178,
                             )
                           ],
@@ -173,14 +206,18 @@ class ProfileViewSuccess extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                              child: StatsCard(title: AppLocalizations.of(context).wins, value: profile.carrerStats.wins),
+                              child: StatsCard(
+                                  title: AppLocalizations.of(context).wins,
+                                  value: widget.profile.carrerStats.wins),
                               flex: 178,
                             ),
                             Spacer(
                               flex: 4,
                             ),
                             Expanded(
-                              child: StatsCard(title: AppLocalizations.of(context).defeats, value: profile.carrerStats.defeats),
+                              child: StatsCard(
+                                  title: AppLocalizations.of(context).defeats,
+                                  value: widget.profile.carrerStats.defeats),
                               flex: 178,
                             )
                           ],
@@ -244,16 +281,17 @@ class StatsCard extends StatelessWidget {
         children: [
           Spacer(),
           Visibility(
-            visible: trend != null,
-            child: Row(
-              children: [
-                Image.asset(
-                  trend == 'up' ? AppImages.trendUp : AppImages.trendDown,
-                ),
-                SizedBox(width: 8.0,),
-              ],
-            )
-          ),
+              visible: trend != null,
+              child: Row(
+                children: [
+                  Image.asset(
+                    trend == 'up' ? AppImages.trendUp : AppImages.trendDown,
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                ],
+              )),
           AutoSizeText(
             value.toString(),
             maxLines: 1,

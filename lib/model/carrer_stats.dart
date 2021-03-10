@@ -10,8 +10,8 @@ class CarrerStats {
   int wins;
   int defeats;
 
-  CarrerStats(this.average, this.averageTrend, this.checkoutPercentage, this.checkoutPercentageTrend, this.firstNine, this.firstNineTrend,
-      this.games, this.wins, this.defeats);
+  CarrerStats({this.average = 0.0, this.averageTrend, this.checkoutPercentage = 0.0, this.checkoutPercentageTrend, this.firstNine = 0.0, this.firstNineTrend,
+      this.games = 0, this.wins = 0, this.defeats = 0});
 
   CarrerStats.dummy() {
     average = 89.44;
