@@ -142,13 +142,7 @@ class ProfileButton extends StatelessWidget {
                   Expanded(
                     flex: 100,
                     child: CircleImage(
-                      profile.photoUrl != null
-                          ? DecorationImage(
-                              image: CachedNetworkImageProvider(profile.photoUrl),
-                            )
-                          : DecorationImage(
-                              image: AssetImage(AppImages.photoPlaceholder),
-                            ),
+                      profile.photoUrl != null ? CachedNetworkImageProvider(profile.photoUrl) : AssetImage(AppImages.photoPlaceholder)
                     ),
                   ),
                   Spacer(

@@ -63,72 +63,55 @@ class ProfileViewSuccess extends StatelessWidget {
                           child: Column(
                             children: [
                               Spacer(
-                                flex: 13,
+                                flex: 22,
                               ),
                               Expanded(
                                 child: Builder(
-                                  builder: (context) => Stack(
-                                    children: [
-                                      CupertinoButton(
-                                        padding: EdgeInsets.zero,
-                                        onPressed: () => showCupertinoModalPopup(
-                                          context: context,
-                                          builder: (context) => CupertinoActionSheet(
-                                            actions: [
-                                              CupertinoActionSheetAction(
-                                                child: Text(
-                                                  AppLocalizations.of(context).deletePhoto,
-                                                  style: TextStyle(color: CupertinoColors.systemRed),
-                                                ),
-                                                onPressed: () {
-                                                  model.onDeletePhotoPressed();
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                              CupertinoActionSheetAction(
-                                                child: Text(AppLocalizations.of(context).takePhoto),
-                                                onPressed: () {
-                                                  model.onTakePhotoPressed();
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                              CupertinoActionSheetAction(
-                                                child: Text(AppLocalizations.of(context).choosePhoto),
-                                                onPressed: () {
-                                                  model.onChoosePhotoPressed();
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            ],
-                                            cancelButton: CupertinoActionSheetAction(
-                                              child: Text(
-                                                AppLocalizations.of(context).cancel,
-                                                style: TextStyle(fontWeight: FontWeight.bold),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
+                                  builder: (context) => CupertinoButton(
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () => showCupertinoModalPopup(
+                                      context: context,
+                                      builder: (context) => CupertinoActionSheet(
+                                        actions: [
+                                          CupertinoActionSheetAction(
+                                            child: Text(
+                                              AppLocalizations.of(context).deletePhoto,
+                                              style: TextStyle(color: CupertinoColors.systemRed),
                                             ),
+                                            onPressed: () {
+                                              model.onDeletePhotoPressed();
+                                              Navigator.pop(context);
+                                            },
                                           ),
-                                        ),
-                                        child: CircleImage(
-                                          profile.photoUrl != null
-                                              ? DecorationImage(
-                                                  image: CachedNetworkImageProvider(profile.photoUrl),
-                                                )
-                                              : DecorationImage(
-                                                  image: AssetImage(AppImages.photoPlaceholder),
-                                                ),
+                                          CupertinoActionSheetAction(
+                                            child: Text(AppLocalizations.of(context).takePhoto),
+                                            onPressed: () {
+                                              model.onTakePhotoPressed();
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          CupertinoActionSheetAction(
+                                            child: Text(AppLocalizations.of(context).choosePhoto),
+                                            onPressed: () {
+                                              model.onChoosePhotoPressed();
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                        cancelButton: CupertinoActionSheetAction(
+                                          child: Text(
+                                            AppLocalizations.of(context).cancel,
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
                                         ),
                                       ),
-                                      Center(
-                                        child: Icon(
-                                          CupertinoIcons.camera,
-                                          color: AppColors.gray,
-                                          size: 25,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
+                                    child: CircleImage(
+                                        profile.photoUrl != null ? CachedNetworkImageProvider(profile.photoUrl) : AssetImage(AppImages.photoPlaceholder)
+                                    ),
                                   ),
                                 ),
                                 flex: 163,
