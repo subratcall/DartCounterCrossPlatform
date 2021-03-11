@@ -6,9 +6,22 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 class CreateGameViewModel extends ViewModel {
   final PlayingService _playingService = locator<PlayingService>();
 
+  GameSnapshot _currentSnapshot;
+
+  CreateGameViewModel() {
+    subscriptions.add(_playingService.gameSnapshots.listen((snapshot) {
+      currentSnapshot = snapshot;
+    }));
+  }
+
   void onStartGamePressed() {
     // TODO
   }
 
-  Stream<GameSnapshot> get gameSnapshots => _playingService.gameSnapshots;
+  GameSnapshot get currentSnapshot => _currentSnapshot;
+
+  set currentSnapshot(GameSnapshot snapshot) {
+    _currentSnapshot = snapshot;
+    notifyListeners();
+  }
 }

@@ -38,61 +38,59 @@ class InGameView extends StatelessWidget {
               ),
             ),
           ),
-          child: StreamBuilder(
-              stream: model.gameSnapshots,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  GameSnapshot game = snapshot.data;
-                  return Row(
-                    children: [
-                      Spacer(
-                        flex: 8,
-                      ),
-                      Expanded(
-                        flex: 359,
-                        child: Column(
-                          children: [
-                            Spacer(
-                              flex: 4,
-                            ),
-                            Expanded(
-                              flex: 318,
-                              child: PlayerWrapper(game.players),
-                            ),
-                            Spacer(
-                              flex: 4,
-                            ),
-                            Expanded(
-                              flex: 64,
-                              child: InputRow(
-                                onUndoPressed: () => model.onUndoPressed(),
-                                onPerformThrowPressed: () => model.onPerformThrowPressed(),
-                                points: model.inputPoints,
-                              ),
-                            ),
-                            Spacer(
-                              flex: 4,
-                            ),
-                            Expanded(
-                              flex: 289,
-                              child: KeyBoard(
-                                onKeyPressed: (key) => model.onKeyPressed(key),
-                              ),
-                            ),
-                            Spacer(
-                              flex: 4,
-                            ),
-                          ],
+          child: Builder(
+            builder: (context) {
+              GameSnapshot game = model.currentSnapshot;
+              return game != null ? Row(
+                children: [
+                  Spacer(
+                    flex: 8,
+                  ),
+                  Expanded(
+                    flex: 359,
+                    child: Column(
+                      children: [
+                        Spacer(
+                          flex: 4,
                         ),
-                      ),
-                      Spacer(
-                        flex: 8,
-                      ),
-                    ],
-                  );
-                }
-                return LoadingView();
-              })),
+                        Expanded(
+                          flex: 318,
+                          child: PlayerWrapper(game.players),
+                        ),
+                        Spacer(
+                          flex: 4,
+                        ),
+                        Expanded(
+                          flex: 64,
+                          child: InputRow(
+                            onUndoPressed: () => model.onUndoPressed(),
+                            onPerformThrowPressed: () => model.onPerformThrowPressed(),
+                            points: model.inputPoints,
+                          ),
+                        ),
+                        Spacer(
+                          flex: 4,
+                        ),
+                        Expanded(
+                          flex: 289,
+                          child: KeyBoard(
+                            onKeyPressed: (key) => model.onKeyPressed(key),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 4,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(
+                    flex: 8,
+                  ),
+                ],
+              ) : LoadingView();
+            }
+          ),
+      ),
     );
   }
 }

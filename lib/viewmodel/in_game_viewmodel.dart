@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dart_counter/api/playing/offline/model/throw_validator.dart';
 import 'package:dart_counter/api/playing/playing_service.dart';
 import 'package:dart_counter/locator.dart';
@@ -6,11 +8,29 @@ import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class InGameViewModel extends ViewModel {
+
   final PlayingService _playingService = locator<PlayingService>();
 
-  Stream<GameSnapshot> get gameSnapshots => _playingService.gameSnapshots;
-
   int _inputPoints = 0;
+  GameSnapshot _currentSnapshot;
+
+  InGameViewModel() {
+    subscriptions.add(_playingService.gameSnapshots.listen((snapshot) {
+      currentSnapshot = snapshot;
+    }));
+  }
+
+  int get inputPoints => _inputPoints;
+  set inputPoints(int inputPoints) {
+    _inputPoints = inputPoints;
+    notifyListeners();
+  }
+
+  GameSnapshot get currentSnapshot => _currentSnapshot;
+  set currentSnapshot(GameSnapshot snapshot) {
+    _currentSnapshot = snapshot;
+    notifyListeners();
+  }
 
   void onUndoPressed() {}
 
@@ -84,13 +104,6 @@ class InGameViewModel extends ViewModel {
 
     if(newInputPoints == 0) return false;
     return ThrowValidator.isValidThrow(newInputPoints, pointsLeft);
-  }
-
-  int get inputPoints => _inputPoints;
-
-  set inputPoints(int inputPoints) {
-    _inputPoints = inputPoints;
-    notifyListeners();
   }
 
 }
