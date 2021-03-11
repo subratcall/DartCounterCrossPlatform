@@ -8,6 +8,7 @@ import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/model/invitation.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image/image.dart';
 
 class DatabaseService {
   final FirebaseFirestore _firestore;
@@ -63,9 +64,10 @@ class DatabaseService {
     _firestore.collection('profiles').doc(uid).set(profile.toJson());
   }
 
-  void updatePhoto(String uid, File data) async {
+  void updatePhoto(String uid, File rawData) async {
     var ref = _firebaseStorage.ref('profilePhotos/$uid');
-    await ref.putFile(data);
+    var thumbnail = copyResize(decodeImage(rawData.readAsBytesSync()), width: 120);
+    await ref.putData(encodePng(thumbnail), SettableMetadata(contentType: 'image/png'));
     String photoUrl = await ref.getDownloadURL();
     _firestore.collection('profiles').doc(uid).update(
       {'photoUrl': photoUrl},
