@@ -237,7 +237,7 @@ class PlayerBig extends StatelessWidget {
         Radius.circular(16.0),
       ),
       child: Container(
-        color: AppColors.black,
+        color: player.currentTurn ? AppColors.black2 : AppColors.black,
         child: Row(
           children: [
             Spacer(flex: 30),
@@ -350,7 +350,7 @@ class PlayerBig extends StatelessWidget {
                   ),
                   Spacer(flex: 13,),
                   Expanded(
-                    flex: 10,
+                    flex: 15,
                     child: Row(
                       children: [
                         Spacer(flex: 135,),
@@ -459,7 +459,7 @@ class PlayerMedium extends StatelessWidget {
         Radius.circular(16.0),
       ),
       child: Container(
-        color: AppColors.black,
+        color: player.currentTurn ? AppColors.black2 : AppColors.black,
         child: Row(
           children: [
             Spacer(flex: 10),
@@ -691,7 +691,7 @@ class PlayerSmall extends StatelessWidget {
         Radius.circular(16.0),
       ),
       child: Container(
-        color: AppColors.black,
+        color: player.currentTurn ? AppColors.black2 : AppColors.black,
         child: Row(
           children: [
             Spacer(flex: 8),
@@ -946,11 +946,11 @@ class InputRow extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: Container(
-              color: AppColors.gray,
+              color: AppColors.black2,
               child: Center(
                 child: AutoSizeText(
                   points.toString(),
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: AppColors.black),
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: AppColors.white),
                 ),
               ),
             ),
