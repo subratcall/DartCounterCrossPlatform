@@ -77,8 +77,8 @@ class InGameViewModel extends ViewModel {
 
   bool _digitIsValid(int newDigit) {
     // TODO read current gamesnapshot from stream
-    GameSnapshot game = GameSnapshot.seed(Status.RUNNING);
-    int pointsLeft = 180;
+    GameSnapshot game = GameSnapshot.seed(Status.running);
+    int pointsLeft = game.currentTurn.pointsLeft;
 
     int newInputPoints = int.parse(inputPoints.toString() + newDigit.toString());
 

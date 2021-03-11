@@ -8,9 +8,7 @@ class PlayingService {
 
   bool _online;
 
-  // TODO remove dummy data;
-
-  Stream<GameSnapshot> get gameSnapshots => Stream.periodic(Duration(seconds: 2), (x) => GameSnapshot.seed(Status.RUNNING));
+  Stream<GameSnapshot> get gameSnapshots => Stream.periodic(Duration(seconds: 2), (x) => GameSnapshot.seed(Status.running));
 
   bool get online => _online;
 
