@@ -7,7 +7,6 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 enum SignInViewState { idle, loading }
 
 class SignInViewModel extends ViewModel<SignInViewState> {
-
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
   SignInViewModel() {
@@ -27,5 +26,4 @@ class SignInViewModel extends ViewModel<SignInViewState> {
       throw e;
     }
   }
-
 }

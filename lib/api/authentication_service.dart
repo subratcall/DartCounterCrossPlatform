@@ -1,13 +1,10 @@
-import 'package:dart_counter/api/database_service.dart';
 import 'package:dart_counter/app_errors.dart';
-import 'package:dart_counter/locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
 
   AuthenticationService() : this._firebaseAuth = FirebaseAuth.instance;
-
 
   Stream<User> get authStateChanged => _firebaseAuth.authStateChanges();
 

@@ -1,5 +1,4 @@
 class AdvancedStats {
-
   double firstNineAverage;
   int bestLegDarts;
   double bestLegAverage;
@@ -31,11 +30,10 @@ class AdvancedStats {
       this.hundredTwentyPlus,
       this.hundredFourtyPlus,
       this.hundredSixtyPlus,
-      this.hundredEighty
-      );
+      this.hundredEighty);
 
   AdvancedStats.dummy(
-  {this.firstNineAverage = 56.5,
+      {this.firstNineAverage = 56.5,
       this.bestLegDarts = 14,
       this.bestLegAverage = 107.51,
       this.worstLegDarts = 30,
@@ -49,8 +47,7 @@ class AdvancedStats {
       this.hundredTwentyPlus = 1,
       this.hundredFourtyPlus = 5,
       this.hundredSixtyPlus = 2,
-      this.hundredEighty = 1}
-      );
+      this.hundredEighty = 1});
 
   AdvancedStats.fromJson(Map<String, dynamic> json) {
     firstNineAverage = json['firstNineAverage'];
@@ -70,19 +67,19 @@ class AdvancedStats {
   }
 
   Map<String, dynamic> toJson() => {
-    'firstNineAverage' : firstNineAverage,
-    'bestLegDarts' : bestLegDarts,
-    'bestLegAverage' : bestLegAverage,
-    'worstLegDarts' : worstLegDarts,
-    'averageDartsPerLeg' : averageDartsPerLeg,
-    'highestFinish' : highestFinish,
-    'fourtyPlus' : fourtyPlus,
-    'sixtyPlus' : sixtyPlus,
-    'eightyPlus' : eightyPlus,
-    'hundredPlus' : hundredPlus,
-    'hundredTwentyPlus' : hundredTwentyPlus,
-    'hundredFourtyPlus' : hundredFourtyPlus,
-    'hundredSixtyPlus' : hundredSixtyPlus,
-    'hundredEighty' : hundredEighty,
-  };
+        'firstNineAverage': firstNineAverage,
+        'bestLegDarts': bestLegDarts,
+        'bestLegAverage': bestLegAverage,
+        'worstLegDarts': worstLegDarts,
+        'averageDartsPerLeg': averageDartsPerLeg,
+        'highestFinish': highestFinish,
+        'fourtyPlus': fourtyPlus,
+        'sixtyPlus': sixtyPlus,
+        'eightyPlus': eightyPlus,
+        'hundredPlus': hundredPlus,
+        'hundredTwentyPlus': hundredTwentyPlus,
+        'hundredFourtyPlus': hundredFourtyPlus,
+        'hundredSixtyPlus': hundredSixtyPlus,
+        'hundredEighty': hundredEighty,
+      };
 }

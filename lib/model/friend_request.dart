@@ -1,5 +1,4 @@
 class FriendRequest {
-
   DateTime date;
   String usernameFrom;
 
@@ -16,7 +15,7 @@ class FriendRequest {
   }
 
   Map<String, dynamic> toJson() => {
-    'date' : date.toIso8601String(),
-    'usernameFrom' : usernameFrom,
-  };
+        'date': date.toIso8601String(),
+        'usernameFrom': usernameFrom,
+      };
 }

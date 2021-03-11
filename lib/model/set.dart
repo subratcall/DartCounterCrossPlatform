@@ -1,7 +1,6 @@
 import 'package:dart_counter/model/leg.dart';
 
 class Set {
-
   List<Leg> legs;
 
   Set(this.legs);
@@ -13,7 +12,6 @@ class Set {
   }
 
   Map<String, dynamic> toJson() => {
-    'legs' : legs != null ? legs.map((leg) => leg.toJson()).toList() : null,
-  };
-
+        'legs': legs != null ? legs.map((leg) => leg.toJson()).toList() : null,
+      };
 }

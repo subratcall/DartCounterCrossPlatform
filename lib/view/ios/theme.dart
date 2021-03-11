@@ -2,12 +2,11 @@ import 'package:dart_counter/assets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class Theme {
-
   static CupertinoThemeData get theme {
     return CupertinoThemeData(
-        primaryColor: AppColors.black,
-        primaryContrastingColor: AppColors.white,
-        scaffoldBackgroundColor: AppColors.white,
+      primaryColor: AppColors.black,
+      primaryContrastingColor: AppColors.white,
+      scaffoldBackgroundColor: AppColors.white,
     );
   }
 
@@ -20,5 +19,4 @@ class Theme {
   static CupertinoThemeData get darkTheme {
     return CupertinoThemeData();
   }
-
 }

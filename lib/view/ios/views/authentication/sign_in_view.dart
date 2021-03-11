@@ -116,10 +116,12 @@ class _SignInViewState extends State<SignInView> {
                                       };
 
                                       model
-                                          .onSignInPressed(email: emailController.text, password: passwordController.text)
+                                          .onSignInPressed(
+                                              email: emailController.text, password: passwordController.text)
                                           .catchError((error) {
                                         if (error is InvalidEmailAddressOrPasswordError) {
-                                          Toast.showToast(errorMessages['errorInvalidEmailAddressOrPassword']);
+                                          Toast.showToast(
+                                              errorMessages['errorInvalidEmailAddressOrPassword']);
                                         } else {
                                           Toast.showToast(errorMessages['errorNetwork']);
                                         }
@@ -158,15 +160,15 @@ class _SignInViewState extends State<SignInView> {
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Builder(
-                                        builder: (context) => SocialMediaButton(
-                                          type: SocialMediaButtonType.facebook,
-                                          onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
-                                            expand: true,
-                                            context: context,
-                                            backgroundColor: AppColors.transparent,
-                                            builder: (context) => SignInFacebookView(),
-                                          ),
+                                      builder: (context) => SocialMediaButton(
+                                        type: SocialMediaButtonType.facebook,
+                                        onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                                          expand: true,
+                                          context: context,
+                                          backgroundColor: AppColors.transparent,
+                                          builder: (context) => SignInFacebookView(),
                                         ),
+                                      ),
                                     ),
                                     Builder(
                                       builder: (context) => SocialMediaButton(
@@ -200,8 +202,8 @@ class _SignInViewState extends State<SignInView> {
                               Flexible(
                                 child: LinkButton(
                                   text: AppLocalizations.of(context).registerNow,
-                                  onPressed: () =>
-                                      widget.pageController.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.easeIn),
+                                  onPressed: () => widget.pageController.animateToPage(1,
+                                      duration: Duration(milliseconds: 500), curve: Curves.easeIn),
                                 ),
                                 flex: 17,
                               ),

@@ -1,5 +1,3 @@
 class AppModel {
-
   String uid;
-
 }

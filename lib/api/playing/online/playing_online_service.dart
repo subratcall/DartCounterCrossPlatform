@@ -1,63 +1,33 @@
 class PlayingOnlineService {
-
   static final PlayingOnlineService instance = PlayingOnlineService._();
 
   PlayingOnlineService._();
 
-  Future<bool> connect() {
+  Future<bool> connect() {}
 
-  }
+  Future<bool> disconnect() {}
 
-  Future<bool> disconnect() {
+  void createGame() {}
 
-  }
+  void changeGameConfig() {}
 
-  void createGame() {
+  void joinGame(String gameId) {}
 
-  }
+  void toggleMode() {}
 
-  void changeGameConfig() {
+  void setSize(int size) {}
 
-  }
+  void toggleType() {}
 
-  void joinGame(String gameId) {
+  void setStartingPoints(int startingPoints) {}
 
-  }
+  bool addPlayer() {}
 
-  void toggleMode() {
+  void removePlayer(int index) {}
 
-  }
+  void startGame() {}
 
-  void setSize(int size) {
+  void performThrow(int points, int dartsThrown, int dartsOnDouble) {}
 
-  }
-
-  void toggleType() {
-
-  }
-
-  void setStartingPoints(int startingPoints) {
-
-  }
-
-  bool addPlayer()  {
-
-  }
-
-  void removePlayer(int index) {
-
-  }
-
-  void startGame() {
-
-  }
-
-  void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-
-  }
-
-  void undoThrow() {
-
-  }
-
+  void undoThrow() {}
 }

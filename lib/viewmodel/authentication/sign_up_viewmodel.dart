@@ -20,7 +20,8 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
     viewState = SignUpViewState.idle;
   }
 
-  Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain}) async {
+  Future<void> onRegisterPressed(
+      {String email, String username, String password, String passwordAgain}) async {
     emailIsValid = EmailValidator.validate(email);
     usernameIsValid = UsernameValidator.validate(username);
     passwordIsValid = PasswordValidator.validate(password);
@@ -29,9 +30,12 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
     if (emailIsValid && usernameIsValid && passwordIsValid && passwordAgainIsValid) {
       viewState = SignUpViewState.loading;
       try {
-        await _authenticationService.signUp(email: email, password: password, onSuccess: (uid) {
-          _databaseService.createUser(uid, username);
-        });
+        await _authenticationService.signUp(
+            email: email,
+            password: password,
+            onSuccess: (uid) {
+              _databaseService.createUser(uid, username);
+            });
 
         viewState = SignUpViewState.idle;
       } on Error catch (e) {

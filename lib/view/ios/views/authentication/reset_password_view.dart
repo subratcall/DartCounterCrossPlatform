@@ -72,7 +72,9 @@ class _ResetPasswordViewIdleState extends State<ResetPasswordViewIdle> {
           ),
           child: Row(
             children: [
-              Spacer(flex: 38,),
+              Spacer(
+                flex: 38,
+              ),
               Expanded(
                 flex: 299,
                 child: Column(
@@ -163,7 +165,9 @@ class _ResetPasswordViewIdleState extends State<ResetPasswordViewIdle> {
                   ],
                 ),
               ),
-              Spacer(flex: 38,),
+              Spacer(
+                flex: 38,
+              ),
             ],
           ),
         ),
@@ -184,7 +188,9 @@ class ResetPasswordViewSuccess extends StatelessWidget {
     return View(
       child: Row(
         children: [
-          Spacer(flex: 38,),
+          Spacer(
+            flex: 38,
+          ),
           Expanded(
             flex: 299,
             child: Column(
@@ -259,7 +265,9 @@ class ResetPasswordViewSuccess extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(flex: 38,),
+          Spacer(
+            flex: 38,
+          ),
         ],
       ),
     );

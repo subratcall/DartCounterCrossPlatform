@@ -1,5 +1,4 @@
 class CarrerStats {
-
   double average;
   String averageTrend;
   double checkoutPercentage;
@@ -10,8 +9,16 @@ class CarrerStats {
   int wins;
   int defeats;
 
-  CarrerStats({this.average = 0.0, this.averageTrend, this.checkoutPercentage = 0.0, this.checkoutPercentageTrend, this.firstNine = 0.0, this.firstNineTrend,
-      this.games = 0, this.wins = 0, this.defeats = 0});
+  CarrerStats(
+      {this.average = 0.0,
+      this.averageTrend,
+      this.checkoutPercentage = 0.0,
+      this.checkoutPercentageTrend,
+      this.firstNine = 0.0,
+      this.firstNineTrend,
+      this.games = 0,
+      this.wins = 0,
+      this.defeats = 0});
 
   CarrerStats.dummy() {
     average = 89.44;
@@ -38,14 +45,14 @@ class CarrerStats {
   }
 
   Map<String, dynamic> toJson() => {
-    'average' : average,
-    'averageTrend' : averageTrend,
-    'checkoutPercentage' : checkoutPercentage,
-    'checkoutPercentageTrend' : checkoutPercentageTrend,
-    'firstNine' : firstNine,
-    'firstNineTrend' : firstNineTrend,
-    'games' : games,
-    'wins' : wins,
-    'defeats' : defeats,
-  };
+        'average': average,
+        'averageTrend': averageTrend,
+        'checkoutPercentage': checkoutPercentage,
+        'checkoutPercentageTrend': checkoutPercentageTrend,
+        'firstNine': firstNine,
+        'firstNineTrend': firstNineTrend,
+        'games': games,
+        'wins': wins,
+        'defeats': defeats,
+      };
 }

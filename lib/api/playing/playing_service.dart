@@ -3,7 +3,6 @@ import 'package:dart_counter/api/playing/online/playing_online_service.dart';
 import 'package:dart_counter/model/game.dart';
 
 class PlayingService {
-
   final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
   final PlayingOnlineService _playingOnlineService = PlayingOnlineService.instance;
 
@@ -16,13 +15,13 @@ class PlayingService {
     Game.dummy(mode: GameMode.BEST_OF, size: 99, type: GameType.LEGS)
   ];
 
-  Stream<Game> get games => Stream.periodic(Duration(seconds: 2), (x) => dummyData[x%dummyData.length]);
+  Stream<Game> get games => Stream.periodic(Duration(seconds: 2), (x) => dummyData[x % dummyData.length]);
 
   bool get online => _online;
 
   /// must call this method before a game TODO
   Future<bool> start([bool online = false]) async {
-    if(online) {
+    if (online) {
       _playingOnlineService.connect();
     }
     this._online = online;
@@ -30,14 +29,13 @@ class PlayingService {
 
   /// call this method after a game TODO
   Future<bool> finish() {
-    if(online) {
+    if (online) {
       _playingOnlineService.disconnect();
     }
   }
 
-
   void createGame() {
-    if(online) {
+    if (online) {
       _playingOnlineService.createGame();
     } else {
       _playingOfflineService.createGame();
@@ -45,7 +43,7 @@ class PlayingService {
   }
 
   void changeGameConfig() {
-    if(online) {
+    if (online) {
       _playingOnlineService.changeGameConfig();
     } else {
       _playingOfflineService.changeGameConfig();
@@ -53,7 +51,7 @@ class PlayingService {
   }
 
   void joinGame(String gameId) {
-    if(online) {
+    if (online) {
       _playingOnlineService.joinGame(gameId);
     } else {
       _playingOfflineService.joinGame(gameId);
@@ -61,7 +59,7 @@ class PlayingService {
   }
 
   void toggleMode() {
-    if(online) {
+    if (online) {
       _playingOnlineService.toggleMode();
     } else {
       _playingOfflineService.toggleMode();
@@ -69,7 +67,7 @@ class PlayingService {
   }
 
   void setSize(int size) {
-    if(online) {
+    if (online) {
       _playingOnlineService.setSize(size);
     } else {
       _playingOfflineService.setSize(size);
@@ -77,7 +75,7 @@ class PlayingService {
   }
 
   void toggleType() {
-    if(online) {
+    if (online) {
       _playingOnlineService.toggleType();
     } else {
       _playingOfflineService.toggleType();
@@ -85,23 +83,23 @@ class PlayingService {
   }
 
   void setStartingPoints(int startingPoints) {
-    if(online) {
+    if (online) {
       _playingOnlineService.setStartingPoints(startingPoints);
     } else {
       _playingOfflineService.setStartingPoints(startingPoints);
     }
   }
 
-  bool addPlayer()  {
-    if(online) {
+  bool addPlayer() {
+    if (online) {
       _playingOnlineService.addPlayer();
     } else {
-    _playingOfflineService.addPlayer();
+      _playingOfflineService.addPlayer();
     }
   }
 
   void removePlayer(int index) {
-    if(online) {
+    if (online) {
       _playingOnlineService.removePlayer(index);
     } else {
       _playingOfflineService.removePlayer(index);
@@ -109,7 +107,7 @@ class PlayingService {
   }
 
   void startGame() {
-    if(online) {
+    if (online) {
       _playingOnlineService.startGame();
     } else {
       _playingOfflineService.startGame();
@@ -117,7 +115,7 @@ class PlayingService {
   }
 
   void performThrow(int points, {int dartsThrown = 3, int dartsOnDouble = 0}) {
-    if(online) {
+    if (online) {
       _playingOnlineService.performThrow(points, dartsThrown, dartsOnDouble);
     } else {
       _playingOfflineService.performThrow(points, dartsThrown, dartsOnDouble);
@@ -125,11 +123,10 @@ class PlayingService {
   }
 
   void undoThrow() {
-    if(online) {
+    if (online) {
       _playingOnlineService.undoThrow();
     } else {
       _playingOfflineService.undoThrow();
     }
   }
-
 }

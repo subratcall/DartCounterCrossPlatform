@@ -1,56 +1,29 @@
 class PlayingOfflineService {
-
   static final PlayingOfflineService instance = PlayingOfflineService._();
 
   PlayingOfflineService._();
 
+  void createGame() {}
 
-  void createGame() {
+  void changeGameConfig() {}
 
-  }
+  void joinGame(String gameId) {}
 
-  void changeGameConfig() {
+  void toggleMode() {}
 
-  }
+  void setSize(int size) {}
 
-  void joinGame(String gameId) {
+  void toggleType() {}
 
-  }
+  void setStartingPoints(int startingPoints) {}
 
-  void toggleMode() {
+  bool addPlayer() {}
 
-  }
+  void removePlayer(int index) {}
 
-  void setSize(int size) {
+  void startGame() {}
 
-  }
+  void performThrow(int points, int dartsThrown, int dartsOnDouble) {}
 
-  void toggleType() {
-
-  }
-
-  void setStartingPoints(int startingPoints) {
-
-  }
-
-  bool addPlayer()  {
-
-  }
-
-  void removePlayer(int index) {
-
-  }
-
-  void startGame() {
-
-  }
-
-  void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-
-  }
-
-  void undoThrow() {
-
-  }
-
+  void undoThrow() {}
 }

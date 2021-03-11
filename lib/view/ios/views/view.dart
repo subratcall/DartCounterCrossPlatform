@@ -1,4 +1,3 @@
-import 'package:dart_counter/assets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -31,8 +30,8 @@ class View extends StatelessWidget {
               ),
               child: SizedBox(
                 width: width,
-                  height: height - paddingTop - navbarHeight - paddingBottom,
-                  child: child,
+                height: height - paddingTop - navbarHeight - paddingBottom,
+                child: child,
               ),
             ),
           ),

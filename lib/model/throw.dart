@@ -1,14 +1,9 @@
 class Throw {
-
   int points;
   int dartsThrown;
   int dartsOnDouble;
 
-  Throw({
-    this.points ,
-    this.dartsThrown = 3,
-    this.dartsOnDouble = 0
-  });
+  Throw({this.points, this.dartsThrown = 3, this.dartsOnDouble = 0});
 
   Throw.dummy() {
     points = 180;
@@ -23,10 +18,8 @@ class Throw {
   }
 
   Map<String, dynamic> toJson() => {
-    'points' : points,
-    'dartsThrown' : dartsThrown,
-    'dartsOnDouble' : dartsOnDouble,
-  };
-
-
+        'points': points,
+        'dartsThrown': dartsThrown,
+        'dartsOnDouble': dartsOnDouble,
+      };
 }

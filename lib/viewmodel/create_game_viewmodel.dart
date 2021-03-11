@@ -4,7 +4,6 @@ import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class CreateGameViewModel extends ViewModel {
-
   final PlayingService _playingService = locator<PlayingService>();
 
   void onStartGamePressed() {

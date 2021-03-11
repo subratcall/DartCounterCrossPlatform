@@ -47,5 +47,9 @@
   "errorLoadingProfile": "Error - Profil konnte nicht geladen werden.",
   "noGamesFound": "Keine Spiele gefunden",
 
-  "startGame": "Spiel starten"
+  "startGame": "Spiel starten",
+
+  "deletePhoto": "Foto löschen",
+  "takePhoto": "Foto aufnehmen",
+  "choosePhoto": "Foto auswählen"
 }

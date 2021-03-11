@@ -23,12 +23,16 @@ class GameHistoryView extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Spacer(flex: 8,),
+            Spacer(
+              flex: 8,
+            ),
             Expanded(
               flex: 259,
               child: Column(
                 children: [
-                  Spacer(flex: 4,),
+                  Spacer(
+                    flex: 4,
+                  ),
                   Expanded(
                     flex: 607,
                     child: FutureBuilder(
@@ -45,7 +49,7 @@ class GameHistoryView extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   child: SizedBox(
                                     width: MediaQuery.of(context).size.width,
-                                    height: (MediaQuery.of(context).size.height-34)/7,
+                                    height: (MediaQuery.of(context).size.height - 34) / 7,
                                     child: GameHistoryCard(games[index]),
                                   ),
                                   onPressed: () => Navigator.push(
@@ -66,11 +70,15 @@ class GameHistoryView extends StatelessWidget {
                           }
                         }),
                   ),
-                  Spacer(flex: 4,),
+                  Spacer(
+                    flex: 4,
+                  ),
                 ],
               ),
             ),
-            Spacer(flex: 8,),
+            Spacer(
+              flex: 8,
+            ),
           ],
         ),
       ),

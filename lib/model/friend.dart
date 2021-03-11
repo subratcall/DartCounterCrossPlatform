@@ -1,5 +1,4 @@
 class Friend {
-
   String username;
 
   Friend(this.username);
@@ -13,7 +12,6 @@ class Friend {
   }
 
   Map<String, dynamic> toJson() => {
-    'username' : username,
-  };
-
+        'username': username,
+      };
 }

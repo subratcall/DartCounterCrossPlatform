@@ -1,7 +1,6 @@
 import 'package:dart_counter/model/carrer_stats.dart';
 
 class Profile {
-
   String photoUrl;
   String username;
   CarrerStats carrerStats;
@@ -21,8 +20,8 @@ class Profile {
   }
 
   Map<String, dynamic> toJson() => {
-    'photoUrl' : photoUrl,
-    'username' : username,
-    'carrerStats' : carrerStats.toJson(),
-  };
+        'photoUrl': photoUrl,
+        'username': username,
+        'carrerStats': carrerStats.toJson(),
+      };
 }

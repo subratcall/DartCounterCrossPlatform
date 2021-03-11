@@ -78,7 +78,6 @@ class InGameView extends StatelessWidget {
 }
 
 class InputRow extends StatelessWidget {
-
   final InGameViewModel model;
 
   InputRow(this.model);
@@ -130,7 +129,6 @@ class InputRow extends StatelessWidget {
 }
 
 class KeyBoard extends StatelessWidget {
-
   final InGameViewModel model;
 
   KeyBoard(this.model);
@@ -147,7 +145,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '1',
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('1'),
                 ),
               ),
@@ -158,7 +156,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '2',
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('2'),
                 ),
               ),
@@ -169,7 +167,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '3',
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('3'),
                 ),
               ),
@@ -186,7 +184,7 @@ class KeyBoard extends StatelessWidget {
               Expanded(
                 flex: 117,
                 child: PrimaryTextButton(
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   text: '4',
                   onPressed: () => model.onKeyPressed('4'),
                 ),
@@ -197,7 +195,7 @@ class KeyBoard extends StatelessWidget {
               Expanded(
                 flex: 117,
                 child: PrimaryTextButton(
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   text: '5',
                   onPressed: () => model.onKeyPressed('5'),
                 ),
@@ -208,7 +206,7 @@ class KeyBoard extends StatelessWidget {
               Expanded(
                 flex: 117,
                 child: PrimaryTextButton(
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   text: '6',
                   onPressed: () => model.onKeyPressed('6'),
                 ),
@@ -227,7 +225,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '7',
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('7'),
                 ),
               ),
@@ -238,7 +236,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '8',
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('8'),
                 ),
               ),
@@ -249,7 +247,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '9',
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('9'),
                 ),
               ),
@@ -277,7 +275,7 @@ class KeyBoard extends StatelessWidget {
                         builder: (context) => CheckoutDetailsView(),
                       );
                     },
-                    borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   ),
                 ),
               ),
@@ -289,7 +287,7 @@ class KeyBoard extends StatelessWidget {
                 child: PrimaryTextButton(
                   text: '0',
                   onPressed: () => model.onKeyPressed('0'),
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 ),
               ),
               Spacer(
@@ -298,7 +296,7 @@ class KeyBoard extends StatelessWidget {
               Expanded(
                 flex: 117,
                 child: PrimaryButton(
-                  borderRadius:  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => model.onKeyPressed('erase'),
                   child: Icon(AppIcons.erase, size: 35),
                 ),

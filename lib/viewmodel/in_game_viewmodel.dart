@@ -4,21 +4,13 @@ import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class InGameViewModel extends ViewModel {
-
   final PlayingService _playingService = locator<PlayingService>();
 
   Stream<Game> get games => _playingService.games;
 
-  void onUndoPressed() {
+  void onUndoPressed() {}
 
-  }
+  void onPerformThrowPressed() {}
 
-  void onPerformThrowPressed() {
-
-  }
-
-  void onKeyPressed(String key) {
-
-  }
-
+  void onKeyPressed(String key) {}
 }

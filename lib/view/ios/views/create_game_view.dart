@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/action_button.dart';
 import 'package:dart_counter/view/ios/widgets/card.dart';
@@ -20,22 +19,30 @@ class CreateGameView extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Spacer(flex: 8,),
+            Spacer(
+              flex: 8,
+            ),
             Expanded(
               flex: 359,
               child: Column(
                 children: [
-                  Spacer(flex: 4,),
+                  Spacer(
+                    flex: 4,
+                  ),
                   Expanded(
                     flex: 132,
                     child: PlayersCard(),
                   ),
-                  Spacer(flex: 4,),
+                  Spacer(
+                    flex: 4,
+                  ),
                   Expanded(
                     flex: 281,
                     child: GameSettingsCard(),
                   ),
-                  Spacer(flex: 45,),
+                  Spacer(
+                    flex: 45,
+                  ),
                   Expanded(
                     flex: 75,
                     child: ActionButton(
@@ -46,11 +53,15 @@ class CreateGameView extends StatelessWidget {
                       },
                     ),
                   ),
-                  Spacer(flex: 141,),
+                  Spacer(
+                    flex: 141,
+                  ),
                 ],
               ),
             ),
-            Spacer(flex: 8,),
+            Spacer(
+              flex: 8,
+            ),
           ],
         ),
       ),
@@ -90,56 +101,86 @@ class GameSettingsCard extends StatelessWidget {
       ),
       body: Row(
         children: [
-          Spacer(flex: 25,),
+          Spacer(
+            flex: 25,
+          ),
           Expanded(
             flex: 328,
             child: Column(
               children: [
-                Spacer(flex: 13,),
-                AutoSizeText('Startwert', maxLines: 1,),
-                Spacer(flex: 11,),
+                Spacer(
+                  flex: 13,
+                ),
+                AutoSizeText(
+                  'Startwert',
+                  maxLines: 1,
+                ),
+                Spacer(
+                  flex: 11,
+                ),
                 Expanded(
                   flex: 50,
                   child: CupertinoSegmentedControl(
-                    children: {'0' : Text('301'), '1' : Text('501'), '2' : Text('701')},
+                    children: {'0': Text('301'), '1': Text('501'), '2': Text('701')},
                     onValueChanged: (v) => {},
                   ),
                 ),
-                Spacer(flex: 20,),
-                AutoSizeText('Spielmodus', maxLines: 1,),
-                Spacer(flex: 11,),
+                Spacer(
+                  flex: 20,
+                ),
+                AutoSizeText(
+                  'Spielmodus',
+                  maxLines: 1,
+                ),
+                Spacer(
+                  flex: 11,
+                ),
                 Expanded(
                   flex: 60,
                   child: CupertinoSegmentedControl(
-                    children: {'0' : Text('FIRST TO',), '1' : Text('BEST OF',)},
+                    children: {
+                      '0': Text(
+                        'FIRST TO',
+                      ),
+                      '1': Text(
+                        'BEST OF',
+                      )
+                    },
                     onValueChanged: (v) => {},
                   ),
                 ),
-                Spacer(flex: 8,),
+                Spacer(
+                  flex: 8,
+                ),
                 Expanded(
                   flex: 37,
-                    child: CupertinoPicker(
-                      children: [for(var i=1; i<=100; i+=1) Text(i.toString())],
-                      itemExtent: 25,
-                      onSelectedItemChanged: (item) => {},
-                    ),
+                  child: CupertinoPicker(
+                    children: [for (var i = 1; i <= 100; i += 1) Text(i.toString())],
+                    itemExtent: 25,
+                    onSelectedItemChanged: (item) => {},
+                  ),
                 ),
-                Spacer(flex: 8,),
+                Spacer(
+                  flex: 8,
+                ),
                 Expanded(
                   flex: 50,
                   child: CupertinoSegmentedControl(
-                    children: {'0' : Text('LEGS'), '1' : Text('SETS')},
+                    children: {'0': Text('LEGS'), '1': Text('SETS')},
                     onValueChanged: (v) => {},
                   ),
                 ),
-                Spacer(flex: 17,),
+                Spacer(
+                  flex: 17,
+                ),
               ],
             ),
           ),
-          Spacer(flex: 25,),
+          Spacer(
+            flex: 25,
+          ),
         ],
       ),
     );
   }
 }
-

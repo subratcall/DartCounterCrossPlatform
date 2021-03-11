@@ -1,5 +1,4 @@
 class Invitation {
-
   DateTime date;
   String usernameFrom;
   int gameCode;
@@ -19,8 +18,8 @@ class Invitation {
   }
 
   Map<String, dynamic> toJson() => {
-    'usernameFrom' : usernameFrom,
-    'gameCode' : gameCode,
-    'date' : date.toIso8601String(),
-  };
+        'usernameFrom': usernameFrom,
+        'gameCode': gameCode,
+        'date': date.toIso8601String(),
+      };
 }

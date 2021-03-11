@@ -3,8 +3,6 @@ import 'package:dart_counter/model/set.dart';
 import 'advanced_stats.dart';
 
 class Player {
-
-
   String name;
   int legs;
   int sets;
@@ -17,19 +15,8 @@ class Player {
   AdvancedStats advancedStats;
   List<Set> setsList;
 
-  Player(
-      this.name,
-      this.legs,
-      this.sets,
-      this.pointsLeft,
-      this.lastThrow,
-      this.finish,
-      this.dartsThrownThisLeg,
-      this.average,
-      this.checkoutPercentage,
-      this.advancedStats,
-      this.setsList
-      );
+  Player(this.name, this.legs, this.sets, this.pointsLeft, this.lastThrow, this.finish,
+      this.dartsThrownThisLeg, this.average, this.checkoutPercentage, this.advancedStats, this.setsList);
 
   Player.dummy({
     this.name = 'Larry',
@@ -41,7 +28,8 @@ class Player {
     this.dartsThrownThisLeg = 18,
     this.average = 56.93,
     this.checkoutPercentage = 27.67,
-  }) : advancedStats = AdvancedStats.dummy(), setsList = [Set.dummy(), Set.dummy(), Set.dummy()];
+  })  : advancedStats = AdvancedStats.dummy(),
+        setsList = [Set.dummy(), Set.dummy(), Set.dummy()];
 
   Player.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -54,21 +42,21 @@ class Player {
     average = json['average'];
     checkoutPercentage = json['checkoutPercentage'];
     advancedStats = AdvancedStats.fromJson(json['advancedStats']);
-    setsList = json['setsList'] != null ? json['setsList'].map((value) => Set.fromJson(value)).toList() : null;
+    setsList =
+        json['setsList'] != null ? json['setsList'].map((value) => Set.fromJson(value)).toList() : null;
   }
 
   Map<String, dynamic> toJson() => {
-    'name' : name,
-    'legs' : legs,
-    'sets' : sets,
-    'pointsLeft' : pointsLeft,
-    'lastThrow' : lastThrow,
-    'finish' : finish,
-    'dartsThrownThisLeg' : dartsThrownThisLeg,
-    'average' : average,
-    'checkoutPercentage' : checkoutPercentage,
-    'advancedStats' : advancedStats.toJson(),
-    'setsList' : setsList != null ? setsList.map((set) => set.toJson()).toList() : null,
-  };
-
+        'name': name,
+        'legs': legs,
+        'sets': sets,
+        'pointsLeft': pointsLeft,
+        'lastThrow': lastThrow,
+        'finish': finish,
+        'dartsThrownThisLeg': dartsThrownThisLeg,
+        'average': average,
+        'checkoutPercentage': checkoutPercentage,
+        'advancedStats': advancedStats.toJson(),
+        'setsList': setsList != null ? setsList.map((set) => set.toJson()).toList() : null,
+      };
 }

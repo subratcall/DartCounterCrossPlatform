@@ -140,6 +140,17 @@
     "description": "word"
   },
 
+   "@deletePhoto": {
+     "description": "word"
+   },
+  "@takePhoto": {
+    "description": "word"
+  },
+  "@choosePhoto": {
+    "description": "word"
+  },
+
+
 
   "aboutUs": "About Us",
   "cancel": "Cancel",
@@ -189,5 +200,9 @@
   "errorLoadingProfile": "Error loading profile",
   "noGamesFound": "No games found",
 
-  "startGame": "Start Game"
+  "startGame": "Start Game",
+
+  "deletePhoto": "Delete Photo",
+  "takePhoto": "Take Photo",
+  "choosePhoto": "Choose Photo"
 }

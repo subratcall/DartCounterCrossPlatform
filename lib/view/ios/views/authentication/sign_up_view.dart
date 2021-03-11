@@ -134,20 +134,25 @@ class _SignUpViewState extends State<SignUpView> {
                                   onPressed: () {
                                     // TODO this is only a workaround find a better solution for this e.g with global key
                                     var errorMessages = {
-                                      'errorInvalidEmailAddress': AppLocalizations.of(context).errorInvalidEmailAddress,
-                                      'errorInvalidUsername': AppLocalizations.of(context).errorInvalidUsername,
-                                      'errorInvalidPassword': AppLocalizations.of(context).errorInvalidPassword,
-                                      'errorPasswordNotEqualPasswordAgain': AppLocalizations.of(context).errorPasswordNotEqualPasswordAgain,
-                                      'errorEmailAddressAlreadyInUse': AppLocalizations.of(context).errorEmailAddressAlreadyInUse,
+                                      'errorInvalidEmailAddress':
+                                          AppLocalizations.of(context).errorInvalidEmailAddress,
+                                      'errorInvalidUsername':
+                                          AppLocalizations.of(context).errorInvalidUsername,
+                                      'errorInvalidPassword':
+                                          AppLocalizations.of(context).errorInvalidPassword,
+                                      'errorPasswordNotEqualPasswordAgain':
+                                          AppLocalizations.of(context).errorPasswordNotEqualPasswordAgain,
+                                      'errorEmailAddressAlreadyInUse':
+                                          AppLocalizations.of(context).errorEmailAddressAlreadyInUse,
                                       'errorNetwork': AppLocalizations.of(context).errorNetwork,
                                     };
 
                                     model
                                         .onRegisterPressed(
-                                        email: emailController.text,
-                                        username: usernameController.text,
-                                        password: passwordController.text,
-                                        passwordAgain: passwordAgainController.text)
+                                            email: emailController.text,
+                                            username: usernameController.text,
+                                            password: passwordController.text,
+                                            passwordAgain: passwordAgainController.text)
                                         .catchError((error) {
                                       if (error is InvalidEmailAddressError) {
                                         Toast.showToast(errorMessages['errorInvalidEmailAddress']);
@@ -173,8 +178,8 @@ class _SignUpViewState extends State<SignUpView> {
                               Flexible(
                                 child: LinkButton(
                                   text: AppLocalizations.of(context).login,
-                                  onPressed: () =>
-                                      widget.pageController.animateToPage(0, duration: Duration(milliseconds: 500), curve: Curves.easeIn),
+                                  onPressed: () => widget.pageController.animateToPage(0,
+                                      duration: Duration(milliseconds: 500), curve: Curves.easeIn),
                                 ),
                                 flex: 17,
                               ),
@@ -190,8 +195,7 @@ class _SignUpViewState extends State<SignUpView> {
                       ],
                     ),
                   ),
-                )
-              )
+                ))
             : LoadingView(),
       ),
     );
