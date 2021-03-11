@@ -22,7 +22,7 @@ class GameSnapshot {
     type = faker.randomGenerator.element([Type.LEGS, Type.SETS]);
     size = faker.randomGenerator.integer(15, min: 1);
     startingPoints = faker.randomGenerator.element([301, 501, 701]);
-    players = faker.randomGenerator.amount((i) => PlayerSnapshot.seed(i == 0), 4).cast<PlayerSnapshot>().toList();
+    players = faker.randomGenerator.amount((i) => PlayerSnapshot.seed(i == 0), 5).cast<PlayerSnapshot>().toList();
   }
 
   GameSnapshot.fromJson(Map<String, dynamic> json) {

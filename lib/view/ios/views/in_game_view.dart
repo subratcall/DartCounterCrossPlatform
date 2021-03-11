@@ -57,7 +57,7 @@ class InGameView extends StatelessWidget {
                             ),
                             Expanded(
                               flex: 318,
-                              child: PlayerDisplayer(game.players),
+                              child: PlayerWrapper(game.players),
                             ),
                             Spacer(
                               flex: 4,
@@ -97,16 +97,144 @@ class InGameView extends StatelessWidget {
   }
 }
 
-class PlayerDisplayer extends StatelessWidget {
+class PlayerWrapper extends StatelessWidget {
   final List<PlayerSnapshot> players;
 
-  PlayerDisplayer(this.players);
+  PlayerWrapper(this.players);
+
+  @override
+  Widget build(BuildContext context) {
+    return players.length == 1 ? OnePlayer(players[0]) :
+        players.length == 2 ? TwoPlayer(players) :
+        players.length == 3 ? ThreePlayer(players) :
+            FourPlayer(players);
+  }
+}
+
+class OnePlayer extends StatelessWidget {
+  
+  final PlayerSnapshot player;
+
+  OnePlayer(this.player);
+
+  @override
+  Widget build(BuildContext context) {
+    return PlayerBig(player);
+  }
+}
+
+class TwoPlayer extends StatelessWidget {
+
+  final List<PlayerSnapshot> players;
+
+  TwoPlayer(this.players);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 178,
+          child: PlayerMedium(players[0]),
+        ),
+        Spacer(flex: 4,),
+        Expanded(
+          flex: 178,
+          child: PlayerMedium(players[1]),
+        )
+      ],
+    );
+  }
+}
+
+class ThreePlayer extends StatelessWidget {
+
+  final List<PlayerSnapshot> players;
+
+  ThreePlayer(this.players);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 178,
+          child: PlayerMedium(players[0]),
+        ),
+        Spacer(flex: 4,),
+        Expanded(
+          flex: 178,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 87,
+                child: PlayerSmall(players[1]),
+              ),
+              Spacer(flex: 4,),
+              Expanded(
+                flex: 87,
+                  child: PlayerSmall(players[2]),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class FourPlayer extends StatelessWidget {
+
+  final List<PlayerSnapshot> players;
+
+  FourPlayer(this.players);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 178,
+          child: PlayerMedium(players[0]),
+        ),
+        Spacer(flex: 4,),
+        Expanded(
+          flex: 178,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 57,
+                  child: PlayerExtraSmall(players[1]),
+              ),
+              Spacer(flex: 4,),
+              Expanded(
+                flex: 57,
+                child: PlayerExtraSmall(players[2]),
+              ),
+              Spacer(flex: 4,),
+              Expanded(
+                flex: 57,
+                child: PlayerExtraSmall(players[3]),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class PlayerBig extends StatelessWidget {
+
+  final PlayerSnapshot player;
+
+  PlayerBig(this.player);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.all(
-        Radius.circular(8.0),
+        Radius.circular(16.0),
       ),
       child: Container(
         color: AppColors.black,
@@ -127,7 +255,7 @@ class PlayerDisplayer extends StatelessWidget {
                           flex: 218,
                           child: Center(
                             child: AutoSizeText(
-                              players[0].name,
+                              player.name,
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -148,26 +276,26 @@ class PlayerDisplayer extends StatelessWidget {
                       children: [
                         Spacer(flex: 52),
                         Expanded(
-                          flex: 60,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(20.0),
-                            ),
-                            child: Container(
-                              color: AppColors.yellow,
-                              child: Center(
-                                child: AutoSizeText(
-                                  'S: ' + players[0].sets.toString(),
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
+                            flex: 60,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(20.0),
+                              ),
+                              child: Container(
+                                color: AppColors.yellow,
+                                child: Center(
+                                  child: AutoSizeText(
+                                    'S: ' + player.sets.toString(),
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 23,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          )
+                            )
                         ),
                         Spacer(flex: 73),
                         Expanded(
@@ -180,7 +308,7 @@ class PlayerDisplayer extends StatelessWidget {
                               color: AppColors.yellow,
                               child: Center(
                                 child: AutoSizeText(
-                                  'L: ' + players[0].legs.toString(),
+                                  'L: ' + player.legs.toString(),
                                   maxLines: 1,
                                   style: TextStyle(
                                     color: AppColors.white,
@@ -206,7 +334,7 @@ class PlayerDisplayer extends StatelessWidget {
                           flex: 158,
                           child: Center(
                             child: AutoSizeText(
-                              players[0].pointsLeft.toString(),
+                              player.pointsLeft.toString(),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -227,18 +355,19 @@ class PlayerDisplayer extends StatelessWidget {
                       children: [
                         Spacer(flex: 135,),
                         Expanded(
-                            flex: 28,
-                            child: Center(
-                              child: AutoSizeText(
-                                players[0].lastThrow.toString(),
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                          flex: 28,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.lastThrow.toString(),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
                               ),
                             ),
+                          ),
                         ),
                         Spacer(flex: 135,),
                       ],
@@ -254,7 +383,7 @@ class PlayerDisplayer extends StatelessWidget {
                           flex: 190,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).dartsThrown + ' : ' + players[0].dartsThrownThisLeg.toString(),
+                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownThisLeg.toString(),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -277,7 +406,7 @@ class PlayerDisplayer extends StatelessWidget {
                           flex: 135,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).average + ' : ' + players[0].average.toStringAsFixed(2),
+                              AppLocalizations.of(context).average + ' : ' + player.average.toStringAsFixed(2),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -292,7 +421,7 @@ class PlayerDisplayer extends StatelessWidget {
                           flex: 135,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).checkoutPercentage + ' : ' + players[0].checkoutPercentage.toStringAsFixed(2),
+                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.checkoutPercentage.toStringAsFixed(2),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -316,6 +445,478 @@ class PlayerDisplayer extends StatelessWidget {
     );
   }
 }
+
+class PlayerMedium extends StatelessWidget {
+
+  final PlayerSnapshot player;
+
+  PlayerMedium(this.player);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(16.0),
+      ),
+      child: Container(
+        color: AppColors.black,
+        child: Row(
+          children: [
+            Spacer(flex: 10),
+            Expanded(
+              flex: 158,
+              child: Column(
+                children: [
+                  Spacer(flex: 12,),
+                  Expanded(
+                    flex: 25,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 29,),
+                        Expanded(
+                          flex: 100,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.name,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 29,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 16,),
+                  Expanded(
+                    flex: 23,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 18),
+                        Expanded(
+                            flex: 47,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(20.0),
+                              ),
+                              child: Container(
+                                color: AppColors.yellow,
+                                child: Center(
+                                  child: AutoSizeText(
+                                    'S: ' + player.sets.toString(),
+                                    maxLines: 1,
+                                    minFontSize: 1,
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                        ),
+                        Spacer(flex: 28),
+                        Expanded(
+                          flex: 47,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20.0),
+                            ),
+                            child: Container(
+                              color: AppColors.yellow,
+                              child: Center(
+                                child: AutoSizeText(
+                                  'L: ' + player.legs.toString(),
+                                  maxLines: 1,
+                                  minFontSize: 1,
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 18),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 26,),
+                  Expanded(
+                    flex: 65,
+                    child: Row(
+                      children: [
+                        Spacer(flex:  18,),
+                        Expanded(
+                          flex: 122,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.pointsLeft.toString(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 80,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex:  18,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 18,),
+                  Expanded(
+                    flex: 15,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 68,),
+                        Expanded(
+                          flex: 22,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.lastThrow.toString(),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 68,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 35,),
+                  Expanded(
+                    flex: 20,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 190,
+                          child: Center(
+                            child: AutoSizeText(
+                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownThisLeg.toString(),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 11,),
+                  Expanded(
+                    flex: 20,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 190,
+                          child: Center(
+                            child: AutoSizeText(
+                              AppLocalizations.of(context).average + ' : ' + player.average.toStringAsFixed(2),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 11,),
+                  Expanded(
+                    flex: 20,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 190,
+                          child: Center(
+                            child: AutoSizeText(
+                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.checkoutPercentage.toStringAsFixed(2),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 46,),
+                ],
+              ),
+            ),
+            Spacer(flex: 10),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlayerSmall extends StatelessWidget {
+
+  final PlayerSnapshot player;
+
+  PlayerSmall(this.player);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(16.0),
+      ),
+      child: Container(
+        color: AppColors.black,
+        child: Row(
+          children: [
+            Spacer(flex: 8),
+            Expanded(
+              flex: 158,
+              child: Column(
+                children: [
+                  Spacer(flex: 10,),
+                  Expanded(
+                    flex: 15,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 29,),
+                        Expanded(
+                          flex: 96,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.name,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 29,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 13,),
+                  Expanded(
+                    flex: 13,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 29),
+                        Expanded(
+                            flex: 36,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(20.0),
+                              ),
+                              child: Container(
+                                color: AppColors.yellow,
+                                child: Center(
+                                  child: AutoSizeText(
+                                    'S: ' + player.sets.toString(),
+                                    maxLines: 1,
+                                    minFontSize: 1,
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                        ),
+                        Spacer(flex: 24),
+                        Expanded(
+                          flex: 36,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20.0),
+                            ),
+                            child: Container(
+                              color: AppColors.yellow,
+                              child: Center(
+                                child: AutoSizeText(
+                                  'L: ' + player.legs.toString(),
+                                  maxLines: 1,
+                                  minFontSize: 1,
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 29),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 14,),
+                  Expanded(
+                    flex: 24,
+                    child: Row(
+                      children: [
+                        Spacer(flex:  46,),
+                        Expanded(
+                          flex: 62,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.pointsLeft.toString(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 37,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex:  46,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 10,),
+                  Expanded(
+                    flex: 8,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 70,),
+                        Expanded(
+                          flex: 14,
+                          child: Center(
+                            child: AutoSizeText(
+                              player.lastThrow.toString(),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 9,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 70,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 14,),
+                  Expanded(
+                    flex: 10,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 25,),
+                        Expanded(
+                          flex: 104,
+                          child: Center(
+                            child: AutoSizeText(
+                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownThisLeg.toString(),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 25,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 11,),
+                  Expanded(
+                    flex: 10,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 67,
+                          child: Center(
+                            child: AutoSizeText(
+                              AppLocalizations.of(context).average + ' : ' + player.average.toStringAsFixed(2),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(flex: 20,),
+                        Expanded(
+                          flex: 67,
+                          child: Center(
+                            child: AutoSizeText(
+                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.checkoutPercentage.toStringAsFixed(2),
+                              maxLines: 1,
+                              minFontSize: 1,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 6,),
+                ],
+              ),
+            ),
+            Spacer(flex: 8),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlayerExtraSmall extends StatelessWidget {
+
+  final PlayerSnapshot player;
+
+  PlayerExtraSmall(this.player);
+
+  @override
+  Widget build(BuildContext context) {
+    return PlayerSmall(player);
+  }
+}
+
 
 class InputRow extends StatelessWidget {
   final VoidCallback onUndoPressed;
@@ -393,6 +994,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '1',
+                  fontSize: 45,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => onKeyPressed(KeyType.one),
                 ),
@@ -404,6 +1006,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '2',
+                  fontSize: 45,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => onKeyPressed(KeyType.two),
                 ),
@@ -415,6 +1018,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                     text: '3',
+                    fontSize: 45,
                     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                     onPressed: () => onKeyPressed(KeyType.three)),
               ),
@@ -433,6 +1037,7 @@ class KeyBoard extends StatelessWidget {
                 child: PrimaryTextButton(
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   text: '4',
+                  fontSize: 45,
                   onPressed: () => onKeyPressed(KeyType.four),
                 ),
               ),
@@ -444,6 +1049,7 @@ class KeyBoard extends StatelessWidget {
                 child: PrimaryTextButton(
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   text: '5',
+                  fontSize: 45,
                   onPressed: () => onKeyPressed(KeyType.five),
                 ),
               ),
@@ -455,6 +1061,7 @@ class KeyBoard extends StatelessWidget {
                 child: PrimaryTextButton(
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   text: '6',
+                  fontSize: 45,
                   onPressed: () => onKeyPressed(KeyType.six),
                 ),
               ),
@@ -472,6 +1079,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '7',
+                  fontSize: 45,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => onKeyPressed(KeyType.seven),
                 ),
@@ -483,6 +1091,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '8',
+                  fontSize: 45,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => onKeyPressed(KeyType.eight),
                 ),
@@ -494,6 +1103,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '9',
+                  fontSize: 45,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => onKeyPressed(KeyType.nine),
                 ),
@@ -513,6 +1123,7 @@ class KeyBoard extends StatelessWidget {
                 child: Builder(
                   builder: (context) => PrimaryTextButton(
                     text: 'Check',
+                    fontSize: 45,
                     onPressed: () {
                       onKeyPressed(KeyType.check);
                       CupertinoScaffold.showCupertinoModalBottomSheet(
@@ -533,6 +1144,7 @@ class KeyBoard extends StatelessWidget {
                 flex: 117,
                 child: PrimaryTextButton(
                   text: '0',
+                  fontSize: 45,
                   onPressed: () => onKeyPressed(KeyType.zero),
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 ),

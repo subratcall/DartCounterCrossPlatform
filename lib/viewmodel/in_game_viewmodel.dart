@@ -10,7 +10,7 @@ class InGameViewModel extends ViewModel {
 
   Stream<GameSnapshot> get gameSnapshots => _playingService.gameSnapshots;
 
-  int inputPoints = 0;
+  int _inputPoints = 0;
 
   void onUndoPressed() {}
 
@@ -78,12 +78,19 @@ class InGameViewModel extends ViewModel {
   bool _digitIsValid(int newDigit) {
     // TODO read current gamesnapshot from stream
     GameSnapshot game = GameSnapshot.seed(Status.RUNNING);
-    int pointsLeft = 1;
+    int pointsLeft = 180;
+
     int newInputPoints = int.parse(inputPoints.toString() + newDigit.toString());
 
     if(newInputPoints == 0) return false;
     return ThrowValidator.isValidThrow(newInputPoints, pointsLeft);
   }
 
+  int get inputPoints => _inputPoints;
+
+  set inputPoints(int inputPoints) {
+    _inputPoints = inputPoints;
+    notifyListeners();
+  }
 
 }
