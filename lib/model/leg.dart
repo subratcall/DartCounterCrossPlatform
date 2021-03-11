@@ -8,7 +8,7 @@ class Leg {
   Leg.dummy() : throws = [Throw.dummy(), Throw.dummy(), Throw.dummy()];
 
   Leg.fromJson(Map<String, dynamic> json) {
-    throws = json['throws'] != null ? json['throws'].map((value) => Throw.fromJson(value)).toList() : null;
+    throws = json['throws'] != null ? json['throws'].map((value) => Throw.fromJson(value)).cast<Throw>().toList() : null;
   }
 
   Map<String, dynamic> toJson() => {

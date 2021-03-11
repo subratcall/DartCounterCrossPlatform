@@ -50,11 +50,19 @@ class DatabaseService {
     });
   }
 
-  Stream<List<Game>> gameHistory(String uid) {
+ /* Stream<List<Game>> gameHistory(String uid) {
     return _firestore.collection('gameHistory').doc(uid).snapshots().map((snapshot) {
       print(snapshot.data());
       return List();
     });
+  }*/
+
+  Future<List<Game>> fetchGameHistory(String uid) async {
+    var documentSnapshot = await _firestore.collection('gameHistory').doc(uid).get();
+    if(documentSnapshot.exists) {
+      return (documentSnapshot.data()['data'] as List).map((e) => Game.fromJson(e)).cast<Game>().toList();
+    }
+    return [];
   }
 
   /// OUT
@@ -83,7 +91,7 @@ class DatabaseService {
   }
 
   void insertDummyData(String uid) async {
-    Profile profile = Profile.dummy();
+    //Profile profile = Profile.dummy();
     List<Invitation> invitations = [Invitation.dummy(), Invitation.dummy(), Invitation.dummy()];
     List<Friend> friends = [Friend.dummy(), Friend.dummy(), Friend.dummy()];
     List<FriendRequest> friendRequests = [
@@ -93,7 +101,7 @@ class DatabaseService {
     ];
     List<Game> games = [Game.dummy(), Game.dummy(), Game.dummy()];
 
-    _firestore.collection('profiles').doc(uid).set(profile.toJson());
+    //_firestore.collection('profiles').doc(uid).set(profile.toJson());
     _firestore.collection('invitations').doc(uid).set({'data': invitations.map((e) => e.toJson()).toList()});
     _firestore.collection('friends').doc(uid).set({'data': friends.map((e) => e.toJson()).toList()});
     _firestore

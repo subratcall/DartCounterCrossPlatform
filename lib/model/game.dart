@@ -1,7 +1,7 @@
 import 'package:dart_counter/model/player.dart';
 
 enum GameStatus { PENDING, RUNNING, FINISHED }
-enum GameMode { BEST_OF, FIRST_TO }
+enum GameMode { FIRST_TO, BEST_OF }
 enum GameType { LEGS, SETS }
 
 class Game {
@@ -19,7 +19,7 @@ class Game {
 
   Game.dummy({
     this.status = GameStatus.PENDING,
-    this.mode = GameMode.BEST_OF,
+    this.mode = GameMode.FIRST_TO,
     this.type = GameType.SETS,
     this.size = 7,
     this.startingPoints = 501,
@@ -28,13 +28,12 @@ class Game {
 
   Game.fromJson(Map<String, dynamic> json) {
     date = DateTime.parse(json['date']);
-    status = json['status'];
-    mode = json['mode'];
-    type = json['type'];
+    status = json['mode'] == 'pending' ? GameStatus.PENDING : json['mode'] == 'running' ? GameStatus.RUNNING : GameStatus.FINISHED;
+    mode = json['mode'] == 'firstTo' ? GameMode.FIRST_TO : GameMode.BEST_OF;
+    type = json['type'] == 'legs' ? GameType.LEGS : GameType.SETS;
     size = json['size'];
     startingPoints = json['startingPoints'];
-    players =
-        json['players'] != null ? json['players'].map((value) => Player.fromJson(value)).toList() : null;
+    players = json['players'] != null ? json['players'].map((value) => Player.fromJson(value)).cast<Player>().toList() : null;
   }
 
   Map<String, dynamic> toJson() => {

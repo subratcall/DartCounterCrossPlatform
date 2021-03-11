@@ -11,13 +11,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'api/database_service.dart';
 import 'app_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
-  //DatabaseService().insertDummyData('testUID');
+  //DatabaseService().insertDummyData('oUSndXHVqbhFZ4as6e5xR9tr33h2');
   runApp(DartCounterApp());
 }
 

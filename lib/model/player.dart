@@ -37,13 +37,12 @@ class Player {
     sets = json['sets'];
     pointsLeft = json['pointsLeft'];
     lastThrow = json['lastThrow'];
-    finish = json['finish'] != null ? json['finish'].map((value) => value).toList() : null;
+    finish = json['finish'] != null ? json['finish'].map((value) => value as String).cast<String>().toList()  : null;
     dartsThrownThisLeg = json['dartsThrownThisLeg'];
     average = json['average'];
     checkoutPercentage = json['checkoutPercentage'];
     advancedStats = AdvancedStats.fromJson(json['advancedStats']);
-    setsList =
-        json['setsList'] != null ? json['setsList'].map((value) => Set.fromJson(value)).toList() : null;
+    setsList = json['setsList'] != null ? json['setsList'].map((value) => Set.fromJson(value)).cast<Set>().toList() : null;
   }
 
   Map<String, dynamic> toJson() => {

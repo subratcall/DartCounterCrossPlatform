@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
@@ -87,7 +89,6 @@ class GameHistoryView extends StatelessWidget {
 }
 
 // View specific widgets
-
 // TODO time ago and descrip in diff language
 // TODO make the widget responsive
 class GameHistoryCard extends StatelessWidget {
@@ -112,8 +113,8 @@ class GameHistoryCard extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              // TODO won
-              true ? AppImages.win : AppImages.defeat,
+              // TODO read winner from game
+              Random().nextBool()? AppImages.win : AppImages.defeat,
             ),
           ),
           Expanded(
