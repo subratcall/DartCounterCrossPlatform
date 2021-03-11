@@ -1,6 +1,6 @@
 import 'package:dart_counter/api/playing/offline/playing_offline_service.dart';
 import 'package:dart_counter/api/playing/online/playing_online_service.dart';
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 
 class PlayingService {
   final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
@@ -9,13 +9,8 @@ class PlayingService {
   bool _online;
 
   // TODO remove dummy data;
-  final dummyData = [
-    Game.dummy(mode: GameMode.FIRST_TO, size: 10, type: GameType.LEGS),
-    Game.dummy(mode: GameMode.FIRST_TO, size: 4, type: GameType.SETS),
-    Game.dummy(mode: GameMode.BEST_OF, size: 99, type: GameType.LEGS)
-  ];
 
-  Stream<Game> get games => Stream.periodic(Duration(seconds: 2), (x) => dummyData[x % dummyData.length]);
+  Stream<GameSnapshot> get games => Stream.periodic(Duration(seconds: 2), (x) => GameSnapshot.seed(Status.PENDING));
 
   bool get online => _online;
 
