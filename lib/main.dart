@@ -18,6 +18,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
+  print(int.parse(0.toString() + 1.toString()));
   //DatabaseService().insertDummyData('oUSndXHVqbhFZ4as6e5xR9tr33h2');
   runApp(DartCounterApp());
 }

@@ -1,6 +1,6 @@
 import 'package:dart_counter/api/playing/playing_service.dart';
 import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class CreateGameViewModel extends ViewModel {
@@ -10,5 +10,5 @@ class CreateGameViewModel extends ViewModel {
     // TODO
   }
 
-  Stream<Game> get games => _playingService.games;
+  Stream<GameSnapshot> get gameSnapshots => _playingService.gameSnapshots;
 }

@@ -1,12 +1,8 @@
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/viewmodel/enum/social_media_button_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-enum SocialMediaButtonType {
-  facebook,
-  google,
-  instagram,
-}
 
 class SocialMediaButton extends StatelessWidget {
   final SocialMediaButtonType type;

@@ -163,7 +163,7 @@ class ProfileViewSuccess extends StatelessWidget {
                             ),
                             Spacer(),
                           ],
-                        )),
+                        ),),
                   ),
                 ),
                 Spacer(

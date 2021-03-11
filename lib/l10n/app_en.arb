@@ -150,7 +150,9 @@
     "description": "word"
   },
 
-
+  "@dartsThrown": {
+    "description": "word"
+  },
 
   "aboutUs": "About Us",
   "cancel": "Cancel",
@@ -204,5 +206,7 @@
 
   "deletePhoto": "Delete Photo",
   "takePhoto": "Take Photo",
-  "choosePhoto": "Choose Photo"
+  "choosePhoto": "Choose Photo",
+
+  "dartsThrown": "Darts thrown"
 }

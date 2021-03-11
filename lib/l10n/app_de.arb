@@ -51,5 +51,7 @@
 
   "deletePhoto": "Foto löschen",
   "takePhoto": "Foto aufnehmen",
-  "choosePhoto": "Foto auswählen"
+  "choosePhoto": "Foto auswählen",
+
+  "dartsThrown": "Geworfene Darts"
 }
