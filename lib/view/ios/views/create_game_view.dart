@@ -46,7 +46,7 @@ class CreateGameView extends StatelessWidget {
                                 flex: 4,
                               ),
                               Expanded(
-                                flex: 50 + model.currentSnapshot.players.length * 50,
+                                flex: 94 + model.currentSnapshot.players.length * 50,
                                 child: PlayersCard(model.currentSnapshot.players),
                               ),
                               Spacer(
