@@ -163,7 +163,7 @@
   "emailSent": "Email sent!",
   "errorEmailAddressAlreadyInUse": "This email is already in use.",
   "errorInvalidEmailAddress": "Invalid email address.",
-  "errorInvalidEmailAddressOrPassword": "Invalid email.",
+  "errorInvalidEmailAddressOrPassword": "Invalid email or password.",
   "errorInvalidPassword": "Invalid password - TODO.",
   "errorInvalidUsername": "Invalid username - TODO.",
   "errorNetwork": "Network error - No internet connection!",

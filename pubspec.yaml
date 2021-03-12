@@ -43,6 +43,7 @@ dependencies:
   cached_network_image: ^2.5.1
   image: ^2.1.19
   faker: ^1.3.0
+  reorderables: ^0.3.2
 
 dev_dependencies:
   flutter_test:

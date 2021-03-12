@@ -29,7 +29,7 @@ class CreateGameView extends StatelessWidget {
               ? SingleChildScrollView(
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height +
-                        model.currentSnapshot.players.length * 50/569 * MediaQuery.of(context).size.height,
+                        model.currentSnapshot.players.length * 50 / 613 * MediaQuery.of(context).size.height,
                     child: Row(
                       children: [
                         Spacer(
@@ -158,25 +158,48 @@ class PlayersCard extends StatelessWidget {
       flexBody: 50 + players.length * 50,
       body: Column(
         children: [
-          for (var player in players) Expanded(child: PlayerItem(player)),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: CupertinoButton(
-                    child: AutoSizeText(
-                      'Spieler hinzufügen',
-                      maxLines: 1,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.green),
-                    ),
-                    onPressed: () {
-                      print('f');
-                    },
-                  ),
-                ),
-              ],
+            flex: players.length,
+            child: ListView.separated(
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: players.length,
+              itemBuilder: (context, index) {
+                return PlayerItem(players[index]);
+              },
+              separatorBuilder: (context, index) => Container(
+                height: 1,
+                color: CupertinoColors.opaqueSeparator,
+              ),
             ),
           ),
+          Expanded(
+              child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  color: CupertinoColors.opaqueSeparator,
+                ),
+              ),
+              Expanded(
+                flex: 49,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CupertinoButton(
+                        child: AutoSizeText(
+                          'Spieler hinzufügen',
+                          maxLines: 1,
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.green),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )),
         ],
       ),
     );
@@ -190,71 +213,89 @@ class PlayerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-        key: ValueKey(player),
-        background: Container(
-          color: AppColors.red,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Icon(CupertinoIcons.delete, color: AppColors.white,),
-              ],
-            ),
-          ),
-        ),
-        direction: DismissDirection.endToStart,
-        child: Column(
-          children: [
-            Spacer(flex: 10,),
-            Expanded(
-              flex: 35,
-              child: Row(
+    return Container(
+      height: MediaQuery.of(context).size.height * 50 / 613,
+      child: Dismissible(
+          key: ValueKey(player),
+          background: Container(
+            color: AppColors.red,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Spacer(flex: 15,),
-                  Expanded(
-                    flex: 35,
-                    child: Image.asset(AppImages.photoPlaceholder),
+                  Icon(
+                    CupertinoIcons.delete,
+                    color: AppColors.white,
                   ),
-                  Spacer(flex: 46,),
-                  Expanded(
-                    flex: 167,
-                    child: Center(
-                      child: Text(
-                        'Jonas',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  Spacer(flex: 55,),
-                  Expanded(
-                    flex: 25,
-                    child: Builder(
-                      builder: (context) => CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        child: Center(child: Icon(CupertinoIcons.ellipsis, size: 35,),),
-                        onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
-                          expand: false,
-                          context: context,
-                          backgroundColor: AppColors.transparent,
-                          builder: (context) => AdvancedSettingsModal(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Spacer(flex: 15,),
                 ],
               ),
             ),
-            Spacer(flex: 5,),
-            Container(
-              height: 1,
-              color: CupertinoColors.opaqueSeparator,
-            ),
-          ],
-        )
+          ),
+          direction: DismissDirection.endToStart,
+          child: Column(
+            children: [
+              Spacer(
+                flex: 10,
+              ),
+              Expanded(
+                flex: 35,
+                child: Row(
+                  children: [
+                    Spacer(
+                      flex: 15,
+                    ),
+                    Expanded(
+                      flex: 35,
+                      child: Image.asset(AppImages.photoPlaceholder),
+                    ),
+                    Spacer(
+                      flex: 46,
+                    ),
+                    Expanded(
+                      flex: 167,
+                      child: Center(
+                        child: Text(
+                          'Jonas',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Spacer(
+                      flex: 55,
+                    ),
+                    Expanded(
+                      flex: 25,
+                      child: Builder(
+                        builder: (context) => CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          child: Center(
+                            child: Icon(
+                              CupertinoIcons.ellipsis,
+                              size: 35,
+                            ),
+                          ),
+                          onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                            expand: false,
+                            context: context,
+                            backgroundColor: AppColors.transparent,
+                            builder: (context) => AdvancedSettingsModal(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(
+                      flex: 15,
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(
+                flex: 5,
+              ),
+            ],
+          )),
     );
     //return Placeholder();
   }
@@ -389,7 +430,10 @@ class AdvancedSettingsModal extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 25),
               tileColor: AppColors.black2,
-              title: Text('Average anzeigen', style: TextStyle(color: AppColors.white),),
+              title: Text(
+                'Average anzeigen',
+                style: TextStyle(color: AppColors.white),
+              ),
               trailing: CupertinoSwitch(
                 value: true,
               ),
@@ -398,7 +442,10 @@ class AdvancedSettingsModal extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 25),
               tileColor: AppColors.black2,
-              title: Text('Doppelquote anzeigen', style: TextStyle(color: AppColors.white),),
+              title: Text(
+                'Doppelquote anzeigen',
+                style: TextStyle(color: AppColors.white),
+              ),
               trailing: CupertinoSwitch(
                 value: false,
               ),
@@ -415,9 +462,17 @@ class AdvancedSettingsModal extends StatelessWidget {
                     padding: const EdgeInsets.all(6.0),
                     child: Row(
                       children: [
-                        Icon(CupertinoIcons.delete, color: AppColors.white,),
-                        SizedBox(width: 10,),
-                        Text('Spieler entfernen', style: TextStyle(color: AppColors.white),)
+                        Icon(
+                          CupertinoIcons.delete,
+                          color: AppColors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Spieler entfernen',
+                          style: TextStyle(color: AppColors.white),
+                        )
                       ],
                     ),
                   ),
@@ -435,7 +490,10 @@ class AdvancedSettingsModal extends StatelessWidget {
                     padding: const EdgeInsets.all(6.0),
                     child: Row(
                       children: [
-                        Text('Fertig', style: TextStyle(color: AppColors.white),)
+                        Text(
+                          'Fertig',
+                          style: TextStyle(color: AppColors.white),
+                        )
                       ],
                     ),
                   ),
@@ -455,4 +513,3 @@ class AdvancedSettingsItem extends StatelessWidget {
     return Placeholder();
   }
 }
-
