@@ -4,6 +4,7 @@ import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
+import 'package:dart_counter/view/ios/modals/modal_fit.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/action_button.dart';
@@ -11,7 +12,9 @@ import 'package:dart_counter/view/ios/widgets/card.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' show Material, ListTile;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CreateGameView extends StatelessWidget {
   @override
@@ -209,7 +212,23 @@ class PlayerItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                Spacer(flex: 95,),
+                Spacer(flex: 55,),
+                Expanded(
+                  flex: 25,
+                  child: Builder(
+                    builder: (context) => CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      child: Center(child: Icon(CupertinoIcons.ellipsis, size: 35,),),
+                      onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                        expand: false,
+                        context: context,
+                        backgroundColor: AppColors.transparent,
+                        builder: (context) => AdvancedSettingsModal(),
+                      ),
+                    ),
+                  ),
+                ),
+                Spacer(flex: 15,),
               ],
             ),
         ),
@@ -340,3 +359,83 @@ class GameSettingsCard extends StatelessWidget {
     );
   }
 }
+
+class AdvancedSettingsModal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Material(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 25),
+              tileColor: AppColors.black2,
+              title: Text('Average anzeigen', style: TextStyle(color: AppColors.white),),
+              trailing: CupertinoSwitch(
+                value: true,
+              ),
+              onTap: () => Navigator.of(context).pop(),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 25),
+              tileColor: AppColors.black2,
+              title: Text('Doppelquote anzeigen', style: TextStyle(color: AppColors.white),),
+              trailing: CupertinoSwitch(
+                value: false,
+              ),
+              onTap: () => Navigator.of(context).pop(),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 25),
+              tileColor: AppColors.black2,
+              title: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                child: Container(
+                  color: AppColors.red,
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Row(
+                      children: [
+                        Icon(CupertinoIcons.delete, color: AppColors.white,),
+                        SizedBox(width: 10,),
+                        Text('Spieler entfernen', style: TextStyle(color: AppColors.white),)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 25),
+              tileColor: AppColors.black2,
+              title: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                child: Container(
+                  color: AppColors.green,
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Row(
+                      children: [
+                        Text('Fertig', style: TextStyle(color: AppColors.white),)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AdvancedSettingsItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
+
