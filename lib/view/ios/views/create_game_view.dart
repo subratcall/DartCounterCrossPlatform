@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
+import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
@@ -137,7 +138,7 @@ class DartBotCard extends StatelessWidget {
 }
 
 class PlayersCard extends StatelessWidget {
-  List<PlayerSnapshot> players;
+  final List<PlayerSnapshot> players;
 
   PlayersCard(this.players);
 
@@ -156,8 +157,21 @@ class PlayersCard extends StatelessWidget {
         children: [
           for (var player in players) Expanded(child: PlayerItem(player)),
           Expanded(
-            child: Placeholder(
-              color: AppColors.green,
+            child: Row(
+              children: [
+                Expanded(
+                  child: CupertinoButton(
+                    child: AutoSizeText(
+                      'Spieler hinzufügen',
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.green),
+                    ),
+                    onPressed: () {
+                      print('f');
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -167,13 +181,46 @@ class PlayersCard extends StatelessWidget {
 }
 
 class PlayerItem extends StatelessWidget {
-  PlayerSnapshot player;
+  final PlayerSnapshot player;
 
   PlayerItem(this.player);
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Column(
+      children: [
+        Spacer(flex: 10,),
+        Expanded(
+          flex: 35,
+          child: Row(
+              children: [
+                Spacer(flex: 15,),
+                Expanded(
+                  flex: 35,
+                  child: Image.asset(AppImages.photoPlaceholder),
+                ),
+                Spacer(flex: 46,),
+                Expanded(
+                  flex: 167,
+                  child: Center(
+                    child: Text(
+                      'Jonas',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Spacer(flex: 95,),
+              ],
+            ),
+        ),
+        Spacer(flex: 5,),
+        Container(
+          height: 1,
+          color: CupertinoColors.opaqueSeparator,
+        ),
+      ],
+    );
+    //return Placeholder();
   }
 }
 
