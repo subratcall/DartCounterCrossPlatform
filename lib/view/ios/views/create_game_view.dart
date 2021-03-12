@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show Material, ListTile;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:reorderables/reorderables.dart';
 
 class CreateGameView extends StatelessWidget {
   @override
@@ -140,13 +141,44 @@ class DartBotCard extends StatelessWidget {
   }
 }
 
-class PlayersCard extends StatelessWidget {
+class PlayersCard extends StatefulWidget {
   final List<PlayerSnapshot> players;
 
   PlayersCard(this.players);
 
   @override
+  _PlayersCardState createState() => _PlayersCardState();
+}
+
+class _PlayersCardState extends State<PlayersCard> {
+  @override
   Widget build(BuildContext context) {
+    void _onReorder(int oldIndex, int newIndex) {
+      setState(() {
+        PlayerSnapshot row = widget.players.removeAt(oldIndex);
+        widget.players.insert(newIndex, row);
+      });
+    }
+
+    ScrollController _scrollController = PrimaryScrollController.of(context) ?? ScrollController();
+
+
+
+    /**
+        CustomScrollView(
+        controller: _scrollController,
+        slivers: <Widget>[
+        ReorderableSliverList(
+        delegate: ReorderableSliverChildBuilderDelegate(
+        (BuildContext context, int index) => PlayerItem(widget.players[index]),
+        childCount: widget.players.length,
+        ),
+        onReorder: _onReorder,
+        )
+        ],
+        )
+     */
+
     return Card(
       flexHeader: 44,
       middle: AutoSizeText(
@@ -155,16 +187,16 @@ class PlayersCard extends StatelessWidget {
         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
       paddingBody: EdgeInsets.all(0.0),
-      flexBody: 50 + players.length * 50,
+      flexBody: 50 + widget.players.length * 50,
       body: Column(
         children: [
           Expanded(
-            flex: players.length,
+            flex: widget.players.length,
             child: ListView.separated(
               physics: NeverScrollableScrollPhysics(),
-              itemCount: players.length,
+              itemCount: widget.players.length,
               itemBuilder: (context, index) {
-                return PlayerItem(players[index]);
+                return PlayerItem(widget.players[index]);
               },
               separatorBuilder: (context, index) => Container(
                 height: 1,
