@@ -190,54 +190,71 @@ class PlayerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Spacer(flex: 10,),
-        Expanded(
-          flex: 35,
-          child: Row(
+    return Dismissible(
+        key: ValueKey(player),
+        background: Container(
+          color: AppColors.red,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Spacer(flex: 15,),
-                Expanded(
-                  flex: 35,
-                  child: Image.asset(AppImages.photoPlaceholder),
-                ),
-                Spacer(flex: 46,),
-                Expanded(
-                  flex: 167,
-                  child: Center(
-                    child: Text(
-                      'Jonas',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                Icon(CupertinoIcons.delete, color: AppColors.white,),
+              ],
+            ),
+          ),
+        ),
+        direction: DismissDirection.endToStart,
+        child: Column(
+          children: [
+            Spacer(flex: 10,),
+            Expanded(
+              flex: 35,
+              child: Row(
+                children: [
+                  Spacer(flex: 15,),
+                  Expanded(
+                    flex: 35,
+                    child: Image.asset(AppImages.photoPlaceholder),
                   ),
-                ),
-                Spacer(flex: 55,),
-                Expanded(
-                  flex: 25,
-                  child: Builder(
-                    builder: (context) => CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      child: Center(child: Icon(CupertinoIcons.ellipsis, size: 35,),),
-                      onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
-                        expand: false,
-                        context: context,
-                        backgroundColor: AppColors.transparent,
-                        builder: (context) => AdvancedSettingsModal(),
+                  Spacer(flex: 46,),
+                  Expanded(
+                    flex: 167,
+                    child: Center(
+                      child: Text(
+                        'Jonas',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
-                ),
-                Spacer(flex: 15,),
-              ],
+                  Spacer(flex: 55,),
+                  Expanded(
+                    flex: 25,
+                    child: Builder(
+                      builder: (context) => CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        child: Center(child: Icon(CupertinoIcons.ellipsis, size: 35,),),
+                        onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                          expand: false,
+                          context: context,
+                          backgroundColor: AppColors.transparent,
+                          builder: (context) => AdvancedSettingsModal(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(flex: 15,),
+                ],
+              ),
             ),
-        ),
-        Spacer(flex: 5,),
-        Container(
-          height: 1,
-          color: CupertinoColors.opaqueSeparator,
-        ),
-      ],
+            Spacer(flex: 5,),
+            Container(
+              height: 1,
+              color: CupertinoColors.opaqueSeparator,
+            ),
+          ],
+        )
     );
     //return Placeholder();
   }
