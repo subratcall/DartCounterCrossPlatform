@@ -9,6 +9,8 @@ class Card extends StatelessWidget {
   final BorderRadius borderRadius;
   final EdgeInsets paddingHeader;
   final EdgeInsets paddingBody;
+  final int flexHeader;
+  final int flexBody;
 
   Card({
     this.leading = const Spacer(),
@@ -20,6 +22,8 @@ class Card extends StatelessWidget {
     ),
     this.paddingHeader = const EdgeInsets.all(8.0),
     this.paddingBody = const EdgeInsets.all(8.0),
+    this.flexHeader = 2,
+    this.flexBody = 5,
   }) : assert(body != null);
 
   @override
@@ -29,7 +33,7 @@ class Card extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: flexHeader,
             child: Container(
                 color: AppColors.black,
                 child: Row(
@@ -44,7 +48,7 @@ class Card extends StatelessWidget {
                 padding: paddingHeader),
           ),
           Expanded(
-            flex: 5,
+            flex: flexBody,
             child: Container(
               color: AppColors.gray,
               padding: paddingBody,

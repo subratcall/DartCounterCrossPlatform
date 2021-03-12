@@ -3,6 +3,7 @@ import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
+import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/action_button.dart';
 import 'package:dart_counter/view/ios/widgets/card.dart';
@@ -20,47 +21,62 @@ class CreateGameView extends StatelessWidget {
           middle: Text(AppLocalizations.of(context).createGame),
         ),
         child: Builder(
-          builder: (context) => SingleChildScrollView(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Row(
-                children: [
-                  Spacer(flex: 8,),
-                  Expanded(
-                    flex: 359,
-                    child: Column(
+          builder: (context) => model.currentSnapshot != null
+              ? SingleChildScrollView(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height +
+                        model.currentSnapshot.players.length * 50/569 * MediaQuery.of(context).size.height,
+                    child: Row(
                       children: [
-                        Spacer(flex: 4,),
-                        Expanded(
-                          flex: 115,
-                          child: DartBotCard(),
+                        Spacer(
+                          flex: 8,
                         ),
-                        Spacer(flex: 4,),
                         Expanded(
-                          flex: 171,
-                          child: PlayersCard(GameSnapshot.seed(Status.pending).players),
-                        ),
-                        Spacer(flex: 4,),
-                        Expanded(
-                          flex: 281,
-                          child: GameSettingsCard(),
-                        ),
-                        Spacer(flex: 36,),
-                        Expanded(
-                          flex: 75,
-                          child: ActionButton(
-                            text: AppLocalizations.of(context).startGame,
-                            onPressed: () => Navigator.pushNamed(context, AppRoutes.gameHistory),
+                          flex: 359,
+                          child: Column(
+                            children: [
+                              Spacer(
+                                flex: 4,
+                              ),
+                              Expanded(
+                                flex: 115,
+                                child: DartBotCard(),
+                              ),
+                              Spacer(
+                                flex: 4,
+                              ),
+                              Expanded(
+                                flex: 50 + model.currentSnapshot.players.length * 50,
+                                child: PlayersCard(model.currentSnapshot.players),
+                              ),
+                              Spacer(
+                                flex: 4,
+                              ),
+                              Expanded(
+                                flex: 281,
+                                child: GameSettingsCard(),
+                              ),
+                              Spacer(
+                                flex: 36,
+                              ),
+                              Expanded(
+                                flex: 75,
+                                child: ActionButton(
+                                  text: AppLocalizations.of(context).startGame,
+                                  onPressed: () => Navigator.pushNamed(context, AppRoutes.inGame),
+                                ),
+                              ),
+                            ],
                           ),
+                        ),
+                        Spacer(
+                          flex: 8,
                         ),
                       ],
                     ),
                   ),
-                  Spacer(flex: 8,),
-                ],
-              ),
-            ),
-          ),
+                )
+              : LoadingView(),
         ),
       ),
     );
@@ -71,6 +87,7 @@ class DartBotCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      flexHeader: 44,
       middle: AutoSizeText(
         'Dartbot',
         maxLines: 1,
@@ -79,6 +96,7 @@ class DartBotCard extends StatelessWidget {
       trailing: CupertinoSwitch(
         value: true,
       ),
+      flexBody: 71,
       body: Column(
         children: [
           Spacer(
@@ -98,10 +116,13 @@ class DartBotCard extends StatelessWidget {
                 Expanded(
                   flex: 284,
                   child: CupertinoSlider(
-                  value: 1,
+                    activeColor: AppColors.green,
+                    value: 1,
+                  ),
                 ),
+                Spacer(
+                  flex: 30,
                 ),
-                Spacer(flex: 30,),
                 AutoSizeText(
                   '88',
                   maxLines: 1,
@@ -116,7 +137,6 @@ class DartBotCard extends StatelessWidget {
 }
 
 class PlayersCard extends StatelessWidget {
-
   List<PlayerSnapshot> players;
 
   PlayersCard(this.players);
@@ -124,19 +144,21 @@ class PlayersCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      flexHeader: 44,
       middle: AutoSizeText(
         'Spieler',
         maxLines: 1,
         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
       paddingBody: EdgeInsets.all(0.0),
+      flexBody: 50 + players.length * 50,
       body: Column(
         children: [
+          for (var player in players) Expanded(child: PlayerItem(player)),
           Expanded(
-            child: Placeholder(),
-          ),
-          Expanded(
-              child: Placeholder(color: AppColors.green,),
+            child: Placeholder(
+              color: AppColors.green,
+            ),
           ),
         ],
       ),
@@ -145,7 +167,6 @@ class PlayersCard extends StatelessWidget {
 }
 
 class PlayerItem extends StatelessWidget {
-
   PlayerSnapshot player;
 
   PlayerItem(this.player);
@@ -160,11 +181,13 @@ class GameSettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      flexHeader: 44,
       middle: AutoSizeText(
         'Modus',
         maxLines: 1,
         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
+      flexBody: 237,
       body: Row(
         children: [
           Spacer(
@@ -209,10 +232,10 @@ class GameSettingsCard extends StatelessWidget {
                   flex: 11,
                 ),
                 Expanded(
-                  flex: 60,
-                  child: Row(
-                    children: [
-                      Expanded(
+                    flex: 60,
+                    child: Row(
+                      children: [
+                        Expanded(
                           child: CupertinoSlidingSegmentedControl(
                             groupValue: '0',
                             children: {
@@ -225,10 +248,9 @@ class GameSettingsCard extends StatelessWidget {
                             },
                             onValueChanged: (v) => {},
                           ),
-                      ),
-                    ],
-                  )
-                ),
+                        ),
+                      ],
+                    )),
                 Spacer(
                   flex: 8,
                 ),
@@ -248,11 +270,11 @@ class GameSettingsCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                          child: CupertinoSlidingSegmentedControl(
-                            groupValue: '0',
-                            children: {'0': Text('LEGS'), '1': Text('SETS')},
-                            onValueChanged: (v) => {},
-                          ),
+                        child: CupertinoSlidingSegmentedControl(
+                          groupValue: '0',
+                          children: {'0': Text('LEGS'), '1': Text('SETS')},
+                          onValueChanged: (v) => {},
+                        ),
                       )
                     ],
                   ),
