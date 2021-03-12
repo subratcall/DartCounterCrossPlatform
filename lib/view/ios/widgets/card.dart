@@ -7,16 +7,20 @@ class Card extends StatelessWidget {
   final Widget trailing;
   final Widget body;
   final BorderRadius borderRadius;
+  final EdgeInsets paddingHeader;
+  final EdgeInsets paddingBody;
 
-  Card(
-      {this.leading = const Spacer(),
-      this.middle = const Spacer(),
-      this.trailing = const Spacer(),
-      this.body,
-      this.borderRadius = const BorderRadius.all(
-        Radius.circular(8.0),
-      )})
-      : assert(body != null);
+  Card({
+    this.leading = const Spacer(),
+    this.middle = const Spacer(),
+    this.trailing = const Spacer(),
+    this.body,
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(8.0),
+    ),
+    this.paddingHeader = const EdgeInsets.all(8.0),
+    this.paddingBody = const EdgeInsets.all(8.0),
+  }) : assert(body != null);
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +31,23 @@ class Card extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
-              color: AppColors.black,
-              child: Row(
-                children: [
-                  leading,
-                  Spacer(),
-                  middle,
-                  Spacer(),
-                  trailing,
-                ],
-              ),
-              padding: const EdgeInsets.all(8.0),
-            ),
+                color: AppColors.black,
+                child: Row(
+                  children: [
+                    leading,
+                    Spacer(),
+                    middle,
+                    Spacer(),
+                    trailing,
+                  ],
+                ),
+                padding: paddingHeader),
           ),
           Expanded(
             flex: 5,
             child: Container(
               color: AppColors.gray,
-              padding: const EdgeInsets.all(8.0),
+              padding: paddingBody,
               child: Center(
                 child: body,
               ),

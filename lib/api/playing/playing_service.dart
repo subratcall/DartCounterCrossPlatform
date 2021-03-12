@@ -8,6 +8,7 @@ class PlayingService {
 
   bool _online;
 
+  // Stream from offline or online service provides all PlayingService events
   Stream<GameSnapshot> get gameSnapshots => Stream.periodic(Duration(seconds: 2), (x) => GameSnapshot.seed(Status.running));
 
   bool get online => _online;
