@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:dart_counter/api/playing/offline/model/status.dart';
 import 'package:dart_counter/api/playing/offline/model/throw_validator.dart';
 import 'package:dart_counter/api/playing/playing_service.dart';
 import 'package:dart_counter/locator.dart';

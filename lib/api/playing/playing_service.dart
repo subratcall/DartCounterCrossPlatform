@@ -1,3 +1,6 @@
+import 'package:dart_counter/api/playing/offline/model/mode.dart';
+import 'package:dart_counter/api/playing/offline/model/status.dart';
+import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/api/playing/offline/playing_offline_service.dart';
 import 'package:dart_counter/api/playing/online/playing_online_service.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
@@ -36,52 +39,22 @@ class PlayingService {
     }
   }
 
-  void changeGameConfig() {
-    if (online) {
-      _playingOnlineService.changeGameConfig();
-    } else {
-      _playingOfflineService.changeGameConfig();
-    }
-  }
-
   void joinGame(String gameId) {
     if (online) {
       _playingOnlineService.joinGame(gameId);
-    } else {
-      _playingOfflineService.joinGame(gameId);
     }
   }
 
-  void toggleMode() {
-    if (online) {
-      _playingOnlineService.toggleMode();
-    } else {
-      _playingOfflineService.toggleMode();
-    }
+  void addDartBot() {
+    _playingOfflineService.addDartBot();
   }
 
-  void setSize(int size) {
-    if (online) {
-      _playingOnlineService.setSize(size);
-    } else {
-      _playingOfflineService.setSize(size);
-    }
+  void removeDartBot() {
+    _playingOfflineService.removeDartBot();
   }
 
-  void toggleType() {
-    if (online) {
-      _playingOnlineService.toggleType();
-    } else {
-      _playingOfflineService.toggleType();
-    }
-  }
-
-  void setStartingPoints(int startingPoints) {
-    if (online) {
-      _playingOnlineService.setStartingPoints(startingPoints);
-    } else {
-      _playingOfflineService.setStartingPoints(startingPoints);
-    }
+  void setDartBotAverage(int average) {
+    _playingOfflineService.setDartBotAverage(average);
   }
 
   bool addPlayer() {
@@ -97,6 +70,38 @@ class PlayingService {
       _playingOnlineService.removePlayer(index);
     } else {
       _playingOfflineService.removePlayer(index);
+    }
+  }
+
+  void setStartingPoints(int startingPoints) {
+    if (online) {
+      _playingOnlineService.setStartingPoints(startingPoints);
+    } else {
+      _playingOfflineService.setStartingPoints(startingPoints);
+    }
+  }
+
+  void setMode(Mode mode) {
+    if (online) {
+      // TODO
+    } else {
+      _playingOfflineService.setMode(mode);
+    }
+  }
+
+  void setSize(int size) {
+    if (online) {
+      _playingOnlineService.setSize(size);
+    } else {
+      _playingOfflineService.setSize(size);
+    }
+  }
+
+  void setType(Type type) {
+    if (online) {
+      // TODO
+    } else {
+      _playingOfflineService.setType(type);
     }
   }
 

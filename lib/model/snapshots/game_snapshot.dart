@@ -1,9 +1,8 @@
+import 'package:dart_counter/api/playing/offline/model/mode.dart';
+import 'package:dart_counter/api/playing/offline/model/status.dart';
+import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
 import 'package:faker/faker.dart';
-
-enum Status { pending, running, finished }
-enum Mode { firstTo, bestOf }
-enum Type { legs, sets }
 
 class GameSnapshot {
 

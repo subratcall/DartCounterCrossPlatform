@@ -1,29 +1,68 @@
+import 'package:dart_counter/api/playing/offline/model/dartbot.dart';
+import 'package:dart_counter/api/playing/offline/model/game.dart';
+import 'package:dart_counter/api/playing/offline/model/type.dart';
+
+import 'model/mode.dart';
+import 'model/player.dart';
+import 'model/throw.dart';
+
 class PlayingOfflineService {
   static final PlayingOfflineService instance = PlayingOfflineService._();
 
   PlayingOfflineService._();
 
-  void createGame() {}
+  Game game;
 
-  void changeGameConfig() {}
+  void createGame() {
+    game = Game();
+  }
 
-  void joinGame(String gameId) {}
+  void addDartBot() {
+    game.addDartBot();
+  }
 
-  void toggleMode() {}
+  void removeDartBot() {
+    game.removeDartBot();
+  }
 
-  void setSize(int size) {}
+  void setDartBotAverage(int average) {
+    // TODO
+    (game.players[game.dartBotIndex] as DartBot).targetAverage = average;
+  }
 
-  void toggleType() {}
+  void addPlayer() {
+    game.addPlayer(Player());
+  }
 
-  void setStartingPoints(int startingPoints) {}
+  void removePlayer(int index) {
+    game.removePlayer(index);
+  }
 
-  bool addPlayer() {}
+  void setStartingPoints(int startingPoints) {
+    game.config.startingPoints = startingPoints;
+  }
 
-  void removePlayer(int index) {}
+  void setMode(Mode mode) {
+    game.config.mode = mode;
+  }
 
-  void startGame() {}
+  void setSize(int size) {
+    game.config.size = size;
+  }
 
-  void performThrow(int points, int dartsThrown, int dartsOnDouble) {}
+  void setType(Type type) {
+    game.config.type = type;
+  }
 
-  void undoThrow() {}
+  void startGame() {
+    game.start();
+  }
+
+  void performThrow(int points, int dartsThrown, int dartsOnDouble) {
+    game.performThrow(Throw(points, dartsOnDouble, dartsThrown));
+  }
+
+  void undoThrow() {
+    game.undoThrow();
+  }
 }

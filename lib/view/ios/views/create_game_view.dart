@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dart_counter/api/playing/offline/model/mode.dart';
+import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
