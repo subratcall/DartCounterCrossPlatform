@@ -1,4 +1,4 @@
-import 'package:dart_counter/api/authentication_service.dart';
+import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';

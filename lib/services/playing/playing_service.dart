@@ -1,5 +1,5 @@
-import 'package:dart_counter/api/playing/offline/playing_offline_service.dart';
-import 'package:dart_counter/api/playing/online/playing_online_service.dart';
+import 'package:dart_counter/services/playing/offline/playing_offline_service.dart';
+import 'package:dart_counter/services/playing/online/playing_online_service.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_game/dart_game.dart';
 

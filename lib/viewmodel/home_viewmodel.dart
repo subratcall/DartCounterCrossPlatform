@@ -1,5 +1,5 @@
-import 'package:dart_counter/api/authentication_service.dart';
-import 'package:dart_counter/api/database_service.dart';
+import 'package:dart_counter/services/authentication_service.dart';
+import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';

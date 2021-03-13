@@ -1,4 +1,4 @@
-import 'package:dart_counter/api/database_service.dart';
+import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';

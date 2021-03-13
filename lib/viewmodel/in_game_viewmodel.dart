@@ -1,4 +1,4 @@
-import 'package:dart_counter/api/playing/playing_service.dart';
+import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
