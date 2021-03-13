@@ -44,7 +44,10 @@ class CreateGameView extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 115,
-                                child: DartBotCard(onActiveChanged: (isActive) {}, onAverageChanged: (average) {},),
+                                child: DartBotCard(
+                                  onActiveChanged: (isActive) => model.onDartBotActiveChanged(isActive),
+                                  onAverageChanged: (average) => model.onDartBotAverageChanged(average),
+                                ),
                               ),
                               Spacer(
                                 flex: 4,
@@ -58,7 +61,12 @@ class CreateGameView extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 281,
-                                child: GameSettingsCard(onStartingPointsChanged: (startingPoints) {}, onModeChanged: (type) {}, onSizeChanged: (size) {}, onTypeChanged: (type) {},),
+                                child: GameSettingsCard(
+                                  onStartingPointsChanged: (startingPoints) => model.onStartingPointsChanged(startingPoints),
+                                  onModeChanged: (mode) => model.onModeChanged(mode),
+                                  onSizeChanged: (size) => model.onSizeChanged(size),
+                                  onTypeChanged: (type) => model.onTypeChanged(type),
+                                ),
                               ),
                               Spacer(
                                 flex: 18,
@@ -67,7 +75,10 @@ class CreateGameView extends StatelessWidget {
                                 flex: 75,
                                 child: ActionButton(
                                   text: AppLocalizations.of(context).startGame,
-                                  onPressed: () => Navigator.pushNamed(context, AppRoutes.inGame),
+                                  onPressed: () {
+                                    model.onStartGamePressed();
+                                    Navigator.pushNamed(context, AppRoutes.inGame);
+                                  },
                                 ),
                               ),
                               Spacer(
@@ -91,18 +102,18 @@ class CreateGameView extends StatelessWidget {
 }
 
 class DartBotCard extends StatefulWidget {
-
   final Function(bool) onActiveChanged;
   final Function(int) onAverageChanged;
 
-  DartBotCard({this.onActiveChanged, this.onAverageChanged}) : assert(onActiveChanged != null), assert(onAverageChanged != null);
+  DartBotCard({this.onActiveChanged, this.onAverageChanged})
+      : assert(onActiveChanged != null),
+        assert(onAverageChanged != null);
 
   @override
   _DartBotCardState createState() => _DartBotCardState();
 }
 
 class _DartBotCardState extends State<DartBotCard> {
-
   bool show = false;
   double sliderValue = 1;
 
@@ -153,17 +164,16 @@ class _DartBotCardState extends State<DartBotCard> {
                   Expanded(
                     flex: 264,
                     child: CupertinoSlider(
-                      min: 1,
-                      max: 150,
-                      activeColor: AppColors.green,
-                      value: sliderValue,
-                      onChangeEnd: (newValue) => widget.onAverageChanged(newValue.round()),
-                      onChanged: (newValue) {
-                        setState(() {
-                          sliderValue = newValue;
-                        });
-                      }
-                    ),
+                        min: 1,
+                        max: 150,
+                        activeColor: AppColors.green,
+                        value: sliderValue,
+                        onChangeEnd: (newValue) => widget.onAverageChanged(newValue.round()),
+                        onChanged: (newValue) {
+                          setState(() {
+                            sliderValue = newValue;
+                          });
+                        }),
                   ),
                   Spacer(
                     flex: 15,
@@ -185,8 +195,6 @@ class _DartBotCardState extends State<DartBotCard> {
   }
 }
 
-
-
 class PlayersCard extends StatefulWidget {
   final List<PlayerSnapshot> players;
 
@@ -207,10 +215,6 @@ class _PlayersCardState extends State<PlayersCard> {
     }
 
     ScrollController _scrollController = PrimaryScrollController.of(context) ?? ScrollController();
-
-    /**
-
-     */
 
     return Card(
       flexHeader: 44,
@@ -241,7 +245,6 @@ class _PlayersCardState extends State<PlayersCard> {
           Expanded(
               child: Column(
             children: [
-
               Expanded(
                 flex: 49,
                 child: Row(
@@ -368,17 +371,14 @@ class PlayerItem extends StatelessWidget {
   }
 }
 
-
-
 class GameSettingsCard extends StatefulWidget {
-
   final Function(int) onStartingPointsChanged;
   final Function(Mode) onModeChanged;
   final Function(int) onSizeChanged;
   final Function(Type) onTypeChanged;
 
-  GameSettingsCard({this.onStartingPointsChanged, this.onModeChanged, this.onSizeChanged, this.onTypeChanged}) :
-        assert(onStartingPointsChanged != null),
+  GameSettingsCard({this.onStartingPointsChanged, this.onModeChanged, this.onSizeChanged, this.onTypeChanged})
+      : assert(onStartingPointsChanged != null),
         assert(onModeChanged != null),
         assert(onSizeChanged != null),
         assert(onTypeChanged != null);
@@ -388,7 +388,6 @@ class GameSettingsCard extends StatefulWidget {
 }
 
 class _GameSettingsCardState extends State<GameSettingsCard> {
-
   String valueStartingPoints = '0';
   String valueMode = '0';
   String valueType = '0';
@@ -434,7 +433,11 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
                             setState(() {
                               valueStartingPoints = newValue;
                             });
-                            widget.onStartingPointsChanged(newValue == '0' ? 301 : newValue == '1' ? 501: 701);
+                            widget.onStartingPointsChanged(newValue == '0'
+                                ? 301
+                                : newValue == '1'
+                                    ? 501
+                                    : 701);
                           },
                         ),
                       )
@@ -484,7 +487,7 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
                   child: CupertinoPicker(
                     children: [for (var i = 1; i <= 100; i += 1) Text(i.toString())],
                     itemExtent: 25,
-                    onSelectedItemChanged: (item) => widget.onSizeChanged(item+1),
+                    onSelectedItemChanged: (item) => widget.onSizeChanged(item + 1),
                   ),
                 ),
                 Spacer(
@@ -523,8 +526,6 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
     );
   }
 }
-
-
 
 class AdvancedSettingsModal extends StatelessWidget {
   @override
@@ -614,28 +615,27 @@ class AdvancedSettingsModal extends StatelessWidget {
                     flex: 134,
                   ),
                   Expanded(
-                    flex: 107,
-                    child: CupertinoButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        child: Container(
-                          color: AppColors.green,
-                          child: Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: Center(
-                              child: AutoSizeText(
-                                'Fertig',
-                                minFontSize: 1,
-                                maxLines: 1,
-                                style: TextStyle(color: AppColors.white),
+                      flex: 107,
+                      child: CupertinoButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          child: Container(
+                            color: AppColors.green,
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Center(
+                                child: AutoSizeText(
+                                  'Fertig',
+                                  minFontSize: 1,
+                                  maxLines: 1,
+                                  style: TextStyle(color: AppColors.white),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    )
-                  ),
+                      )),
                   Spacer(
                     flex: 134,
                   ),

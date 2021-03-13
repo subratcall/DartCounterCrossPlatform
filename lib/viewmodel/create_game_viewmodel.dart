@@ -14,6 +14,30 @@ class CreateGameViewModel extends ViewModel {
     }));*/
   }
 
+  void onDartBotActiveChanged(bool isActive) {
+
+  }
+
+  void onDartBotAverageChanged(int average) {
+
+  }
+
+  void onStartingPointsChanged(int startingPoints) {
+
+  }
+
+  void onModeChanged(Mode mode) {
+
+  }
+
+  void onSizeChanged(int size) {
+
+  }
+
+  void onTypeChanged(Type type) {
+
+  }
+
   void onStartGamePressed() {
     // TODO
   }
