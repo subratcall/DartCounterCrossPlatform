@@ -1,3 +1,5 @@
+part of dart_game;
+
 class ThrowValidator {
   
   static bool isValidThrow(int points, int pointsLeft, {int dartsThrown = 3, dartsOnDouble = 0}) {

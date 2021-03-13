@@ -1,10 +1,4 @@
-import 'package:dart_counter/api/playing/offline/model/dartbot.dart';
-import 'package:dart_counter/api/playing/offline/model/game.dart';
-import 'package:dart_counter/api/playing/offline/model/type.dart';
-
-import 'model/mode.dart';
-import 'model/player.dart';
-import 'model/throw.dart';
+import 'package:dart_game/dart_game.dart';
 
 class PlayingOfflineService {
   static final PlayingOfflineService instance = PlayingOfflineService._();

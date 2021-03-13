@@ -1,6 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_counter/api/playing/offline/model/mode.dart';
-import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
@@ -12,10 +10,11 @@ import 'package:dart_counter/view/ios/widgets/card.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show Material, ListTile;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:reorderables/reorderables.dart';
+import 'package:dart_game/dart_game.dart';
+import 'package:flutter/material.dart' show Material, ListTile;
 
 class CreateGameView extends StatelessWidget {
   @override

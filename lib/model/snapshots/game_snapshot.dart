@@ -1,8 +1,6 @@
-import 'package:dart_counter/api/playing/offline/model/mode.dart';
-import 'package:dart_counter/api/playing/offline/model/status.dart';
-import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
 import 'package:faker/faker.dart';
+import 'package:dart_game/dart_game.dart';
 
 class GameSnapshot {
 

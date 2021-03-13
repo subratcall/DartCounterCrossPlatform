@@ -1,10 +1,8 @@
-import 'package:dart_counter/api/playing/offline/model/mode.dart';
-import 'package:dart_counter/api/playing/offline/model/status.dart';
-import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/api/playing/playing_service.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
+import 'package:dart_game/dart_game.dart';
 
 class CreateGameViewModel extends ViewModel {
   final PlayingService _playingService = locator<PlayingService>();

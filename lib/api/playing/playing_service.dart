@@ -1,9 +1,7 @@
-import 'package:dart_counter/api/playing/offline/model/mode.dart';
-import 'package:dart_counter/api/playing/offline/model/status.dart';
-import 'package:dart_counter/api/playing/offline/model/type.dart';
 import 'package:dart_counter/api/playing/offline/playing_offline_service.dart';
 import 'package:dart_counter/api/playing/online/playing_online_service.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_game/dart_game.dart';
 
 class PlayingService {
   final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
