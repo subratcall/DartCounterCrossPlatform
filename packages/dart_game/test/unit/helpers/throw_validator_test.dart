@@ -2,249 +2,462 @@ import 'package:dart_game/dart_game.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('isOneDartFinish', () {
-    test('GIVEN points < 0 WHEN isOneDartFinish is called THEN throw ArgumentError', () {
+  group('isValidThrowWithZeroDartsOnDouble', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithZeroDartsOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int lessThanZero = -1;
+      final int points = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isOneDartFinish(lessThanZero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithZeroDartsOnDouble(points, 501), throwsArgumentError);
     });
-    test('GIVEN points = 0 WHEN isOneDartFinish is called THEN throw ArgumentError', () {
+    test('GIVEN points > 180 WHEN isValidThrowWithZeroDartsOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int zero = 0;
+      final int points = 181;
 
       // Act & Assert
-      expect(() => ThrowValidator.isOneDartFinish(zero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithZeroDartsOnDouble(points, 501), throwsArgumentError);
     });
-    test('GIVEN points = 1 WHEN isOneDartFinish is called THEN throw ArgumentError', () {
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithZeroDartsOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int one = 1;
+      final int pointsLeft = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isOneDartFinish(one), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithZeroDartsOnDouble(60, pointsLeft), throwsArgumentError);
     });
-    test('GIVEN points > 180 WHEN isOneDartFinish is called THEN throw ArgumentError', () {
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithZeroDartsOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int toLargeValue = 181;
+      final int pointsLeft = 0;
 
       // Act & Assert
-      expect(() => ThrowValidator.isOneDartFinish(toLargeValue), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithZeroDartsOnDouble(60, pointsLeft), throwsArgumentError);
     });
-    group('GIVEN points is one-dart-finish WHEN isOneDartFinish is called THEN return true', () {
-      final List<int> oneDartFinishes = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
-
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithZeroDartsOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      for(int oneDartFinish in oneDartFinishes) {
-        test('$oneDartFinish -> true', () {
-          // Act & Assert
-          expect(ThrowValidator.isOneDartFinish(oneDartFinish), true);
-        });
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithZeroDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithZeroDartsOnDouble is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithZeroDartsOnDouble(points, pointsLeft), false);
+    });
+    test('GIVEN points that can be scored with zero dartsOnDouble WHEN isValidThrowWithZeroDartsOnDouble is called THEN return true', () {
+      // Arrange
+      final List<int> validPoints = List.generate(180, (index) => index+1);
+      validPoints.removeWhere((element) => [163, 166, 169, 172, 173, 175, 176, 178, 179].contains(element));
+
+      // Act & Assert
+      for(int points in validPoints) {
+        expect(ThrowValidator.isValidThrowWithZeroDartsOnDouble(points, 501), true);
       }
     });
-    group('GIVEN points is not one-dart-finish WHEN isOneDartFinish is called THEN return false', () {
-      final List<int> oneDartFinishes = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
-      final List<int> notOneDartFinishes = List.generate(180, (index) => index+1);
-      notOneDartFinishes.removeWhere((element) => oneDartFinishes.contains(element) || element == 1);
-
+    test('GIVEN points that can not be scored with zero dartsOnDouble WHEN isValidThrowWithZeroDartsOnDouble is called THEN return false', () {
       // Arrange
-      for(int notOneDartFinish in notOneDartFinishes) {
-        test('$notOneDartFinish -> false', () {
-          // Act & Assert
-          expect(ThrowValidator.isOneDartFinish(notOneDartFinish), false);
-        });
-      }
-    });
-  });
-
-  group('isTwoDartFinish', () {
-    test('GIVEN points < 0 WHEN isTwoDartFinish is called THEN throw ArgumentError', () {
-      // Arrange
-      final int lessThanZero = -1;
+      final List<int> invalidPoints = [163, 166, 169, 172, 173, 175, 176, 178, 179];
 
       // Act & Assert
-      expect(() => ThrowValidator.isTwoDartFinish(lessThanZero), throwsArgumentError);
-    });
-    test('GIVEN points = 0 WHEN isTwoDartFinish is called THEN throw ArgumentError', () {
-      // Arrange
-      final int zero = 0;
-
-      // Act & Assert
-      expect(() => ThrowValidator.isTwoDartFinish(zero), throwsArgumentError);
-    });
-    test('GIVEN points = 1 WHEN isTwoDartFinish is called THEN throw ArgumentError', () {
-      // Arrange
-      final int one = 1;
-
-      // Act & Assert
-      expect(() => ThrowValidator.isTwoDartFinish(one), throwsArgumentError);
-    });
-    test('GIVEN points > 180 WHEN isTwoDartFinish is called THEN throw ArgumentError', () {
-      // Arrange
-      final int toLargeValue = 181;
-
-      // Act & Assert
-      expect(() => ThrowValidator.isTwoDartFinish(toLargeValue), throwsArgumentError);
-    });
-    group('GIVEN points is two-dart-finish WHEN isTwoDartFinish is called THEN return true', () {
-      final List<int> twoDartFinishes = List.generate(110, (index) => index+1);
-      twoDartFinishes.removeWhere((element) => [1, 99, 102, 103, 105, 106, 108, 109].contains(element));
-
-      // Arrange
-      for(int twoDartFinish in twoDartFinishes) {
-        test('$twoDartFinish -> true', () {
-          // Act & Assert
-          expect(ThrowValidator.isTwoDartFinish(twoDartFinish), true);
-        });
-      }
-    });
-    group('GIVEN points is not two-dart-finish WHEN isTwoDartFinish is called THEN return false', () {
-      final List<int> twoDartFinishes = List.generate(110, (index) => index+1);
-      twoDartFinishes.removeWhere((element) => [1, 99, 102, 103, 105, 106, 108, 109].contains(element));
-      final List<int> notTwoDartFinishes = List.generate(180, (index) => index+1);
-      notTwoDartFinishes.removeWhere((element) => twoDartFinishes.contains(element) || element == 1);
-
-      // Arrange
-      for(int notTwoDartFinish in notTwoDartFinishes) {
-        test('$notTwoDartFinish -> false', () {
-          // Act & Assert
-          expect(ThrowValidator.isTwoDartFinish(notTwoDartFinish), false);
-        });
+      for(int points in invalidPoints) {
+        expect(ThrowValidator.isValidThrowWithZeroDartsOnDouble(points, 501), false);
       }
     });
   });
 
-  group('isThreeDartFinish', () {
-    test('GIVEN points < 0 WHEN isThreeDartFinish is called THEN throw ArgumentError', () {
+  group('isValidThrowWithOneDartOnDouble', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithOneDartOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int lessThanZero = -1;
+      final int points = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isThreeDartFinish(lessThanZero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithOneDartOnDouble(points, 501), throwsArgumentError);
     });
-    test('GIVEN points = 0 WHEN isThreeDartFinish is called THEN throw ArgumentError', () {
+    test('GIVEN points > 180 WHEN isValidThrowWithOneDartOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int zero = 0;
+      final int points = 181;
 
       // Act & Assert
-      expect(() => ThrowValidator.isThreeDartFinish(zero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithOneDartOnDouble(points, 501), throwsArgumentError);
     });
-    test('GIVEN points = 1 WHEN isThreeDartFinish is called THEN throw ArgumentError', () {
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithOneDartOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int one = 1;
+      final int pointsLeft = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isThreeDartFinish(one), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithOneDartOnDouble(60, pointsLeft), throwsArgumentError);
     });
-    test('GIVEN points > 180 WHEN isThreeDartFinish is called THEN throw ArgumentError', () {
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithOneDartOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      final int toLargeValue = 181;
+      final int pointsLeft = 0;
 
       // Act & Assert
-      expect(() => ThrowValidator.isThreeDartFinish(toLargeValue), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrowWithOneDartOnDouble(60, pointsLeft), throwsArgumentError);
     });
-    group('GIVEN points is three-dart-finish WHEN isThreeDartFinish is called THEN return true', () {
-      final List<int> threeDartFinishes = List.generate(170, (index) => index+1);
-      threeDartFinishes.removeWhere((element) => [1, 159, 162, 163, 165, 166, 168, 169].contains(element));
-
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithOneDartOnDouble is called THEN throw ArgumentError', () {
       // Arrange
-      for(int threeDartFinish in threeDartFinishes) {
-        test('$threeDartFinish -> true', () {
-          // Act & Assert
-          expect(ThrowValidator.isThreeDartFinish(threeDartFinish), true);
-        });
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithOneDartOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithOneDartOnDouble is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pointsLeft), false);
+    });
+    // TODO
+  });
+
+  group('isValidThrowWithTwoDartsOnDouble', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithTwoDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, 501), throwsArgumentError);
+    });
+    test('GIVEN points > 180 WHEN isValidThrowWithTwoDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = 181;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, 501), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithTwoDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithTwoDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 0;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithTwoDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithTwoDartsOnDouble is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pointsLeft), false);
+    });
+    // TODO
+  });
+
+  group('isValidThrowWithThreeDartsOnDouble', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithThreeDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsOnDouble(points, 501), throwsArgumentError);
+    });
+    test('GIVEN points > 180 WHEN isValidThrowWithThreeDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = 181;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsOnDouble(points, 501), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithThreeDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithThreeDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 0;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithThreeDartsOnDouble is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsOnDouble(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithThreeDartsOnDouble is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithThreeDartsOnDouble(points, pointsLeft), false);
+    });
+    test('GIVEN points = singleDartFinish and pointsLeft = singleDartFinish WHEN isValidThrowWithThreeDartsOnDouble is called THEN return true', () {
+      // Arrange
+      final List<int> points = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+      final List<int> pointsLeft = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int p in points) {
+        for(int pl in pointsLeft) {
+          if(p < pl) {
+            expect(ThrowValidator.isValidThrowWithThreeDartsOnDouble(p, pl), true);
+          }
+        }
       }
     });
-    group('GIVEN points is not three-dart-finish WHEN isThreeDartFinish is called THEN return false', () {
-      final List<int> threeDartFinishes = List.generate(170, (index) => index+1);
-      threeDartFinishes.removeWhere((element) => [1, 159, 162, 163, 165, 166, 168, 169].contains(element));
-      final List<int> notThreeDartFinishes = List.generate(180, (index) => index+1);
-      notThreeDartFinishes.removeWhere((element) => threeDartFinishes.contains(element) || element == 1);
-
+    test('GIVEN points != singleDartFinish and pointsLeft = singleDartFinish WHEN isValidThrowWithThreeDartsOnDouble is called THEN return false', () {
       // Arrange
-      for(int notThreeDartFinish in notThreeDartFinishes) {
-        test('$notThreeDartFinish -> false', () {
-          // Act & Assert
-          expect(ThrowValidator.isThreeDartFinish(notThreeDartFinish), false);
-        });
+      final int points = 3;
+      final List<int> pointsLeft = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        if(points < pl) {
+          expect(ThrowValidator.isValidThrowWithThreeDartsOnDouble(points, pl), false);
+        }
       }
     });
+    test('GIVEN points = singleDartFinish and pointsLeft != singleDartFinish WHEN isValidThrowWithThreeDartsOnDouble is called THEN return false', () {
+      // Arrange
+      final int points = 2;
+      final List<int> pointsLeft = List.generate(180, (index) => index+1);
+      pointsLeft.removeWhere((element) => [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50].contains(element) || element == 1);
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithThreeDartsOnDouble(points, pl), true);
+      }
+    });
+    test('GIVEN points != singleDartFinish and pointsLeft != singleDartFinish WHEN isValidThrowWithThreeDartsOnDouble is called THEN return false', () {
+      // Arrange
+      final int points = 3;
+      final int pointsLeft = 3;
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithThreeDartsOnDouble(points, points), false);
+    });
+  });
+
+  group('isValidThrowWithOneDartThrown', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithOneDartThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithOneDartThrown(points, 501), throwsArgumentError);
+    });
+    test('GIVEN points > 180 WHEN isValidThrowWithOneDartThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = 181;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithOneDartThrown(points, 501), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithOneDartThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithOneDartThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithOneDartThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 0;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithOneDartThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithOneDartThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithOneDartThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithOneDartThrown is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithOneDartThrown(points, pointsLeft), false);
+    });
+    // TODO
+  });
+
+  group('isValidThrowWithTwoDartsThrown', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithTwoDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsThrown(points, 501), throwsArgumentError);
+    });
+    test('GIVEN points > 180 WHEN isValidThrowWithTwoDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = 181;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsThrown(points, 501), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithTwoDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithTwoDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 0;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithTwoDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithTwoDartsThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithTwoDartsThrown is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithTwoDartsThrown(points, pointsLeft), false);
+    });
+    // TODO
+  });
+
+  group('isValidThrowWithThreeDartsThrown', () {
+    test('GIVEN points < 0 WHEN isValidThrowWithThreeDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsThrown(points, 501), throwsArgumentError);
+    });
+    test('GIVEN points > 180 WHEN isValidThrowWithThreeDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int points = 181;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsThrown(points, 501), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft < 0 WHEN isValidThrowWithThreeDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = -1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 0 WHEN isValidThrowWithThreeDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 0;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN pointsLeft = 1 WHEN isValidThrowWithThreeDartsThrown is called THEN throw ArgumentError', () {
+      // Arrange
+      final int pointsLeft = 1;
+
+      // Act & Assert
+      expect(() => ThrowValidator.isValidThrowWithThreeDartsThrown(60, pointsLeft), throwsArgumentError);
+    });
+    test('GIVEN points > pointsLeft WHEN isValidThrowWithThreeDartsThrown is called THEN return false', () {
+      // Arrange
+      final int points = 120;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithThreeDartsThrown(points, pointsLeft), false);
+    });
+    // TODO
   });
 
   group('isValidThrow', () {
     test('GIVEN points < 0 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int lessThanZero = -1;
+      final int points = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(lessThanZero, 501), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(points, 501), throwsArgumentError);
     });
     test('GIVEN points > 180 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int toLargeValue = 181;
+      final int points = 181;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(toLargeValue, 501), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(points, 501), throwsArgumentError);
     });
     test('GIVEN pointsLeft < 0 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int lessThanZero = -1;
+      final int pointsLeft = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, lessThanZero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, pointsLeft), throwsArgumentError);
     });
     test('GIVEN pointsLeft = 0 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int zero = 0;
+      final int pointsLeft = 0;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, zero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, pointsLeft), throwsArgumentError);
     });
     test('GIVEN pointsLeft = 1 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int one = 1;
+      final int pointsLeft = 1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, one), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, pointsLeft), throwsArgumentError);
     });
     test('GIVEN dartsThrown < 1 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int lessThanOne = 0;
+      final int dartsThrown = 0;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, 501, dartsThrown: lessThanOne), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, 501, dartsThrown: dartsThrown), throwsArgumentError);
     });
     test('GIVEN dartsThrown > 3 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int greaterThanThree = 4;
+      final int dartsThrown = 4;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, 501, dartsThrown: greaterThanThree), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, 501, dartsThrown: dartsThrown), throwsArgumentError);
     });
     test('GIVEN dartsOnDouble < 0 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int lessThanZero = -1;
+      final int dartsOnDouble = -1;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, 501, dartsOnDouble: lessThanZero), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, 501, dartsOnDouble: dartsOnDouble), throwsArgumentError);
     });
     test('GIVEN dartsOnDouble > 3 WHEN isValidThrow is called THEN throw ArgumentError', () {
       // Arrange
-      final int greaterThanThree = 4;
+      final int dartsOnDouble = 4;
 
       // Act & Assert
-      expect(() => ThrowValidator.isValidThrow(60, 501, dartsOnDouble: greaterThanThree), throwsArgumentError);
+      expect(() => ThrowValidator.isValidThrow(60, 501, dartsOnDouble: dartsOnDouble), throwsArgumentError);
     });
 
-    test('GIVEN points = 0, dartsThrown != 3 WHEN isValidThrow is called THEN return false', () {
-      // Arrange
-      final int zero = 0;
-      final int notEqualThree = 2;
-
-      // Act & Assert
-      expect(ThrowValidator.isValidThrow(zero, 501, dartsThrown: notEqualThree), false);
-    });
-    test('GIVEN points > pointsLeft WHEN isValidThrow is called THEN return false', () {
+    /*test('GIVEN points > pointsLeft WHEN isValidThrow is called THEN return false', () {
       // Arrange
       final int points = 100;
       final int pointsLeft = 50;
@@ -252,13 +465,35 @@ void main() {
       // Act & Assert
       expect(ThrowValidator.isValidThrow(points, pointsLeft), false);
     });
-    test('GIVEN points that can not be scored with 3 darts WHEN isValidThrow is called THEN return false', () {
+    test('GIVEN points = 0, dartsThrown != 3 WHEN isValidThrow is called THEN return false', () {
       // Arrange
-      // TODO
+      final int points = 0;
+      final int dartsThrown = 2;
 
       // Act & Assert
-      // TODO
+      expect(ThrowValidator.isValidThrow(points, 501, dartsThrown: dartsThrown), false);
     });
+    test('GIVEN pointsLeft-points = 1, WHEN isValidThrow is called THEN return false', () {
+      // Arrange
+      final int points = 11;
+      final int pointsLeft = 12;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrow(points, pointsLeft), false);
+    });
+    group('GIVEN points that can not be scored with 3 darts WHEN isValidThrow is called THEN return false', () {
+
+      final List<int> canNotBeScoredWithThreeDarts = [163, 166, 169, 172, 173, 175, 176, 178, 179];
+
+      // Arrange
+      for(int points in canNotBeScoredWithThreeDarts) {
+        test('$points -> false', () {
+          // Act & Assert
+          expect(ThrowValidator.isValidThrow(points, 501), false);
+        });
+      }
+    });
+
     test('GIVEN dartsOnDouble > dartsThrown WHEN isValidThrow is called THEN return false', () {
       // Arrange
       final int dartsOnDouble = 3;
@@ -267,5 +502,39 @@ void main() {
       // Act & Assert
       expect(ThrowValidator.isValidThrow(60, 501, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble), false);
     });
+    test('GIVEN dartsOnDouble > 0, pointsLeft is not checkable with 3 darts WHEN isValidThrow is called THEN return false', () {
+      // Arrange
+      final int dartsOnDouble = 2;
+      final int pointsLeft = 200;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrow(60, pointsLeft, dartsOnDouble: dartsOnDouble), false);
+    });
+    test('GIVEN dartsOnDouble = 2, pointsLeft is only checkable with 3 darts WHEN isValidThrow is called THEN return false', () {
+      // Arrange
+      final int dartsOnDouble = 2;
+      final int pointsLeft = 170;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrow(60, pointsLeft, dartsOnDouble: dartsOnDouble), false);
+    });
+    test('GIVEN dartsOnDouble = 3, pointsLeft is not checkable with 1 dart WHEN isValidThrow is called THEN return false', () {
+      // Arrange
+      final int dartsOnDouble = 3;
+      final int pointsLeft = 100;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrow(60, pointsLeft, dartsOnDouble: dartsOnDouble), false);
+    });
+
+    test('GIVEN points = 170, dartsThrown = 1, dartsOnDouble = 1, WHEN isValidThrow is called THEN return false', () {
+      // Arrange
+      final int points = 170;
+      final int dartsThrown = 1;
+      final int dartsOnDouble = 1;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrow(points, 170, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble), false);
+    });*/
   });
 }
