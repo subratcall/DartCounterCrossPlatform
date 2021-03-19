@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_icons.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
@@ -15,8 +14,8 @@ import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/in_game_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class InGameView extends StatelessWidget {
   @override
@@ -24,7 +23,7 @@ class InGameView extends StatelessWidget {
     return ViewModelProvider<InGameViewModel>(
       builder: (context, model, child) => View(
           navigationBar: CupertinoNavigationBar(
-            middle: Text('First to 5 Legs'),
+            middle: Text(model.currentSnapshot.description),
             trailing: Builder(
               builder: (context) => CupertinoButton(
                 padding: EdgeInsets.zero,
@@ -915,7 +914,6 @@ class PlayerExtraSmall extends StatelessWidget {
   }
 }
 
-
 class InputRow extends StatelessWidget {
   final VoidCallback onUndoPressed;
   final VoidCallback onPerformThrowPressed;
@@ -931,7 +929,7 @@ class InputRow extends StatelessWidget {
           flex: 104,
           child: CupertinoButton(
             color: AppColors.red,
-            onPressed: () => onUndoPressed,
+            onPressed: () => onUndoPressed(),
             padding: EdgeInsets.zero,
             child: Center(child: Icon(CupertinoIcons.arrow_left, size: 35)),
           ),
@@ -961,11 +959,7 @@ class InputRow extends StatelessWidget {
           flex: 104,
           child: CupertinoButton(
             color: AppColors.green,
-            onPressed: () {
-              //onPerformThrowPressed();
-              // TODO remove this line
-              Navigator.pushNamed(context, AppRoutes.postGame);
-            },
+            onPressed: () => onPerformThrowPressed(),
             padding: EdgeInsets.zero,
             child: Center(child: Icon(CupertinoIcons.arrow_right, size: 35)),
           ),
