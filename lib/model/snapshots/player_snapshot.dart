@@ -22,14 +22,14 @@ class PlayerSnapshot {
   PlayerSnapshot.from(Player player) {
     id = player.id;
     name = player.name;
-    currentTurn = player.isNext;
+    currentTurn = player.isCurrentTurn;
     sets = player.sets;
     legs = player.legs;
     pointsLeft = player.pointsLeft;
     lastThrow = player.lastThrow;
     dartsThrownThisLeg = player.dartsThrown;
-    average = player.average != null ?  double.parse(player.average) : null;
-    checkoutPercentage = player.checkoutPercentage != null ?  double.parse(player.checkoutPercentage) : null;
+    average = player.average;
+    checkoutPercentage = player.checkoutPercentage;
     // todo stats
   }
 
