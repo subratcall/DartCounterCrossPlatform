@@ -9,12 +9,12 @@ import 'package:dart_counter/view/ios/widgets/button/action_button.dart';
 import 'package:dart_counter/view/ios/widgets/card.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
+import 'package:dart_game/dart_game.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' show Material, ListTile;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:reorderables/reorderables.dart';
-import 'package:dart_game/dart_game.dart';
-import 'package:flutter/material.dart' show Material, ListTile;
 
 class CreateGameView extends StatelessWidget {
   @override
@@ -54,7 +54,11 @@ class CreateGameView extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 94 + model.currentSnapshot.players.length * 50,
-                                child: PlayersCard(model.currentSnapshot.players),
+                                child: PlayersCard(
+                                  model.currentSnapshot.players,
+                                  onAddPlayerPressed: model.onAddPlayerPressed,
+                                  onRemovePlayer: model.onRemovePlayer,
+                                ),
                               ),
                               Spacer(
                                 flex: 4,
@@ -122,7 +126,7 @@ class _DartBotCardState extends State<DartBotCard> {
     return Card(
       flexHeader: 44,
       middle: AutoSizeText(
-        'Dartbot',
+        AppLocalizations.of(context).dartbot,
         maxLines: 1,
         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
@@ -148,7 +152,7 @@ class _DartBotCardState extends State<DartBotCard> {
               child: Row(
                 children: [
                   AutoSizeText(
-                    'Dartbot Average',
+                    AppLocalizations.of(context).dartbotAverage,
                     maxLines: 1,
                   ),
                 ],
@@ -197,8 +201,12 @@ class _DartBotCardState extends State<DartBotCard> {
 
 class PlayersCard extends StatefulWidget {
   final List<PlayerSnapshot> players;
+  final VoidCallback onAddPlayerPressed;
+  final Function(String) onRemovePlayer;
 
-  PlayersCard(this.players);
+  PlayersCard(this.players, {this.onAddPlayerPressed, this.onRemovePlayer})
+      : assert(onAddPlayerPressed != null),
+        assert(onRemovePlayer != null);
 
   @override
   _PlayersCardState createState() => _PlayersCardState();
@@ -219,7 +227,7 @@ class _PlayersCardState extends State<PlayersCard> {
     return Card(
       flexHeader: 44,
       middle: AutoSizeText(
-        'Spieler',
+          AppLocalizations.of(context).players,
         maxLines: 1,
         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
@@ -234,7 +242,7 @@ class _PlayersCardState extends State<PlayersCard> {
               slivers: <Widget>[
                 ReorderableSliverList(
                   delegate: ReorderableSliverChildBuilderDelegate(
-                    (BuildContext context, int index) => PlayerItem(widget.players[index]),
+                    (BuildContext context, int index) => PlayerItem(widget.players[index], onDismissed: widget.onRemovePlayer,),
                     childCount: widget.players.length,
                   ),
                   onReorder: _onReorder,
@@ -252,11 +260,11 @@ class _PlayersCardState extends State<PlayersCard> {
                     Expanded(
                       child: CupertinoButton(
                         child: AutoSizeText(
-                          'Spieler hinzufügen',
+                          AppLocalizations.of(context).addPlayer,
                           maxLines: 1,
                           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.green),
                         ),
-                        onPressed: () {},
+                        onPressed: widget.onAddPlayerPressed,
                       ),
                     ),
                   ],
@@ -272,8 +280,9 @@ class _PlayersCardState extends State<PlayersCard> {
 
 class PlayerItem extends StatelessWidget {
   final PlayerSnapshot player;
+  final Function(String) onDismissed;
 
-  PlayerItem(this.player);
+  PlayerItem(this.player, {this.onDismissed});
 
   @override
   Widget build(BuildContext context) {
@@ -281,6 +290,7 @@ class PlayerItem extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 50 / 613,
       child: Dismissible(
           key: ValueKey(player),
+          onDismissed: (_) => onDismissed(player.id),
           background: Container(
             color: AppColors.red,
             child: Padding(
@@ -365,7 +375,7 @@ class PlayerItem extends StatelessWidget {
                 ),
               ),
             ],
-          )),
+          ),),
     );
     //return Placeholder();
   }
@@ -390,14 +400,16 @@ class GameSettingsCard extends StatefulWidget {
 class _GameSettingsCardState extends State<GameSettingsCard> {
   String valueStartingPoints = '0';
   String valueMode = '0';
+  int valueSize = 1;
   String valueType = '0';
+
 
   @override
   Widget build(BuildContext context) {
     return Card(
       flexHeader: 44,
       middle: AutoSizeText(
-        'Modus',
+        AppLocalizations.of(context).modus,
         maxLines: 1,
         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: AppColors.white),
       ),
@@ -415,7 +427,7 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
                   flex: 13,
                 ),
                 AutoSizeText(
-                  'Startwert',
+                  AppLocalizations.of(context).startingPoints,
                   maxLines: 1,
                 ),
                 Spacer(
@@ -448,7 +460,7 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
                   flex: 20,
                 ),
                 AutoSizeText(
-                  'Spielmodus',
+                  AppLocalizations.of(context).gameMode,
                   maxLines: 1,
                 ),
                 Spacer(
@@ -487,7 +499,12 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
                   child: CupertinoPicker(
                     children: [for (var i = 1; i <= 100; i += 1) Text(i.toString())],
                     itemExtent: 25,
-                    onSelectedItemChanged: (item) => widget.onSizeChanged(item + 1),
+                    onSelectedItemChanged: (item) {
+                      setState(() {
+                        valueSize = item + 1;
+                      });
+                      widget.onSizeChanged(valueSize);
+                    },
                   ),
                 ),
                 Spacer(
@@ -500,7 +517,7 @@ class _GameSettingsCardState extends State<GameSettingsCard> {
                       Expanded(
                         child: CupertinoSlidingSegmentedControl(
                           groupValue: valueType,
-                          children: {'0': Text('LEGS'), '1': Text('SETS')},
+                          children: {'0': Text(valueSize == 1 ? 'LEG' : 'LEGS'), '1': Text(valueSize == 1 ? 'SET' : 'SETS')},
                           onValueChanged: (newValue) {
                             setState(() {
                               valueType = newValue;
@@ -540,7 +557,7 @@ class AdvancedSettingsModal extends StatelessWidget {
               contentPadding: EdgeInsets.symmetric(horizontal: 25),
               tileColor: AppColors.black2,
               title: Text(
-                'Average anzeigen',
+                  AppLocalizations.of(context).showAverage,
                 style: TextStyle(color: AppColors.white),
               ),
               trailing: CupertinoSwitch(
@@ -552,7 +569,7 @@ class AdvancedSettingsModal extends StatelessWidget {
               contentPadding: EdgeInsets.symmetric(horizontal: 25),
               tileColor: AppColors.black2,
               title: Text(
-                'Doppelquote anzeigen',
+                AppLocalizations.of(context).showCheckoutPercentage,
                 style: TextStyle(color: AppColors.white),
               ),
               trailing: CupertinoSwitch(
@@ -588,7 +605,7 @@ class AdvancedSettingsModal extends StatelessWidget {
                               Expanded(
                                 flex: 70,
                                 child: AutoSizeText(
-                                  'Spieler entfernen',
+                                  AppLocalizations.of(context).removePlayer,
                                   minFontSize: 1,
                                   maxLines: 1,
                                   style: TextStyle(color: AppColors.white),
@@ -626,7 +643,7 @@ class AdvancedSettingsModal extends StatelessWidget {
                               padding: const EdgeInsets.all(6.0),
                               child: Center(
                                 child: AutoSizeText(
-                                  'Fertig',
+                                    AppLocalizations.of(context).done,
                                   minFontSize: 1,
                                   maxLines: 1,
                                   style: TextStyle(color: AppColors.white),

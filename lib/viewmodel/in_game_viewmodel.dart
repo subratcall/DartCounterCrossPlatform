@@ -1,6 +1,7 @@
-import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_counter/services/playing/playing_service.dart';
+import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:dart_game/dart_game.dart';
@@ -12,10 +13,10 @@ class InGameViewModel extends ViewModel {
   int _inputPoints = 0;
   GameSnapshot _currentSnapshot;
 
-  InGameViewModel() {
-    subscriptions.add(_playingService.gameSnapshots.listen((snapshot) {
-      currentSnapshot = snapshot;
-    }));
+  GameSnapshot get currentSnapshot => _currentSnapshot;
+  set currentSnapshot(GameSnapshot snapshot) {
+    _currentSnapshot = snapshot;
+    notifyListeners();
   }
 
   int get inputPoints => _inputPoints;
@@ -24,15 +25,26 @@ class InGameViewModel extends ViewModel {
     notifyListeners();
   }
 
-  GameSnapshot get currentSnapshot => _currentSnapshot;
-  set currentSnapshot(GameSnapshot snapshot) {
-    _currentSnapshot = snapshot;
-    notifyListeners();
+  InGameViewModel() {
+    currentSnapshot = _playingService.gameSnapshot;
+    subscriptions.add(_playingService.onEvent().listen((event) {
+      if(event is SnapshotEvent) {
+        currentSnapshot = event.item as GameSnapshot;
+      }
+    }));
   }
 
-  void onUndoPressed() {}
+  void onUndoPressed() {
+    // TODO reset only if true
+    _playingService.undoThrow();
+    inputPoints = 0;
+  }
 
-  void onPerformThrowPressed() {}
+  void onPerformThrowPressed() {
+    // TODO reset only if true
+    _playingService.performThrow(inputPoints);
+    inputPoints = 0;
+  }
 
   void onKeyPressed(KeyType key) {
     switch(key) {
@@ -94,14 +106,17 @@ class InGameViewModel extends ViewModel {
   }
 
   bool _digitIsValid(int newDigit) {
-    // TODO read current gamesnapshot from stream
-    GameSnapshot game = GameSnapshot.seed(Status.running);
-    int pointsLeft = game.currentTurn.pointsLeft;
+    int pointsLeft = _currentSnapshot.currentTurn.pointsLeft;
 
     int newInputPoints = int.parse(inputPoints.toString() + newDigit.toString());
 
     if(newInputPoints == 0) return false;
-    return ThrowValidator.isValidThrow(newInputPoints, pointsLeft);
+    try {
+      bool valid = ThrowValidator.isValidThrow(newInputPoints, pointsLeft);
+      return valid;
+    } on ArgumentError {
+      return false;
+    }
   }
 
 }
