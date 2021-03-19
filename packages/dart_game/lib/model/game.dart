@@ -249,6 +249,7 @@ class Game {
       // UNDO STANDARD THROW
       Throw last = _currentLeg.undoThrow();
       this._turnIndex = last.playerIndex;
+      // TODO index is buged
       _currentTurn.lastThrow = _currentLeg
           .throws[_currentLeg.throws.length + 1 - this.players.length].points;
       _currentTurn.pointsLeft += last.points;
