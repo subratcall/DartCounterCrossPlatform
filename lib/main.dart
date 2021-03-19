@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/locator.dart';
+import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/view/android/export.dart' as android;
 import 'package:dart_counter/view/ios/export.dart' as ios;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +11,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'services/database_service.dart';
 import 'app_model.dart';
 
 Future<void> main() async {

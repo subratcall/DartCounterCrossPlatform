@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/profile.dart';
+import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:image_picker/image_picker.dart';
 

@@ -18,10 +18,10 @@ import 'package:dart_counter/viewmodel/social_media_viewmodel.dart';
 import 'package:dart_counter/viewmodel/stats_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 
+import 'app_model.dart';
 import 'services/authentication_service.dart';
 import 'services/database_service.dart';
 import 'services/playing/playing_service.dart';
-import 'app_model.dart';
 
 GetIt locator = GetIt.instance;
 
