@@ -1,7 +1,17 @@
-class PlayingOnlineService {
+import 'dart:async';
+
+import 'package:dart_counter/services/playing/service.dart';
+
+class PlayingOnlineService extends AbstractPlayingService {
   static final PlayingOnlineService instance = PlayingOnlineService._();
 
   PlayingOnlineService._();
+
+  StreamController<Event> controller = StreamController<Event>.broadcast();
+
+  @override
+  // TODO: implement onEvent
+  Stream<Event> onEvent() => controller.stream;
 
   Future<bool> connect() {}
 
@@ -30,4 +40,9 @@ class PlayingOnlineService {
   void performThrow(int points, int dartsThrown, int dartsOnDouble) {}
 
   void undoThrow() {}
+
+  void dispose() {
+    controller.close();
+  }
+
 }

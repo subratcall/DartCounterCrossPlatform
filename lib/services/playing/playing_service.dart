@@ -1,16 +1,29 @@
+import 'package:dart_counter/model/snapshots/game_snapshot.dart';
 import 'package:dart_counter/services/playing/offline/playing_offline_service.dart';
 import 'package:dart_counter/services/playing/online/playing_online_service.dart';
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_game/dart_game.dart';
 
-class PlayingService {
+class PlayingService extends AbstractPlayingService {
   final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
   final PlayingOnlineService _playingOnlineService = PlayingOnlineService.instance;
 
-  bool _online;
+  bool _online = false;
 
-  // Stream from offline or online service provides all PlayingService events
-  Stream<GameSnapshot> get gameSnapshots => Stream.periodic(Duration(seconds: 2), (x) => GameSnapshot.seed(Status.running));
+  GameSnapshot gameSnapshot;
+
+  PlayingService() {
+    onEvent().listen((event) {
+      if(event is SnapshotEvent) {
+        gameSnapshot = event.item as GameSnapshot;
+      }
+    });
+  }
+
+  @override
+  Stream<Event> onEvent() {
+    return _online ? _playingOnlineService.onEvent() : _playingOfflineService.onEvent();
+  }
 
   bool get online => _online;
 
@@ -52,7 +65,9 @@ class PlayingService {
   }
 
   void setDartBotAverage(int average) {
-    _playingOfflineService.setDartBotAverage(average);
+    if(!online) {
+      _playingOfflineService.setDartBotAverage(average);
+    }
   }
 
   bool addPlayer() {
@@ -63,11 +78,11 @@ class PlayingService {
     }
   }
 
-  void removePlayer(int index) {
+  void removePlayer(String id) {
     if (online) {
-      _playingOnlineService.removePlayer(index);
+      //_playingOnlineService.removePlayer(id);
     } else {
-      _playingOfflineService.removePlayer(index);
+      _playingOfflineService.removePlayer(id);
     }
   }
 
