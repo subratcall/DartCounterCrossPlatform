@@ -3,7 +3,7 @@ part of dart_game;
 class ScoreGenerator {
   static int getScore(DartBot bot) {
     Random random = new Random();
-    double avg = double.parse(bot.average);
+    double avg =bot.average;
     int pointsLeft = bot.pointsLeft;
 
     if (bot.dartsThrown < 9) {

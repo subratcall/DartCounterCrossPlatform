@@ -1,47 +1,92 @@
 part of dart_game;
 
 class Game {
+  /// INTERFACE
+  Status get status => _status;
+  final Config config;
+  List<Player> get players => _players;
+  List<Set> get sets => _sets;
 
-  Config config;
-  Status status;
-
-  List<Player> players;
-  List<Set> sets;
-
-  int _turnIndex;
-
-  Game() {
-    this.config = Config();
-    this.status = Status.pending;
-    this.players = [];
-    this.sets = [];
-    this._turnIndex = 0;
-    addPlayer(Player());
+  bool get hasDartBot => _dartBotIndex != -1;
+  DartBot get dartBot => hasDartBot ? players[_dartBotIndex] : null;
+  bool get hasWinner => winner != null;
+  Player get winner {
+    switch (config.type) {
+      case Type.legs:
+        int legsNeededToWin;
+        switch (config.mode) {
+          case Mode.firstTo:
+            legsNeededToWin = config.size;
+            for (Player player in _players) {
+              if (player.legs == legsNeededToWin) {
+                return player;
+              }
+            }
+            break;
+          case Mode.bestOf:
+            legsNeededToWin = (config.size / 2).round();
+            for (Player player in _players) {
+              if (player.legs == legsNeededToWin) {
+                return player;
+              }
+            }
+            break;
+        }
+        break;
+      case Type.sets:
+        int setsNeededToWin;
+        switch (config.mode) {
+          case Mode.firstTo:
+            setsNeededToWin = config.size;
+            for (Player player in _players) {
+              if (player.sets == setsNeededToWin) {
+                return player;
+              }
+            }
+            break;
+          case Mode.bestOf:
+            setsNeededToWin = (config.size / 2).round();
+            for (Player player in _players) {
+              if (player.sets == setsNeededToWin) {
+                return player;
+              }
+            }
+            break;
+        }
+        break;
+    }
+    return null;
   }
 
+  Game()
+      : _status = Status.pending,
+        config = Config(),
+        _players = [Player()],
+        _sets = [];
+
   bool addPlayer(Player player) {
-    if (players.length < 4) {
-      players.add(player);
+    if (_players.length < 4) {
+      _players.add(player);
       return true;
     }
     return false;
   }
 
-  void removePlayer(int index) {
-    players.removeAt(index);
+  void removePlayer(String id) {
+    _players.removeWhere((player) => player.id == id);
   }
 
   bool addDartBot() {
-    if (dartBotIndex == -1) {
-      players.add(new DartBot(20));
+    if (!hasDartBot) {
+      _players.add(DartBot());
       return true;
     }
     return false;
   }
 
   void removeDartBot() {
-    if (dartBotIndex != -1) {
-      this.players.removeAt(dartBotIndex);
+    if (hasDartBot) {
+      _players.removeAt(_dartBotIndex);
     }
   }
 
@@ -49,13 +94,13 @@ class Game {
     _createSet();
     _createLeg();
     _initPlayers();
-    status = Status.running;
+    _status = Status.running;
   }
 
   bool performThrow(Throw t) {
     if (true) {
       // TODO THROW VALIDATION
-      _currentTurn.isNext = false;
+      _currentTurn.isCurrentTurn = false;
 
       // sets the player who threw
       t.playerIndex = _turnIndex;
@@ -67,19 +112,19 @@ class Game {
       _currentTurn.lastThrow = t.points;
       _currentTurn.pointsLeft -= t.points;
       _currentTurn.dartsThrown += t.dartsThrown;
-      _currentTurn.average = this._averageCurrentTurn;
-      _currentTurn.checkoutPercentage = this._checkoutPercentageCurrentTurn;
+      _currentTurn.average = _averageCurrentTurn;
+      _currentTurn.checkoutPercentage = _checkoutPercentageCurrentTurn;
 
       // updates the reference to the Player who has next turn
       // updates the player data and creates next leg and set when needed
       if (_currentLeg.winner != -1) {
         if (_currentSet.winner != -1) {
           int sets = -1;
-          if (this.config.type == Type.sets) {
+          if (config.type == Type.sets) {
             sets = _currentTurn.sets + 1;
           }
           int legs;
-          if (this.config.type == Type.legs) {
+          if (config.type == Type.legs) {
             legs = _currentTurn.legs + 1;
           } else {
             legs = 0;
@@ -88,42 +133,42 @@ class Game {
           _currentTurn.pointsLeft = 0;
           _currentTurn.sets = sets;
           _currentTurn.legs = legs;
-          if (this.winner != null) {
+          if (winner != null) {
             // GAME FINISHED
-            this.status = Status.finished;
+            _status = Status.finished;
           } else {
             // CONTINUE NEW SET
-            for (int i = 0; i < this.players.length; i++) {
-              Player player = players[i];
-              player.pointsLeft = this.config.startingPoints;
+            for (int i = 0; i < _players.length; i++) {
+              Player player = _players[i];
+              player.pointsLeft = config.startingPoints;
               player.dartsThrown = 0;
               player.legs = 0;
             }
-            this._turnIndex = (_currentSet.startIndex + 1) % this.players.length;
+            _turnIndex = (_currentSet.startIndex + 1) % _players.length;
             _createSet();
             _createLeg();
           }
         } else {
           // CONTINUE NEW LEG
-          for (int i = 0; i < this.players.length; i++) {
-            Player player = players[i];
+          for (int i = 0; i < _players.length; i++) {
+            Player player = _players[i];
             int legs = player.legs;
-            if (i == this._turnIndex) {
+            if (i == _turnIndex) {
               legs += 1;
             }
-            player.pointsLeft = this.config.startingPoints;
+            player.pointsLeft = config.startingPoints;
             player.dartsThrown = 0;
             player.legs = legs;
           }
-          this._turnIndex = (_currentLeg.startIndex + 1) % this.players.length;
+          _turnIndex = (_currentLeg.startIndex + 1) % _players.length;
           _createLeg();
         }
       } else {
         // CONTINUE
-        this._turnIndex = (this._turnIndex + 1) % this.players.length;
+        _turnIndex = (_turnIndex + 1) % _players.length;
       }
 
-      _currentTurn.isNext = true;
+      _currentTurn.isCurrentTurn = true;
 
       if (_currentTurn is DartBot && _currentLeg.winner == -1) {
         performDartBotThrow();
@@ -133,7 +178,6 @@ class Game {
     return false;
   }
 
-  // TODO test
   void performDartBotThrow() {
     int randomScore = ScoreGenerator.getScore(_currentTurn as DartBot);
     Throw t;
@@ -142,9 +186,9 @@ class Game {
       if (ThrowValidator.isValidThrowWithOneDartThrown(randomScore, _currentTurn.pointsLeft)) {
         t = new Throw(randomScore, 1, 1);
       } else if (ThrowValidator.isValidThrowWithThreeDartsThrown(randomScore, _currentTurn.pointsLeft)) {
-        t = new Throw(randomScore, 1, 3);
+        t = new Throw(randomScore, 3, 1);
       } else {
-        t = new Throw(randomScore, 1, 2);
+        t = new Throw(randomScore, 2, 1);
       }
     } else {
       t = new Throw(randomScore);
@@ -153,41 +197,34 @@ class Game {
   }
 
   void undoThrow() {
-    if (sets.length == 1 &&
-        sets[0].legs.length == 1 &&
-        _currentLeg.throws.length == 0) {
+    if (_sets.length == 1 && _sets[0].legs.length == 1 && _currentLeg.throws.length == 0) {
       // NO THROW PERFORMED YET -> do nothing
       return;
     }
 
-    _currentTurn.isNext = false;
+    _currentTurn.isCurrentTurn = false;
 
-    if (sets.length == 1 &&
-        sets[0].legs.length == 1 &&
-        _currentLeg.throws.length == 1) {
+    if (_sets.length == 1 && _sets[0].legs.length == 1 && _currentLeg.throws.length == 1) {
       // UNDO FIRST THROW OF GAME
       Throw last = _currentLeg.undoThrow();
-      this._turnIndex = last.playerIndex;
+      _turnIndex = last.playerIndex;
       _currentTurn.lastThrow = -1;
-      _currentTurn.pointsLeft = this.config.startingPoints;
+      _currentTurn.pointsLeft = config.startingPoints;
       _currentTurn.dartsThrown = 0;
-      _currentTurn.average = "0.00";
-      _currentTurn.checkoutPercentage = "0.00";
-    } else if (this.sets.length >= 2 &&
-        _currentSet.legs.length == 1 &&
-        _currentLeg.throws.length == 0) {
+      _currentTurn.average = 0;
+      _currentTurn.checkoutPercentage = 0;
+    } else if (_sets.length >= 2 && _currentSet.legs.length == 1 && _currentLeg.throws.length == 0) {
       // UNDO LAST THROW OF SET
-      this.sets.removeLast();
+      _sets.removeLast();
       Throw last = _currentLeg.undoThrow();
-      this._turnIndex = last.playerIndex;
+      _turnIndex = last.playerIndex;
 
       // restore player data
-      for (int i = 0; i < this.players.length; i++) {
-        Player player = this.players[i];
+      for (int i = 0; i < _players.length; i++) {
+        Player player = _players[i];
 
-        if (this._turnIndex == i) {
-          player.lastThrow = _currentLeg
-              .throws[_currentLeg.throws.length - this.players.length].points;
+        if (_turnIndex == i) {
+          player.lastThrow = _currentLeg.throws[_currentLeg.throws.length - _players.length].points;
           player.average = _averageCurrentTurn;
           player.checkoutPercentage = _checkoutPercentageCurrentTurn;
         }
@@ -197,8 +234,8 @@ class Game {
 
         int s = 0;
         int l = 0;
-        for (Set set in this.sets) {
-          if (this.config.type == Type.sets) {
+        for (Set set in _sets) {
+          if (config.type == Type.sets) {
             if (set.winner == i) {
               s += 1;
             }
@@ -220,15 +257,14 @@ class Game {
       // UNDO LAST THROW OF LEG
       _currentSet.legs.removeLast();
       Throw last = _currentLeg.undoThrow();
-      this._turnIndex = last.playerIndex;
+      _turnIndex = last.playerIndex;
 
       // restore player data
-      for (int i = 0; i < this.players.length; i++) {
-        Player player = this.players[i];
+      for (int i = 0; i < _players.length; i++) {
+        Player player = _players[i];
 
-        if (this._turnIndex == i) {
-          player.lastThrow = _currentLeg
-              .throws[_currentLeg.throws.length - this.players.length].points;
+        if (_turnIndex == i) {
+          player.lastThrow = _currentLeg.throws[_currentLeg.throws.length - _players.length].points;
           player.average = _averageCurrentTurn;
           player.checkoutPercentage = _checkoutPercentageCurrentTurn;
         }
@@ -248,122 +284,60 @@ class Game {
     } else {
       // UNDO STANDARD THROW
       Throw last = _currentLeg.undoThrow();
-      this._turnIndex = last.playerIndex;
+      _turnIndex = last.playerIndex;
       // TODO index is buged
-      _currentTurn.lastThrow = _currentLeg
-          .throws[_currentLeg.throws.length + 1 - this.players.length].points;
+      _currentTurn.lastThrow = _currentLeg.throws[_currentLeg.throws.length + 1 - _players.length].points;
       _currentTurn.pointsLeft += last.points;
       _currentTurn.dartsThrown -= last.dartsThrown;
     }
 
-    _currentTurn.isNext = true;
+    _currentTurn.isCurrentTurn = true;
     _currentTurn.average = _averageCurrentTurn;
     _currentTurn.checkoutPercentage = _checkoutPercentageCurrentTurn;
   }
 
-  String get description {
-    return config.mode
-            .toString()
-            .replaceAll("GameMode.", " ")
-            .replaceAll("_", " ") +
-        " " +
-        config.size.toString() +
-        " " +
-        config.type.toString().replaceAll("GameType.", " ");
-  }
-
-  int get dartBotIndex {
-    for (int i = 0; i < this.players.length; i++) {
-      Player player = this.players[i];
-      if (player is DartBot) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  Player get winner {
-    switch (this.config.type) {
-      case Type.legs:
-        int legsNeededToWin;
-        switch (this.config.mode) {
-          case Mode.firstTo:
-            legsNeededToWin = this.config.size;
-            for (Player player in this.players) {
-              if (player.legs == legsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-          case Mode.bestOf:
-            legsNeededToWin = (this.config.size / 2).round();
-            for (Player player in this.players) {
-              if (player.legs == legsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-        }
-        break;
-      case Type.sets:
-        int setsNeededToWin;
-        switch (this.config.mode) {
-          case Mode.firstTo:
-            setsNeededToWin = this.config.size;
-            for (Player player in this.players) {
-              if (player.sets == setsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-          case Mode.bestOf:
-            setsNeededToWin = (this.config.size / 2).round();
-            for (Player player in this.players) {
-              if (player.sets == setsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-        }
-        break;
-    }
-    return null;
+  /// INTERNAL
+  Status _status;
+  List<Player> _players;
+  List<Set> _sets;
+  int _turnIndex;
+  int get _dartBotIndex {
+    return players.indexWhere((player) => player is DartBot);
   }
 
   Set get _currentSet {
-    return this.sets.last;
+    return _sets.last;
   }
 
   Leg get _currentLeg {
-    return this._currentSet.legs.last;
+    return _currentSet.legs.last;
   }
 
   Player get _currentTurn {
-    return this.players[_turnIndex];
+    return _players[_turnIndex];
   }
 
-  String get _averageCurrentTurn {
+  double get _averageCurrentTurn {
     int totalDartsThrown = 0;
     int totalPointsScored = 0;
-    for (Set set in this.sets) {
+    for (Set set in _sets) {
       for (Leg leg in set.legs) {
         totalDartsThrown += leg.dartsThrown[_turnIndex];
-        totalPointsScored +=
-            (this.config.startingPoints - leg.pointsLeft[_turnIndex]);
+        totalPointsScored += (config.startingPoints - leg.pointsLeft[_turnIndex]);
       }
     }
     if (totalDartsThrown == 0) {
-      return "0.00";
+      return 0;
     }
-    return ((3 * totalPointsScored) / totalDartsThrown).toStringAsFixed(2);
+    return ((3 * totalPointsScored) / totalDartsThrown);
   }
 
-  String get _checkoutPercentageCurrentTurn {
+  double get _checkoutPercentageCurrentTurn {
     int totalLegsWon = 0;
     int totalDartsOnDouble = 0;
-    for (Set set in this.sets) {
+    for (Set set in _sets) {
       for (Leg leg in set.legs) {
-        if (leg.winner == this._turnIndex) {
+        if (leg.winner == _turnIndex) {
           totalLegsWon += 1;
         }
         totalDartsOnDouble += leg.dartsOnDouble[_turnIndex];
@@ -371,66 +345,61 @@ class Game {
     }
 
     if (totalDartsOnDouble == 0) {
-      return "0.00";
+      return 0;
     }
-    return ((totalLegsWon / totalDartsOnDouble) * 100).toStringAsFixed(2);
+    return ((totalLegsWon / totalDartsOnDouble) * 100);
   }
 
   void _createSet() {
-    if (this.config.mode == Mode.firstTo) {
-      if (this.config.type == Type.legs) {
-        this.sets.add(new Set(_turnIndex, this.config.size));
+    if (config.mode == Mode.firstTo) {
+      if (config.type == Type.legs) {
+        _sets.add(Set(_turnIndex, config.size));
       } else {
-        this.sets.add(new Set(_turnIndex, 3));
+        _sets.add(Set(_turnIndex, 3));
       }
     } else {
       if (config.type == Type.legs) {
-        this.sets.add(new Set(_turnIndex, (this.config.size / 2).round()));
+        _sets.add(Set(_turnIndex, (config.size / 2).round()));
       } else {
-        this.sets.add(new Set(_turnIndex, 3));
+        _sets.add(Set(_turnIndex, 3));
       }
     }
   }
 
   void _createLeg() {
-    this._currentSet.legs.add(new Leg(
-        this._turnIndex, this.players.length, this.config.startingPoints));
+    _currentSet.legs.add(Leg(_turnIndex, _players.length, config.startingPoints));
   }
 
   void _initPlayers() {
     int index = 1;
-    for (Player player in this.players) {
-      if (player.name == "") {
-        player.name = "Player ${index}";
+    for (Player player in _players) {
+      if (player.name == '') {
+        player.name = 'Player $index}';
         index++;
       }
-      player.isNext = false;
+      player.isCurrentTurn = false;
       player.lastThrow = -1;
-      player.pointsLeft = this.config.startingPoints;
+      player.pointsLeft = config.startingPoints;
       player.dartsThrown = 0;
-      if (this.config.type == Type.sets) {
-        player.sets = 0;
-      } else {
-        player.sets = -1;
-      }
+      player.sets = config.type == Type.sets ? 0 : -1;
       player.legs = 0;
-      player.average = "0.00";
-      player.checkoutPercentage = "0.00";
+      player.average = 0;
+      player.checkoutPercentage = 0;
     }
-    this.players[_turnIndex].isNext = true;
+    _currentTurn.isCurrentTurn = true;
   }
 
   @override
   String toString() {
-    return 'Game{config: $config, status: $status, players: $players, sets: $sets, turnIndex: $_turnIndex}';
+    return 'Game{config: $config, status: $_status, players: $_players, sets: $_sets, turnIndex: $_turnIndex}';
   }
 
   @override
   bool operator ==(other) {
-    Game o = other as Game;
-    return this.config == o.config &&
-        listEquals(this.players, o.players) &&
-        listEquals(this.sets, o.sets) &&
-        this._turnIndex == o._turnIndex;
+    Game o = other;
+    return config == o.config &&
+        listEquals(_players, o._players) &&
+        listEquals(_sets, o._sets) &&
+        _turnIndex == o._turnIndex;
   }
 }

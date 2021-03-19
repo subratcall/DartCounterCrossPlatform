@@ -1,20 +1,22 @@
 part of dart_game;
 
 class Leg {
-  List pointsLeft;
-  List dartsThrown;
-  List dartsOnDouble;
-  List throws;
+
+  String id;
+  List<int> pointsLeft;
+  List<int> dartsThrown;
+  List<int> dartsOnDouble;
+  List<Throw> throws;
   int startIndex;
 
-  Leg(this.startIndex, int numberOfPlayers, int startingPoints) {
-    this.pointsLeft = new List<int>.filled(numberOfPlayers, startingPoints);
-    this.dartsThrown = new List<int>.filled(numberOfPlayers, 0);
-    this.dartsOnDouble = new List<int>.filled(numberOfPlayers, 0);
-    this.throws = new List();
-  }
+  Leg(this.startIndex, int numberOfPlayers, int startingPoints)
+      : this.pointsLeft = List.filled(numberOfPlayers, startingPoints),
+        this.dartsThrown = List.filled(numberOfPlayers, 0),
+        this.dartsOnDouble = List.filled(numberOfPlayers, 0),
+        this.throws = [];
 
-  Leg.fromJson(Map<String, dynamic> json) {
+
+  /*Leg.fromJson(Map<String, dynamic> json) {
     pointsLeft = json['pointsLeft'];
     dartsThrown = json['dartsThrown'];
     dartsOnDouble = json['dartsOnDouble'];
@@ -29,7 +31,7 @@ class Leg {
     'throws': throws,
     'startIndex': startIndex,
   };
-
+*/
   void performThrow(Throw t) {
     this.pointsLeft[t.playerIndex] -= t.points;
     this.dartsThrown[t.playerIndex] += t.dartsThrown;
@@ -43,7 +45,6 @@ class Leg {
     this.dartsThrown[last.playerIndex] -= last.dartsThrown;
     this.dartsOnDouble[last.playerIndex] -= last.dartsOnDouble;
     this.throws.removeLast();
-
     return last;
   }
 
@@ -58,7 +59,7 @@ class Leg {
 
   @override
   bool operator ==(other) {
-    Leg o = other as Leg;
+    Leg o = other;
     return listEquals(this.pointsLeft, o.pointsLeft) &&
         listEquals(this.dartsThrown, o.dartsThrown) &&
         listEquals(this.dartsOnDouble, o.dartsOnDouble) &&

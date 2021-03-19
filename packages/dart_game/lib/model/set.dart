@@ -1,16 +1,15 @@
 part of dart_game;
 
 class Set {
-  List legs;
+
+  final String id;
+  List<Leg> legs;
   int legsNeededToWin;
   int startIndex;
 
-  Set(this.startIndex, int legsNeededToWin) {
-    this.legs = new List();
-    this.legsNeededToWin = legsNeededToWin;
-  }
+  Set(this.startIndex, this.legsNeededToWin) :  id = Uuid().v4(), legs = [];
 
-  Set.fromJson(Map<String, dynamic> json) {
+  /*Set.fromJson(Map<String, dynamic> json) {
     legs = json['legs'] != null ? json['legs'].map((value) => Leg.fromJson(value)).toList(): null;
     legsNeededToWin = json['legsNeededToWin'];
     startIndex = json['startIndex'];
@@ -20,10 +19,10 @@ class Set {
     'legs': legs,
     'legsNeededToWin': legsNeededToWin,
     'startIndex': startIndex
-  };
+  };*/
 
   int get winner {
-    List winners = new List();
+    List<int> winners = [];
     for (Leg leg in legs) {
       winners.add(leg.winner);
     }
@@ -47,7 +46,7 @@ class Set {
 
   @override
   bool operator ==(other) {
-    Set o = other as Set;
+    Set o = other;
     return listEquals(this.legs, o.legs) &&
         this.legsNeededToWin == o.legsNeededToWin &&
         this.startIndex == o.startIndex;

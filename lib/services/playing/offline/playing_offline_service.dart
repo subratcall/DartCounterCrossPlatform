@@ -70,7 +70,7 @@ class PlayingOfflineService extends AbstractPlayingService {
   }
 
   void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-    _game.performThrow(Throw(points, dartsOnDouble, dartsThrown));
+    _game.performThrow(Throw(points, dartsThrown, dartsOnDouble));
     controller.add(SnapshotEvent(GameSnapshot.from(_game)));
   }
 

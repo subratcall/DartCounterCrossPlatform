@@ -4,7 +4,7 @@ class Player {
 
   String id;
   String name;
-  bool isNext;
+  bool isCurrentTurn;
 
   int lastThrow;
   int pointsLeft;
@@ -13,19 +13,13 @@ class Player {
   int sets;
   int legs;
 
-  String average;
-  String checkoutPercentage;
+  double average;
+  double checkoutPercentage;
 
   bool isWinner;
 
-  Player([this.name]) {
-    id = Uuid().v4();
-
-    if (name == null) {
-      name = "";
-    }
-  }
-
+  Player([this.name = '']) : id = Uuid().v4();
+/*
   Player.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -52,7 +46,7 @@ class Player {
         'average': average,
         'checkoutPercentage': checkoutPercentage,
         'isWinner': isWinner,
-      };
+      };*/
 
   @override
   String toString() {
@@ -61,7 +55,7 @@ class Player {
 
   @override
   bool operator ==(other) {
-    Player o = other as Player;
+    Player o = other;
     return this.id == o.id;
   }
 }

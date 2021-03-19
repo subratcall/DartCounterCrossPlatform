@@ -1,21 +1,16 @@
 part of dart_game;
 
 class Throw {
+
+  String id;
   int points;
   int dartsOnDouble;
   int dartsThrown;
   int playerIndex;
 
-  Throw(this.points, [this.dartsOnDouble, this.dartsThrown]) {
-    if (dartsThrown == null) {
-      dartsThrown = 3;
-    }
-    if (dartsOnDouble == null) {
-      dartsOnDouble = 0;
-    }
-  }
+  Throw(this.points, [this.dartsThrown = 3, this.dartsOnDouble = 0]) : id = Uuid().v4();
 
-  Throw.fromJson(Map<String, dynamic> json) {
+  /*Throw.fromJson(Map<String, dynamic> json) {
     points = json['points'];
     dartsOnDouble = json['dartsOnDouble'];
     dartsThrown = json['dartsThrown'];
@@ -27,7 +22,7 @@ class Throw {
     'dartsOnDouble' : dartsOnDouble,
     'dartsThrown' : dartsThrown,
     'playerIndex' : playerIndex,
-  };
+  };*/
 
   @override
   String toString() {
@@ -36,7 +31,7 @@ class Throw {
 
   @override
   bool operator ==(other) {
-    Throw t = other as Throw;
+    Throw t = other;
     return this.points == t.points &&
         this.dartsOnDouble == t.dartsOnDouble &&
         this.dartsThrown == t.dartsThrown &&
