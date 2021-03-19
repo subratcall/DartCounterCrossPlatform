@@ -53,5 +53,17 @@
   "takePhoto": "Foto aufnehmen",
   "choosePhoto": "Foto auswählen",
 
-  "dartsThrown": "Geworfene Darts"
+  "dartsThrown": "Geworfene Darts",
+
+  "dartbot": "Dartbot",
+  "dartbotAverage" : "Dartbot average",
+  "players" : "Spieler",
+  "addPlayer" : "Spieler hinzufügen",
+  "modus" : "Modus",
+  "startingPoints" : "Startwert",
+  "gameMode" : "Spielmodus",
+  "showAverage" : "Average anzeigen",
+  "showCheckoutPercentage" : "Doppelquote anzeigen",
+  "removePlayer" : "Spieler entfernen",
+  "done" : "Fertig"
 }

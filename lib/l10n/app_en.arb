@@ -154,6 +154,41 @@
     "description": "word"
   },
 
+  "@dartbot": {
+    "description": "word"
+  },
+  "@dartbotAverage": {
+    "description": "word"
+  },
+  "@players": {
+    "description": "word"
+  },
+  "@addPlayer": {
+    "description": "word"
+  },
+  "@modus": {
+    "description": "word"
+  },
+  "@startingPoints": {
+    "description": "word"
+  },
+  "@gameMode": {
+    "description": "word"
+  },
+  "@showAverage": {
+    "description": "word"
+  },
+  "@showCheckoutPercentage": {
+    "description": "word"
+  },
+  "@removePlayer": {
+    "description": "word"
+  },
+  "@done": {
+    "description": "word"
+  },
+
+
   "aboutUs": "About Us",
   "cancel": "Cancel",
   "checkMailAccountForPasswordResetLink": "Check your email account to reset your password.",
@@ -208,5 +243,17 @@
   "takePhoto": "Take Photo",
   "choosePhoto": "Choose Photo",
 
-  "dartsThrown": "Darts thrown"
+  "dartsThrown": "Darts thrown",
+
+  "dartbot": "Dartbot",
+  "dartbotAverage" : "Dartbot average",
+  "players" : "Players",
+  "addPlayer" : "Add Player",
+  "modus" : "Modus",
+  "startingPoints" : "Points",
+  "gameMode" : "Gamemode",
+  "showAverage" : "Show Average",
+  "showCheckoutPercentage" : "Show CheckoutPercentage",
+  "removePlayer" : "Remove Player",
+  "done" : "Done"
 }
