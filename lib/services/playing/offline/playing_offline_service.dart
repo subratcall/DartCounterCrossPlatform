@@ -33,7 +33,9 @@ class PlayingOfflineService extends AbstractPlayingService {
   }
 
   void setDartBotAverage(int average) {
-    _game.dartBot.targetAverage = average;
+    if(_game.hasDartBot) {
+      _game.dartBot.targetAverage = average;
+    }
   }
 
   void addPlayer() {
