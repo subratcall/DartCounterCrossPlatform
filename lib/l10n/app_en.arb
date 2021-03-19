@@ -187,7 +187,27 @@
   "@done": {
     "description": "word"
   },
-
+  "@category": {
+    "description": "word"
+  },
+  "@sets": {
+    "description": "word"
+  },
+  "@legs": {
+    "description": "word"
+  },
+  "@bestLeg": {
+    "description": "word"
+  },
+  "@worstLeg": {
+    "description": "word"
+  },
+  "@dartsPerLeg": {
+    "description": "word"
+  },
+  "@highestFinish": {
+    "description": "word"
+  },
 
   "aboutUs": "About Us",
   "cancel": "Cancel",
@@ -255,5 +275,13 @@
   "showAverage" : "Show Average",
   "showCheckoutPercentage" : "Show CheckoutPercentage",
   "removePlayer" : "Remove Player",
-  "done" : "Done"
+  "done" : "Done",
+
+  "category" : "Category",
+  "sets" : "Sets",
+  "legs" : "Legs",
+  "bestLeg": "Best leg",
+  "worstLeg": "Worst leg",
+  "dartsPerLeg" : "Darts/leg",
+  "highestFinish" : "Highest Finish"
 }

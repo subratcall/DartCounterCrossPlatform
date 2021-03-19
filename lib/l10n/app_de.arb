@@ -65,5 +65,13 @@
   "showAverage" : "Average anzeigen",
   "showCheckoutPercentage" : "Doppelquote anzeigen",
   "removePlayer" : "Spieler entfernen",
-  "done" : "Fertig"
+  "done" : "Fertig",
+
+  "category" : "Kategorie",
+  "sets" : "Sets",
+  "legs" : "Legs",
+  "bestLeg": "Bestes leg",
+  "worstLeg": "Schlechtestes leg",
+  "dartsPerLeg" : "Darts/leg",
+  "highestFinish" : "Höchstes Finish"
 }
