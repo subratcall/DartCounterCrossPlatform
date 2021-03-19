@@ -19,7 +19,9 @@ class ScoreGenerator {
     }
 
     if (score >= pointsLeft) {
-      if (ThrowValidator.isThreeDartFinish(pointsLeft)) {
+      // TODO uncomment and instead of true in if
+      /*ThrowValidator.canCheckWithThreeDartsThrown(pointsLeft)*/
+      if (true) {
         return pointsLeft;
       } else {
         return getScore(bot);

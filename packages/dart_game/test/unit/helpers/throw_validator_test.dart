@@ -116,7 +116,87 @@ void main() {
       // Act & Assert
       expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pointsLeft), false);
     });
-    // TODO
+
+    test('GIVEN pointsLeft is oneDartFinish WHEN points = 0 THEN return true', () {
+      // Arrange
+      final int points = 0;
+      final List<int> pointsLeft = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pl), true);
+      }
+    });
+    test('GIVEN pointsLeft is twoDartFinish WHEN points = 0 THEN return true', () {
+      // Arrange
+      final int points = 0;
+      final int pointsLeft = 60;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pointsLeft), true);
+    });
+    test('GIVEN pointsLeft is threeDartFinish WHEN points = 0 THEN return true', () {
+      // Arrange
+      final int points = 0;
+      final List<int> pointsLeft = [99, 102, 103, 105, 106, 108, 109, 160, 161, 164, 167, 170] + List.generate(158 - 111 + 1, (i) => i + 111);
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pl), true);
+      }
+    });
+    test('GIVEN pointsLeft is no finish WHEN points = 0 THEN return false', () {
+      // Arrange
+      final int points = 0;
+      final List<int> pointsLeft = [169, 168, 166, 165, 163, 162, 159, 171, 172,173,174,175,176,177,178,179,180];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pl), false);
+      }
+    });
+
+    test('GIVEN pointsLeft is oneDartFinish > 2 WHEN points = 1 THEN return true', () {
+      // Arrange
+      final int points = 1;
+      final List<int> pointsLeft = [4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pl), true);
+      }
+    });
+    test('GIVEN pointsLeft-1 is oneDartFinish WHEN points = 1 THEN return true', () {
+      // Arrange
+      final int points = 1;
+      final List<int> pointsLeft = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pl+1), true);
+      }
+    });
+    test('GIVEN pointsLeft = 2 WHEN points = 1 THEN return false', () {
+      // Arrange
+      final int points = 1;
+      final int pointsLeft = 2;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pointsLeft), false);
+    });
+    test('GIVEN pointsLeft > 51 WHEN points = 1 THEN return false', () {
+      // Arrange
+      final int points = 1;
+      final List<int> pointsLeft = List.generate(129, (index) => index+52);
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithOneDartOnDouble(points, pl), false);
+      }
+    });
+
+
+    // TODO when person throws 10 with 150 left and says 1 dart on double
   });
 
 
@@ -165,7 +245,87 @@ void main() {
       // Act & Assert
       expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pointsLeft), false);
     });
-    // TODO
+
+    test('GIVEN pointsLeft is oneDartFinish WHEN points = 0 THEN return true', () {
+      // Arrange
+      final int points = 0;
+      final List<int> pointsLeft = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pl), true);
+      }
+    });
+    test('GIVEN pointsLeft is twoDartFinish WHEN points = 0 THEN return true', () {
+      // Arrange
+      final int points = 0;
+      final int pointsLeft = 60;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pointsLeft), true);
+    });
+    test('GIVEN pointsLeft is threeDartFinish WHEN points = 0 THEN return false', () {
+      // Arrange
+      final int points = 0;
+      final List<int> pointsLeft = [99, 102, 103, 105, 106, 108, 109, 160, 161, 164, 167, 170] + List.generate(158 - 111 + 1, (i) => i + 111);
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pl), false);
+      }
+    });
+    test('GIVEN pointsLeft is no finish WHEN points = 0 THEN return false', () {
+      // Arrange
+      final int points = 0;
+      final List<int> pointsLeft = [169, 168, 166, 165, 163, 162, 159, 171, 172,173,174,175,176,177,178,179,180];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pl), false);
+      }
+    });
+
+    test('GIVEN pointsLeft is oneDartFinish > 2 WHEN points = 1 THEN return true', () {
+      // Arrange
+      final int points = 1;
+      final List<int> pointsLeft = [4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pl), true);
+      }
+    });
+    test('GIVEN pointsLeft-1 is oneDartFinish WHEN points = 1 THEN return true', () {
+      // Arrange
+      final int points = 1;
+      final List<int> pointsLeft = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pl+1), true);
+      }
+    });
+    test('GIVEN pointsLeft = 2 WHEN points = 1 THEN return false', () {
+      // Arrange
+      final int points = 1;
+      final int pointsLeft = 2;
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pointsLeft), false);
+    });
+    test('GIVEN pointsLeft > 51 WHEN points = 1 THEN return false', () {
+      // Arrange
+      final int points = 1;
+      final List<int> pointsLeft = List.generate(129, (index) => index+52);
+
+      // Act & Assert
+      for(int pl in pointsLeft) {
+        expect(ThrowValidator.isValidThrowWithTwoDartsOnDouble(points, pl), false);
+      }
+    });
+
+
+    // TODO when person throws 10 with 150 left and says 2 dart on double
   });
 
   // Fertig
@@ -588,8 +748,18 @@ void main() {
       // Act & Assert
       expect(ThrowValidator.isValidThrow(points, pointsLeft), false);
     });
-    // TODO
 
+    test('GIVEN points = 170, pointsLeft 170 WHEN dartsThrown = 3, dartsOnDouble = 1 THEN return true', () {
+      // Arrange
+      final int points = 170;
+      final int pointsLeft = 170;
+      final int dartsThrown = 3;
+      final int dartsOnDouble = 1;
+
+
+      // Act & Assert
+      expect(ThrowValidator.isValidThrow(points, pointsLeft, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble), true);
+    });
     /*test('GIVEN points > pointsLeft WHEN isValidThrow is called THEN return false', () {
       // Arrange
       final int points = 100;

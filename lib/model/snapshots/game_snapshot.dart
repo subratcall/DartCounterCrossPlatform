@@ -1,6 +1,6 @@
 import 'package:dart_counter/model/snapshots/player_snapshot.dart';
-import 'package:faker/faker.dart';
 import 'package:dart_game/dart_game.dart';
+import 'package:faker/faker.dart';
 
 class GameSnapshot {
 
@@ -12,7 +12,23 @@ class GameSnapshot {
 
   List<PlayerSnapshot> players;
 
+  String get description {
+    return (mode == Mode.firstTo ? 'First to ' : 'Best of ') + size.toString() + (type == Type.legs ? ' leg' : ' set') + (size == 1 ? '' : 's');
+  }
+
   GameSnapshot(this.status, this.mode, this.type, this.size, this.startingPoints, this.players);
+
+  GameSnapshot.from(Game game) {
+    status = game.status;
+    mode = game.config.mode;
+    type = game.config.type;
+    size = game.config.size;
+    startingPoints = game.config.startingPoints;
+    players = [];
+    for(Player player in game.players) {
+      players.add(PlayerSnapshot.from(player));
+    }
+  }
 
   GameSnapshot.seed(this.status) {
     mode = faker.randomGenerator.element([Mode.firstTo, Mode.bestOf]);

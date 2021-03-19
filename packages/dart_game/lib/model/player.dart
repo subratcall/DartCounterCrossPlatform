@@ -16,6 +16,8 @@ class Player {
   String average;
   String checkoutPercentage;
 
+  bool isWinner;
+
   Player([this.name]) {
     id = Uuid().v4();
 
@@ -35,6 +37,7 @@ class Player {
     legs = json['legs'];
     average = json['average'];
     checkoutPercentage = json['checkoutPercentage'];
+    isWinner = json['isWinner'];
   }
 
   Map<String, dynamic> toJson() => {
@@ -48,11 +51,12 @@ class Player {
         'legs': legs,
         'average': average,
         'checkoutPercentage': checkoutPercentage,
+        'isWinner': isWinner,
       };
 
   @override
   String toString() {
-    return 'Player{id: $id, name: $name, lastThrow: $lastThrow, pointsLeft: $pointsLeft, dartsThrown: $dartsThrown, sets: $sets, legs: $legs, average: $average, checkoutPercentage: $checkoutPercentage}';
+    return 'Player{id: $id, name: $name, lastThrow: $lastThrow, pointsLeft: $pointsLeft, dartsThrown: $dartsThrown, sets: $sets, legs: $legs, average: $average, checkoutPercentage: $checkoutPercentage, isWinner: $isWinner}';
   }
 
   @override
