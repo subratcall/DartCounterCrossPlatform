@@ -7,7 +7,9 @@ class Set {
   int legsNeededToWin;
   int startIndex;
 
-  Set(this.startIndex, this.legsNeededToWin) :  id = Uuid().v4(), legs = [];
+  Set(this.startIndex, this.legsNeededToWin)
+      :  id = Uuid().v4(),
+        legs = [];
 
   /*Set.fromJson(Map<String, dynamic> json) {
     legs = json['legs'] != null ? json['legs'].map((value) => Leg.fromJson(value)).toList(): null;
