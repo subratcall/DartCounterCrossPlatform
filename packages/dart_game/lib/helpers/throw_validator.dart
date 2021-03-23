@@ -1,138 +1,117 @@
 part of dart_game;
 
 class ThrowValidator {
+  static List<int> _oneDartFinishes = [
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    50
+  ];
+  static List<int> _twoDartFinishes = [
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17,
+        19,
+        21,
+        23,
+        25,
+        27,
+        29,
+        31,
+        33,
+        35,
+        37,
+        39
+      ] +
+      List.generate(58, (index) => index + 41) +
+      [100, 101, 104, 107, 110];
+  static List<int> _threeDartFinishes = [99, 102, 103, 105, 106, 108, 109, 160, 161, 164, 167, 170] +
+      List.generate(158 - 111 + 1, (i) => i + 111);
 
-  static List<int> _oneDartFinishes = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,50];
-  static List<int> _threeDartFinishes = [99, 102, 103, 105, 106, 108, 109, 160, 161, 164, 167, 170] + List.generate(158 - 111 + 1, (i) => i + 111);
+  static bool isValid(Throw t, int pointsLeft) {
+    if (t.points < 0 || t.points > 180) return false;
+    if (t.dartsThrown < 1 || t.dartsThrown > 3) return false;
+    if (t.dartsOnDouble < 0 || t.dartsOnDouble > 3) return false;
+    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) return false;
 
-  // Fertig
-  static bool isValidThrowWithZeroDartsOnDouble(int points, int pointsLeft) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
+    if (t.points > pointsLeft) return false;
+    if (t.dartsOnDouble > t.dartsThrown) return false;
+    if ([163, 166, 169, 172, 173, 175, 176, 178, 179].contains(t.points)) return false;
+    if (pointsLeft - t.points == 1) return false;
 
-    if (points > pointsLeft) return false;
-    if ([163, 166, 169, 172, 173, 175, 176, 178, 179].contains(points)) return false;
-    return true;
-  }
+    // oneDartFinish checked with 1st dart on double
+    if (t.dartsThrown == 1 &&
+        t.dartsOnDouble == 1 &&
+        t.points == pointsLeft &&
+        _oneDartFinishes.contains(pointsLeft)) return true;
 
-  static bool isValidThrowWithOneDartOnDouble(int points, int pointsLeft) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
+    // oneDartFinish checked with 2nd dart on double
+    if (t.dartsThrown == 2 &&
+        t.dartsOnDouble == 2 &&
+        t.points == pointsLeft &&
+        _oneDartFinishes.contains(pointsLeft)) return true;
 
-    if (points > pointsLeft) return false;
-    if (points == 0) {
-      if(pointsLeft > 170 || [169, 168, 166, 165, 163, 162, 159].contains(pointsLeft)) {
-        return false;
-      }
+    // oneDartFinish != 2 nach umstellen checked with 1st dart on double || twoDartFinish checked with 1st dart on double
+    if (t.dartsThrown == 2 &&
+        t.dartsOnDouble == 1 &&
+        t.points == pointsLeft &&
+        ((pointsLeft != 2 && _oneDartFinishes.contains(pointsLeft)) || _twoDartFinishes.contains(pointsLeft)))
       return true;
-    }
-    if (points == 1) {
-      if(pointsLeft > 2 && _oneDartFinishes.contains(pointsLeft)) {
-        return true;
-      } else if(_oneDartFinishes.contains(pointsLeft-1)) {
-        return true;
-      }
-      return false;
-    }
-    return true;
-    // TODO when person throws 10 with 150 left and says 1 dart on double
-  }
 
-  static bool isValidThrowWithTwoDartsOnDouble(int points, int pointsLeft) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
+    if (t.dartsThrown == 3) {
+      if (t.dartsOnDouble == 3) {
+        // oneDartFinish check with 3rd dart on double || or gerade - 0 - t.points-gerade
+        if (_oneDartFinishes.contains(pointsLeft)) return true;
+      } else if (t.dartsOnDouble == 2) {
+        // oneDartFinish != 2 (umstellen, miss, check with 2nd dart on double)
+        if (pointsLeft != 2 && _oneDartFinishes.contains(pointsLeft)) return true;
+        // twoDartFinish(stellen, miss, check with 2nd dart on double)
+        if (t.points == pointsLeft && _twoDartFinishes.contains(pointsLeft)) return true;
+        // twoDartFinish stellen with first dart then one dartFinish left, throw something lessequal 50 with to remaining darts (first dart equal)
+        if (pointsLeft - t.points <= 50 && _twoDartFinishes.contains(pointsLeft))
+          return true; // TODO is correct?
+      } else if (t.dartsOnDouble == 1) {
+        // oneDartFinish != 2 (umstellen miss), umstellen, oneDartThrowable)
+        if (pointsLeft != 2 && _oneDartFinishes.contains(pointsLeft)) return true;
 
-    if (points > pointsLeft) return false;
+        // twoDartFinish(stellen miss, stellen, check with 1st dart on double)
+        if (t.points == pointsLeft && _twoDartFinishes.contains(pointsLeft)) return true;
+        if (pointsLeft - t.points <= 50 && _twoDartFinishes.contains(pointsLeft))
+          return true; // TODO is correct?
 
-    if (points == 0) {
-      if(pointsLeft < 110 && !_threeDartFinishes.contains(pointsLeft)) {
-        return true;
+        // threeDartFinish(stellen, stellen, check with 1st dart on double)
+        if (t.points == pointsLeft && _threeDartFinishes.contains(pointsLeft)) return true;
+
+        if (pointsLeft - t.points <= 50 && _threeDartFinishes.contains(pointsLeft))
+          return true; // TODO is correct?
+      } else {
+        // no check
+        if (t.points != pointsLeft) return true;
       }
-      return false;
     }
-    if (points == 1) {
-      if(pointsLeft > 2 && _oneDartFinishes.contains(pointsLeft)) {
-        return true;
-      } else if(_oneDartFinishes.contains(pointsLeft-1)) {
-        return true;
-      }
-      return false;
-    }
-    if(pointsLeft < 110 && !_threeDartFinishes.contains(pointsLeft)) return true;
+
     return false;
-    // TODO when person throws 10 with 150 left and says 2 dart on double
-  }
-
-  // Fertig
-  static bool isValidThrowWithThreeDartsOnDouble(int points, int pointsLeft) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
-
-    if (points > pointsLeft) return false;
-    if (points > 50) return false;
-    if(!_oneDartFinishes.contains(pointsLeft)) return false;
-    return true;
-  }
-
-  // Fertig
-  static bool isValidThrowWithOneDartThrown(int points, int pointsLeft) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
-
-    if (points == 0 && pointsLeft <= 60) return true;
-    if (points == pointsLeft && _oneDartFinishes.contains(points)) return true;
-    return false;
-  }
-
-  // Fertig
-  static bool isValidThrowWithTwoDartsThrown(int points, int pointsLeft) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
-
-    if (points == 0 && pointsLeft <= 120) return true;
-    if (points != pointsLeft) return false;
-    if (points > 110) return false;
-    if ([99, 102, 103, 105, 106, 108, 109].contains(points)) return false;
-    return true;
-  }
-
-  // Fertig
-  static bool isValidThrowWithThreeDartsThrown(int points, int pointsLeft) {
-    return isValidThrowWithZeroDartsOnDouble(points, pointsLeft);
-  }
-
-
-  static bool isValidThrow(int points, int pointsLeft, {int dartsThrown = 3, dartsOnDouble = 0}) {
-    if (points < 0 || points > 180) throw ArgumentError.value(points, 'points');
-    if (pointsLeft < 0 || pointsLeft == 0 || pointsLeft == 1) throw ArgumentError.value(pointsLeft, 'pointsLeft');
-    if (dartsThrown < 1 || dartsThrown > 3) throw ArgumentError.value(dartsThrown, 'dartsThrown');
-    if (dartsOnDouble < 0 || dartsOnDouble > 3) throw ArgumentError.value(dartsOnDouble, 'dartsOnDouble');
-
-    if (points > pointsLeft) return false;
-
-    if (points == 0 && dartsThrown != 3) return false;
-    if (pointsLeft-points == 1) return false;
-    if ([163, 166, 169, 172, 173, 175, 176, 178, 179].contains(points)) return false;
-
-    if(dartsThrown == 1) {
-      if(dartsOnDouble == 0) return isValidThrowWithOneDartThrown(points, pointsLeft) && isValidThrowWithZeroDartsOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 1) return isValidThrowWithOneDartThrown(points, pointsLeft) && isValidThrowWithOneDartOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 2) return isValidThrowWithOneDartThrown(points, pointsLeft) && isValidThrowWithTwoDartsOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 3) return isValidThrowWithOneDartThrown(points, pointsLeft) && isValidThrowWithThreeDartsOnDouble(points, pointsLeft);
-    }
-
-    if(dartsThrown == 2) {
-      if(dartsOnDouble == 0) return isValidThrowWithTwoDartsThrown(points, pointsLeft) && isValidThrowWithZeroDartsOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 1) return isValidThrowWithTwoDartsThrown(points, pointsLeft) && isValidThrowWithOneDartOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 2) return isValidThrowWithTwoDartsThrown(points, pointsLeft) && isValidThrowWithTwoDartsOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 3) return isValidThrowWithTwoDartsThrown(points, pointsLeft) && isValidThrowWithThreeDartsOnDouble(points, pointsLeft);
-    }
-
-    if(dartsThrown == 3) {
-      if(dartsOnDouble == 0) return isValidThrowWithThreeDartsThrown(points, pointsLeft) && isValidThrowWithZeroDartsOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 1) return isValidThrowWithThreeDartsThrown(points, pointsLeft) && isValidThrowWithOneDartOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 2) return isValidThrowWithThreeDartsThrown(points, pointsLeft) && isValidThrowWithTwoDartsOnDouble(points, pointsLeft);
-      if(dartsOnDouble == 3) return isValidThrowWithThreeDartsThrown(points, pointsLeft) && isValidThrowWithThreeDartsOnDouble(points, pointsLeft);
-    }
   }
 }

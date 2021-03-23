@@ -1,405 +1,238 @@
 part of dart_game;
 
 class Game {
-  /// INTERFACE
-  Status get status => _status;
-  final Config config;
-  List<Player> get players => _players;
-  List<Set> get sets => _sets;
+  ///
+  /// PUBLIC
+  ///
 
-  bool get hasDartBot => _dartBotIndex != -1;
-  DartBot get dartBot => hasDartBot ? players[_dartBotIndex] : null;
-  bool get hasWinner => winner != null;
-  Player get winner {
-    switch (config.type) {
-      case Type.legs:
-        int legsNeededToWin;
-        switch (config.mode) {
-          case Mode.firstTo:
-            legsNeededToWin = config.size;
-            for (Player player in _players) {
-              if (player.legs == legsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-          case Mode.bestOf:
-            legsNeededToWin = (config.size / 2).round();
-            for (Player player in _players) {
-              if (player.legs == legsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-        }
-        break;
-      case Type.sets:
-        int setsNeededToWin;
-        switch (config.mode) {
-          case Mode.firstTo:
-            setsNeededToWin = config.size;
-            for (Player player in _players) {
-              if (player.sets == setsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-          case Mode.bestOf:
-            setsNeededToWin = (config.size / 2).round();
-            for (Player player in _players) {
-              if (player.sets == setsNeededToWin) {
-                return player;
-              }
-            }
-            break;
-        }
-        break;
-    }
-    return null;
+  Status get status => _status;
+  Config get config => _config;
+
+  List<Player> get players => _players;
+
+  Game() {
+    _config = Config();
+    _status = Status.pending;
+    _players = [];
+    _turnIndex = 0;
+    _startSetIndex = 0;
+    _startLegIndex = 0;
+    addPlayer();
   }
 
-  Game()
-      : _status = Status.pending,
-        config = Config(),
-        _players = [Player()],
-        _sets = [];
+  bool addPlayer() {
+    if (status == Status.pending) {
+      if (_players.length < 4) {
+        _players.add(Player(this));
 
-  bool addPlayer(Player player) {
-    if (_players.length < 4) {
-      _players.add(player);
-      return true;
+        return true;
+      }
     }
     return false;
   }
 
-  void removePlayer(String id) {
-    _players.removeWhere((player) => player.id == id);
+  void removePlayer(int id) {
+    if (status == Status.pending) {
+      if (_players.length > 1 && !_hasDartBot || _players.length > 2 && _hasDartBot) {
+        _players.removeWhere((player) => player.id == id);
+      }
+    }
   }
 
   bool addDartBot() {
-    if (!hasDartBot) {
-      _players.add(DartBot());
-      return true;
+    if (status == Status.pending) {
+      if (!_hasDartBot && players.length < 4) {
+        _players.add(DartBot(this));
+        return true;
+      }
     }
     return false;
   }
 
+  void setDartBotTargetAverage(int targetAverage) {
+    if (status == Status.pending) {
+      if (_hasDartBot) {
+        (_players[_dartBotIndex] as DartBot).targetAverage = targetAverage;
+      }
+    }
+  }
+
   void removeDartBot() {
-    if (hasDartBot) {
-      _players.removeAt(_dartBotIndex);
+    if (status == Status.pending) {
+      if (_hasDartBot) {
+        _players.removeAt(_dartBotIndex);
+      }
+    }
+  }
+
+  void setStartingPoints(int startingPoints) {
+    if (status == Status.pending) {
+      _config.startingPoints = startingPoints;
+    }
+  }
+
+  void setMode(Mode mode) {
+    if (status == Status.pending) {
+      _config.mode = mode;
+    }
+  }
+
+  void setSize(int size) {
+    if (size < 1) throw ArgumentError.value(size, 'size can not be < 1');
+    if (status == Status.pending) {
+      _config.size = size;
+    }
+  }
+
+  void setType(Type type) {
+    if (status == Status.pending) {
+      _config.type = type;
     }
   }
 
   void start() {
-    _createSet();
-    _createLeg();
-    _initPlayers();
-    _status = Status.running;
+    if (_status == Status.pending) {
+      _status = Status.running;
+      for (Player player in _players) {
+        player._createSet();
+      }
+    }
   }
 
-  bool performThrow(Throw t) {
-    if (true) {
-      // TODO THROW VALIDATION
-      _currentTurn.isCurrentTurn = false;
-
-      // sets the player who threw
-      t.playerIndex = _turnIndex;
-
-      // updates the leg data
-      _currentLeg.performThrow(t);
-
-      // updates the player data
-      _currentTurn.lastThrow = t.points;
-      _currentTurn.pointsLeft -= t.points;
-      _currentTurn.dartsThrown += t.dartsThrown;
-      _currentTurn.average = _averageCurrentTurn;
-      _currentTurn.checkoutPercentage = _checkoutPercentageCurrentTurn;
-
-      // updates the reference to the Player who has next turn
-      // updates the player data and creates next leg and set when needed
-      if (_currentLeg.winner != -1) {
-        if (_currentSet.winner != -1) {
-          int sets = -1;
-          if (config.type == Type.sets) {
-            sets = _currentTurn.sets + 1;
-          }
-          int legs;
-          if (config.type == Type.legs) {
-            legs = _currentTurn.legs + 1;
-          } else {
-            legs = 0;
-          }
-
-          _currentTurn.pointsLeft = 0;
-          _currentTurn.sets = sets;
-          _currentTurn.legs = legs;
-          if (winner != null) {
-            // GAME FINISHED
-            _status = Status.finished;
-          } else {
-            // CONTINUE NEW SET
-            for (int i = 0; i < _players.length; i++) {
-              Player player = _players[i];
-              player.pointsLeft = config.startingPoints;
-              player.dartsThrown = 0;
-              player.legs = 0;
-            }
-            _turnIndex = (_currentSet.startIndex + 1) % _players.length;
-            _createSet();
-            _createLeg();
-          }
+  void performThrow(Throw t) {
+    if (_status == Status.running) {
+      if (ThrowValidator.isValid(t, _currentTurn.pointsLeft)) {
+        _currentTurn._currentSet._currentLeg.throws.add(t);
+        if (_currentTurn._won) {
+          _status = Status.finished;
         } else {
-          // CONTINUE NEW LEG
-          for (int i = 0; i < _players.length; i++) {
-            Player player = _players[i];
-            int legs = player.legs;
-            if (i == _turnIndex) {
-              legs += 1;
-            }
-            player.pointsLeft = config.startingPoints;
-            player.dartsThrown = 0;
-            player.legs = legs;
+          _nextTurn();
+          if (_turnIndex == _dartBotIndex) {
+            performThrow(ThrowGenerator.generate(_players[_dartBotIndex], this));
           }
-          _turnIndex = (_currentLeg.startIndex + 1) % _players.length;
-          _createLeg();
         }
-      } else {
-        // CONTINUE
-        _turnIndex = (_turnIndex + 1) % _players.length;
       }
-
-      _currentTurn.isCurrentTurn = true;
-
-      if (_currentTurn is DartBot && _currentLeg.winner == -1) {
-        performDartBotThrow();
-      }
-      return true;
     }
-    return false;
-  }
-
-  void performDartBotThrow() {
-    int randomScore = ScoreGenerator.getScore(_currentTurn as DartBot);
-    Throw t;
-
-    if (randomScore == _currentTurn.pointsLeft) {
-      if (ThrowValidator.isValidThrowWithOneDartThrown(randomScore, _currentTurn.pointsLeft)) {
-        t = new Throw(randomScore, 1, 1);
-      } else if (ThrowValidator.isValidThrowWithThreeDartsThrown(randomScore, _currentTurn.pointsLeft)) {
-        t = new Throw(randomScore, 3, 1);
-      } else {
-        t = new Throw(randomScore, 2, 1);
-      }
-    } else {
-      t = new Throw(randomScore);
-    }
-    performThrow(t);
   }
 
   void undoThrow() {
-    if (_sets.length == 1 && _sets[0].legs.length == 1 && _currentLeg.throws.length == 0) {
-      // NO THROW PERFORMED YET -> do nothing
-      return;
-    }
-
-    _currentTurn.isCurrentTurn = false;
-
-    if (_sets.length == 1 && _sets[0].legs.length == 1 && _currentLeg.throws.length == 1) {
-      // UNDO FIRST THROW OF GAME
-      Throw last = _currentLeg.undoThrow();
-      _turnIndex = last.playerIndex;
-      _currentTurn.lastThrow = -1;
-      _currentTurn.pointsLeft = config.startingPoints;
-      _currentTurn.dartsThrown = 0;
-      _currentTurn.average = 0;
-      _currentTurn.checkoutPercentage = 0;
-    } else if (_sets.length >= 2 && _currentSet.legs.length == 1 && _currentLeg.throws.length == 0) {
-      // UNDO LAST THROW OF SET
-      _sets.removeLast();
-      Throw last = _currentLeg.undoThrow();
-      _turnIndex = last.playerIndex;
-
-      // restore player data
-      for (int i = 0; i < _players.length; i++) {
-        Player player = _players[i];
-
-        if (_turnIndex == i) {
-          player.lastThrow = _currentLeg.throws[_currentLeg.throws.length - _players.length].points;
-          player.average = _averageCurrentTurn;
-          player.checkoutPercentage = _checkoutPercentageCurrentTurn;
+    if (_status == Status.running) {
+      if(_noThrowsPerformedGame) {
+        // no throws performed in game => do nothing
+        return;
+      } else if(_noThrowsPerformedSet) {
+        // no throws performed in set => remove set update turnIndex remove throw
+        for(Player player in _players) {
+          player._removeSet();
         }
-
-        player.pointsLeft = _currentLeg.pointsLeft[i];
-        player.dartsThrown = _currentLeg.dartsThrown[i];
-
-        int s = 0;
-        int l = 0;
-        for (Set set in _sets) {
-          if (config.type == Type.sets) {
-            if (set.winner == i) {
-              s += 1;
-            }
-          } else {
-            s = -1;
-          }
+        _startSetIndex = (_startSetIndex - 1) % _players.length;
+        _startLegIndex = (_startSetIndex + _currentTurn._currentSet.legs.length-1) % _players.length;
+        _turnIndex = (_startLegIndex + _players.map((e) => e._currentSet._currentLeg.throws.length).toList().reduce(max)) % _players.length;
+        _currentTurn._currentSet._currentLeg.throws.removeLast();
+      } else if(_noThrowsPerformedLeg) {
+        // no throws performed in leg => update turnIndex remove throw
+        for(Player player in _players) {
+          player._currentSet._removeLeg();
         }
-
-        for (Leg leg in _currentSet.legs) {
-          if (leg.winner == i) {
-            l += 1;
-          }
-        }
-
-        player.sets = s;
-        player.legs = l;
+        _startLegIndex = (_startSetIndex + _currentTurn._currentSet.legs.length-1) % _players.length;
+        _turnIndex = (_startLegIndex + _players.map((e) => e._currentSet._currentLeg.throws.length).toList().reduce(max)) % _players.length;
+        _currentTurn._currentSet._currentLeg.throws.removeLast();
+      } else {
+        // normal throw => update turnIndex remove throw
+        _turnIndex = (_turnIndex - 1) % _players.length;
+        _currentTurn._currentSet._currentLeg.throws.removeLast();
       }
-    } else if (_currentSet.legs.length >= 2 && _currentLeg.throws.length == 0) {
-      // UNDO LAST THROW OF LEG
-      _currentSet.legs.removeLast();
-      Throw last = _currentLeg.undoThrow();
-      _turnIndex = last.playerIndex;
-
-      // restore player data
-      for (int i = 0; i < _players.length; i++) {
-        Player player = _players[i];
-
-        if (_turnIndex == i) {
-          player.lastThrow = _currentLeg.throws[_currentLeg.throws.length - _players.length].points;
-          player.average = _averageCurrentTurn;
-          player.checkoutPercentage = _checkoutPercentageCurrentTurn;
-        }
-
-        player.pointsLeft = _currentLeg.pointsLeft[i];
-        player.dartsThrown = _currentLeg.dartsThrown[i];
-
-        int l = 0;
-        for (Leg leg in _currentSet.legs) {
-          if (leg.winner == i) {
-            l += 1;
-          }
-        }
-
-        player.legs = l;
-      }
-    } else {
-      // UNDO STANDARD THROW
-      Throw last = _currentLeg.undoThrow();
-      _turnIndex = last.playerIndex;
-      // TODO index is buged
-      _currentTurn.lastThrow = _currentLeg.throws[_currentLeg.throws.length + 1 - _players.length].points;
-      _currentTurn.pointsLeft += last.points;
-      _currentTurn.dartsThrown -= last.dartsThrown;
     }
-
-    _currentTurn.isCurrentTurn = true;
-    _currentTurn.average = _averageCurrentTurn;
-    _currentTurn.checkoutPercentage = _checkoutPercentageCurrentTurn;
   }
 
-  /// INTERNAL
+  ///
+  /// PRIVATE
+  ///
+
   Status _status;
+  Config _config;
   List<Player> _players;
-  List<Set> _sets;
   int _turnIndex;
-  int get _dartBotIndex {
-    return players.indexWhere((player) => player is DartBot);
-  }
+  int _startSetIndex;
+  int _startLegIndex;
+  int get _dartBotIndex => players.indexWhere((player) => player is DartBot);
+  bool get _hasDartBot => _dartBotIndex != -1;
+  Player get _currentTurn => players[_turnIndex];
 
-  Set get _currentSet {
-    return _sets.last;
-  }
+  bool get _noThrowsPerformedGame {
+    bool allSetsEqual1 = true;
+    bool allLegsEqual1 = true;
+    bool allThrowsEqual0 = true;
 
-  Leg get _currentLeg {
-    return _currentSet.legs.last;
-  }
-
-  Player get _currentTurn {
-    return _players[_turnIndex];
-  }
-
-  double get _averageCurrentTurn {
-    int totalDartsThrown = 0;
-    int totalPointsScored = 0;
-    for (Set set in _sets) {
-      for (Leg leg in set.legs) {
-        totalDartsThrown += leg.dartsThrown[_turnIndex];
-        totalPointsScored += (config.startingPoints - leg.pointsLeft[_turnIndex]);
-      }
-    }
-    if (totalDartsThrown == 0) {
-      return 0;
-    }
-    return ((3 * totalPointsScored) / totalDartsThrown);
-  }
-
-  double get _checkoutPercentageCurrentTurn {
-    int totalLegsWon = 0;
-    int totalDartsOnDouble = 0;
-    for (Set set in _sets) {
-      for (Leg leg in set.legs) {
-        if (leg.winner == _turnIndex) {
-          totalLegsWon += 1;
-        }
-        totalDartsOnDouble += leg.dartsOnDouble[_turnIndex];
-      }
+    for(Player player in _players) {
+      allSetsEqual1 &= player.sets.length == 1;
+      allLegsEqual1 &= player._currentSet.legs.length == 1;
+      allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
     }
 
-    if (totalDartsOnDouble == 0) {
-      return 0;
+    return allSetsEqual1 && allLegsEqual1 && allThrowsEqual0;
+  }
+
+  bool get _noThrowsPerformedSet {
+    bool allLegsEqual1 = true;
+    bool allThrowsEqual0 = true;
+
+    for(Player player in _players) {
+      allLegsEqual1 &= player._currentSet.legs.length == 1;
+      allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
     }
-    return ((totalLegsWon / totalDartsOnDouble) * 100);
+
+    return allLegsEqual1 && allThrowsEqual0;
   }
 
-  void _createSet() {
-    if (config.mode == Mode.firstTo) {
-      if (config.type == Type.legs) {
-        _sets.add(Set(_turnIndex, config.size));
-      } else {
-        _sets.add(Set(_turnIndex, 3));
-      }
-    } else {
-      if (config.type == Type.legs) {
-        _sets.add(Set(_turnIndex, (config.size / 2).round()));
-      } else {
-        _sets.add(Set(_turnIndex, 3));
-      }
+  bool get _noThrowsPerformedLeg {
+    bool allThrowsEqual0 = true;
+
+    for(Player player in _players) {
+      allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
     }
+
+    return allThrowsEqual0;
   }
 
-  void _createLeg() {
-    _currentSet.legs.add(Leg(_turnIndex, _players.length, config.startingPoints));
-  }
 
-  void _initPlayers() {
-    int index = 1;
+  void _nextTurn() {
+    // create new legs, sets if needed
+    Set setThrowWasPerformedOn = _currentTurn._currentSet;
+    Leg legThrowWasPerformedOn = setThrowWasPerformedOn._currentLeg;
     for (Player player in _players) {
-      if (player.name == '') {
-        player.name = 'Player $index}';
-        index++;
+      if (setThrowWasPerformedOn._won) {
+        // won set
+        player._createSet();
+      } else if (legThrowWasPerformedOn._won) {
+        // won leg
+        player._currentSet._createLeg();
       }
-      player.isCurrentTurn = false;
-      player.lastThrow = -1;
-      player.pointsLeft = config.startingPoints;
-      player.dartsThrown = 0;
-      player.sets = config.type == Type.sets ? 0 : -1;
-      player.legs = 0;
-      player.average = 0;
-      player.checkoutPercentage = 0;
     }
-    _currentTurn.isCurrentTurn = true;
+
+    // updated indices
+    if (setThrowWasPerformedOn._won) {
+      // won set
+      _startSetIndex = (_startSetIndex + 1) % _players.length;
+      _startLegIndex = _startSetIndex;
+      _turnIndex = _startSetIndex;
+    } else if (legThrowWasPerformedOn._won) {
+      // won leg
+      _startLegIndex = (_startLegIndex + 1) % _players.length;
+      _turnIndex = _startLegIndex;
+    } else {
+      // won nothing
+      _turnIndex = (_turnIndex + 1) % _players.length;
+    }
+  }
+
+  void _prevTurn() {
+    // update CurrentTurn
+    _turnIndex = (_turnIndex - 1) % _players.length;
   }
 
   @override
   String toString() {
-    return 'Game{config: $config, status: $_status, players: $_players, sets: $_sets, turnIndex: $_turnIndex}';
-  }
-
-  @override
-  bool operator ==(other) {
-    Game o = other;
-    return config == o.config &&
-        listEquals(_players, o._players) &&
-        listEquals(_sets, o._sets) &&
-        _turnIndex == o._turnIndex;
+    return 'Game{status: $status, config: $config, players: $players}';
   }
 }

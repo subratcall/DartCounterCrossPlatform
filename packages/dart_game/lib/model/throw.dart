@@ -1,40 +1,14 @@
 part of dart_game;
 
 class Throw {
+  final int points;
+  final int dartsOnDouble;
+  final int dartsThrown;
 
-  String id;
-  int points;
-  int dartsOnDouble;
-  int dartsThrown;
-  int playerIndex;
-
-  Throw(this.points, [this.dartsThrown = 3, this.dartsOnDouble = 0]) : id = Uuid().v4();
-
-  /*Throw.fromJson(Map<String, dynamic> json) {
-    points = json['points'];
-    dartsOnDouble = json['dartsOnDouble'];
-    dartsThrown = json['dartsThrown'];
-    playerIndex = json['playerIndex'];
-  }
-
-  Map<String, dynamic> toJson() => {
-    'points' : points,
-    'dartsOnDouble' : dartsOnDouble,
-    'dartsThrown' : dartsThrown,
-    'playerIndex' : playerIndex,
-  };*/
+  Throw(this.points, {this.dartsThrown = 3, this.dartsOnDouble = 0});
 
   @override
   String toString() {
-    return 'Throw{points: $points, dartsOnDouble: $dartsOnDouble, dartsThrown: $dartsThrown, playerIndex: $playerIndex}';
-  }
-
-  @override
-  bool operator ==(other) {
-    Throw t = other;
-    return this.points == t.points &&
-        this.dartsOnDouble == t.dartsOnDouble &&
-        this.dartsThrown == t.dartsThrown &&
-        this.playerIndex == t.playerIndex;
+    return 'Throw{points: $points, dartsOnDouble: $dartsOnDouble, dartsThrown: $dartsThrown}';
   }
 }

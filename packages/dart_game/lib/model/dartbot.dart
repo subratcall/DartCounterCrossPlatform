@@ -3,10 +3,10 @@ part of dart_game;
 class DartBot extends Player {
   int targetAverage;
 
-  DartBot({this.targetAverage = 20}) : super('Dartbot');
+  DartBot(Game game, {this.targetAverage = 0}) : super(game, 'Dartbot');
 
   @override
   String toString() {
-    return 'DartBot{targetAverage: $targetAverage, lastThrow: $lastThrow, pointsLeft: $pointsLeft, dartsThrown: $dartsThrown, sets: $sets, legs: $legs, average: $average, checkoutPercentage: $checkoutPercentage, isWinner: $isWinner}';
+    return 'DartBot{targetAverage: $targetAverage, player: Player{id: $id, name: $name, isCurrentTurn: $isCurrentTurn, won: $won, wonSets: $wonSets, wonLegsCurrentSet: $wonLegsCurrentSet, pointsLeft: $pointsLeft, lastPoints: $lastPoints, dartsThrownCurrentLeg: $dartsThrownCurrentLeg, stats: $stats, sets: $sets}}';
   }
 }
