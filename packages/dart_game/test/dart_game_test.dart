@@ -4153,7 +4153,7 @@ void main() {
   });
 
   group('undoThrow', () {
-    test('GIVEN running first to 3 sets game from 501 with 1 Players WHEN throw is undone when nobody threw yet THEN do noting', () {
+    test('GIVEN running first to 3 sets game from 501 with 1 Players WHEN throw is undone but nobody threw yet THEN do noting', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4175,7 +4175,7 @@ void main() {
       expect(player.dartsThrownCurrentLeg, 0);
       expect(player.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 2 Players WHEN throw is undone when nobody threw yet THEN do noting', () {
+    test('GIVEN running first to 3 sets game from 501 with 2 Players WHEN throw is undone but nobody threw yet THEN do noting', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4207,7 +4207,7 @@ void main() {
       expect(player1.dartsThrownCurrentLeg, 0);
       expect(player1.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 3 Players WHEN throw is undone when nobody threw yet THEN do noting', () {
+    test('GIVEN running first to 3 sets game from 501 with 3 Players WHEN throw is undone but nobody threw yet THEN do noting', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4249,7 +4249,7 @@ void main() {
       expect(player2.dartsThrownCurrentLeg, 0);
       expect(player2.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 4 Players WHEN throw is undone when nobody threw yet THEN do noting', () {
+    test('GIVEN running first to 3 sets game from 501 with 4 Players WHEN throw is undone but nobody threw yet THEN do noting', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4302,7 +4302,7 @@ void main() {
       expect(player3.stats, Stats());
     });
 
-    test('GIVEN running first to 3 sets game from 501 with 1 Players with 1st leg played perfectly by first player and now 2nd leg began but second player did not throw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 1 Players with 1st leg played perfectly by first player and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4332,7 +4332,7 @@ void main() {
           hundredEighty: 2)
       );
     });
-    test('GIVEN running first to 3 sets game from 501 with 2 Players with 1st leg played perfectly by first player and now 2nd leg began but second player did not throw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 2 Players with 1st leg played perfectly by first player and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4374,7 +4374,7 @@ void main() {
       expect(player1.dartsThrownCurrentLeg, 6);
       expect(player1.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 3 Players with 1st leg played perfectly by first player and now 2nd leg began but second player did not throw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 3 Players with 1st leg played perfectly by first player and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4428,7 +4428,7 @@ void main() {
       expect(player2.dartsThrownCurrentLeg, 6);
       expect(player2.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 4 Players with 1st leg played perfectly by first player and now 2nd leg began but second player did not throw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 4 Players with 1st leg played perfectly by first player and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4495,7 +4495,7 @@ void main() {
       expect(player3.stats, Stats());
     });
 
-    test('GIVEN running first to 3 sets game from 501 with 1 Players with 1st set played perfectly by first player and now 2nd set began but no throw performed yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 1 Players with 1st set played perfectly by first player and now 2nd set began nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4535,7 +4535,7 @@ void main() {
           hundredEighty: 6)
       );
     });
-    test('GIVEN running first to 3 sets game from 501 with 2 Players with 1st set played perfectly by first player and now 2nd set began but second player did not throw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 2 Players with 1st set played perfectly by first player and now 2nd set began but nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4597,7 +4597,7 @@ void main() {
       expect(player1.dartsThrownCurrentLeg, 6);
       expect(player1.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 3 Players with 1st set played perfectly by first player and now 2nd set began but second player did not throw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 3 Players with 1st set played perfectly by first player and now 2nd set began but nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4678,7 +4678,7 @@ void main() {
       expect(player2.dartsThrownCurrentLeg, 9);
       expect(player2.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 4 Players with 1st set played perfectly by first player and now 2nd set began but second player did not throw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
+    test('GIVEN running first to 3 sets game from 501 with 4 Players with 1st set played perfectly by first player and now 2nd set began but nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of player 1', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4778,7 +4778,7 @@ void main() {
       expect(player3.stats, Stats());
     });
 
-    test('GIVEN running first to 3 sets game from 501 with 1 Players WHEN throw is undone when 1 throw was done THEN undo throw', () {
+    test('GIVEN running first to 3 sets game from 501 with 1 Players WHEN throw is undone after 1 throw was done THEN undo throw', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4801,7 +4801,7 @@ void main() {
       expect(player.dartsThrownCurrentLeg, 0);
       expect(player.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 2 Players WHEN throw is undone when 1 throw was done THEN undo throw', () {
+    test('GIVEN running first to 3 sets game from 501 with 2 Players WHEN throw is undone after 1 throw was done THEN undo throw', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4834,7 +4834,7 @@ void main() {
       expect(player1.dartsThrownCurrentLeg, 0);
       expect(player1.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 3 Players WHEN throw is undone when 1 throw was done THEN undo throw', () {
+    test('GIVEN running first to 3 sets game from 501 with 3 Players WHEN throw is undone after 1 throw was done THEN undo throw', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4877,7 +4877,7 @@ void main() {
       expect(player2.dartsThrownCurrentLeg, 0);
       expect(player2.stats, Stats());
     });
-    test('GIVEN running first to 3 sets game from 501 with 4 Players WHEN throw is undone when 1 throw was done THEN undo throw', () {
+    test('GIVEN running first to 3 sets game from 501 with 4 Players WHEN throw is undone after 1 throw was done THEN undo throw', () {
       // Arrange
       final Game game = Game();
       game.setSize(3);
@@ -4930,5 +4930,728 @@ void main() {
       expect(player3.dartsThrownCurrentLeg, 0);
       expect(player3.stats, Stats());
     });
+
+    test('GIVEN running first to 3 sets game from 501 with 1 Player and a dartBot WHEN throw is undone when nobody threw yet THEN do noting', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addDartBot();
+      game.start();
+      Player player = game.players[0];
+      Player dartBot = game.players[1];
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 501);
+      expect(player.lastPoints, null);
+      expect(player.dartsThrownCurrentLeg, 0);
+      expect(player.stats, Stats());
+      // Player 1
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 501);
+      expect(dartBot.lastPoints, null);
+      expect(dartBot.dartsThrownCurrentLeg, 0);
+      expect(dartBot.stats, Stats());
+    });
+    test('GIVEN running first to 3 sets game from 501 with 2 Players and a dartBot WHEN throw is undone when nobody threw yet THEN do noting', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addDartBot();
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player dartBot = game.players[2];
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 501);
+      expect(player.lastPoints, null);
+      expect(player.dartsThrownCurrentLeg, 0);
+      expect(player.stats, Stats());
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 501);
+      expect(player1.lastPoints, null);
+      expect(player1.dartsThrownCurrentLeg, 0);
+      expect(player1.stats, Stats());
+      // Player 2
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 501);
+      expect(dartBot.lastPoints, null);
+      expect(dartBot.dartsThrownCurrentLeg, 0);
+      expect(dartBot.stats, Stats());
+    });
+    test('GIVEN running first to 3 sets game from 501 with 3 Players and a dartBot WHEN throw is undone when nobody threw yet THEN do noting', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addPlayer();
+      game.addDartBot();
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player player2 = game.players[2];
+      Player dartBot = game.players[3];
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 501);
+      expect(player.lastPoints, null);
+      expect(player.dartsThrownCurrentLeg, 0);
+      expect(player.stats, Stats());
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 501);
+      expect(player1.lastPoints, null);
+      expect(player1.dartsThrownCurrentLeg, 0);
+      expect(player1.stats, Stats());
+      // Player 2
+      expect(player2.won, false);
+      expect(player2.wonSets, 0);
+      expect(player2.wonLegsCurrentSet, 0);
+      expect(player2.pointsLeft, 501);
+      expect(player2.lastPoints, null);
+      expect(player2.dartsThrownCurrentLeg, 0);
+      expect(player2.stats, Stats());
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 501);
+      expect(dartBot.lastPoints, null);
+      expect(dartBot.dartsThrownCurrentLeg, 0);
+      expect(dartBot.stats, Stats());
+    });
+
+    test('GIVEN running first to 3 sets game from 501 with 1 Players and a dartBot with 1st leg played perfectly by dartBot and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of dartBot and of player 1', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player dartBot = game.players[1];
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 301);
+      expect(player.lastPoints, 100);
+      expect(player.dartsThrownCurrentLeg, 6);
+      expect(player.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 2)
+      );
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 141);
+      expect(dartBot.lastPoints, 180);
+      expect(dartBot.dartsThrownCurrentLeg, 6);
+      expect(dartBot.stats, Stats(
+          average: 180,
+          checkoutPercentage: 0,
+          firstNineAverage: 180,
+          hundredEighty: 2)
+      );
+    });
+    test('GIVEN running first to 3 sets game from 501 with 2 Players and a dartBot with 1st leg played perfectly by dartBot and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of dartBot and of player 2', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player dartBot = game.players[2];
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 201);
+      expect(player.lastPoints, 100);
+      expect(player.dartsThrownCurrentLeg, 9);
+      expect(player.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 3)
+      );
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 301);
+      expect(player1.lastPoints, 100);
+      expect(player1.dartsThrownCurrentLeg, 6);
+      expect(player1.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 2)
+      );
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 141);
+      expect(dartBot.lastPoints, 180);
+      expect(dartBot.dartsThrownCurrentLeg, 6);
+      expect(dartBot.stats, Stats(
+          average: 180,
+          checkoutPercentage: 0,
+          firstNineAverage: 180,
+          hundredEighty: 2)
+      );
+    });
+    test('GIVEN running first to 3 sets game from 501 with 3 Players and a dartBot with 1st leg played perfectly by dartBot and now 2nd leg began but nobody threw yet WHEN throw is undone THEN jump back to 1st leg and undo the last throw of dartBot and of player 3', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addPlayer();
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player player2 = game.players[2];
+      Player dartBot = game.players[3];
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 201);
+      expect(player.lastPoints, 100);
+      expect(player.dartsThrownCurrentLeg, 9);
+      expect(player.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 3)
+      );
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 201);
+      expect(player1.lastPoints, 100);
+      expect(player1.dartsThrownCurrentLeg, 9);
+      expect(player1.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 3)
+      );
+      // Player 2
+      expect(player2.won, false);
+      expect(player2.wonSets, 0);
+      expect(player2.wonLegsCurrentSet, 0);
+      expect(player2.pointsLeft, 301);
+      expect(player2.lastPoints, 100);
+      expect(player2.dartsThrownCurrentLeg, 6);
+      expect(player2.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 2)
+      );
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 141);
+      expect(dartBot.lastPoints, 180);
+      expect(dartBot.dartsThrownCurrentLeg, 6);
+      expect(dartBot.stats, Stats(
+          average: 180,
+          checkoutPercentage: 0,
+          firstNineAverage: 180,
+          hundredEighty: 2)
+      );
+    });
+
+    test('GIVEN running first to 3 sets game from 501 with 1 Players and a dartBot with 1st set played perfectly by dartBot and now 2nd set began but nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of dartBot and of player 1', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player dartBot = game.players[1];
+      // Set 1 Leg 1
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Set 1 Leg 2
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Set 1 Leg 3
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 301);
+      expect(player.lastPoints, 100);
+      expect(player.dartsThrownCurrentLeg, 6);
+      expect(player.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 7)
+      );
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 2);
+      expect(dartBot.pointsLeft, 141);
+      expect(dartBot.lastPoints, 180);
+      expect(dartBot.dartsThrownCurrentLeg, 6);
+      expect(dartBot.stats, Stats(
+          average: 170.25,
+          checkoutPercentage: 1,
+          firstNineAverage: 170.25,
+          bestLegDartsThrown: 9,
+          bestLegAverage: 167,
+          worstLegDarts: 9,
+          worstLegAverage: 167,
+          averageDartsPerLeg: 9,
+          highestFinish: 141,
+          hundredFourtyPlus: 2,
+          hundredEighty: 6)
+      );
+    });
+    test('GIVEN running first to 3 sets game from 501 with 2 Players and a dartBot with 1st set played perfectly by dartBot and now 2nd set began but nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of dartBot and of player 2', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player dartBot = game.players[2];
+      // Set 1 Leg 1
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Set 1 Leg 2
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Set 1 Leg 3
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 301);
+      expect(player.lastPoints, 100);
+      expect(player.dartsThrownCurrentLeg, 6);
+      expect(player.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 7)
+      );
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 401);
+      expect(player1.lastPoints, 100);
+      expect(player1.dartsThrownCurrentLeg, 3);
+      expect(player1.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 7)
+      );
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 2);
+      expect(dartBot.pointsLeft, 141);
+      expect(dartBot.lastPoints, 180);
+      expect(dartBot.dartsThrownCurrentLeg, 6);
+      expect(dartBot.stats, Stats(
+          average: 170.25,
+          checkoutPercentage: 1,
+          firstNineAverage: 170.25,
+          bestLegDartsThrown: 9,
+          bestLegAverage: 167,
+          worstLegDarts: 9,
+          worstLegAverage: 167,
+          averageDartsPerLeg: 9,
+          highestFinish: 141,
+          hundredFourtyPlus: 2,
+          hundredEighty: 6)
+      );
+    });
+    test('GIVEN running first to 3 sets game from 501 with 3 Players and a dartBot with 1st set played perfectly by dartBot and now 2nd set began but nobody threw yet WHEN throw is undone THEN jump back to 1st set and undo the last throw of dartBot and of player 3', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addPlayer();
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player player2 = game.players[2];
+      Player dartBot = game.players[3];
+      // Set 1 Leg 1
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Set 1 Leg 2
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Set 1 Leg 3
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      game.performThrow(Throw(100));
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 301);
+      expect(player.lastPoints, 100);
+      expect(player.dartsThrownCurrentLeg, 6);
+      expect(player.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 7)
+      );
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 301);
+      expect(player1.lastPoints, 100);
+      expect(player1.dartsThrownCurrentLeg, 6);
+      expect(player1.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 8)
+      );
+      // Player 2
+      expect(player2.won, false);
+      expect(player2.wonSets, 0);
+      expect(player2.wonLegsCurrentSet, 0);
+      expect(player2.pointsLeft, 301);
+      expect(player2.lastPoints, 100);
+      expect(player2.dartsThrownCurrentLeg, 6);
+      expect(player2.stats, Stats(
+          average: 100,
+          checkoutPercentage: 0,
+          firstNineAverage: 100,
+          hundredPlus: 8)
+      );
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 2);
+      expect(dartBot.pointsLeft, 141);
+      expect(dartBot.lastPoints, 180);
+      expect(dartBot.dartsThrownCurrentLeg, 6);
+      expect(dartBot.stats, Stats(
+          average: 170.25,
+          checkoutPercentage: 1,
+          firstNineAverage: 170.25,
+          bestLegDartsThrown: 9,
+          bestLegAverage: 167,
+          worstLegDarts: 9,
+          worstLegAverage: 167,
+          averageDartsPerLeg: 9,
+          highestFinish: 141,
+          hundredFourtyPlus: 2,
+          hundredEighty: 6)
+      );
+    });
+
+    test('GIVEN running first to 3 sets game from 501 with 1 Player and a dartBot WHEN throw is undone after 1 throw of dartBot was done THEN undo dartBot throw and throw of player 1', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player dartBot = game.players[1];
+      game.performThrow(Throw(180));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 501);
+      expect(player.lastPoints, null);
+      expect(player.dartsThrownCurrentLeg, 0);
+      expect(player.stats, Stats());
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 501);
+      expect(dartBot.lastPoints, null);
+      expect(dartBot.dartsThrownCurrentLeg, 0);
+      expect(dartBot.stats, Stats());
+    });
+    test('GIVEN running first to 3 sets game from 501 with 2 Players and a dartBot WHEN throw is undone after 1 throw of dartBot was done THEN undo dartBot throw and and throw of player 2', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player dartBot = game.players[2];
+      game.performThrow(Throw(180));
+      game.performThrow(Throw(180));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 321);
+      expect(player.lastPoints, 180);
+      expect(player.dartsThrownCurrentLeg, 3);
+      expect(player.stats, Stats(
+        average: 180,
+        firstNineAverage: 180,
+        hundredEighty: 1
+      ));
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 501);
+      expect(player1.lastPoints, null);
+      expect(player1.dartsThrownCurrentLeg, 0);
+      expect(player1.stats, Stats());
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 501);
+      expect(dartBot.lastPoints, null);
+      expect(dartBot.dartsThrownCurrentLeg, 0);
+      expect(dartBot.stats, Stats());
+    });
+    test('GIVEN running first to 3 sets game from 501 with 3 Players and a dartBot WHEN throw is undone after 1 throw of dartBot was done THEN undo dartBot throw and and throw of player 3', () {
+      // Arrange
+      final Game game = Game();
+      game.setSize(3);
+      game.setType(Type.sets);
+      game.setStartingPoints(501);
+      game.addPlayer();
+      game.addPlayer();
+      game.addDartBot();
+      game.setDartBotTargetAverage(180);
+      game.start();
+      Player player = game.players[0];
+      Player player1 = game.players[1];
+      Player player2 = game.players[2];
+      Player dartBot = game.players[3];
+      game.performThrow(Throw(180));
+      game.performThrow(Throw(180));
+      game.performThrow(Throw(180));
+
+      // Act
+      game.undoThrow();
+
+      // Assert
+      // Player
+      expect(player.won, false);
+      expect(player.wonSets, 0);
+      expect(player.wonLegsCurrentSet, 0);
+      expect(player.pointsLeft, 321);
+      expect(player.lastPoints, 180);
+      expect(player.dartsThrownCurrentLeg, 3);
+      expect(player.stats, Stats(
+          average: 180,
+          firstNineAverage: 180,
+          hundredEighty: 1
+      ));
+      // Player 1
+      expect(player1.won, false);
+      expect(player1.wonSets, 0);
+      expect(player1.wonLegsCurrentSet, 0);
+      expect(player1.pointsLeft, 321);
+      expect(player1.lastPoints, 180);
+      expect(player1.dartsThrownCurrentLeg, 3);
+      expect(player1.stats, Stats(
+          average: 180,
+          firstNineAverage: 180,
+          hundredEighty: 1
+      ));
+      // Player 1
+      expect(player2.won, false);
+      expect(player2.wonSets, 0);
+      expect(player2.wonLegsCurrentSet, 0);
+      expect(player2.pointsLeft, 501);
+      expect(player2.lastPoints, null);
+      expect(player2.dartsThrownCurrentLeg, 0);
+      expect(player2.stats, Stats());
+      // DartBot
+      expect(dartBot.won, false);
+      expect(dartBot.wonSets, 0);
+      expect(dartBot.wonLegsCurrentSet, 0);
+      expect(dartBot.pointsLeft, 501);
+      expect(dartBot.lastPoints, null);
+      expect(dartBot.dartsThrownCurrentLeg, 0);
+      expect(dartBot.stats, Stats());
+    });
+  });
+
+  test('realGameSimulation', () {
+    // TODO
   });
 }

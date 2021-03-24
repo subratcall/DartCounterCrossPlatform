@@ -109,8 +109,8 @@ class Game {
         } else {
           _nextTurn();
           if (_turnIndex == _dartBotIndex) {
-            performThrow(
-                ThrowGenerator.generate(_players[_dartBotIndex], this));
+            Throw x = ThrowGenerator.generate(_players[_dartBotIndex], this);
+            performThrow(x);
           }
         }
       }
@@ -138,14 +138,15 @@ class Game {
           }
         }
         _currentTurn._currentSet._currentLeg.throws.removeLast();
+        if(_turnIndex == _dartBotIndex) {
+          undoThrow();
+        }
       } else if (_noThrowsPerformedLeg) {
         // no throws performed in leg => update turnIndex remove throw
         for (Player player in _players) {
           player._currentSet._removeLeg();
         }
-        _startLegIndex =
-            (_startSetIndex + _currentTurn._currentSet.legs.length - 1) %
-                _players.length;
+        _startLegIndex = (_startSetIndex + _currentTurn._currentSet.legs.length - 1) % _players.length;
         for (int i = 0; i < _players.length; i++) {
           if (_players[i]._currentSet._currentLeg._won) {
             _turnIndex = i;
@@ -153,10 +154,16 @@ class Game {
           }
         }
         _currentTurn._currentSet._currentLeg.throws.removeLast();
+        if(_turnIndex == _dartBotIndex) {
+          undoThrow();
+        }
       } else {
         // normal throw => update turnIndex remove throw
         _turnIndex = (_turnIndex - 1) % _players.length;
         _currentTurn._currentSet._currentLeg.throws.removeLast();
+        if(_turnIndex == _dartBotIndex) {
+          undoThrow();
+        }
       }
     }
   }
@@ -181,9 +188,11 @@ class Game {
     bool allThrowsEqual0 = true;
 
     for (Player player in _players) {
-      allSetsEqual1 &= player.sets.length == 1;
-      allLegsEqual1 &= player._currentSet.legs.length == 1;
-      allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
+      if(player is! DartBot) {
+        allSetsEqual1 &= player.sets.length == 1;
+        allLegsEqual1 &= player._currentSet.legs.length == 1;
+        allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
+      }
     }
 
     return allSetsEqual1 && allLegsEqual1 && allThrowsEqual0;
@@ -194,8 +203,10 @@ class Game {
     bool allThrowsEqual0 = true;
 
     for (Player player in _players) {
-      allLegsEqual1 &= player._currentSet.legs.length == 1;
-      allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
+      if(player is! DartBot) {
+        allLegsEqual1 &= player._currentSet.legs.length == 1;
+        allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
+      }
     }
 
     return allLegsEqual1 && allThrowsEqual0;
@@ -205,7 +216,9 @@ class Game {
     bool allThrowsEqual0 = true;
 
     for (Player player in _players) {
-      allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
+      if(player is! DartBot) {
+        allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
+      }
     }
 
     return allThrowsEqual0;
