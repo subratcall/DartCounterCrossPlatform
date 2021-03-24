@@ -33,7 +33,8 @@ class Game {
 
   void removePlayer(int id) {
     if (status == Status.pending) {
-      if (_players.length > 1 && !_hasDartBot || _players.length > 2 && _hasDartBot) {
+      if (_players.length > 1 && !_hasDartBot ||
+          _players.length > 2 && _hasDartBot) {
         _players.removeWhere((player) => player.id == id);
       }
     }
@@ -108,7 +109,8 @@ class Game {
         } else {
           _nextTurn();
           if (_turnIndex == _dartBotIndex) {
-            performThrow(ThrowGenerator.generate(_players[_dartBotIndex], this));
+            performThrow(
+                ThrowGenerator.generate(_players[_dartBotIndex], this));
           }
         }
       }
@@ -117,25 +119,39 @@ class Game {
 
   void undoThrow() {
     if (_status == Status.running) {
-      if(_noThrowsPerformedGame) {
+      if (_noThrowsPerformedGame) {
         // no throws performed in game => do nothing
         return;
-      } else if(_noThrowsPerformedSet) {
+      } else if (_noThrowsPerformedSet) {
         // no throws performed in set => remove set update turnIndex remove throw
-        for(Player player in _players) {
+        for (Player player in _players) {
           player._removeSet();
         }
         _startSetIndex = (_startSetIndex - 1) % _players.length;
-        _startLegIndex = (_startSetIndex + _currentTurn._currentSet.legs.length-1) % _players.length;
-        _turnIndex = (_startLegIndex + _players.map((e) => e._currentSet._currentLeg.throws.length).toList().reduce(max)) % _players.length;
+        _startLegIndex =
+            (_startSetIndex + _currentTurn._currentSet.legs.length - 1) %
+                _players.length;
+        for (int i = 0; i < _players.length; i++) {
+          if (_players[i]._currentSet._currentLeg._won) {
+            _turnIndex = i;
+            break;
+          }
+        }
         _currentTurn._currentSet._currentLeg.throws.removeLast();
-      } else if(_noThrowsPerformedLeg) {
+      } else if (_noThrowsPerformedLeg) {
         // no throws performed in leg => update turnIndex remove throw
-        for(Player player in _players) {
+        for (Player player in _players) {
           player._currentSet._removeLeg();
         }
-        _startLegIndex = (_startSetIndex + _currentTurn._currentSet.legs.length-1) % _players.length;
-        _turnIndex = (_startLegIndex + _players.map((e) => e._currentSet._currentLeg.throws.length).toList().reduce(max)) % _players.length;
+        _startLegIndex =
+            (_startSetIndex + _currentTurn._currentSet.legs.length - 1) %
+                _players.length;
+        for (int i = 0; i < _players.length; i++) {
+          if (_players[i]._currentSet._currentLeg._won) {
+            _turnIndex = i;
+            break;
+          }
+        }
         _currentTurn._currentSet._currentLeg.throws.removeLast();
       } else {
         // normal throw => update turnIndex remove throw
@@ -164,7 +180,7 @@ class Game {
     bool allLegsEqual1 = true;
     bool allThrowsEqual0 = true;
 
-    for(Player player in _players) {
+    for (Player player in _players) {
       allSetsEqual1 &= player.sets.length == 1;
       allLegsEqual1 &= player._currentSet.legs.length == 1;
       allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
@@ -177,7 +193,7 @@ class Game {
     bool allLegsEqual1 = true;
     bool allThrowsEqual0 = true;
 
-    for(Player player in _players) {
+    for (Player player in _players) {
       allLegsEqual1 &= player._currentSet.legs.length == 1;
       allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
     }
@@ -188,13 +204,12 @@ class Game {
   bool get _noThrowsPerformedLeg {
     bool allThrowsEqual0 = true;
 
-    for(Player player in _players) {
+    for (Player player in _players) {
       allThrowsEqual0 &= player._currentSet._currentLeg.throws.length == 0;
     }
 
     return allThrowsEqual0;
   }
-
 
   void _nextTurn() {
     // create new legs, sets if needed

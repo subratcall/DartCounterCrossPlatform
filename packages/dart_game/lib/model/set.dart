@@ -10,7 +10,8 @@ class Set {
 
   final List<Leg> legs;
 
-  Set(this._startingPoints, this._legsNeededToWin) : legs = [Leg(_startingPoints)];
+  Set(this._startingPoints, this._legsNeededToWin)
+      : legs = [Leg(_startingPoints)];
 
   ///
   /// PRIVATE
@@ -44,7 +45,8 @@ class Set {
     return (3 * points) / dartsThrown;
   }
 
-  double get _checkoutPercentage => _wonLegs == 0 ? 0 : _wonLegs / _dartsOnDouble;
+  double get _checkoutPercentage =>
+      _wonLegs == 0 ? 0 : _wonLegs / _dartsOnDouble;
 
   double get _firstNineAverage {
     int points = 0;
@@ -142,13 +144,10 @@ class Set {
     return legs.last;
   }
 
-  // TODO
   Leg get _prevLeg {
-    int index = legs.length - 2;
-    if (index >= 0) {
-      return legs[index];
+    if (legs.length > 1) {
+      return legs[legs.length - 2];
     }
-
     return null;
   }
 
@@ -171,10 +170,10 @@ class Set {
   }
 
   int get _lastPoints {
-    if (_currentLeg._lastPoints == null) {
-      return _prevLeg != null ? _prevLeg._lastPoints : null;
+    if (_currentLeg._lastPoints != null) {
+      return _currentLeg._lastPoints;
     }
-    return _currentLeg._lastPoints;
+    return _prevLeg != null ? _prevLeg._lastPoints : null;
   }
 
   int get _dartsThrown {

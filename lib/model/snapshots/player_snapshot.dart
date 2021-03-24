@@ -1,5 +1,4 @@
 import 'package:dart_counter/model/snapshots/stats_snapshot.dart';
-import 'package:dart_game/dart_game.dart';
 import 'package:faker/faker.dart';
 
 class PlayerSnapshot {
@@ -18,20 +17,6 @@ class PlayerSnapshot {
 
   PlayerSnapshot(this.id, this.name, this.currentTurn, this.sets, this.legs, this.pointsLeft, this.lastThrow, this.dartsThrownThisLeg,
       this.average, this.checkoutPercentage, this.stats);
-
-  PlayerSnapshot.from(Player player) {
-    id = player.id;
-    name = player.name;
-    currentTurn = player.isCurrentTurn;
-    sets = player.sets;
-    legs = player.legs;
-    pointsLeft = player.pointsLeft;
-    lastThrow = player.lastThrow;
-    dartsThrownThisLeg = player.dartsThrown;
-    average = player.average;
-    checkoutPercentage = player.checkoutPercentage;
-    // todo stats
-  }
 
   PlayerSnapshot.seed(this.currentTurn) {
     name = faker.internet.userName();

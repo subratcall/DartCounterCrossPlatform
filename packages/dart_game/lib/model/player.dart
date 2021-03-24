@@ -12,6 +12,7 @@ class Player {
   int get wonSets => _game._config.type == Type.legs ? null : _wonSets;
   int get wonLegsCurrentSet => _wonLegsCurrentSet;
   int get pointsLeft => _pointsLeft;
+  List<String> get finishRecommendation => Finishes.get(_pointsLeft);
   int get lastPoints => _lastPoints;
   int get dartsThrownCurrentLeg => _dartsThrownCurrentLeg;
   Stats get stats => _stats;
@@ -53,7 +54,16 @@ class Player {
 
   int get _pointsLeft => _currentSet._currentLeg._pointsLeft;
 
-  int get _lastPoints => _currentSet._lastPoints;
+  int get _lastPoints {
+    if (_currentSet._lastPoints != null) {
+      return _currentSet._lastPoints;
+    } else {
+      if (_prevSet != null) {
+        return _prevSet._lastPoints;
+      }
+    }
+    return null;
+  }
 
   int get _dartsThrownCurrentLeg => _currentSet._currentLeg._dartsThrown;
 
@@ -78,7 +88,8 @@ class Player {
 
   double get _average => _dartsThrown == 0 ? 0 : (3 * _points) / _dartsThrown;
 
-  double get _checkoutPercentage => _dartsOnDouble == 0 ? 0 : _wonLegs / _dartsOnDouble;
+  double get _checkoutPercentage =>
+      _dartsOnDouble == 0 ? 0 : _wonLegs / _dartsOnDouble;
 
   double get _firstNineAverage {
     int points = 0;
@@ -244,6 +255,25 @@ class Player {
 
   Set get _currentSet => sets.last;
 
+  Set get _prevSet {
+    if (sets.length > 1) {
+      return sets[sets.length - 2];
+    } else {
+      return null;
+    }
+  }
+
+  Leg get _prevLeg {
+    if (_currentSet._prevLeg != null) {
+      return _currentSet._prevLeg;
+    } else {
+      if (_prevSet != null) {
+        return _prevSet.legs.last;
+      }
+    }
+    return null;
+  }
+
   int get _wonLegs {
     int wonLegs = 0;
     for (Set set in sets) {
@@ -313,7 +343,9 @@ class Player {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Player && runtimeType == other.runtimeType && id == other.id;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Player && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;

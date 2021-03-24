@@ -8,17 +8,20 @@ class ThrowGenerator {
     if (game.config.size == 301) {
       if (bot._dartsThrown < 3) {
         // first 3 darts
-        return Throw(bot.targetAverage + random.nextInt(bot.targetAverage ~/ 5));
+        return Throw(
+            bot.targetAverage + random.nextInt(bot.targetAverage ~/ 5));
       }
     } else if (game.config.size == 501) {
       if (bot._dartsThrown < 6) {
         // first 6 darts
-        return Throw(bot.targetAverage + random.nextInt(bot.targetAverage ~/ 5));
+        return Throw(
+            bot.targetAverage + random.nextInt(bot.targetAverage ~/ 5));
       }
     } else {
       if (bot._dartsThrown < 9) {
         // first 9 darts
-        return Throw(bot.targetAverage + random.nextInt(bot.targetAverage ~/ 5));
+        return Throw(
+            bot.targetAverage + random.nextInt(bot.targetAverage ~/ 5));
       }
     }
 

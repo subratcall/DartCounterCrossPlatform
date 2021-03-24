@@ -6,7 +6,11 @@ class Config {
   int size;
   Type type;
 
-  Config({this.startingPoints = 301, this.mode = Mode.firstTo, this.size = 1, this.type = Type.legs});
+  Config(
+      {this.startingPoints = 301,
+      this.mode = Mode.firstTo,
+      this.size = 1,
+      this.type = Type.legs});
 
   @override
   String toString() {
