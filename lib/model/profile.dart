@@ -1,27 +1,20 @@
 import 'package:dart_counter/model/carrer_stats.dart';
 
 class Profile {
-  String photoUrl;
-  String username;
-  CarrerStats carrerStats;
+  final String photoUrl;
+  final String username;
+  final CareerStats careerStats;
 
-  Profile(this.photoUrl, this.username, this.carrerStats);
+  Profile(this.photoUrl, this.username, this.careerStats);
 
-  Profile.dummy() {
-    photoUrl = 'www.example.com';
-    username = 'dummyUsername';
-    carrerStats = CarrerStats.dummy();
-  }
-
-  Profile.fromJson(Map<String, dynamic> json) {
-    photoUrl = json['photoUrl'];
-    username = json['username'];
-    carrerStats = CarrerStats.fromJson(json['carrerStats']);
-  }
+  Profile.fromJson(Map<String, dynamic> json)
+      : photoUrl = json['photoUrl'],
+        username = json['username'],
+        careerStats = json['careerStats'] != null ? CareerStats.fromJson(json['careerStats']) : null;
 
   Map<String, dynamic> toJson() => {
         'photoUrl': photoUrl,
         'username': username,
-        'carrerStats': carrerStats.toJson(),
+        'careerStats': careerStats.toJson(),
       };
 }

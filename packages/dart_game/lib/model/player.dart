@@ -73,7 +73,7 @@ class Player {
       firstNineAverage: _firstNineAverage,
       bestLegDartsThrown: _bestLegDartsThrown,
       bestLegAverage: _bestLegAverage,
-      worstLegDarts: _worstLegDarts,
+      worstLegDartsThrown: _worstLegDarts,
       worstLegAverage: _worstLegAverage,
       averageDartsPerLeg: _averageDartsPerLeg,
       highestFinish: _highestFinish,

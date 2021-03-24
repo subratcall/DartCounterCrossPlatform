@@ -179,8 +179,8 @@ class ProfileViewSuccess extends StatelessWidget {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).average,
-                                  value: profile.carrerStats.average,
-                                  trend: profile.carrerStats.averageTrend),
+                                  value: profile.careerStats.average,
+                                  trend: profile.careerStats.averageTrend),
                               flex: 178,
                             ),
                             Spacer(
@@ -189,8 +189,8 @@ class ProfileViewSuccess extends StatelessWidget {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).checkoutPercentage,
-                                  value: profile.carrerStats.checkoutPercentage,
-                                  trend: profile.carrerStats.checkoutPercentageTrend),
+                                  value: profile.careerStats.checkoutPercentage,
+                                  trend: profile.careerStats.checkoutPercentageTrend),
                               flex: 178,
                             )
                           ],
@@ -206,8 +206,8 @@ class ProfileViewSuccess extends StatelessWidget {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).firstNine,
-                                  value: profile.carrerStats.firstNine,
-                                  trend: profile.carrerStats.firstNineTrend),
+                                  value: profile.careerStats.firstNine,
+                                  trend: profile.careerStats.firstNineTrend),
                               flex: 178,
                             ),
                             Spacer(
@@ -216,7 +216,7 @@ class ProfileViewSuccess extends StatelessWidget {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).games,
-                                  value: profile.carrerStats.games),
+                                  value: profile.careerStats.games),
                               flex: 178,
                             )
                           ],
@@ -231,7 +231,7 @@ class ProfileViewSuccess extends StatelessWidget {
                           children: [
                             Expanded(
                               child: StatsCard(
-                                  title: AppLocalizations.of(context).wins, value: profile.carrerStats.wins),
+                                  title: AppLocalizations.of(context).wins, value: profile.careerStats.wins),
                               flex: 178,
                             ),
                             Spacer(
@@ -240,7 +240,7 @@ class ProfileViewSuccess extends StatelessWidget {
                             Expanded(
                               child: StatsCard(
                                   title: AppLocalizations.of(context).defeats,
-                                  value: profile.carrerStats.defeats),
+                                  value: profile.careerStats.defeats),
                               flex: 178,
                             )
                           ],

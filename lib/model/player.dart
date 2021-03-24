@@ -1,63 +1,67 @@
+import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/model/set.dart';
-
-import 'advanced_stats.dart';
+import 'package:dart_counter/model/stats.dart';
 
 class Player {
+  final Profile profile;
 
+  final int id;
+  final String name;
+  final bool isCurrentTurn;
+  final bool won;
+  final int wonSets;
+  final int wonLegsCurrentSet;
+  final int pointsLeft;
+  final List<String> finishRecommendation;
+  final int lastPoints;
+  final int dartsThrownCurrentLeg;
+  final Stats stats;
 
-  String name;
-  int legs;
-  int sets;
-  int pointsLeft;
-  int lastThrow;
-  List<String> finish;
-  int dartsThrownThisLeg;
-  double average;
-  double checkoutPercentage;
-  AdvancedStats advancedStats;
-  List<Set> setsList;
+  final List<Set> sets;
 
-  Player(this.name, this.legs, this.sets, this.pointsLeft, this.lastThrow, this.finish,
-      this.dartsThrownThisLeg, this.average, this.checkoutPercentage, this.advancedStats, this.setsList);
+  Player(
+      {this.profile,
+      this.id,
+      this.name,
+      this.isCurrentTurn,
+      this.won,
+      this.wonSets,
+      this.wonLegsCurrentSet,
+      this.pointsLeft,
+      this.finishRecommendation,
+      this.lastPoints,
+      this.dartsThrownCurrentLeg,
+      this.stats,
+      this.sets});
 
-  Player.dummy({
-    this.name = 'Larry',
-    this.legs = 2,
-    this.sets = 5,
-    this.pointsLeft = 99,
-    this.lastThrow = 121,
-    this.finish = const ['T20', 'S7', 'D16'],
-    this.dartsThrownThisLeg = 18,
-    this.average = 56.93,
-    this.checkoutPercentage = 27.67,
-  })  : advancedStats = AdvancedStats.dummy(),
-        setsList = [Set.dummy(), Set.dummy(), Set.dummy()];
-
-  Player.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    legs = json['legs'];
-    sets = json['sets'];
-    pointsLeft = json['pointsLeft'];
-    lastThrow = json['lastThrow'];
-    finish = json['finish'] != null ? json['finish'].map((value) => value as String).cast<String>().toList()  : null;
-    dartsThrownThisLeg = json['dartsThrownThisLeg'];
-    average = json['average'];
-    checkoutPercentage = json['checkoutPercentage'];
-    advancedStats = AdvancedStats.fromJson(json['advancedStats']);
-    setsList = json['setsList'] != null ? json['setsList'].map((value) => Set.fromJson(value)).cast<Set>().toList() : null;
-  }
+  Player.fromJson(Map<String, dynamic> json)
+      : profile = json['profile'] != null ? Profile.fromJson(json['profile']) : null,
+        id = json['id'] != null ? json['id'] : null,
+        name = json['name'] != null ? json['name'] : null,
+        isCurrentTurn = json['isCurrentTurn'] != null ? json['isCurrentTurn'] : null,
+        won = json['won'] != null ? json['won'] : null,
+        wonSets = json['wonSets'] != null ? json['wonSets'] : null,
+        wonLegsCurrentSet = json['wonLegsCurrentSet'] != null ? json['wonLegsCurrentSet'] : null,
+        pointsLeft = json['pointsLeft'] != null ? json['pointsLeft'] : null,
+        finishRecommendation = json['finishRecommendation'] != null ? json['finishRecommendation'].map((value) => value as String).cast<String>().toList()  : null,
+        lastPoints = json['lastPoints'] != null ? json['lastPoints'] : null,
+        dartsThrownCurrentLeg = json['dartsThrownCurrentLeg'] != null ? json['dartsThrownCurrentLeg'] : null,
+        stats = json['stats'] != null ? Stats.fromJson(json['stats']) : null,
+        sets = json['sets'] != null ? json['sets'].map((value) => Set.fromJson(value)).cast<Set>().toList() : null;
 
   Map<String, dynamic> toJson() => {
+        'profile': profile,
+        'id': id,
         'name': name,
-        'legs': legs,
-        'sets': sets,
+        'isCurrentTurn': isCurrentTurn,
+        'won': won,
+        'wonSets': wonSets,
+        'wonLegsCurrentSet': wonLegsCurrentSet,
         'pointsLeft': pointsLeft,
-        'lastThrow': lastThrow,
-        'finish': finish,
-        'dartsThrownThisLeg': dartsThrownThisLeg,
-        'average': average,
-        'checkoutPercentage': checkoutPercentage,
-        'advancedStats': advancedStats.toJson(),
-        'setsList': setsList != null ? setsList.map((set) => set.toJson()).toList() : null,
+        'finishRecommendation': finishRecommendation,
+        'lastPoints': lastPoints,
+        'dartsThrownCurrentLeg': dartsThrownCurrentLeg,
+        'stats': stats,
+        'sets': sets != null ? sets.map((set) => set.toJson()).toList() : null,
       };
 }

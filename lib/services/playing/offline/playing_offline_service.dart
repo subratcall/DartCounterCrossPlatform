@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/service.dart';
-import 'package:dart_game/dart_game.dart';
-
+import 'package:dart_game/dart_game.dart' as DartGame;
 
 class PlayingOfflineService extends AbstractPlayingService {
   static final PlayingOfflineService instance = PlayingOfflineService._();
@@ -12,24 +11,24 @@ class PlayingOfflineService extends AbstractPlayingService {
 
   StreamController<Event> controller = StreamController<Event>.broadcast();
 
-  Game _game;
+  DartGame.Game _game;
 
   @override
   Stream<Event> onEvent() => controller.stream;
 
   void createGame() {
-    _game = Game();
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _game = DartGame.Game();
+    _addSnapshotEvent();
   }
 
   void addDartBot() {
     _game.addDartBot();
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _addSnapshotEvent();
   }
 
   void removeDartBot() {
     _game.removeDartBot();
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _addSnapshotEvent();
   }
 
   void setDartBotTargetAverage(int targetAverage) {
@@ -38,12 +37,12 @@ class PlayingOfflineService extends AbstractPlayingService {
 
   void addPlayer() {
     _game.addPlayer();
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _addSnapshotEvent();
   }
 
   void removePlayer(int id) {
     _game.removePlayer(id);
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _addSnapshotEvent();
   }
 
   void setStartingPoints(int startingPoints) {
@@ -51,7 +50,7 @@ class PlayingOfflineService extends AbstractPlayingService {
   }
 
   void setMode(Mode mode) {
-    _game.config.mode = mode;
+    _game.config.mode = mode == Mode.firstTo ? DartGame.Mode.firstTo : DartGame.Mode.bestOf;
   }
 
   void setSize(int size) {
@@ -59,22 +58,26 @@ class PlayingOfflineService extends AbstractPlayingService {
   }
 
   void setType(Type type) {
-    _game.config.type = type;
+    _game.config.type = type == Type.legs ? DartGame.Type.legs : DartGame.Type.sets;
   }
 
   void startGame() {
     _game.start();
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _addSnapshotEvent();
   }
 
   void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-    _game.performThrow(Throw(points, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble));
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _game.performThrow(DartGame.Throw(points, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble));
+    _addSnapshotEvent();
   }
 
   void undoThrow() {
     _game.undoThrow();
-    controller.add(SnapshotEvent(GameSnapshot.from(_game)));
+    _addSnapshotEvent();
+  }
+  
+  void _addSnapshotEvent() {
+    controller.add(SnapshotEvent(Game()));
   }
 
   void dispose() {

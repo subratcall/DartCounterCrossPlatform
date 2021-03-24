@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/snapshots/player_snapshot.dart';
+import 'package:dart_counter/model/player.dart';
 import 'package:dart_counter/view/ios/widgets/card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Stats extends StatelessWidget {
 
-  final List<PlayerSnapshot> players;
+  final List<Player> players;
 
   Stats(this.players)
       : assert(players != null),
@@ -246,7 +246,7 @@ class DescriptionItem extends StatelessWidget {
 
 class PlayerItem extends StatelessWidget {
 
-  final PlayerSnapshot player;
+  final Player player;
 
   PlayerItem(this.player);
 
@@ -272,14 +272,14 @@ class PlayerItem extends StatelessWidget {
           ),
           Expanded(
             child: AutoSizeText(
-              player.legs.toString(),
+              player.wonLegsCurrentSet.toString(),
               maxLines: 1,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
             child: AutoSizeText(
-              player.average.toStringAsFixed(2),
+              player.stats.average.toStringAsFixed(2),
               maxLines: 1,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
@@ -307,7 +307,7 @@ class PlayerItem extends StatelessWidget {
           ),
           Expanded(
             child: AutoSizeText(
-              player.checkoutPercentage.toStringAsFixed(2),
+              player.stats.checkoutPercentage.toStringAsFixed(2),
               maxLines: 1,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),

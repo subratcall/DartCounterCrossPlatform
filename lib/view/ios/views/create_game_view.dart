@@ -2,14 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/snapshots/player_snapshot.dart';
+import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/player.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/ios/widgets/button/action_button.dart';
 import 'package:dart_counter/view/ios/widgets/card.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
-import 'package:dart_game/dart_game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show Material, ListTile;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -200,7 +200,7 @@ class _DartBotCardState extends State<DartBotCard> {
 }
 
 class PlayersCard extends StatefulWidget {
-  final List<PlayerSnapshot> players;
+  final List<Player> players;
   final VoidCallback onAddPlayerPressed;
   final Function(int) onRemovePlayer;
 
@@ -217,7 +217,7 @@ class _PlayersCardState extends State<PlayersCard> {
   Widget build(BuildContext context) {
     void _onReorder(int oldIndex, int newIndex) {
       setState(() {
-        PlayerSnapshot row = widget.players.removeAt(oldIndex);
+        Player row = widget.players.removeAt(oldIndex);
         widget.players.insert(newIndex, row);
       });
     }
@@ -279,7 +279,7 @@ class _PlayersCardState extends State<PlayersCard> {
 }
 
 class PlayerItem extends StatelessWidget {
-  final PlayerSnapshot player;
+  final Player player;
   final Function(int) onDismissed;
 
   PlayerItem(this.player, {this.onDismissed});

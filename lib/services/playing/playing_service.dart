@@ -1,8 +1,8 @@
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/offline/playing_offline_service.dart';
 import 'package:dart_counter/services/playing/online/playing_online_service.dart';
 import 'package:dart_counter/services/playing/service.dart';
-import 'package:dart_game/dart_game.dart';
+import 'package:dart_game/dart_game.dart' as DartGame;
 
 class PlayingService extends AbstractPlayingService {
   final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
@@ -10,12 +10,12 @@ class PlayingService extends AbstractPlayingService {
 
   bool _online = false;
 
-  GameSnapshot gameSnapshot;
+  Game gameSnapshot;
 
   PlayingService() {
     onEvent().listen((event) {
       if(event is SnapshotEvent) {
-        gameSnapshot = event.item as GameSnapshot;
+        gameSnapshot = event.item as Game;
       }
     });
   }
@@ -144,6 +144,6 @@ class PlayingService extends AbstractPlayingService {
   
   /// HELPER
   bool validatePoints(int points, int pointsLeft) {
-    return ThrowValidator.validatePoints(points, pointsLeft);
+    return DartGame.ThrowValidator.validatePoints(points, pointsLeft);
   }
 }

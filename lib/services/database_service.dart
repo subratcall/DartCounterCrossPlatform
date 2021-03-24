@@ -68,7 +68,7 @@ class DatabaseService {
   /// OUT
 
   void createUser(String uid, String username) {
-    Profile profile = Profile(null, username, CarrerStats());
+    Profile profile = Profile(null, username, CareerStats());
     _firestore.collection('profiles').doc(uid).set(profile.toJson());
   }
 
@@ -90,25 +90,4 @@ class DatabaseService {
     );
   }
 
-  void insertDummyData(String uid) async {
-    //Profile profile = Profile.dummy();
-    List<Invitation> invitations = [Invitation.dummy(), Invitation.dummy(), Invitation.dummy()];
-    List<Friend> friends = [Friend.dummy(), Friend.dummy(), Friend.dummy()];
-    List<FriendRequest> friendRequests = [
-      FriendRequest.dummy(),
-      FriendRequest.dummy(),
-      FriendRequest.dummy()
-    ];
-    List<Game> games = [Game.dummy(), Game.dummy(), Game.dummy()];
-
-    //_firestore.collection('profiles').doc(uid).set(profile.toJson());
-    _firestore.collection('invitations').doc(uid).set({'data': invitations.map((e) => e.toJson()).toList()});
-    _firestore.collection('friends').doc(uid).set({'data': friends.map((e) => e.toJson()).toList()});
-    _firestore
-        .collection('friendRequests')
-        .doc(uid)
-        .set({'data': friendRequests.map((e) => e.toJson()).toList()});
-    _firestore.collection('gameHistory').doc(uid).set({'data': games.map((e) => e.toJson()).toList()});
-    _firestore.collection('isOnline').doc(uid).set({'data': true});
-  }
 }

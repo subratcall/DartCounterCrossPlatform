@@ -177,7 +177,7 @@ class ProfileButton extends StatelessWidget {
                               ),
                               Spacer(),
                               AutoSizeText(
-                                profile?.carrerStats?.average?.toString() ?? '--',
+                                profile?.careerStats?.average?.toString() ?? '--',
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
@@ -197,7 +197,7 @@ class ProfileButton extends StatelessWidget {
                               ),
                               Spacer(),
                               AutoSizeText(
-                                profile?.carrerStats?.checkoutPercentage?.toString() ?? '--',
+                                profile?.careerStats?.checkoutPercentage?.toString() ?? '--',
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
@@ -217,7 +217,7 @@ class ProfileButton extends StatelessWidget {
                               ),
                               Spacer(),
                               AutoSizeText(
-                                profile?.carrerStats?.wins?.toString() ?? '--',
+                                profile?.careerStats?.wins?.toString() ?? '--',
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),
@@ -237,7 +237,7 @@ class ProfileButton extends StatelessWidget {
                               ),
                               Spacer(),
                               AutoSizeText(
-                                profile?.carrerStats?.defeats?.toString() ?? '--',
+                                profile?.careerStats?.defeats?.toString() ?? '--',
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.white),

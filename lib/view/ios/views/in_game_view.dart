@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_icons.dart';
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
-import 'package:dart_counter/model/snapshots/player_snapshot.dart';
+import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/player.dart';
 import 'package:dart_counter/view/ios/views/checkout_details_view.dart';
 import 'package:dart_counter/view/ios/views/in_game_stats_view.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
@@ -32,14 +32,14 @@ class InGameView extends StatelessWidget {
                   expand: true,
                   context: context,
                   backgroundColor: AppColors.transparent,
-                  builder: (context) => InGameStatsView(),
+                  builder: (context) => InGameStatsView(model.currentSnapshot),
                 ),
               ),
             ),
           ),
           child: Builder(
             builder: (context) {
-              GameSnapshot game = model.currentSnapshot;
+              Game game = model.currentSnapshot;
               return game != null ? Row(
                 children: [
                   Spacer(
@@ -95,7 +95,7 @@ class InGameView extends StatelessWidget {
 }
 
 class PlayerWrapper extends StatelessWidget {
-  final List<PlayerSnapshot> players;
+  final List<Player> players;
 
   PlayerWrapper(this.players);
 
@@ -110,7 +110,7 @@ class PlayerWrapper extends StatelessWidget {
 
 class OnePlayer extends StatelessWidget {
   
-  final PlayerSnapshot player;
+  final Player player;
 
   OnePlayer(this.player);
 
@@ -122,7 +122,7 @@ class OnePlayer extends StatelessWidget {
 
 class TwoPlayer extends StatelessWidget {
 
-  final List<PlayerSnapshot> players;
+  final List<Player> players;
 
   TwoPlayer(this.players);
 
@@ -146,7 +146,7 @@ class TwoPlayer extends StatelessWidget {
 
 class ThreePlayer extends StatelessWidget {
 
-  final List<PlayerSnapshot> players;
+  final List<Player> players;
 
   ThreePlayer(this.players);
 
@@ -182,7 +182,7 @@ class ThreePlayer extends StatelessWidget {
 
 class FourPlayer extends StatelessWidget {
 
-  final List<PlayerSnapshot> players;
+  final List<Player> players;
 
   FourPlayer(this.players);
 
@@ -223,7 +223,7 @@ class FourPlayer extends StatelessWidget {
 
 class PlayerBig extends StatelessWidget {
 
-  final PlayerSnapshot player;
+  final Player player;
 
   PlayerBig(this.player);
 
@@ -234,7 +234,7 @@ class PlayerBig extends StatelessWidget {
         Radius.circular(16.0),
       ),
       child: Container(
-        color: player.currentTurn ? AppColors.black2 : AppColors.black,
+        color: player.isCurrentTurn ? AppColors.black2 : AppColors.black,
         child: Row(
           children: [
             Spacer(flex: 30),
@@ -305,7 +305,7 @@ class PlayerBig extends StatelessWidget {
                               color: AppColors.yellow,
                               child: Center(
                                 child: AutoSizeText(
-                                  'L: ' + player.legs.toString(),
+                                  'L: ' + player.wonLegsCurrentSet.toString(),
                                   maxLines: 1,
                                   style: TextStyle(
                                     color: AppColors.white,
@@ -355,7 +355,7 @@ class PlayerBig extends StatelessWidget {
                           flex: 28,
                           child: Center(
                             child: AutoSizeText(
-                              player.lastThrow.toString(),
+                              player.lastPoints.toString(),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -380,7 +380,7 @@ class PlayerBig extends StatelessWidget {
                           flex: 190,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownThisLeg.toString(),
+                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownCurrentLeg.toString(),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -403,7 +403,7 @@ class PlayerBig extends StatelessWidget {
                           flex: 135,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).average + ' : ' + player.average.toStringAsFixed(2),
+                              AppLocalizations.of(context).average + ' : ' + player.stats.average.toStringAsFixed(2),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -418,7 +418,7 @@ class PlayerBig extends StatelessWidget {
                           flex: 135,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.checkoutPercentage.toStringAsFixed(2),
+                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.stats.checkoutPercentage.toStringAsFixed(2),
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -445,7 +445,7 @@ class PlayerBig extends StatelessWidget {
 
 class PlayerMedium extends StatelessWidget {
 
-  final PlayerSnapshot player;
+  final Player player;
 
   PlayerMedium(this.player);
 
@@ -456,7 +456,7 @@ class PlayerMedium extends StatelessWidget {
         Radius.circular(16.0),
       ),
       child: Container(
-        color: player.currentTurn ? AppColors.black2 : AppColors.black,
+        color: player.isCurrentTurn ? AppColors.black2 : AppColors.black,
         child: Row(
           children: [
             Spacer(flex: 10),
@@ -528,7 +528,7 @@ class PlayerMedium extends StatelessWidget {
                               color: AppColors.yellow,
                               child: Center(
                                 child: AutoSizeText(
-                                  'L: ' + player.legs.toString(),
+                                  'L: ' + player.wonLegsCurrentSet.toString(),
                                   maxLines: 1,
                                   minFontSize: 1,
                                   style: TextStyle(
@@ -579,7 +579,7 @@ class PlayerMedium extends StatelessWidget {
                           flex: 22,
                           child: Center(
                             child: AutoSizeText(
-                              player.lastThrow.toString(),
+                              player.lastPoints.toString(),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -603,7 +603,7 @@ class PlayerMedium extends StatelessWidget {
                           flex: 190,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownThisLeg.toString(),
+                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownCurrentLeg.toString(),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -626,7 +626,7 @@ class PlayerMedium extends StatelessWidget {
                           flex: 190,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).average + ' : ' + player.average.toStringAsFixed(2),
+                              AppLocalizations.of(context).average + ' : ' + player.stats.average.toStringAsFixed(2),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -649,7 +649,7 @@ class PlayerMedium extends StatelessWidget {
                           flex: 190,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.checkoutPercentage.toStringAsFixed(2),
+                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.stats.checkoutPercentage.toStringAsFixed(2),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -677,7 +677,7 @@ class PlayerMedium extends StatelessWidget {
 
 class PlayerSmall extends StatelessWidget {
 
-  final PlayerSnapshot player;
+  final Player player;
 
   PlayerSmall(this.player);
 
@@ -688,7 +688,7 @@ class PlayerSmall extends StatelessWidget {
         Radius.circular(16.0),
       ),
       child: Container(
-        color: player.currentTurn ? AppColors.black2 : AppColors.black,
+        color: player.isCurrentTurn ? AppColors.black2 : AppColors.black,
         child: Row(
           children: [
             Spacer(flex: 8),
@@ -760,7 +760,7 @@ class PlayerSmall extends StatelessWidget {
                               color: AppColors.yellow,
                               child: Center(
                                 child: AutoSizeText(
-                                  'L: ' + player.legs.toString(),
+                                  'L: ' + player.wonLegsCurrentSet.toString(),
                                   maxLines: 1,
                                   minFontSize: 1,
                                   style: TextStyle(
@@ -811,7 +811,7 @@ class PlayerSmall extends StatelessWidget {
                           flex: 14,
                           child: Center(
                             child: AutoSizeText(
-                              player.lastThrow.toString(),
+                              player.lastPoints.toString(),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -836,7 +836,7 @@ class PlayerSmall extends StatelessWidget {
                           flex: 104,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownThisLeg.toString(),
+                              AppLocalizations.of(context).dartsThrown + ' : ' + player.dartsThrownCurrentLeg.toString(),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -860,7 +860,7 @@ class PlayerSmall extends StatelessWidget {
                           flex: 67,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).average + ' : ' + player.average.toStringAsFixed(2),
+                              AppLocalizations.of(context).average + ' : ' + player.stats.average.toStringAsFixed(2),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -876,7 +876,7 @@ class PlayerSmall extends StatelessWidget {
                           flex: 67,
                           child: Center(
                             child: AutoSizeText(
-                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.checkoutPercentage.toStringAsFixed(2),
+                              AppLocalizations.of(context).checkoutPercentage + ' : ' + player.stats.checkoutPercentage.toStringAsFixed(2),
                               maxLines: 1,
                               minFontSize: 1,
                               style: TextStyle(
@@ -904,7 +904,7 @@ class PlayerSmall extends StatelessWidget {
 
 class PlayerExtraSmall extends StatelessWidget {
 
-  final PlayerSnapshot player;
+  final Player player;
 
   PlayerExtraSmall(this.player);
 

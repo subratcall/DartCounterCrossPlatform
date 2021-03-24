@@ -1,5 +1,3 @@
-
-
 class Event<T> {
 
   T _item;
@@ -12,7 +10,7 @@ class Event<T> {
 
 }
 
-class SnapshotEvent<GameSnapshot> extends Event {
+class SnapshotEvent<Game> extends Event {
   SnapshotEvent(item) : super(item);
 }
 

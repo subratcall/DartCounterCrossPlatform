@@ -1,4 +1,4 @@
-class CarrerStats {
+class CareerStats {
   double average;
   String averageTrend;
   double checkoutPercentage;
@@ -9,7 +9,7 @@ class CarrerStats {
   int wins;
   int defeats;
 
-  CarrerStats(
+  CareerStats(
       {this.average = 0.0,
       this.averageTrend,
       this.checkoutPercentage = 0.0,
@@ -20,7 +20,7 @@ class CarrerStats {
       this.wins = 0,
       this.defeats = 0});
 
-  CarrerStats.dummy() {
+  CareerStats.dummy() {
     average = 89.44;
     averageTrend = 'up';
     checkoutPercentage = 34.44;
@@ -32,7 +32,7 @@ class CarrerStats {
     defeats = 43;
   }
 
-  CarrerStats.fromJson(Map<String, dynamic> json) {
+  CareerStats.fromJson(Map<String, dynamic> json) {
     average = json['average'];
     averageTrend = json['averageTrend'];
     checkoutPercentage = json['checkoutPercentage'];

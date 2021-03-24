@@ -1,5 +1,5 @@
 import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
@@ -10,10 +10,10 @@ class InGameViewModel extends ViewModel {
   final PlayingService _playingService = locator<PlayingService>();
 
   int _inputPoints = 0;
-  GameSnapshot _currentSnapshot;
+  Game _currentSnapshot;
 
-  GameSnapshot get currentSnapshot => _currentSnapshot;
-  set currentSnapshot(GameSnapshot snapshot) {
+  Game get currentSnapshot => _currentSnapshot;
+  set currentSnapshot(Game snapshot) {
     _currentSnapshot = snapshot;
     notifyListeners();
   }
@@ -28,7 +28,7 @@ class InGameViewModel extends ViewModel {
     currentSnapshot = _playingService.gameSnapshot;
     subscriptions.add(_playingService.onEvent().listen((event) {
       if(event is SnapshotEvent) {
-        currentSnapshot = event.item as GameSnapshot;
+        currentSnapshot = event.item as Game;
       }
     }));
   }

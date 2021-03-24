@@ -1,17 +1,16 @@
 import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/model/snapshots/game_snapshot.dart';
+import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
-import 'package:dart_game/dart_game.dart';
 
 class CreateGameViewModel extends ViewModel {
   final PlayingService _playingService = locator<PlayingService>();
 
-  GameSnapshot _currentSnapshot = GameSnapshot.seed(Status.pending);
+  Game _currentSnapshot;
 
-  GameSnapshot get currentSnapshot => _currentSnapshot;
-  set currentSnapshot(GameSnapshot snapshot) {
+  Game get currentSnapshot => _currentSnapshot;
+  set currentSnapshot(Game snapshot) {
     _currentSnapshot = snapshot;
     notifyListeners();
   }
@@ -19,7 +18,7 @@ class CreateGameViewModel extends ViewModel {
   CreateGameViewModel() {
     subscriptions.add(_playingService.onEvent().listen((event) {
       if(event is SnapshotEvent) {
-        currentSnapshot = event.item as GameSnapshot;
+        currentSnapshot = event.item as Game;
       }
     }));
 

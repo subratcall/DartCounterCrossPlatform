@@ -6,7 +6,7 @@ class Stats {
   final double firstNineAverage;
   final int bestLegDartsThrown;
   final double bestLegAverage;
-  final int worstLegDarts;
+  final int worstLegDartsThrown;
   final double worstLegAverage;
   final double averageDartsPerLeg;
   final int highestFinish;
@@ -25,7 +25,7 @@ class Stats {
       this.firstNineAverage = 0,
       this.bestLegDartsThrown,
       this.bestLegAverage,
-      this.worstLegDarts,
+      this.worstLegDartsThrown,
       this.worstLegAverage,
       this.averageDartsPerLeg,
       this.highestFinish,
@@ -40,7 +40,7 @@ class Stats {
 
   @override
   String toString() {
-    return 'Stats{average: $average, checkoutPercentage: $checkoutPercentage, firstNineAverage: $firstNineAverage, bestLegDartsThrown: $bestLegDartsThrown, bestLegAverage: $bestLegAverage, worstLegDarts: $worstLegDarts, worstLegAverage: $worstLegAverage, averageDartsPerLeg: $averageDartsPerLeg, highestFinish: $highestFinish, fourtyPlus: $fourtyPlus, sixtyPlus: $sixtyPlus, eightyPlus: $eightyPlus, hundredPlus: $hundredPlus, hundredTwentyPlus: $hundredTwentyPlus, hundredFourtyPlus: $hundredFourtyPlus, hundredSixtyPlus: $hundredSixtyPlus, hundredEighty: $hundredEighty}';
+    return 'Stats{average: $average, checkoutPercentage: $checkoutPercentage, firstNineAverage: $firstNineAverage, bestLegDartsThrown: $bestLegDartsThrown, bestLegAverage: $bestLegAverage, worstLegDartsThrown: $worstLegDartsThrown, worstLegAverage: $worstLegAverage, averageDartsPerLeg: $averageDartsPerLeg, highestFinish: $highestFinish, fourtyPlus: $fourtyPlus, sixtyPlus: $sixtyPlus, eightyPlus: $eightyPlus, hundredPlus: $hundredPlus, hundredTwentyPlus: $hundredTwentyPlus, hundredFourtyPlus: $hundredFourtyPlus, hundredSixtyPlus: $hundredSixtyPlus, hundredEighty: $hundredEighty}';
   }
 
   @override
@@ -53,7 +53,7 @@ class Stats {
           firstNineAverage == other.firstNineAverage &&
           bestLegDartsThrown == other.bestLegDartsThrown &&
           bestLegAverage == other.bestLegAverage &&
-          worstLegDarts == other.worstLegDarts &&
+          worstLegDartsThrown == other.worstLegDartsThrown &&
           worstLegAverage == other.worstLegAverage &&
           averageDartsPerLeg == other.averageDartsPerLeg &&
           highestFinish == other.highestFinish &&
@@ -73,7 +73,7 @@ class Stats {
       firstNineAverage.hashCode ^
       bestLegDartsThrown.hashCode ^
       bestLegAverage.hashCode ^
-      worstLegDarts.hashCode ^
+      worstLegDartsThrown.hashCode ^
       worstLegAverage.hashCode ^
       averageDartsPerLeg.hashCode ^
       highestFinish.hashCode ^
