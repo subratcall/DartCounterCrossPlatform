@@ -66,7 +66,7 @@ class PlayingService extends AbstractPlayingService {
 
   void setDartBotAverage(int average) {
     if(!online) {
-      _playingOfflineService.setDartBotAverage(average);
+      _playingOfflineService.setDartBotTargetAverage(average);
     }
   }
 
@@ -78,7 +78,7 @@ class PlayingService extends AbstractPlayingService {
     }
   }
 
-  void removePlayer(String id) {
+  void removePlayer(int id) {
     if (online) {
       //_playingOnlineService.removePlayer(id);
     } else {
@@ -140,5 +140,10 @@ class PlayingService extends AbstractPlayingService {
     } else {
       _playingOfflineService.undoThrow();
     }
+  }
+  
+  /// HELPER
+  bool validatePoints(int points, int pointsLeft) {
+    return ThrowValidator.validatePoints(points, pointsLeft);
   }
 }

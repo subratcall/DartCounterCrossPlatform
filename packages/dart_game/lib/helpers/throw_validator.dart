@@ -138,12 +138,21 @@ class ThrowValidator {
   }
 
   static bool validatePoints(int points, pointsLeft) {
-   return validateThrow(Throw(points), pointsLeft)
+    if (points < 0 || points > 180) return false;
+
+    if (points > pointsLeft) return false;
+    if ([163, 166, 169, 172, 173, 175, 176, 178, 179].contains(points)) return false;
+    if (pointsLeft - points == 1) return false;
+    return true;
+  }
+}
+
+/*
+validateThrow(Throw(points), pointsLeft)
        || validateThrow(Throw(points, dartsOnDouble:  1), pointsLeft)
        || validateThrow(Throw(points, dartsOnDouble:  2), pointsLeft)
        || validateThrow(Throw(points, dartsOnDouble:  3), pointsLeft)
        || validateThrow(Throw(points, dartsThrown: 2, dartsOnDouble: 1), pointsLeft)
        || validateThrow(Throw(points, dartsThrown: 2, dartsOnDouble: 2), pointsLeft)
        || validateThrow(Throw(points, dartsThrown: 1, dartsOnDouble:  1), pointsLeft);
-  }
-}
+ */

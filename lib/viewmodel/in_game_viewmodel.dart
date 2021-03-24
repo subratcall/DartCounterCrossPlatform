@@ -4,7 +4,6 @@ import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
-import 'package:dart_game/dart_game.dart';
 
 class InGameViewModel extends ViewModel {
 
@@ -111,7 +110,7 @@ class InGameViewModel extends ViewModel {
     int newInputPoints = int.parse(inputPoints.toString() + newDigit.toString());
 
     if(newInputPoints == 0) return false;
-    return ThrowValidator.validatePoints(newInputPoints, pointsLeft);
+    return _playingService.validatePoints(newInputPoints, pointsLeft);
   }
 
 }

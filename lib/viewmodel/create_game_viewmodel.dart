@@ -58,7 +58,7 @@ class CreateGameViewModel extends ViewModel {
     _playingService.startGame();
   }
 
-  void onRemovePlayer(String id) {
+  void onRemovePlayer(int id) {
     _playingService.removePlayer(id);
   }
 

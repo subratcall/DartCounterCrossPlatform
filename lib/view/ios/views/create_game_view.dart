@@ -202,7 +202,7 @@ class _DartBotCardState extends State<DartBotCard> {
 class PlayersCard extends StatefulWidget {
   final List<PlayerSnapshot> players;
   final VoidCallback onAddPlayerPressed;
-  final Function(String) onRemovePlayer;
+  final Function(int) onRemovePlayer;
 
   PlayersCard(this.players, {this.onAddPlayerPressed, this.onRemovePlayer})
       : assert(onAddPlayerPressed != null),
@@ -280,7 +280,7 @@ class _PlayersCardState extends State<PlayersCard> {
 
 class PlayerItem extends StatelessWidget {
   final PlayerSnapshot player;
-  final Function(String) onDismissed;
+  final Function(int) onDismissed;
 
   PlayerItem(this.player, {this.onDismissed});
 

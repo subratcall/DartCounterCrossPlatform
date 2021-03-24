@@ -3,6 +3,8 @@ import 'package:dart_counter/model/set.dart';
 import 'advanced_stats.dart';
 
 class Player {
+
+
   String name;
   int legs;
   int sets;

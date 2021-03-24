@@ -3,7 +3,7 @@ import 'package:faker/faker.dart';
 
 class PlayerSnapshot {
 
-  String id;
+  int id;
   String name;
   bool currentTurn;
   int sets;

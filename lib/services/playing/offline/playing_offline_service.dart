@@ -32,18 +32,16 @@ class PlayingOfflineService extends AbstractPlayingService {
     controller.add(SnapshotEvent(GameSnapshot.from(_game)));
   }
 
-  void setDartBotAverage(int average) {
-    if(_game.hasDartBot) {
-      _game.dartBot.targetAverage = average;
-    }
+  void setDartBotTargetAverage(int targetAverage) {
+    _game.setDartBotTargetAverage(targetAverage);
   }
 
   void addPlayer() {
-    _game.addPlayer(Player());
+    _game.addPlayer();
     controller.add(SnapshotEvent(GameSnapshot.from(_game)));
   }
 
-  void removePlayer(String id) {
+  void removePlayer(int id) {
     _game.removePlayer(id);
     controller.add(SnapshotEvent(GameSnapshot.from(_game)));
   }
@@ -70,7 +68,7 @@ class PlayingOfflineService extends AbstractPlayingService {
   }
 
   void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-    _game.performThrow(Throw(points, dartsThrown, dartsOnDouble));
+    _game.performThrow(Throw(points, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble));
     controller.add(SnapshotEvent(GameSnapshot.from(_game)));
   }
 
