@@ -111,12 +111,7 @@ class InGameViewModel extends ViewModel {
     int newInputPoints = int.parse(inputPoints.toString() + newDigit.toString());
 
     if(newInputPoints == 0) return false;
-    try {
-      bool valid = ThrowValidator.isValidThrow(newInputPoints, pointsLeft);
-      return valid;
-    } on ArgumentError {
-      return false;
-    }
+    return ThrowValidator.validatePoints(newInputPoints, pointsLeft);
   }
 
 }

@@ -102,7 +102,7 @@ class Game {
 
   void performThrow(Throw t) {
     if (_status == Status.running) {
-      if (ThrowValidator.isValid(t, _currentTurn.pointsLeft)) {
+      if (ThrowValidator.validateThrow(t, _currentTurn.pointsLeft)) {
         _currentTurn._currentSet._currentLeg.throws.add(t);
         if (_currentTurn._won) {
           _status = Status.finished;

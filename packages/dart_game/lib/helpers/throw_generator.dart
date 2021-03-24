@@ -43,7 +43,7 @@ class ThrowGenerator {
       }
     } else {
       if (bot.pointsLeft - score >= 2) {
-        if (ThrowValidator.isValid(Throw(score), bot.pointsLeft)) {
+        if (ThrowValidator.validateThrow(Throw(score), bot.pointsLeft)) {
           return Throw(score);
         } else {
           return generate(bot, game);

@@ -63,7 +63,7 @@ class ThrowValidator {
       ] +
       List.generate(158 - 111 + 1, (i) => i + 111);
 
-  static bool isValid(Throw t, int pointsLeft) {
+  static bool validateThrow(Throw t, int pointsLeft) {
     if (t.points < 0 || t.points > 180) return false;
     if (t.dartsThrown < 1 || t.dartsThrown > 3) return false;
     if (t.dartsOnDouble < 0 || t.dartsOnDouble > 3) return false;
@@ -135,5 +135,15 @@ class ThrowValidator {
     }
 
     return false;
+  }
+
+  static bool validatePoints(int points, pointsLeft) {
+   return validateThrow(Throw(points), pointsLeft)
+       || validateThrow(Throw(points, dartsOnDouble:  1), pointsLeft)
+       || validateThrow(Throw(points, dartsOnDouble:  2), pointsLeft)
+       || validateThrow(Throw(points, dartsOnDouble:  3), pointsLeft)
+       || validateThrow(Throw(points, dartsThrown: 2, dartsOnDouble: 1), pointsLeft)
+       || validateThrow(Throw(points, dartsThrown: 2, dartsOnDouble: 2), pointsLeft)
+       || validateThrow(Throw(points, dartsThrown: 1, dartsOnDouble:  1), pointsLeft);
   }
 }
