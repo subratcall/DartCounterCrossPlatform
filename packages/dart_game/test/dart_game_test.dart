@@ -276,6 +276,106 @@ void main() {
         });
   });
 
+  group('setStartingPoints', () {
+    test('GIVEN pending game WHEN startingPoints are set THEN set new startingPoints', () {
+      // Arrange
+      final Game game = Game();
+
+      // Act
+      game.setStartingPoints(701);
+
+      // Assert
+      expect(game.config.startingPoints, 701);
+    });
+
+    test('GIVEN running game WHEN startingPoints are set THEN do nothing', () {
+      // Arrange
+      final Game game = Game();
+      game.start();
+
+      // Act
+      game.setStartingPoints(701);
+
+      // Assert
+      expect(game.config.startingPoints, 301);
+    });
+  });
+
+  group('setMode', () {
+    test('GIVEN pending game with WHEN mode is set THEN set new mode', () {
+      // Arrange
+      final Game game = Game();
+
+      // Act
+      game.setMode(Mode.bestOf);
+
+      // Assert
+      expect(game.config.mode, Mode.bestOf);
+    });
+
+    test('GIVEN running game with WHEN mode is set THEN do nothing', () {
+      // Arrange
+      final Game game = Game();
+      game.start();
+
+      // Act
+      game.setMode(Mode.bestOf);
+
+      // Assert
+      expect(game.config.mode, Mode.firstTo);
+    });
+  });
+
+  group('setSize', () {
+    test('GIVEN pending game WHEN size is set THEN set new size', () {
+      // Arrange
+      final Game game = Game();
+
+      // Act
+      game.setSize(10);
+
+      // Assert
+      expect(game.config.size, 10);
+    });
+
+    test('GIVEN running game WHEN size is set THEN do nothing', () {
+      // Arrange
+      final Game game = Game();
+      game.start();
+
+      // Act
+      game.setSize(10);
+
+      // Assert
+      expect(game.config.size, 1);
+    });
+  });
+
+  group('setType', () {
+    test('GIVEN pending game with WHEN type is set THEN set new type', () {
+      // Arrange
+      final Game game = Game();
+
+      // Act
+      game.setType(Type.sets);
+
+      // Assert
+      expect(game.config.type, Type.sets);
+    });
+
+    test('GIVEN running game with WHEN type is set THEN do nothing', () {
+      // Arrange
+      final Game game = Game();
+      game.start();
+
+      // Act
+      game.setType(Type.sets);
+
+      // Assert
+      expect(game.config.type, Type.legs);
+    });
+  });
+
   group('start', () {
     test('GIVEN game with status = pending WHEN start is called THEN status = running', () {
       // Arrange
