@@ -208,6 +208,12 @@
   "@highestFinish": {
     "description": "word"
   },
+  "@name": {
+    "description": "word"
+  },
+  "@player": {
+    "description": "word"
+  },
 
   "aboutUs": "About Us",
   "cancel": "Cancel",
@@ -283,5 +289,9 @@
   "bestLeg": "Best leg",
   "worstLeg": "Worst leg",
   "dartsPerLeg" : "Darts/leg",
-  "highestFinish" : "Highest Finish"
+  "highestFinish" : "Highest Finish",
+
+  "name" : "Name",
+
+  "player" : "Player"
 }

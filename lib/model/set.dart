@@ -6,7 +6,12 @@ class Set {
   Set({this.legs});
 
   Set.fromJson(Map<String, dynamic> json)
-      : legs = json['legs'] != null ? json['legs'].map((value) => Leg.fromJson(value)).cast<Leg>().toList() : null;
+      : legs = json['legs'] != null
+            ? json['legs']
+                .map((value) => Leg.fromJson(value))
+                .cast<Leg>()
+                .toList()
+            : null;
 
   Map<String, dynamic> toJson() => {
         'legs': legs != null ? legs.map((leg) => leg.toJson()).toList() : null,

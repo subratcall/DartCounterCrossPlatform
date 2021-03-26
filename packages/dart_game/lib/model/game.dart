@@ -23,8 +23,7 @@ class Game {
   bool addPlayer() {
     if (status == Status.pending) {
       if (_players.length < 4) {
-        _players.add(Player(this));
-
+        _players.add(Player(this, ++_playerCounter));
         return true;
       }
     }
@@ -258,6 +257,8 @@ class Game {
     // update CurrentTurn
     _turnIndex = (_turnIndex - 1) % _players.length;
   }
+
+  int _playerCounter = 0;
 
   @override
   String toString() {

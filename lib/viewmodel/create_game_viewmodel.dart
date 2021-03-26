@@ -9,23 +9,34 @@ class CreateGameViewModel extends ViewModel {
 
   Game _currentSnapshot;
 
+  bool _dartBotIsActive = false;
+
   Game get currentSnapshot => _currentSnapshot;
   set currentSnapshot(Game snapshot) {
     _currentSnapshot = snapshot;
     notifyListeners();
   }
 
+  bool get dartBotIsActive => _dartBotIsActive;
+  set dartBotIsActive(bool dartBotIsActive) {
+    _dartBotIsActive = dartBotIsActive;
+    notifyListeners();
+  }
+
+
   CreateGameViewModel() {
     subscriptions.add(_playingService.onEvent().listen((event) {
-      if(event is SnapshotEvent) {
-        currentSnapshot = event.item as Game;
+      if (event is Event<Game>) {
+        currentSnapshot = event.item;
       }
     }));
 
+    _playingService.start();
     _playingService.createGame();
   }
 
   void onDartBotActiveChanged(bool isActive) {
+    dartBotIsActive = isActive;
     isActive ? _playingService.addDartBot() : _playingService.removeDartBot();
   }
 
@@ -61,4 +72,7 @@ class CreateGameViewModel extends ViewModel {
     _playingService.removePlayer(id);
   }
 
+  void onNameChanged(int id, String newName) {
+    _playingService.updateName(id, newName);
+  }
 }

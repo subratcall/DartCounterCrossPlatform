@@ -45,14 +45,24 @@ class AppIcons {
   static const _kFontFam = 'AppIcons';
   static const String _kFontPkg = null;
 
-  static const IconData erase = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData logout = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData menu = IconData(0xe871, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData on_target = IconData(0xea52, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData facebook = IconData(0xf082, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData users = IconData(0xf0c0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData youtube = IconData(0xf167, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData instagram = IconData(0xf16d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData google = IconData(0xf1a0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData mail = IconData(0xf394, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData erase =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData logout =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu =
+      IconData(0xe871, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData on_target =
+      IconData(0xea52, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData facebook =
+      IconData(0xf082, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData users =
+      IconData(0xf0c0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData youtube =
+      IconData(0xf167, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData instagram =
+      IconData(0xf16d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData google =
+      IconData(0xf1a0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData mail =
+      IconData(0xf394, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

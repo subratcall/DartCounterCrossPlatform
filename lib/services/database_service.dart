@@ -28,29 +28,41 @@ class DatabaseService {
   }
 
   Stream<List<Invitation>> invitations(String uid) {
-    return _firestore.collection('invitations').doc(uid).snapshots().map((snapshot) {
-      List<Invitation> invitations =
-          List<Invitation>.from(snapshot.data().values.map((model) => Invitation.fromJson(model)));
+    return _firestore
+        .collection('invitations')
+        .doc(uid)
+        .snapshots()
+        .map((snapshot) {
+      List<Invitation> invitations = List<Invitation>.from(
+          snapshot.data().values.map((model) => Invitation.fromJson(model)));
       print(invitations);
       return invitations;
     });
   }
 
   Stream<List<Friend>> friends(String uid) {
-    return _firestore.collection('friends').doc(uid).snapshots().map((snapshot) {
+    return _firestore
+        .collection('friends')
+        .doc(uid)
+        .snapshots()
+        .map((snapshot) {
       print(snapshot.data());
       return List();
     });
   }
 
   Stream<List<FriendRequest>> friendRequests(String uid) {
-    return _firestore.collection('friendRequests').doc(uid).snapshots().map((snapshot) {
+    return _firestore
+        .collection('friendRequests')
+        .doc(uid)
+        .snapshots()
+        .map((snapshot) {
       print(snapshot.data());
       return List();
     });
   }
 
- /* Stream<List<Game>> gameHistory(String uid) {
+  /* Stream<List<Game>> gameHistory(String uid) {
     return _firestore.collection('gameHistory').doc(uid).snapshots().map((snapshot) {
       print(snapshot.data());
       return List();
@@ -58,9 +70,13 @@ class DatabaseService {
   }*/
 
   Future<List<Game>> fetchGameHistory(String uid) async {
-    var documentSnapshot = await _firestore.collection('gameHistory').doc(uid).get();
-    if(documentSnapshot.exists) {
-      return (documentSnapshot.data()['data'] as List).map((e) => Game.fromJson(e)).cast<Game>().toList();
+    var documentSnapshot =
+        await _firestore.collection('gameHistory').doc(uid).get();
+    if (documentSnapshot.exists) {
+      return (documentSnapshot.data()['data'] as List)
+          .map((e) => Game.fromJson(e))
+          .cast<Game>()
+          .toList();
     }
     return [];
   }
@@ -74,8 +90,10 @@ class DatabaseService {
 
   void updatePhoto(String uid, File rawData) async {
     var ref = _firebaseStorage.ref('profilePhotos/$uid');
-    var thumbnail = copyResize(decodeImage(rawData.readAsBytesSync()), width: 120);
-    await ref.putData(encodePng(thumbnail), SettableMetadata(contentType: 'image/png'));
+    var thumbnail =
+        copyResize(decodeImage(rawData.readAsBytesSync()), width: 120);
+    await ref.putData(
+        encodePng(thumbnail), SettableMetadata(contentType: 'image/png'));
     String photoUrl = await ref.getDownloadURL();
     _firestore.collection('profiles').doc(uid).update(
       {'photoUrl': photoUrl},
@@ -89,5 +107,4 @@ class DatabaseService {
       {'photoUrl': null},
     );
   }
-
 }

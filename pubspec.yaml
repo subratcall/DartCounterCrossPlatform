@@ -17,11 +17,12 @@ environment:
   sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
+
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.16.1
   dart_game:
     path: packages/dart_game
 
@@ -57,7 +58,6 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/appIcon.png"
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

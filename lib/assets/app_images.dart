@@ -13,4 +13,5 @@ class AppImages {
   static const trendDown = 'assets/images/png/trend_down.png';
   static const delete = 'assets/images/png/delete.png';
   static const photoPlaceholder = 'assets/images/png/photoPlaceholder.png';
+  static const bot = 'assets/images/png/bot.png';
 }

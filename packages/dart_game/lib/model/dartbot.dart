@@ -3,7 +3,7 @@ part of dart_game;
 class DartBot extends Player {
   int targetAverage;
 
-  DartBot(Game game, {this.targetAverage = 0}) : super(game, 'Dartbot');
+  DartBot(Game game, {this.targetAverage = 0}) : super(game, -1);
 
   @override
   String toString() {

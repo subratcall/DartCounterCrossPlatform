@@ -5,7 +5,8 @@ import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class HomeViewModel extends ViewModel {
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 
   int newInvites;

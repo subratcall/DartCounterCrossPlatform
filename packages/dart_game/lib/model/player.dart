@@ -19,9 +19,8 @@ class Player {
 
   final List<Set> sets;
 
-  Player(this._game, [this.name])
-      : id = _game._players.length,
-        sets = [];
+  Player(this._game, this.id)
+       : sets = [];
 
   ///
   /// PRIVATE
@@ -50,22 +49,22 @@ class Player {
     return wonSets;
   }
 
-  int get _wonLegsCurrentSet => _currentSet._wonLegs;
+  int get _wonLegsCurrentSet => _currentSet?._wonLegs;
 
-  int get _pointsLeft => _currentSet._currentLeg._pointsLeft;
+  int get _pointsLeft => _currentSet?._currentLeg?._pointsLeft;
 
   int get _lastPoints {
-    if (_currentSet._lastPoints != null) {
-      return _currentSet._lastPoints;
+    if (_currentSet?._lastPoints != null) {
+      return _currentSet?._lastPoints;
     } else {
       if (_prevSet != null) {
-        return _prevSet._lastPoints;
+        return _prevSet?._lastPoints;
       }
     }
     return null;
   }
 
-  int get _dartsThrownCurrentLeg => _currentSet._currentLeg._dartsThrown;
+  int get _dartsThrownCurrentLeg => _currentSet?._currentLeg?._dartsThrown;
 
   Stats get _stats => Stats(
       average: _average,
@@ -253,7 +252,7 @@ class Player {
   /// internal properties
   final Game _game;
 
-  Set get _currentSet => sets.last;
+  Set get _currentSet => sets.length > 0 ? sets.last : null;
 
   Set get _prevSet {
     if (sets.length > 1) {

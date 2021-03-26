@@ -35,19 +35,35 @@ class Player {
       this.sets});
 
   Player.fromJson(Map<String, dynamic> json)
-      : profile = json['profile'] != null ? Profile.fromJson(json['profile']) : null,
+      : profile =
+            json['profile'] != null ? Profile.fromJson(json['profile']) : null,
         id = json['id'] != null ? json['id'] : null,
         name = json['name'] != null ? json['name'] : null,
-        isCurrentTurn = json['isCurrentTurn'] != null ? json['isCurrentTurn'] : null,
+        isCurrentTurn =
+            json['isCurrentTurn'] != null ? json['isCurrentTurn'] : null,
         won = json['won'] != null ? json['won'] : null,
         wonSets = json['wonSets'] != null ? json['wonSets'] : null,
-        wonLegsCurrentSet = json['wonLegsCurrentSet'] != null ? json['wonLegsCurrentSet'] : null,
+        wonLegsCurrentSet = json['wonLegsCurrentSet'] != null
+            ? json['wonLegsCurrentSet']
+            : null,
         pointsLeft = json['pointsLeft'] != null ? json['pointsLeft'] : null,
-        finishRecommendation = json['finishRecommendation'] != null ? json['finishRecommendation'].map((value) => value as String).cast<String>().toList()  : null,
+        finishRecommendation = json['finishRecommendation'] != null
+            ? json['finishRecommendation']
+                .map((value) => value as String)
+                .cast<String>()
+                .toList()
+            : null,
         lastPoints = json['lastPoints'] != null ? json['lastPoints'] : null,
-        dartsThrownCurrentLeg = json['dartsThrownCurrentLeg'] != null ? json['dartsThrownCurrentLeg'] : null,
+        dartsThrownCurrentLeg = json['dartsThrownCurrentLeg'] != null
+            ? json['dartsThrownCurrentLeg']
+            : null,
         stats = json['stats'] != null ? Stats.fromJson(json['stats']) : null,
-        sets = json['sets'] != null ? json['sets'].map((value) => Set.fromJson(value)).cast<Set>().toList() : null;
+        sets = json['sets'] != null
+            ? json['sets']
+                .map((value) => Set.fromJson(value))
+                .cast<Set>()
+                .toList()
+            : null;
 
   Map<String, dynamic> toJson() => {
         'profile': profile,

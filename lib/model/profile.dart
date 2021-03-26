@@ -10,7 +10,9 @@ class Profile {
   Profile.fromJson(Map<String, dynamic> json)
       : photoUrl = json['photoUrl'],
         username = json['username'],
-        careerStats = json['careerStats'] != null ? CareerStats.fromJson(json['careerStats']) : null;
+        careerStats = json['careerStats'] != null
+            ? CareerStats.fromJson(json['careerStats'])
+            : null;
 
   Map<String, dynamic> toJson() => {
         'photoUrl': photoUrl,

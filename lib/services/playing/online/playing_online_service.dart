@@ -44,5 +44,4 @@ class PlayingOnlineService extends AbstractPlayingService {
   void dispose() {
     controller.close();
   }
-
 }

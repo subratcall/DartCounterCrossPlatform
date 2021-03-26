@@ -15,7 +15,8 @@ class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
   _ViewModelProviderState<T> createState() => _ViewModelProviderState<T>();
 }
 
-class _ViewModelProviderState<T extends ViewModel> extends State<ViewModelProvider<T>> {
+class _ViewModelProviderState<T extends ViewModel>
+    extends State<ViewModelProvider<T>> {
   T model = locator<T>();
 
   @override

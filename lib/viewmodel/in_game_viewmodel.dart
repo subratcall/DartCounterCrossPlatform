@@ -6,7 +6,6 @@ import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 class InGameViewModel extends ViewModel {
-
   final PlayingService _playingService = locator<PlayingService>();
 
   int _inputPoints = 0;
@@ -27,8 +26,10 @@ class InGameViewModel extends ViewModel {
   InGameViewModel() {
     currentSnapshot = _playingService.gameSnapshot;
     subscriptions.add(_playingService.onEvent().listen((event) {
-      if(event is SnapshotEvent) {
-        currentSnapshot = event.item as Game;
+      if (event is Event<Game>) {
+        Game game = event.item;
+        // TODO
+        currentSnapshot = game;
       }
     }));
   }
@@ -46,7 +47,7 @@ class InGameViewModel extends ViewModel {
   }
 
   void onKeyPressed(KeyType key) {
-    switch(key) {
+    switch (key) {
       case KeyType.one:
         _addDigit(1);
         break;
@@ -83,19 +84,18 @@ class InGameViewModel extends ViewModel {
       case KeyType.erase:
         eraseDigit();
         break;
-
     }
   }
 
   void _addDigit(int newDigit) {
-    if(_digitIsValid(newDigit)) {
+    if (_digitIsValid(newDigit)) {
       inputPoints = int.parse(inputPoints.toString() + newDigit.toString());
     }
   }
 
   void eraseDigit() {
-    if(inputPoints != 0) {
-      if(inputPoints < 10) {
+    if (inputPoints != 0) {
+      if (inputPoints < 10) {
         inputPoints = 0;
       } else {
         String temp = inputPoints.toString();
@@ -107,10 +107,10 @@ class InGameViewModel extends ViewModel {
   bool _digitIsValid(int newDigit) {
     int pointsLeft = _currentSnapshot.currentTurn.pointsLeft;
 
-    int newInputPoints = int.parse(inputPoints.toString() + newDigit.toString());
+    int newInputPoints =
+        int.parse(inputPoints.toString() + newDigit.toString());
 
-    if(newInputPoints == 0) return false;
+    if (newInputPoints == 0) return false;
     return _playingService.validatePoints(newInputPoints, pointsLeft);
   }
-
 }

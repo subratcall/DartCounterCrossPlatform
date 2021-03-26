@@ -73,5 +73,9 @@
   "bestLeg": "Bestes leg",
   "worstLeg": "Schlechtestes leg",
   "dartsPerLeg" : "Darts/leg",
-  "highestFinish" : "Höchstes Finish"
+  "highestFinish" : "Höchstes Finish",
+
+  "name" : "Name",
+
+  "player" : "Spieler"
 }

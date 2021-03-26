@@ -5,8 +5,10 @@ import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_game/dart_game.dart' as DartGame;
 
 class PlayingService extends AbstractPlayingService {
-  final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
-  final PlayingOnlineService _playingOnlineService = PlayingOnlineService.instance;
+  final PlayingOfflineService _playingOfflineService =
+      PlayingOfflineService.instance;
+  final PlayingOnlineService _playingOnlineService =
+      PlayingOnlineService.instance;
 
   bool _online = false;
 
@@ -14,15 +16,17 @@ class PlayingService extends AbstractPlayingService {
 
   PlayingService() {
     onEvent().listen((event) {
-      if(event is SnapshotEvent) {
-        gameSnapshot = event.item as Game;
+      if (event is Event<Game>) {
+        gameSnapshot = event.item;
       }
     });
   }
 
   @override
   Stream<Event> onEvent() {
-    return _online ? _playingOnlineService.onEvent() : _playingOfflineService.onEvent();
+    return _online
+        ? _playingOnlineService.onEvent()
+        : _playingOfflineService.onEvent();
   }
 
   bool get online => _online;
@@ -65,7 +69,7 @@ class PlayingService extends AbstractPlayingService {
   }
 
   void setDartBotAverage(int average) {
-    if(!online) {
+    if (!online) {
       _playingOfflineService.setDartBotTargetAverage(average);
     }
   }
@@ -141,7 +145,13 @@ class PlayingService extends AbstractPlayingService {
       _playingOfflineService.undoThrow();
     }
   }
-  
+
+  void updateName(int id, String newName) {
+    if(!online) {
+      _playingOfflineService.updateName(id, newName);
+    }
+  }
+
   /// HELPER
   bool validatePoints(int points, int pointsLeft) {
     return DartGame.ThrowValidator.validatePoints(points, pointsLeft);

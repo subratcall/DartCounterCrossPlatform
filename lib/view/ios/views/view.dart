@@ -15,7 +15,8 @@ class View extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     final double paddingTop = MediaQuery.of(context).padding.top;
-    final double navbarHeight = navigationBar != null ? navigationBar.preferredSize.height : 0;
+    final double navbarHeight =
+        navigationBar != null ? navigationBar.preferredSize.height : 0;
     final double paddingBottom = MediaQuery.of(context).padding.bottom;
 
     return CupertinoScaffold(
@@ -26,7 +27,8 @@ class View extends StatelessWidget {
           child: SafeArea(
             child: MediaQuery(
               data: MediaQueryData(
-                size: Size(width, height - paddingTop - navbarHeight - paddingBottom),
+                size: Size(
+                    width, height - paddingTop - navbarHeight - paddingBottom),
               ),
               child: SizedBox(
                 width: width,
