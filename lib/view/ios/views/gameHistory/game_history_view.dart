@@ -1,4 +1,3 @@
-
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';

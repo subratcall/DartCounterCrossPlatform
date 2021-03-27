@@ -24,7 +24,7 @@ class TextField extends StatelessWidget {
       this.keyboardType,
       this.textInputAction,
       this.onEditingComplete,
-        this.onChanged,
+      this.onChanged,
       this.isValid = true,
       this.color = AppColors.gray});
 

@@ -38,7 +38,10 @@ class PlayerBig extends StatelessWidget {
                           flex: 218,
                           child: Center(
                             child: AutoSizeText(
-                              player.id == -1 ? 'Dartbot' : player.name ?? '${AppLocalizations.of(context).player} ${player.id}',
+                              player.id == -1
+                                  ? 'Dartbot'
+                                  : player.name ??
+                                      '${AppLocalizations.of(context).player} ${player.id}',
                               maxLines: 1,
                               style: TextStyle(
                                 color: AppColors.white,
@@ -59,83 +62,87 @@ class PlayerBig extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 23,
-                    child: player.wonSets == null ? Row(
-                      children: [
-                        Spacer(flex: 118),
-                        Expanded(
-                          flex: 61,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(20.0),
-                            ),
-                            child: Container(
-                              color: AppColors.yellow,
-                              child: Center(
-                                child: AutoSizeText(
-                                  'L: ' + player.wonLegsCurrentSet.toString(),
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
+                    child: player.wonSets == null
+                        ? Row(
+                            children: [
+                              Spacer(flex: 118),
+                              Expanded(
+                                flex: 61,
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(20.0),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Spacer(flex: 118),
-                      ],
-                    ) : Row(
-                      children: [
-                        Spacer(flex: 52),
-                        Expanded(
-                            flex: 60,
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(20.0),
-                              ),
-                              child: Container(
-                                color: AppColors.yellow,
-                                child: Center(
-                                  child: AutoSizeText(
-                                    'S: ' + player.wonSets.toString(),
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 23,
+                                  child: Container(
+                                    color: AppColors.yellow,
+                                    child: Center(
+                                      child: AutoSizeText(
+                                        'L: ' +
+                                            player.wonLegsCurrentSet.toString(),
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 23,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            )),
-                        Spacer(flex: 73),
-                        Expanded(
-                          flex: 60,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(20.0),
-                            ),
-                            child: Container(
-                              color: AppColors.yellow,
-                              child: Center(
-                                child: AutoSizeText(
-                                  'L: ' + player.wonLegsCurrentSet.toString(),
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
+                              Spacer(flex: 118),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              Spacer(flex: 52),
+                              Expanded(
+                                  flex: 60,
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(20.0),
+                                    ),
+                                    child: Container(
+                                      color: AppColors.yellow,
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          'S: ' + player.wonSets.toString(),
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            color: AppColors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 23,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                              Spacer(flex: 73),
+                              Expanded(
+                                flex: 60,
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(20.0),
+                                  ),
+                                  child: Container(
+                                    color: AppColors.yellow,
+                                    child: Center(
+                                      child: AutoSizeText(
+                                        'L: ' +
+                                            player.wonLegsCurrentSet.toString(),
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 23,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                              Spacer(flex: 52),
+                            ],
                           ),
-                        ),
-                        Spacer(flex: 52),
-                      ],
-                    ),
                   ),
                   Spacer(
                     flex: 26,

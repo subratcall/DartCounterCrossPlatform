@@ -147,14 +147,13 @@ class PlayingService extends AbstractPlayingService {
   }
 
   void updateName(int id, String newName) {
-    if(!online) {
+    if (!online) {
       _playingOfflineService.updateName(id, newName);
     }
   }
 
   void reorderPlayer(int oldIndex, int newIndex) {
-    if(online) {
-
+    if (online) {
     } else {
       _playingOfflineService.reorderPlayer(oldIndex, newIndex);
     }

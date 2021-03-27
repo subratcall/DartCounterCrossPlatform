@@ -81,7 +81,8 @@ class _SignInViewState extends State<SignInView> {
                               ),
                               Expanded(
                                 child: TextField(
-                                  placeholder: AppLocalizations.of(context).email,
+                                  placeholder:
+                                      AppLocalizations.of(context).email,
                                   controller: emailController,
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,

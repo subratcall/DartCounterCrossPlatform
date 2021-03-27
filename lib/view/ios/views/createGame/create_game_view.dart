@@ -26,7 +26,11 @@ class CreateGameView extends StatelessWidget {
           builder: (context) => model.currentSnapshot != null
               ? SingleChildScrollView(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height + model.currentSnapshot.players.length * 50 / 613 * MediaQuery.of(context).size.height,
+                    height: MediaQuery.of(context).size.height +
+                        model.currentSnapshot.players.length *
+                            50 /
+                            613 *
+                            MediaQuery.of(context).size.height,
                     child: Row(
                       children: [
                         Spacer(

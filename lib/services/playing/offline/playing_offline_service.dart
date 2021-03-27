@@ -90,8 +90,8 @@ class PlayingOfflineService extends AbstractPlayingService {
 
   void reorderPlayer(int oldIndex, int newIndex) {
     _game.reorderPlayer(oldIndex, newIndex);
+    _addSnapshotEvent();
   }
-
 
   void _addSnapshotEvent() {
     Status status = _game.status == DartGame.Status.pending

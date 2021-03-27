@@ -40,68 +40,80 @@ class _DartBotCardState extends State<DartBotCard> {
         },
       ),
       flexBody: show ? 71 : 0,
-      body: show ? Column(
-        children: [
-          Spacer(
-            flex: 13,
-          ),
-          Expanded(
-            flex: 20,
-            child: Row(
+      body: show
+          ? Column(
               children: [
-                AutoSizeText(
-                  AppLocalizations.of(context).dartbotAverage,
-                  maxLines: 1,
+                Spacer(
+                  flex: 13,
                 ),
-              ],
-            ),
-          ),
-          Spacer(
-            flex: 11,
-          ),
-          Expanded(
-            flex: 30,
-            child: Row(
-              children: [
                 Expanded(
-                  flex: 264,
-                  child: CupertinoSlider(
-                      min: 1,
-                      max: 130,
-                      activeColor: sliderValue <= 50 ? AppColors.green : sliderValue <= 80 ? AppColors.yellow : AppColors.red,
-                      value: sliderValue,
-                      onChangeEnd: (newValue) =>
-                          widget.onAverageChanged(newValue.round()),
-                      onChanged: (newValue) {
-                        setState(() {
-                          sliderValue = newValue;
-                        });
-                      }),
+                  flex: 20,
+                  child: Row(
+                    children: [
+                      AutoSizeText(
+                        AppLocalizations.of(context).dartbotAverage,
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
                 ),
                 Spacer(
-                  flex: 15,
+                  flex: 11,
                 ),
                 Expanded(
-                    flex: 35,
-                    child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                        child: Container(
-                          padding: EdgeInsets.all(8.0),
-                          color: sliderValue <= 50 ? AppColors.green : sliderValue <= 80 ? AppColors.yellow : AppColors.red,
-                          child: AutoSizeText(
-                            sliderValue.round().toString(),
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 30, color: AppColors.white, fontWeight: FontWeight.bold),
-                          ),
-                        )
-                    )
+                  flex: 30,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 264,
+                        child: CupertinoSlider(
+                            min: 1,
+                            max: 130,
+                            activeColor: sliderValue <= 50
+                                ? AppColors.green
+                                : sliderValue <= 80
+                                    ? AppColors.yellow
+                                    : AppColors.red,
+                            value: sliderValue,
+                            onChangeEnd: (newValue) =>
+                                widget.onAverageChanged(newValue.round()),
+                            onChanged: (newValue) {
+                              setState(() {
+                                sliderValue = newValue;
+                              });
+                            }),
+                      ),
+                      Spacer(
+                        flex: 15,
+                      ),
+                      Expanded(
+                          flex: 35,
+                          child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8.0)),
+                              child: Container(
+                                padding: EdgeInsets.all(8.0),
+                                color: sliderValue <= 50
+                                    ? AppColors.green
+                                    : sliderValue <= 80
+                                        ? AppColors.yellow
+                                        : AppColors.red,
+                                child: AutoSizeText(
+                                  sliderValue.round().toString(),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ))),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
-      ) : null,
+            )
+          : null,
     );
   }
 }

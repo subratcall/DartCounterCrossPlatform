@@ -19,16 +19,19 @@ class AnonymousPlayerItem extends StatefulWidget {
 }
 
 class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
-  final nameController = TextEditingController();
+  final _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
 
+    // TODO
+    _nameController.text = widget.player.name;
+
     return Container(
       height: MediaQuery.of(context).size.height * 50 / 613,
       child: Dismissible(
-        key: ValueKey(widget.player),
+        key: ValueKey<Player>(widget.player),
         onDismissed: (_) => widget.onDismissed(widget.player.id),
         background: Container(
           color: AppColors.red,
@@ -71,7 +74,7 @@ class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
                     child: TextField(
                       color: AppColors.white,
                       placeholder: AppLocalizations.of(context).name,
-                      controller: nameController,
+                      controller: _nameController,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.done,
                       onChanged: (newName) => widget.onNameChanged(newName),
@@ -94,11 +97,11 @@ class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
                         ),
                         onPressed: () =>
                             CupertinoScaffold.showCupertinoModalBottomSheet(
-                              expand: false,
-                              context: context,
-                              backgroundColor: AppColors.transparent,
-                              builder: (context) => AdvancedSettingsModal(),
-                            ),
+                          expand: false,
+                          context: context,
+                          backgroundColor: AppColors.transparent,
+                          builder: (context) => AdvancedSettingsModal(),
+                        ),
                       ),
                     ),
                   ),
@@ -126,7 +129,7 @@ class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
 
   @override
   void dispose() {
-    nameController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 }

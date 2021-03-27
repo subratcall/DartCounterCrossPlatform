@@ -3,6 +3,7 @@ import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/model/player.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/card.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/anonymous_player_item.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_item.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/player_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,7 +16,11 @@ class PlayerCard extends StatefulWidget {
   final Function(int, String) onNameChanged;
   final Function(int, int) onReordered;
 
-  PlayerCard(this.players, {this.onAddPlayerPressed, this.onRemovePlayer, this.onNameChanged, this.onReordered})
+  PlayerCard(this.players,
+      {this.onAddPlayerPressed,
+      this.onRemovePlayer,
+      this.onNameChanged,
+      this.onReordered})
       : assert(onAddPlayerPressed != null),
         assert(onRemovePlayer != null);
 
@@ -26,14 +31,6 @@ class PlayerCard extends StatefulWidget {
 class _PlayerCardState extends State<PlayerCard> {
   @override
   Widget build(BuildContext context) {
-    void _onReorder(int oldIndex, int newIndex) {
-      setState(() {
-        widget.onReordered(oldIndex, newIndex);
-        Player row = widget.players.removeAt(oldIndex);
-        widget.players.insert(newIndex, row);
-      });
-    }
-
     ScrollController _scrollController =
         PrimaryScrollController.of(context) ?? ScrollController();
 
@@ -58,7 +55,9 @@ class _PlayerCardState extends State<PlayerCard> {
                   delegate: ReorderableSliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       Player player = widget.players[index];
-                      if(player.id == -1 || player.profile != null) {
+                      if (player.id == -1) {
+                        return DartBotItem(player);
+                      } else if (player.profile != null) {
                         return PlayerItem(
                           player,
                           onDismissed: widget.onRemovePlayer,
@@ -67,13 +66,14 @@ class _PlayerCardState extends State<PlayerCard> {
                         return AnonymousPlayerItem(
                           player,
                           onDismissed: widget.onRemovePlayer,
-                          onNameChanged: (name) => widget.onNameChanged(player.id, name),
+                          onNameChanged: (name) =>
+                              widget.onNameChanged(player.id, name),
                         );
                       }
                     },
                     childCount: widget.players.length,
                   ),
-                  onReorder: _onReorder,
+                  onReorder: widget.onReordered,
                 )
               ],
             ),

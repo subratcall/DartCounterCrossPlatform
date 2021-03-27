@@ -23,7 +23,6 @@ class CreateGameViewModel extends ViewModel {
     notifyListeners();
   }
 
-
   CreateGameViewModel() {
     subscriptions.add(_playingService.onEvent().listen((event) {
       if (event is Event<Game>) {

@@ -5,7 +5,6 @@ import 'package:dart_counter/locator.dart';
 import 'package:flutter/foundation.dart';
 
 class ViewModel<T> extends ChangeNotifier {
-
   AppModel appModel = locator<AppModel>();
 
   List<StreamSubscription> subscriptions = [];

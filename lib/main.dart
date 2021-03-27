@@ -17,12 +17,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
-  //DatabaseService().insertDummyData('oUSndXHVqbhFZ4as6e5xR9tr33h2');
   runApp(DartCounterApp());
 }
 
 class DartCounterApp extends StatelessWidget {
-  final controller = PageController(
+  final _controller = PageController(
     initialPage: 0,
   );
 
@@ -45,10 +44,10 @@ class DartCounterApp extends StatelessWidget {
               } else {
                 appModel.uid = null;
                 return PageView(
-                  controller: controller,
+                  controller: _controller,
                   children: [
-                    ios.SignInView(controller),
-                    ios.SignUpView(controller),
+                    ios.SignInView(_controller),
+                    ios.SignUpView(_controller),
                   ],
                 );
               }
