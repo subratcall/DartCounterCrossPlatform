@@ -13,8 +13,9 @@ class PlayerCard extends StatefulWidget {
   final Function() onAddPlayerPressed;
   final Function(int) onRemovePlayer;
   final Function(int, String) onNameChanged;
+  final Function(int, int) onReordered;
 
-  PlayerCard(this.players, {this.onAddPlayerPressed, this.onRemovePlayer, this.onNameChanged})
+  PlayerCard(this.players, {this.onAddPlayerPressed, this.onRemovePlayer, this.onNameChanged, this.onReordered})
       : assert(onAddPlayerPressed != null),
         assert(onRemovePlayer != null);
 
@@ -27,6 +28,7 @@ class _PlayerCardState extends State<PlayerCard> {
   Widget build(BuildContext context) {
     void _onReorder(int oldIndex, int newIndex) {
       setState(() {
+        widget.onReordered(oldIndex, newIndex);
         Player row = widget.players.removeAt(oldIndex);
         widget.players.insert(newIndex, row);
       });

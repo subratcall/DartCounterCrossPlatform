@@ -59,6 +59,7 @@ class CreateGameView extends StatelessWidget {
                                   onAddPlayerPressed: model.onAddPlayerPressed,
                                   onRemovePlayer: model.onRemovePlayer,
                                   onNameChanged: model.onNameChanged,
+                                  onReordered: model.onReorderPlayer,
                                 ),
                               ),
                               Spacer(

@@ -152,6 +152,14 @@ class PlayingService extends AbstractPlayingService {
     }
   }
 
+  void reorderPlayer(int oldIndex, int newIndex) {
+    if(online) {
+
+    } else {
+      _playingOfflineService.reorderPlayer(oldIndex, newIndex);
+    }
+  }
+
   /// HELPER
   bool validatePoints(int points, int pointsLeft) {
     return DartGame.ThrowValidator.validatePoints(points, pointsLeft);

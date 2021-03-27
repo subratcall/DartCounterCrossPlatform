@@ -88,6 +88,10 @@ class PlayingOfflineService extends AbstractPlayingService {
     _game.players.firstWhere((player) => player.id == id).name = newName;
   }
 
+  void reorderPlayer(int oldIndex, int newIndex) {
+    _game.reorderPlayer(oldIndex, newIndex);
+  }
+
 
   void _addSnapshotEvent() {
     Status status = _game.status == DartGame.Status.pending

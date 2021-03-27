@@ -75,4 +75,8 @@ class CreateGameViewModel extends ViewModel {
   void onNameChanged(int id, String newName) {
     _playingService.updateName(id, newName);
   }
+
+  void onReorderPlayer(int oldIndex, int newIndex) {
+    _playingService.reorderPlayer(oldIndex, newIndex);
+  }
 }

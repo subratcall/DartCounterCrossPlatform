@@ -39,6 +39,11 @@ class Game {
     }
   }
 
+  void reorderPlayer(int oldIndex, int newIndex) {
+    Player player = players.removeAt(oldIndex);
+    players.insert(newIndex, player);
+  }
+
   bool addDartBot() {
     if (status == Status.pending) {
       if (!_hasDartBot && players.length < 4) {
