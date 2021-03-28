@@ -1,6 +1,7 @@
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:provider/provider.dart';
 
 /// root widget of every ios view

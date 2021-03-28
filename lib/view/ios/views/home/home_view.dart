@@ -1,11 +1,14 @@
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/view/ios/views/home/home_view_mobile_landscape.dart';
+import 'package:dart_counter/view/ios/views/home/home_view_mobile_portrait.dart';
+import 'package:dart_counter/view/ios/views/home/home_view_tablet_landscape.dart';
+import 'package:dart_counter/view/ios/views/home/home_view_tablet_portrait.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'widgets/friends_button.dart';
 import 'widgets/invites_button.dart';
 import 'widgets/play_offline_button.dart';
@@ -118,6 +121,24 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class HomeView2 extends StatefulWidget {
+
+  @override
+  _HomeView2State createState() => _HomeView2State();
+}
+
+class _HomeView2State extends State<HomeView2> {
+  @override
+  Widget build(BuildContext context) {
+    return View2<HomeViewModel>(
+      mobilePortrait: HomeViewMobilePortrait(),
+      mobileLandscape: HomeViewMobileLandscape(),
+      tabletPortrait: HomeViewTabletPortrait(),
+      tabletLandscape: HomeViewTabletLandscape(),
     );
   }
 }

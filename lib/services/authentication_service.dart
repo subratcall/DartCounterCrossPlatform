@@ -1,12 +1,13 @@
 import 'package:dart_counter/app_errors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dart_counter/model/user.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
 
   AuthenticationService() : this._firebaseAuth = FirebaseAuth.instance;
 
-  Stream<User> get authStateChanged => _firebaseAuth.authStateChanges();
+  Stream<User> get authStateChanged => _firebaseAuth.authStateChanges().map((firebaseUser) => User(firebaseUser.uid));
 
   Future<void> signIn({String email, String password}) async {
     try {
