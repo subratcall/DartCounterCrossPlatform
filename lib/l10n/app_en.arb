@@ -113,7 +113,7 @@
   "@online": {
     "description": "word"
   },
-  "@invitations": {
+  "@invites": {
     "description": "word"
   },
   "@careerStats": {
@@ -254,7 +254,7 @@
   "offline": "Offline",
   "play": "Play",
   "online": "Online",
-  "invitations": "Invitations",
+  "invites": "Invitations",
   "careerStats": "Career Stats",
   "showGameHistory": "Show History",
 

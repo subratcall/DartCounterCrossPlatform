@@ -1,8 +1,10 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-abstract class StatsViewModel extends ViewModel {}
+abstract class PostGameViewModel extends ViewModel {
 
-class StatsViewModelImpl implements StatsViewModel {
+}
+
+class PostGameViewModelImpl implements PostGameViewModel {
 
   @override
   Stream<ViewState> get outputViewState => throw UnimplementedError();
@@ -11,4 +13,5 @@ class StatsViewModelImpl implements StatsViewModel {
   void dispose() {
 
   }
+
 }

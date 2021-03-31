@@ -1,3 +1,17 @@
+
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-class SettingsViewModel extends ViewModel {}
+abstract class SettingsViewModel extends ViewModel{
+
+}
+
+class SettingsViewModelImpl implements SettingsViewModel {
+
+  @override
+  Stream<ViewState> get outputViewState => throw UnimplementedError();
+
+  @override
+  void dispose() {
+
+  }
+}

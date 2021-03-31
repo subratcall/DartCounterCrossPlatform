@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,7 +13,7 @@ class PrimaryTextButton extends StatelessWidget {
       {this.text,
       this.onPressed,
       this.borderRadius = const BorderRadius.all(
-        Radius.circular(16.0),
+        Radius.circular(AppPaddings.big),
       ),
       this.fontSize = 9.0})
       : assert(text != null && text.length > 0);
@@ -21,11 +22,13 @@ class PrimaryTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return PrimaryButton(
       onPressed: onPressed,
-      child: AutoSizeText(
-        text,
-        maxLines: 1,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
-      ),
+      builder: (context, boxConstraints) {
+        return AutoSizeText(
+          text,
+          maxLines: 1,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+        );
+      },
       borderRadius: borderRadius,
     );
   }

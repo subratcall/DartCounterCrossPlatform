@@ -1,3 +1,15 @@
+
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-class InvitesViewModel extends ViewModel {}
+abstract class InvitesViewModel extends ViewModel {}
+
+class InvitesViewModelImpl implements InvitesViewModel {
+
+  @override
+  Stream<ViewState> get outputViewState => throw UnimplementedError();
+
+  @override
+  void dispose() {
+
+  }
+}

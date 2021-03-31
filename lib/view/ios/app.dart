@@ -14,7 +14,7 @@ import 'views/friends/friends_view.dart';
 import 'views/gameHistory/game_history_view.dart';
 import 'views/home/home_view.dart';
 import 'views/inGame/in_game_view.dart';
-import 'views/invitations/invites_view.dart';
+import 'views/invites/invites_view.dart';
 import 'views/loading_view.dart';
 import 'views/post_game_view.dart';
 import 'views/profile/profile_view.dart';
@@ -34,6 +34,7 @@ class DartCounterAppIOS extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: DevicePreview.appBuilder,
+      theme: Theme.theme,
       home: StreamBuilder<User>(
           stream: locator<AuthenticationService>().authStateChanged,
           builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
@@ -41,7 +42,7 @@ class DartCounterAppIOS extends StatelessWidget {
             final User user = snapshot.data;
             if (user != null) {
               appModel.uid = user.uid;
-              return HomeView2();
+              return HomeView();
             } else {
               appModel.uid = null;
               return PageView(
@@ -67,7 +68,6 @@ class DartCounterAppIOS extends StatelessWidget {
         AppRoutes.inGame: (context) => InGameView(),
         AppRoutes.postGame: (context) => PostGameView(),
       },
-      theme: Theme.theme,
     );
   }
 }

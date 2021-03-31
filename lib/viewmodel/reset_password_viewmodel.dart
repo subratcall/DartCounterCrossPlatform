@@ -4,15 +4,21 @@ import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-enum ResetPasswordViewState { idle, loading, successful }
+abstract class ResetPasswordViewModel extends ViewModel {
 
-class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
+}
+
+class ResetPasswordViewModelImpl implements ResetPasswordViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
 
   ResetPasswordViewModel() {
     viewState = ResetPasswordViewState.idle;
   }
+
+
+  @override
+  Stream<ViewState> get outputViewState => throw UnimplementedError();
 
   Future<void> onConfirmPressed({String email}) async {
     if (!EmailValidator.validate(email)) {
@@ -27,5 +33,10 @@ class ResetPasswordViewModel extends ViewModel<ResetPasswordViewState> {
       viewState = ResetPasswordViewState.idle;
       throw e;
     }
+  }
+
+  @override
+  void dispose() {
+
   }
 }

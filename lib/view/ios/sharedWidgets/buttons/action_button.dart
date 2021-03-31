@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
+import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
 
 class ActionButton extends StatelessWidget {
@@ -11,14 +12,14 @@ class ActionButton extends StatelessWidget {
       {this.text,
       this.onPressed,
       this.borderRadius = const BorderRadius.all(
-        Radius.circular(24.0),
+        Radius.circular(AppPaddings.big),
       )})
       : assert(text != null && text.length > 0);
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(AppPaddings.big),
       onPressed: onPressed,
       child: Center(
         child: AutoSizeText(

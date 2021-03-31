@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
@@ -5,12 +7,17 @@ import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-enum SignUpViewState { idle, loading }
+abstract class SignUpViewModel extends ViewModel {
 
-class SignUpViewModel extends ViewModel<SignUpViewState> {
+}
+
+class SignUpViewModelImpl implements SignUpViewModel {
+
   final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
+  locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
+
+  final StreamController<ViewState> _viewStateController = StreamController.broadcast();
 
   bool _emailIsValid = true;
   bool _usernameIsValid = true;
@@ -18,14 +25,17 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
   bool _passwordAgainIsValid = true;
 
   SignUpViewModel() {
-    viewState = SignUpViewState.idle;
+    _viewStateController.add(ViewState.idle);
   }
+
+  @override
+  Stream<ViewState> get outputViewState => throw UnimplementedError();
 
   Future<void> onRegisterPressed(
       {String email,
-      String username,
-      String password,
-      String passwordAgain}) async {
+        String username,
+        String password,
+        String passwordAgain}) async {
     emailIsValid = EmailValidator.validate(email);
     usernameIsValid = UsernameValidator.validate(username);
     passwordIsValid = PasswordValidator.validate(password);
@@ -35,7 +45,7 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
         usernameIsValid &&
         passwordIsValid &&
         passwordAgainIsValid) {
-      viewState = SignUpViewState.loading;
+      _viewStateController.add(ViewState.loading);
       try {
         await _authenticationService.signUp(
             email: email,
@@ -44,9 +54,9 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
               _databaseService.createUser(uid, username);
             });
 
-        viewState = SignUpViewState.idle;
+        _viewStateController.add(ViewState.idle);
       } on Error catch (e) {
-        viewState = SignUpViewState.idle;
+        _viewStateController.add(ViewState.idle);
         throw e;
       }
     } else {
@@ -88,5 +98,10 @@ class SignUpViewModel extends ViewModel<SignUpViewState> {
   set passwordAgainIsValid(bool passwordAgainIsValid) {
     _passwordAgainIsValid = passwordAgainIsValid;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+
   }
 }

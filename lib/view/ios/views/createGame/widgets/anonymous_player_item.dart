@@ -4,8 +4,8 @@ import 'package:dart_counter/model/player.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
 import 'package:dart_counter/view/ios/views/createGame/create_game_view.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AnonymousPlayerItem extends StatefulWidget {
   final Player player;

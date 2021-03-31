@@ -5,12 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DartBotCard extends StatefulWidget {
-  final Function(bool) onActiveChanged;
-  final Function(int) onAverageChanged;
 
-  DartBotCard({this.onActiveChanged, this.onAverageChanged})
-      : assert(onActiveChanged != null),
-        assert(onAverageChanged != null);
+  final Sink outputDartBotActive;
+  final Stream<bool> inputDartBotActive;
+
+  DartBotCard({this.outputDartBotActive, this.inputDartBotActive});
 
   @override
   _DartBotCardState createState() => _DartBotCardState();

@@ -12,7 +12,6 @@ import 'package:dart_counter/view/ios/views/sign_in_google_view.dart';
 import 'package:dart_counter/view/ios/views/sign_in_instagram_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/toast.dart';
-import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/enum/social_media_button_type.dart';
 import 'package:dart_counter/viewmodel/sign_in_viewmodel.dart';
 import 'package:flutter/cupertino.dart';

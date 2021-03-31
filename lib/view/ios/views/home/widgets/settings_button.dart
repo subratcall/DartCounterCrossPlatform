@@ -1,35 +1,43 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsButton extends StatelessWidget {
+
+  final VoidCallback onPressed;
+
+  SettingsButton({this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return PrimaryButton(
-      child: Column(
-        children: [
-          Spacer(),
-          Icon(
-            CupertinoIcons.settings,
-            size: 50,
-            color: AppColors.white,
-          ),
-          Spacer(),
-          AutoSizeText(
-            AppLocalizations.of(context).settings.toUpperCase(),
-            maxLines: 1,
-            style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-                color: AppColors.white),
-          ),
-          Spacer(),
-        ],
-      ),
-      onPressed: () => Navigator.pushNamed(context, AppRoutes.settings),
+      builder: (context, boxConstraints) {
+        final double width = boxConstraints.maxWidth;
+        final double height = boxConstraints.maxHeight;
+        return Column(
+          children: [
+            Spacer(),
+            Icon(
+              CupertinoIcons.settings,
+              size: 50,
+              color: AppColors.white,
+            ),
+            Spacer(),
+            AutoSizeText(
+              AppLocalizations.of(context).settings.toUpperCase(),
+              maxLines: 1,
+              style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.white),
+            ),
+            Spacer(),
+          ],
+        );
+      },
+      onPressed: onPressed,
     );
   }
 }

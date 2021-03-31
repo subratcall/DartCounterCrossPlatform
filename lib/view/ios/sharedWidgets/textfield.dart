@@ -1,4 +1,5 @@
 import 'package:dart_counter/assets/app_colors.dart';
+import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
 
 class TextField extends StatelessWidget {
@@ -44,7 +45,7 @@ class TextField extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+            Radius.circular(AppPaddings.medium),
           ),
         ),
       );
@@ -64,7 +65,7 @@ class TextField extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.gray,
               borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
+                Radius.circular(AppPaddings.medium),
               ),
               border: Border.all(
                 color: AppColors.red,
@@ -75,7 +76,7 @@ class TextField extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
+              padding: const EdgeInsets.fromLTRB(0, 0, AppPaddings.medium, 0),
               child: Icon(
                 CupertinoIcons.xmark_circle,
                 color: AppColors.red,

@@ -26,7 +26,7 @@ import 'services/playing/playing_service.dart';
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
-  /// Register AppModel here (must be first)
+  /// Register AppModel here
   locator.registerLazySingleton<AppModel>(() => AppModel());
 
   /// Register Services here
@@ -35,23 +35,4 @@ void setupLocator() {
   locator.registerLazySingleton<DatabaseService>(() => DatabaseService());
   locator.registerLazySingleton<PlayingService>(() => PlayingService());
 
-  /// Register Viewmodels here
-  locator.registerFactory(() => AboutUsViewModel());
-  locator.registerFactory(() => CheckoutDetailsViewModel());
-  locator.registerFactory(() => CreateGameViewModel());
-  locator.registerFactory(() => FriendsViewModel());
-  locator.registerFactory(() => GameHistoryViewModel());
-  locator.registerFactory(() => HomeViewModel());
-  locator.registerFactory(() => InGameViewModel());
-  locator.registerFactory(() => InvitesViewModel());
-  locator.registerFactory(() => ProfileViewModel());
-  locator.registerFactory(() => SettingsViewModel());
-  locator.registerFactory(() => SignInViewModel());
-  locator.registerFactory(() => SignUpViewModel());
-  locator.registerFactory(() => SocialMediaViewModel());
-  locator.registerFactory(() => StatsViewModel());
-  locator.registerFactory(() => ResetPasswordViewModel());
-  locator.registerFactory(() => SignInFacebookViewModel());
-  locator.registerFactory(() => SignInGoogleViewModel());
-  locator.registerFactory(() => SignInInstagramViewModel());
 }

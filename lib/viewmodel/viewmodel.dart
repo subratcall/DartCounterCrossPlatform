@@ -1,4 +1,17 @@
-import 'dart:async';
+import 'package:dart_counter/app_model.dart';
+import 'package:dart_counter/locator.dart';
+
+enum ViewState { loading, idle, error, success }
+
+abstract class ViewModel {
+
+  Stream<ViewState> get outputViewState;
+
+  void dispose();
+
+}
+
+/*import 'dart:async';
 
 import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/locator.dart';
@@ -24,4 +37,4 @@ class ViewModel<T> extends ChangeNotifier {
     }
     super.dispose();
   }
-}
+}*/

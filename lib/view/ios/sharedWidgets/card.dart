@@ -1,6 +1,6 @@
 import 'package:dart_counter/assets/app_colors.dart';
+import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:dart_counter/view/extensions/extensions.dart';
 
 class Card extends StatelessWidget {
   final Widget leading;
@@ -19,10 +19,10 @@ class Card extends StatelessWidget {
     this.trailing = const Spacer(),
     this.body,
     this.borderRadius = const BorderRadius.all(
-      Radius.circular(8.0),
+      Radius.circular(AppPaddings.medium),
     ),
-    this.paddingHeader = const EdgeInsets.all(8.0),
-    this.paddingBody = const EdgeInsets.all(8.0),
+    this.paddingHeader = const EdgeInsets.all(AppPaddings.medium),
+    this.paddingBody = const EdgeInsets.all(AppPaddings.medium),
     this.flexHeader = 2,
     this.flexBody = 5,
   });

@@ -187,7 +187,9 @@ class KeyBoard extends StatelessWidget {
                 child: PrimaryButton(
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onPressed: () => onKeyPressed(KeyType.erase),
-                  child: Icon(AppIcons.erase, size: 35),
+                  builder: (context, boxConstraints) {
+                    return Icon(AppIcons.erase, size: 35);
+                  }
                 ),
               ),
             ],

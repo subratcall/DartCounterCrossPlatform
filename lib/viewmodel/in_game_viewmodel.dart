@@ -5,8 +5,15 @@ import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-class InGameViewModel extends ViewModel {
+abstract class InGameViewModel extends ViewModel{
+
+}
+
+class InGameViewModelImpl implements InGameViewModel {
   final PlayingService _playingService = locator<PlayingService>();
+
+  @override
+  Stream<ViewState> get outputViewState => throw UnimplementedError();
 
   int _inputPoints = 0;
   Game _currentSnapshot;
@@ -112,5 +119,10 @@ class InGameViewModel extends ViewModel {
 
     if (newInputPoints == 0) return false;
     return _playingService.validatePoints(newInputPoints, pointsLeft);
+  }
+
+  @override
+  void dispose() {
+
   }
 }

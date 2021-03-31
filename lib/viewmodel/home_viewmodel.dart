@@ -1,63 +1,59 @@
 import 'dart:async';
 
+import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-class HomeViewModel extends ViewModel {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
+abstract class HomeViewModel extends ViewModel {
+
+  /// IN
+
+  /// OUT
+
+  Stream<Profile> get outputProfile;
+
+  Stream<int> get outputNewInvites;
+
+  Stream<int> get outputNewFriendRequests;
+
+  /// METHODS
+  void onSignOutPressed();
+
+}
+
+class HomeViewModelImpl implements HomeViewModel {
+  final AppModel _appModel = locator<AppModel>();
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 
-  int newInvites;
-  int newFriendRequests;
+  /// IN
 
-  Stream<Profile> profile() => _databaseService.profile(appModel.uid);
+  /// OUT
 
+  @override
+  Stream<ViewState> get outputViewState => throw UnimplementedError();
+
+  @override
+  Stream<Profile> get outputProfile => _databaseService.profile(_appModel.uid);
+
+  @override
+  Stream<int> get outputNewInvites => Stream<int>.periodic(Duration(seconds: 10), (index) => index);
+
+  @override
+  Stream<int> get outputNewFriendRequests => Stream<int>.periodic(Duration(seconds: 10), (index) => index);
+
+  /// METHODS
+  @override
   void onSignOutPressed() {
     _authenticationService.signOut();
   }
 
-  String _text = 'Initial';
-
-  String get text =>  _text;
-  set text(String text) {
-    _text = text;
-    notifyListeners();
-  }
-
-}
-
-
-abstract class HomeViewModel2 {
-
-  /// IN
-  Sink<String> get inputText;
-
-  /// OUT
-  Stream<String> get outputText;
-
-
-  void dispose();
-
-}
-
-class HomeViewModel2Impl implements HomeViewModel2 {
-
-  StreamController<String> _textController = StreamController<String>.broadcast();
-
-  /// IN
-  @override
-  Sink<String> get inputText => _textController;
-
-  /// OUT
-  Stream<String> get outputText => _textController.stream;
-
-
   @override
   void dispose() {
-    _textController.close();
+
   }
+
 }

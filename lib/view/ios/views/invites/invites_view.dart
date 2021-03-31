@@ -1,29 +1,28 @@
 import 'package:dart_counter/view/ios/views/view.dart';
-
-import 'package:dart_counter/viewmodel/social_media_viewmodel.dart';
+import 'package:dart_counter/viewmodel/invites_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SocialMediaView extends StatelessWidget {
+class InvitesView extends StatelessWidget {
 
-  final SocialMediaViewModel model = SocialMediaViewModelImpl();
+  final InvitesViewModel model = InvitesViewModelImpl();
 
   @override
   Widget build(BuildContext context) {
     return View2(
       navigationBar: CupertinoNavigationBar(
-        middle: Text(AppLocalizations.of(context).socialMedia),
+        middle: Text(AppLocalizations.of(context).invites),
       ),
-      mobilePortrait: SocialMediaViewMobilePortrait(model),
+      mobilePortrait: InvitesViewMobilePortrait(model),
     );
   }
 }
 
-class SocialMediaViewMobilePortrait extends StatelessWidget {
+class InvitesViewMobilePortrait extends StatelessWidget {
 
-  final SocialMediaViewModel model;
+  final InvitesViewModel model;
 
-  SocialMediaViewMobilePortrait(this.model);
+  InvitesViewMobilePortrait(this.model);
 
   @override
   Widget build(BuildContext context) {

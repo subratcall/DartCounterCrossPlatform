@@ -8,26 +8,44 @@ import 'package:dart_counter/view/ios/sharedWidgets/buttons/action_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/circle_image.dart';
 import 'package:dart_counter/view/ios/views/profile/widgets/stats_card.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
-import 'package:dart_counter/view/view_model_provider.dart';
 import 'package:dart_counter/viewmodel/profile_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileView extends StatelessWidget {
+
+  final ProfileViewModel model = ProfileViewModelImpl();
+
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<ProfileViewModel>(
-      builder: (context, model, child) => View(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text(AppLocalizations.of(context).profile),
-        ),
-        child: StreamBuilder(
-          stream: model.profile(),
-          builder: (context, snapshot) => snapshot.hasData
-              ? ProfileViewSuccess(model, snapshot.data)
-              : ProfileViewError(),
-        ),
+    return View2(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(AppLocalizations.of(context).profile),
       ),
+      mobilePortrait: ProfileViewMobilePortrait(model),
+    );
+  }
+}
+
+class ProfileViewMobilePortrait extends StatelessWidget {
+
+  final ProfileViewModel model;
+
+  ProfileViewMobilePortrait(this.model);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints boxConstraints) {
+          final double width = boxConstraints.maxWidth;
+          final double height = boxConstraints.maxHeight;
+          return StreamBuilder(
+            stream: model.outProfile,
+            builder: (context, snapshot) => snapshot.hasData
+                ? ProfileViewSuccess(model, snapshot.data)
+                : ProfileViewError(),
+          );
+        }
     );
   }
 }
@@ -74,58 +92,58 @@ class ProfileViewSuccess extends StatelessWidget {
                                       context: context,
                                       builder: (context) =>
                                           CupertinoActionSheet(
-                                        actions: [
-                                          CupertinoActionSheetAction(
-                                            child: Text(
-                                              AppLocalizations.of(context)
-                                                  .deletePhoto,
-                                              style: TextStyle(
-                                                  color: CupertinoColors
-                                                      .systemRed),
-                                            ),
-                                            onPressed: () {
-                                              model.onDeletePhotoPressed();
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                          CupertinoActionSheetAction(
-                                            child: Text(
-                                                AppLocalizations.of(context)
-                                                    .takePhoto),
-                                            onPressed: () {
-                                              model.onTakePhotoPressed();
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                          CupertinoActionSheetAction(
-                                            child: Text(
-                                                AppLocalizations.of(context)
-                                                    .choosePhoto),
-                                            onPressed: () {
-                                              model.onChoosePhotoPressed();
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        ],
-                                        cancelButton:
+                                            actions: [
+                                              CupertinoActionSheetAction(
+                                                child: Text(
+                                                  AppLocalizations.of(context)
+                                                      .deletePhoto,
+                                                  style: TextStyle(
+                                                      color: CupertinoColors
+                                                          .systemRed),
+                                                ),
+                                                onPressed: () {
+                                                  model.onDeletePhotoPressed();
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                              CupertinoActionSheetAction(
+                                                child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .takePhoto),
+                                                onPressed: () {
+                                                  model.onTakePhotoPressed();
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                              CupertinoActionSheetAction(
+                                                child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .choosePhoto),
+                                                onPressed: () {
+                                                  model.onChoosePhotoPressed();
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ],
+                                            cancelButton:
                                             CupertinoActionSheetAction(
-                                          child: Text(
-                                            AppLocalizations.of(context).cancel,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                              child: Text(
+                                                AppLocalizations.of(context).cancel,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
                                           ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      ),
                                     ),
                                     child: CircleImage(
                                       profile.photoUrl != null
                                           ? CachedNetworkImageProvider(
-                                              profile.photoUrl)
+                                          profile.photoUrl)
                                           : AssetImage(
-                                              AppImages.photoPlaceholder),
+                                          AppImages.photoPlaceholder),
                                     ),
                                   ),
                                 ),
@@ -208,7 +226,7 @@ class ProfileViewSuccess extends StatelessWidget {
                                   title: AppLocalizations.of(context)
                                       .checkoutPercentage,
                                   value:
-                                      profile?.careerStats?.checkoutPercentage,
+                                  profile?.careerStats?.checkoutPercentage,
                                   trend: profile
                                       ?.careerStats?.checkoutPercentageTrend),
                             ),
