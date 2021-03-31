@@ -7,6 +7,15 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 abstract class InGameViewModel extends ViewModel{
 
+  int inputPoints;
+  Game currentSnapshot;
+
+  void onUndoPressed();
+
+  void onPerformThrowPressed();
+
+  void onKeyPressed(KeyType key);
+
 }
 
 class InGameViewModelImpl implements InGameViewModel {
@@ -15,30 +24,18 @@ class InGameViewModelImpl implements InGameViewModel {
   @override
   Stream<ViewState> get outputViewState => throw UnimplementedError();
 
-  int _inputPoints = 0;
-  Game _currentSnapshot;
-
-  Game get currentSnapshot => _currentSnapshot;
-  set currentSnapshot(Game snapshot) {
-    _currentSnapshot = snapshot;
-    notifyListeners();
-  }
-
-  int get inputPoints => _inputPoints;
-  set inputPoints(int inputPoints) {
-    _inputPoints = inputPoints;
-    notifyListeners();
-  }
+  int inputPoints = 0;
+  Game currentSnapshot;
 
   InGameViewModel() {
     currentSnapshot = _playingService.gameSnapshot;
-    subscriptions.add(_playingService.onEvent().listen((event) {
+  /*  subscriptions.add(_playingService.onEvent().listen((event) {
       if (event is Event<Game>) {
         Game game = event.item;
         // TODO
         currentSnapshot = game;
       }
-    }));
+    }));*/
   }
 
   void onUndoPressed() {
@@ -47,12 +44,14 @@ class InGameViewModelImpl implements InGameViewModel {
     inputPoints = 0;
   }
 
+  @override
   void onPerformThrowPressed() {
     // TODO reset only if true
     _playingService.performThrow(inputPoints);
     inputPoints = 0;
   }
 
+  @override
   void onKeyPressed(KeyType key) {
     switch (key) {
       case KeyType.one:
@@ -89,7 +88,7 @@ class InGameViewModelImpl implements InGameViewModel {
         _addDigit(0);
         break;
       case KeyType.erase:
-        eraseDigit();
+        _eraseDigit();
         break;
     }
   }
@@ -100,7 +99,8 @@ class InGameViewModelImpl implements InGameViewModel {
     }
   }
 
-  void eraseDigit() {
+  @override
+  void _eraseDigit() {
     if (inputPoints != 0) {
       if (inputPoints < 10) {
         inputPoints = 0;
@@ -112,7 +112,7 @@ class InGameViewModelImpl implements InGameViewModel {
   }
 
   bool _digitIsValid(int newDigit) {
-    int pointsLeft = _currentSnapshot.currentTurn.pointsLeft;
+    int pointsLeft = currentSnapshot.currentTurn.pointsLeft;
 
     int newInputPoints =
         int.parse(inputPoints.toString() + newDigit.toString());

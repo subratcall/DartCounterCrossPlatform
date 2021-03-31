@@ -28,6 +28,7 @@ Future<void> main() async {
 class DartCounterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return DartCounterAppIOS();
     return Platform.isIOS ? DartCounterAppIOS() : DartCounterAppAndroid();
   }
 }

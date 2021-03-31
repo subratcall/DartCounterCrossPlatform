@@ -14,30 +14,50 @@ import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/enum/social_media_button_type.dart';
 import 'package:dart_counter/viewmodel/sign_in_viewmodel.dart';
+import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class SignInView extends StatefulWidget {
+class SignInView extends StatelessWidget {
+  final SignInViewModel model = SignInViewModelImpl();
   final PageController pageController;
 
   SignInView(this.pageController);
 
   @override
-  _SignInViewState createState() => _SignInViewState();
+  Widget build(BuildContext context) {
+    return View2(
+      mobilePortrait: SignInViewMobilePortrait(model, pageController),
+    );
+  }
 }
 
-class _SignInViewState extends State<SignInView> {
+class SignInViewMobilePortrait extends StatefulWidget {
+  final SignInViewModel model;
+  final PageController pageController;
+
+  SignInViewMobilePortrait(this.model, this.pageController);
+
+  @override
+  _SignInViewMobilePortraitState createState() =>
+      _SignInViewMobilePortraitState();
+}
+
+class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-
-    return ViewModelProvider<SignInViewModel>(
-      builder: (context, model, child) => View(
-        onTap: () => node.unfocus(),
-        child: model.viewState == SignInViewState.idle
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints boxConstraints) {
+      final double width = boxConstraints.maxWidth;
+      final double height = boxConstraints.maxHeight;
+      return StreamBuilder<ViewState>(
+        stream: widget.model.outputViewState,
+        builder: (context, snapshot) => snapshot.data == ViewState.idle
             ? SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
                 child: Builder(
@@ -120,7 +140,7 @@ class _SignInViewState extends State<SignInView> {
                                                 .errorNetwork,
                                       };
 
-                                      model
+                                      widget.model
                                           .onSignInPressed(
                                               email: emailController.text,
                                               password: passwordController.text)
@@ -248,8 +268,8 @@ class _SignInViewState extends State<SignInView> {
                 ),
               )
             : LoadingView(),
-      ),
-    );
+      );
+    });
   }
 
   @override

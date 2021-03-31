@@ -9,20 +9,25 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 abstract class SignUpViewModel extends ViewModel {
 
+  bool emailIsValid;
+  bool usernameIsValid;
+  bool passwordIsValid;
+  bool passwordAgainIsValid;
+
+  Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain});
 }
 
 class SignUpViewModelImpl implements SignUpViewModel {
 
-  final AuthenticationService _authenticationService =
-  locator<AuthenticationService>();
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 
   final StreamController<ViewState> _viewStateController = StreamController.broadcast();
 
-  bool _emailIsValid = true;
-  bool _usernameIsValid = true;
-  bool _passwordIsValid = true;
-  bool _passwordAgainIsValid = true;
+  bool emailIsValid = true;
+  bool usernameIsValid = true;
+  bool passwordIsValid = true;
+  bool passwordAgainIsValid = true;
 
   SignUpViewModel() {
     _viewStateController.add(ViewState.idle);
@@ -31,11 +36,7 @@ class SignUpViewModelImpl implements SignUpViewModel {
   @override
   Stream<ViewState> get outputViewState => throw UnimplementedError();
 
-  Future<void> onRegisterPressed(
-      {String email,
-        String username,
-        String password,
-        String passwordAgain}) async {
+  Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain}) async {
     emailIsValid = EmailValidator.validate(email);
     usernameIsValid = UsernameValidator.validate(username);
     passwordIsValid = PasswordValidator.validate(password);
@@ -72,36 +73,8 @@ class SignUpViewModelImpl implements SignUpViewModel {
     }
   }
 
-  bool get emailIsValid => _emailIsValid;
-
-  bool get usernameIsValid => _usernameIsValid;
-
-  bool get passwordIsValid => _passwordIsValid;
-
-  bool get passwordAgainIsValid => _passwordAgainIsValid;
-
-  set emailIsValid(bool emailIsValid) {
-    _emailIsValid = emailIsValid;
-    notifyListeners();
-  }
-
-  set usernameIsValid(bool usernameIsValid) {
-    _usernameIsValid = usernameIsValid;
-    notifyListeners();
-  }
-
-  set passwordIsValid(bool passwordIsValid) {
-    _passwordIsValid = passwordIsValid;
-    notifyListeners();
-  }
-
-  set passwordAgainIsValid(bool passwordAgainIsValid) {
-    _passwordAgainIsValid = passwordAgainIsValid;
-    notifyListeners();
-  }
-
   @override
   void dispose() {
-
+    _viewStateController.close();
   }
 }

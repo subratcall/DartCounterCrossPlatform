@@ -7,19 +7,39 @@ import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/sign_up_viewmodel.dart';
+import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SignUpView extends StatefulWidget {
+
+
+class SignUpView extends StatelessWidget {
+
+  final SignUpViewModel model = SignUpViewModelImpl();
   final PageController pageController;
 
   SignUpView(this.pageController);
 
   @override
-  _SignUpViewState createState() => _SignUpViewState();
+  Widget build(BuildContext context) {
+    return View2(
+      mobilePortrait: SignUpViewMobilePortrait(model, pageController),
+    );
+  }
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class SignUpViewMobilePortrait extends StatefulWidget {
+
+  final SignUpViewModel model;
+  final PageController pageController;
+
+  SignUpViewMobilePortrait(this.model, this.pageController);
+
+  @override
+  _SignUpViewMobilePortraitState createState() => _SignUpViewMobilePortraitState();
+}
+
+class _SignUpViewMobilePortraitState extends State<SignUpViewMobilePortrait> {
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -28,11 +48,14 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-    return ViewModelProvider<SignUpViewModel>(
-      builder: (context, model, child) => View(
-        onTap: () => node.unfocus(),
-        child: model.viewState == SignUpViewState.idle
-            ? SingleChildScrollView(
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints boxConstraints) {
+          final double width = boxConstraints.maxWidth;
+          final double height = boxConstraints.maxHeight;
+          return StreamBuilder<ViewState>(
+            stream: widget.model.outputViewState,
+            builder: (context, snapshot) => snapshot.data == ViewState.idle
+                ? SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
                 child: Builder(
                   builder: (context) => ConstrainedBox(
@@ -75,12 +98,12 @@ class _SignUpViewState extends State<SignUpView> {
                               Expanded(
                                 child: TextField(
                                   placeholder:
-                                      AppLocalizations.of(context).email,
+                                  AppLocalizations.of(context).email,
                                   controller: emailController,
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   onEditingComplete: () => node.nextFocus(),
-                                  isValid: model.emailIsValid,
+                                  isValid: widget.model.emailIsValid,
                                 ),
                                 flex: 36,
                               ),
@@ -90,11 +113,11 @@ class _SignUpViewState extends State<SignUpView> {
                               Expanded(
                                 child: TextField(
                                   placeholder:
-                                      AppLocalizations.of(context).username,
+                                  AppLocalizations.of(context).username,
                                   controller: usernameController,
                                   textInputAction: TextInputAction.next,
                                   onEditingComplete: () => node.nextFocus(),
-                                  isValid: model.usernameIsValid,
+                                  isValid: widget.model.usernameIsValid,
                                 ),
                                 flex: 36,
                               ),
@@ -104,12 +127,12 @@ class _SignUpViewState extends State<SignUpView> {
                               Expanded(
                                 child: TextField(
                                   placeholder:
-                                      AppLocalizations.of(context).password,
+                                  AppLocalizations.of(context).password,
                                   controller: passwordController,
                                   obscureText: true,
                                   textInputAction: TextInputAction.next,
                                   onEditingComplete: () => node.nextFocus(),
-                                  isValid: model.passwordIsValid,
+                                  isValid: widget.model.passwordIsValid,
                                 ),
                                 flex: 36,
                               ),
@@ -124,7 +147,7 @@ class _SignUpViewState extends State<SignUpView> {
                                   obscureText: true,
                                   textInputAction: TextInputAction.done,
                                   onEditingComplete: () => node.unfocus(),
-                                  isValid: model.passwordAgainIsValid,
+                                  isValid: widget.model.passwordAgainIsValid,
                                 ),
                                 flex: 36,
                               ),
@@ -138,52 +161,52 @@ class _SignUpViewState extends State<SignUpView> {
                                     // TODO this is only a workaround find a better solution for this e.g with global key
                                     var errorMessages = {
                                       'errorInvalidEmailAddress':
-                                          AppLocalizations.of(context)
-                                              .errorInvalidEmailAddress,
+                                      AppLocalizations.of(context)
+                                          .errorInvalidEmailAddress,
                                       'errorInvalidUsername':
-                                          AppLocalizations.of(context)
-                                              .errorInvalidUsername,
+                                      AppLocalizations.of(context)
+                                          .errorInvalidUsername,
                                       'errorInvalidPassword':
-                                          AppLocalizations.of(context)
-                                              .errorInvalidPassword,
+                                      AppLocalizations.of(context)
+                                          .errorInvalidPassword,
                                       'errorPasswordNotEqualPasswordAgain':
-                                          AppLocalizations.of(context)
-                                              .errorPasswordNotEqualPasswordAgain,
+                                      AppLocalizations.of(context)
+                                          .errorPasswordNotEqualPasswordAgain,
                                       'errorEmailAddressAlreadyInUse':
-                                          AppLocalizations.of(context)
-                                              .errorEmailAddressAlreadyInUse,
+                                      AppLocalizations.of(context)
+                                          .errorEmailAddressAlreadyInUse,
                                       'errorNetwork':
-                                          AppLocalizations.of(context)
-                                              .errorNetwork,
+                                      AppLocalizations.of(context)
+                                          .errorNetwork,
                                     };
 
-                                    model
+                                    widget.model
                                         .onRegisterPressed(
-                                            email: emailController.text,
-                                            username: usernameController.text,
-                                            password: passwordController.text,
-                                            passwordAgain:
-                                                passwordAgainController.text)
+                                        email: emailController.text,
+                                        username: usernameController.text,
+                                        password: passwordController.text,
+                                        passwordAgain:
+                                        passwordAgainController.text)
                                         .catchError((error) {
                                       if (error is InvalidEmailAddressError) {
                                         Toast.showToast(errorMessages[
-                                            'errorInvalidEmailAddress']);
+                                        'errorInvalidEmailAddress']);
                                       } else if (error
-                                          is InvalidUsernameError) {
+                                      is InvalidUsernameError) {
                                         Toast.showToast(errorMessages[
-                                            'errorInvalidUsername']);
+                                        'errorInvalidUsername']);
                                       } else if (error
-                                          is InvalidPasswordError) {
+                                      is InvalidPasswordError) {
                                         Toast.showToast(errorMessages[
-                                            'errorInvalidPassword']);
+                                        'errorInvalidPassword']);
                                       } else if (error
-                                          is PasswordNotEqualPasswordAgainError) {
+                                      is PasswordNotEqualPasswordAgainError) {
                                         Toast.showToast(errorMessages[
-                                            'errorPasswordNotEqualPasswordAgain']);
+                                        'errorPasswordNotEqualPasswordAgain']);
                                       } else if (error
-                                          is EmailAddressAlreadyInUseError) {
+                                      is EmailAddressAlreadyInUseError) {
                                         Toast.showToast(errorMessages[
-                                            'errorEmailAddressAlreadyInUse']);
+                                        'errorEmailAddressAlreadyInUse']);
                                       } else {
                                         Toast.showToast(
                                             errorMessages['errorNetwork']);
@@ -201,8 +224,8 @@ class _SignUpViewState extends State<SignUpView> {
                                   text: AppLocalizations.of(context).login,
                                   onPressed: () => widget.pageController
                                       .animateToPage(0,
-                                          duration: Duration(milliseconds: 500),
-                                          curve: Curves.easeIn),
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.easeIn),
                                 ),
                                 flex: 17,
                               ),
@@ -219,8 +242,9 @@ class _SignUpViewState extends State<SignUpView> {
                     ),
                   ),
                 ))
-            : LoadingView(),
-      ),
+                : LoadingView(),
+          );
+        }
     );
   }
 

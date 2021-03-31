@@ -36,7 +36,7 @@ class InGameView extends StatelessWidget {
               expand: true,
               context: context,
               backgroundColor: AppColors.transparent,
-              builder: (context) => InGameStatsView(model.currentSnapshot),
+              builder: (context) => InGameStatsView(),
             ),
           ),
         ),

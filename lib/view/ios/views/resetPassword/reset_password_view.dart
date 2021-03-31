@@ -9,27 +9,50 @@ import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/reset_password_viewmodel.dart';
+import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ResetPasswordView extends StatefulWidget {
-  @override
-  _ResetPasswordViewState createState() => _ResetPasswordViewState();
-}
+class ResetPasswordView extends StatelessWidget {
 
-class _ResetPasswordViewState extends State<ResetPasswordView> {
+  final ResetPasswordViewModel model = ResetPasswordViewModelImpl();
+
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<ResetPasswordViewModel>(
-        builder: (context, model, child) {
-      return model.viewState == ResetPasswordViewState.idle
-          ? ResetPasswordViewIdle(model)
-          : model.viewState == ResetPasswordViewState.successful
-              ? ResetPasswordViewSuccess()
-              : LoadingView();
-    });
+    return View2(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(AppLocalizations.of(context).settings),
+      ),
+      mobilePortrait: ResetPasswordViewMobilePortrait(model),
+    );
   }
 }
+
+
+class ResetPasswordViewMobilePortrait extends StatelessWidget {
+
+  final ResetPasswordViewModel model;
+
+  ResetPasswordViewMobilePortrait(this.model);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints boxConstraints) {
+          final double width = boxConstraints.maxWidth;
+          final double height = boxConstraints.maxHeight;
+          return StreamBuilder<ViewState>(
+              builder: (context, snapshot) => snapshot.data == ViewState.idle
+                  ? ResetPasswordViewIdle(model) : snapshot.data == ViewState.success
+                  ? ResetPasswordViewSuccess()
+                  : LoadingView()
+          );
+        }
+    );
+  }
+}
+
+
 
 class ResetPasswordViewIdle extends StatefulWidget {
   final ResetPasswordViewModel model;
