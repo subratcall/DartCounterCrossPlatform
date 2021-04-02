@@ -134,6 +134,7 @@ class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
                       ),
                       Expanded(
                         child: PrimaryTextButton(
+                          initialIsEnabled: false,
                           inputIsEnabled: model.outputIsConfirmButtonEnabled,
                           text: AppLocalizations.of(context).confirm,
                           onPressed: () {
