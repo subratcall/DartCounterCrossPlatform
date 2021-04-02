@@ -3,6 +3,8 @@ import 'package:dart_counter/viewmodel/sign_in_instagram_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'sign_in_instagram_view_mobile_portrait.dart';
+
 class SignInInstagramView extends StatelessWidget {
 
   final SignInInstagramViewModel model = SignInInstagramViewModelImpl();
@@ -21,26 +23,6 @@ class SignInInstagramView extends StatelessWidget {
         middle: Text('SignIn Instagram title - TODO'),
       ),
       mobilePortrait: SignInInstagramViewMobilePortrait(model),
-    );
-  }
-}
-
-class SignInInstagramViewMobilePortrait extends StatelessWidget {
-
-  final SignInInstagramViewModel model;
-
-  SignInInstagramViewMobilePortrait(this.model);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints boxConstraints) {
-          final double width = boxConstraints.maxWidth;
-          final double height = boxConstraints.maxHeight;
-          return Center(
-            child: Text(this.toStringShort() + " -- IOS"),
-          );
-        }
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:dart_counter/viewmodel/game_history_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../game_history_details_view.dart';
+import 'details/game_history_details_view.dart';
 import 'widgets/game_history_card.dart';
 
 class GameHistoryView extends StatelessWidget {

@@ -3,6 +3,8 @@ import 'package:dart_counter/viewmodel/sign_in_facebook_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'sign_in_facebook_view_mobile_portrait.dart';
+
 class SignInFacebookView extends StatelessWidget {
 
   final SignInFacebookViewModel model = SignInFacebookViewModelImpl();
@@ -21,26 +23,6 @@ class SignInFacebookView extends StatelessWidget {
         middle: Text('SignIn facebook title - TODO'),
       ),
       mobilePortrait: SignInFacebookViewMobilePortrait(model),
-    );
-  }
-}
-
-class SignInFacebookViewMobilePortrait extends StatelessWidget {
-
-  final SignInFacebookViewModel model;
-
-  SignInFacebookViewMobilePortrait(this.model);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints boxConstraints) {
-          final double width = boxConstraints.maxWidth;
-          final double height = boxConstraints.maxHeight;
-          return Center(
-            child: Text(this.toStringShort() + " -- IOS"),
-          );
-        }
     );
   }
 }

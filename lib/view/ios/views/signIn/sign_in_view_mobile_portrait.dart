@@ -7,9 +7,9 @@ import 'package:dart_counter/view/ios/sharedWidgets/buttons/social_media_button.
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/resetPassword/reset_password_view.dart';
-import 'package:dart_counter/view/ios/views/sign_in_facebook_view.dart';
-import 'package:dart_counter/view/ios/views/sign_in_google_view.dart';
-import 'package:dart_counter/view/ios/views/sign_in_instagram_view.dart';
+import 'package:dart_counter/view/ios/views/signInFacebook/sign_in_facebook_view.dart';
+import 'package:dart_counter/view/ios/views/signInGoogle/sign_in_google_view.dart';
+import 'package:dart_counter/view/ios/views/signInInstagram/sign_in_instagram_view.dart';
 import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/enum/social_media_button_type.dart';
 import 'package:dart_counter/viewmodel/sign_in_viewmodel.dart';

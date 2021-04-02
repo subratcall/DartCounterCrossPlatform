@@ -1,5 +1,5 @@
 import 'package:dart_counter/model/game.dart';
-import 'package:dart_counter/view/ios/views/game_history_details_view.dart';
+import 'package:dart_counter/view/ios/views/gameHistory/details/game_history_details_view.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/viewmodel/game_history_viewmodel.dart';
 import 'package:flutter/cupertino.dart';

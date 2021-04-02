@@ -16,12 +16,12 @@ import 'views/home/home_view.dart';
 import 'views/inGame/in_game_view.dart';
 import 'views/invites/invites_view.dart';
 import 'views/loading_view.dart';
-import 'views/post_game_view.dart';
+import 'views/postGame/post_game_view.dart';
 import 'views/profile/profile_view.dart';
 import 'views/settings/settings_view.dart';
 import 'views/signIn/sign_in_view.dart';
 import 'views/signUp/sign_up_view.dart';
-import 'views/social_media_view.dart';
+import 'views/socialMedia/social_media_view.dart';
 
 class DartCounterAppIOS extends StatelessWidget {
   final _pageController = PageController(
