@@ -4,13 +4,6 @@ abstract class SignInFacebookViewModel extends ViewModel {
 
 }
 
-class SignInFacebookViewModelImpl implements SignInFacebookViewModel {
+class SignInFacebookViewModelImpl extends SignInFacebookViewModel {
 
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
-
-  @override
-  void dispose() {
-
-  }
 }

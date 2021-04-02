@@ -5,43 +5,55 @@ import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class ResetPasswordViewModel extends ViewModel {
 
-  Future<void> onConfirmPressed({String email});
+  /// INPUT
+  Sink<String> get inputEmail;
+  Future<Error> onConfirmPressed();
+
+  /// OUTPUT
+  Stream<bool> get outputIsConfirmButtonEnabled;
 
 }
 
-class ResetPasswordViewModelImpl implements ResetPasswordViewModel {
+class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
-  final StreamController<ViewState> _viewStateController = StreamController.broadcast();
+  BehaviorSubject<String> _emailController = BehaviorSubject();
 
-  ResetPasswordViewModel() {
-    _viewStateController.add(ViewState.idle);
+  ResetPasswordViewModelImpl() {
+    inputViewState.add(ViewState.idle);
   }
 
+  /// INPUT
   @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
+  Sink<String> get inputEmail => _emailController;
 
   @override
-  Future<void> onConfirmPressed({String email}) async {
-    if (!EmailValidator.validate(email)) {
+  Future<Error> onConfirmPressed() async {
+    if (!_emailController.hasValue || !EmailValidator.validate(_emailController.value)) {
       throw InvalidEmailAddressError();
     }
 
-    _viewStateController.add(ViewState.loading);
     try {
-      await _authenticationService.resetPassword(email: email);
-      _viewStateController.add(ViewState.success);
+      inputViewState.add(ViewState.loading);
+      await _authenticationService.resetPassword(email: _emailController.value);
+      inputViewState.add(ViewState.success);
     } on Error catch (e) {
-      _viewStateController.add(ViewState.idle);
-      throw e;
+      inputViewState.add(ViewState.idle);
+      return  e;
     }
+    return null;
   }
+
+  /// OUTPUT
+  @override
+  Stream<bool> get outputIsConfirmButtonEnabled => _emailController.stream.map((email) => EmailValidator.validate(email));
 
   @override
   void dispose() {
-    _viewStateController.close();
+    _emailController.close();
   }
 }

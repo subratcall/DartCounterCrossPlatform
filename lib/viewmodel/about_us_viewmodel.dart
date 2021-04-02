@@ -4,13 +4,6 @@ abstract class AboutUsViewModel extends ViewModel {
 
 }
 
-class AboutUsViewModelImpl implements AboutUsViewModel {
+class AboutUsViewModelImpl extends AboutUsViewModel {
 
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
-
-  @override
-  void dispose() {
-
-  }
 }

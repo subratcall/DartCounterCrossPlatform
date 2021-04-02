@@ -4,13 +4,6 @@ abstract class InGameStatsViewModel extends ViewModel {
 
 }
 
-class InGameStatsViewModelImpl implements InGameStatsViewModel {
+class InGameStatsViewModelImpl extends InGameStatsViewModel {
 
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
-
-  @override
-  void dispose() {
-
-  }
 }

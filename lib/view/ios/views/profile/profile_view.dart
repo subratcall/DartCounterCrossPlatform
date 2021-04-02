@@ -18,7 +18,7 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return View2(
+    return View(
       navigationBar: CupertinoNavigationBar(
         middle: Text(AppLocalizations.of(context).profile),
       ),

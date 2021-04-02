@@ -45,7 +45,7 @@ abstract class CreateGameViewModel  extends ViewModel{
 
 }
 
-class CreateGameViewModelImpl implements CreateGameViewModel {
+class CreateGameViewModelImpl extends CreateGameViewModel {
   final PlayingService _playingService = locator<PlayingService>();
 
   Game currentSnapshot = Game();
@@ -58,9 +58,6 @@ class CreateGameViewModelImpl implements CreateGameViewModel {
 
 
   /// OUT
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
-
 
   @override
   Stream<Game> get outputSnapshots => throw UnimplementedError();

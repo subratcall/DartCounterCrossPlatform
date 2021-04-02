@@ -3,37 +3,25 @@ import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/model/player.dart';
 import 'package:dart_counter/view/ios/modalBottomSheets/advancedSettingsModalBottomSheet/advanced_settings_modal_bottom_sheet.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
-import 'package:dart_counter/view/ios/views/createGame/create_game_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class AnonymousPlayerItem extends StatefulWidget {
+class AnonymousPlayerItem extends StatelessWidget {
   final Player player;
   final Function(int) onDismissed;
-  final Function(String) onNameChanged;
 
-  AnonymousPlayerItem(this.player, {this.onDismissed, this.onNameChanged});
-
-  @override
-  _AnonymousPlayerItemState createState() => _AnonymousPlayerItemState();
-}
-
-class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
-  final _nameController = TextEditingController();
+  AnonymousPlayerItem(this.player, {this.onDismissed});
 
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
 
-    // TODO
-    _nameController.text = widget.player.name;
-
     return Container(
       height: MediaQuery.of(context).size.height * 50 / 613,
       child: Dismissible(
-        key: ValueKey<Player>(widget.player),
-        onDismissed: (_) => widget.onDismissed(widget.player.id),
+        key: ValueKey<Player>(player),
+        onDismissed: (_) => onDismissed(player.id),
         background: Container(
           color: AppColors.red,
           child: Padding(
@@ -75,10 +63,8 @@ class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
                     child: TextField(
                       color: AppColors.white,
                       placeholder: AppLocalizations.of(context).name,
-                      controller: _nameController,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.done,
-                      onChanged: (newName) => widget.onNameChanged(newName),
                       onEditingComplete: () => node.unfocus(),
                     ),
                   ),
@@ -98,11 +84,11 @@ class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
                         ),
                         onPressed: () =>
                             CupertinoScaffold.showCupertinoModalBottomSheet(
-                          expand: false,
-                          context: context,
-                          backgroundColor: AppColors.transparent,
-                          builder: (context) => AdvancedSettingsModalBottomSheet(),
-                        ),
+                              expand: false,
+                              context: context,
+                              backgroundColor: AppColors.transparent,
+                              builder: (context) => AdvancedSettingsModalBottomSheet(),
+                            ),
                       ),
                     ),
                   ),
@@ -127,10 +113,6 @@ class _AnonymousPlayerItemState extends State<AnonymousPlayerItem> {
     );
     //return Placeholder();
   }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
 }
+
+

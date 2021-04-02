@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart' as x;
 
 class EmailValidator {
+
   static bool validate(String email) {
     return x.EmailValidator.validate(email.trim());
   }

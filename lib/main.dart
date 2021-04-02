@@ -19,7 +19,7 @@ Future<void> main() async {
   setupLocator();
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode && true,
+      enabled: !kReleaseMode && false,
       builder: (context) => DartCounterApp(),
     ),
   );

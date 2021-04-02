@@ -1,40 +1,18 @@
-import 'package:dart_counter/app_model.dart';
-import 'package:dart_counter/locator.dart';
+import 'dart:async';
+
+import 'package:rxdart/rxdart.dart';
 
 enum ViewState { loading, idle, error, success }
 
 abstract class ViewModel {
 
-  Stream<ViewState> get outputViewState;
+  final BehaviorSubject<ViewState> _viewStateController = BehaviorSubject();
 
-  void dispose();
-
-}
-
-/*import 'dart:async';
-
-import 'package:dart_counter/app_model.dart';
-import 'package:dart_counter/locator.dart';
-import 'package:flutter/foundation.dart';
-
-class ViewModel<T> extends ChangeNotifier {
-  AppModel appModel = locator<AppModel>();
-
-  List<StreamSubscription> subscriptions = [];
-
-  T _viewState;
-
-  get viewState => _viewState;
-
-  set viewState(T viewState) {
-    _viewState = viewState;
-    notifyListeners();
-  }
+  Sink<ViewState> get inputViewState => _viewStateController;
+  ValueStream<ViewState> get outputViewState => _viewStateController.stream;
 
   void dispose() {
-    for (StreamSubscription subscription in subscriptions) {
-      subscription.cancel();
-    }
-    super.dispose();
+    _viewStateController.close();
   }
-}*/
+
+}

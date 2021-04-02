@@ -1,17 +1,9 @@
-
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 abstract class SignInInstagramViewModel extends ViewModel {
 
 }
 
-class SignInInstagramViewModelImpl implements SignInInstagramViewModel {
+class SignInInstagramViewModelImpl extends SignInInstagramViewModel {
 
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
-
-  @override
-  void dispose() {
-
-  }
 }

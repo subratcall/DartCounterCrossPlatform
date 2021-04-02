@@ -2,48 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class View extends StatelessWidget {
-  final CupertinoNavigationBar navigationBar;
-  final Widget child;
-  final VoidCallback onTap;
-
-  View({this.navigationBar, this.child, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    // Params to calc contentview width and height
-    final double width = MediaQuery.of(context).size.width;
-    final double height = MediaQuery.of(context).size.height;
-    final double paddingTop = MediaQuery.of(context).padding.top;
-    final double navbarHeight =
-        navigationBar != null ? navigationBar.preferredSize.height : 0;
-    final double paddingBottom = MediaQuery.of(context).padding.bottom;
-
-    return CupertinoScaffold(
-      body: CupertinoPageScaffold(
-        navigationBar: navigationBar,
-        child: GestureDetector(
-          onTap: onTap,
-          child: SafeArea(
-            child: MediaQuery(
-              data: MediaQueryData(
-                size: Size(
-                    width, height - paddingTop - navbarHeight - paddingBottom),
-              ),
-              child: SizedBox(
-                width: width,
-                height: height - paddingTop - navbarHeight - paddingBottom,
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class View2 extends StatefulWidget {
+class View extends StatefulWidget {
 
   final VoidCallback onTap;
 
@@ -53,13 +12,13 @@ class View2 extends StatefulWidget {
   final Widget tabletPortrait;
   final Widget tabletLandscape;
 
-  View2({this.onTap, this.navigationBar, this.mobilePortrait, this.mobileLandscape, this.tabletLandscape, this.tabletPortrait});
+  View({this.onTap, this.navigationBar, this.mobilePortrait, this.mobileLandscape, this.tabletLandscape, this.tabletPortrait});
 
   @override
-  _View2State createState() => _View2State();
+  _ViewState createState() => _ViewState();
 }
 
-class _View2State extends State<View2> {
+class _ViewState extends State<View> {
 
   @override
   Widget build(BuildContext context) {

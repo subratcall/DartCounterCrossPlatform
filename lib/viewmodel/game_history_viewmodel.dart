@@ -20,15 +20,13 @@ abstract class GameHistoryViewModel extends ViewModel{
 
 }
 
-class GameHistoryViewModelImpl implements GameHistoryViewModel {
+class GameHistoryViewModelImpl extends GameHistoryViewModel {
   final AppModel _appModel = locator<AppModel>();
 
   final DatabaseService _databaseService = locator<DatabaseService>();
 
   final StreamController<List<Game>> _gamesController = StreamController.broadcast();
 
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
 
   @override
   Stream<List<Game>> get outputGames => _gamesController.stream;

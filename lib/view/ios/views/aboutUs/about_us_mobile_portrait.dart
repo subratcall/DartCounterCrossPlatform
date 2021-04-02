@@ -13,10 +13,8 @@ class AboutUsViewMobilePortrait extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints boxConstraints) {
           final double width = boxConstraints.maxWidth;
           final double height = boxConstraints.maxHeight;
-          return Container(
-            child: Center(
-              child: Text(toStringShort()),
-            ),
+          return Center(
+            child: Text(this.toStringShort() + " -- IOS"),
           );
         }
     );

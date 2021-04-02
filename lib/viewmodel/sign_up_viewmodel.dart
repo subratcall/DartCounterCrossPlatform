@@ -1,80 +1,101 @@
 import 'dart:async';
 
-import 'package:dart_counter/app_errors.dart';
-import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class SignUpViewModel extends ViewModel {
 
-  bool emailIsValid;
-  bool usernameIsValid;
-  bool passwordIsValid;
-  bool passwordAgainIsValid;
+  /// INPUT
+  Sink<String> get inputEmail;
+  Sink<String> get inputUsername;
+  Sink<String> get inputPassword;
+  Sink<String> get inputPasswordAgain;
+  Future<Error> onRegisterPressed();
 
-  Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain});
+  /// OUTPUT
+  Stream<Error> get outputErrorEmail;
+  Stream<Error> get outputErrorUsername;
+  Stream<Error> get outputErrorPassword;
+  Stream<Error> get outputErrorPasswordAgain;
+  Stream<bool> get outputIsRegisterButtonEnabled;
 }
 
-class SignUpViewModelImpl implements SignUpViewModel {
-
+class SignUpViewModelImpl extends SignUpViewModel {
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 
-  final StreamController<ViewState> _viewStateController = StreamController.broadcast();
+  BehaviorSubject<String> _emailController = BehaviorSubject();
+  BehaviorSubject<String> _usernameController = BehaviorSubject();
+  BehaviorSubject<String> _passwordController = BehaviorSubject();
+  BehaviorSubject<String> _passwordAgainController = BehaviorSubject();
+  bool _isRegisterButtonEnabled() {
+    bool emailValid = outputErrorEmail.hasValue && outputErrorEmail.value == null ? true : false;
+    bool usernameValid = outputErrorUsername.hasValue && outputErrorUsername.value == null ? true : false;
+    bool passwordValid = outputErrorPassword.hasValue && outputErrorPassword.value == null ? true : false;
+    bool passwordAgainValid = outputErrorPasswordAgain.hasValue && outputErrorPasswordAgain.value == null ? true : false;
 
-  bool emailIsValid = true;
-  bool usernameIsValid = true;
-  bool passwordIsValid = true;
-  bool passwordAgainIsValid = true;
-
-  SignUpViewModel() {
-    _viewStateController.add(ViewState.idle);
+    return emailValid && usernameValid && passwordValid && passwordAgainValid;
   }
+
+  /// INPUT
+  @override
+  Sink<String> get inputEmail => _emailController;
 
   @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
+  Sink<String> get inputUsername => _usernameController;
 
-  Future<void> onRegisterPressed({String email, String username, String password, String passwordAgain}) async {
-    emailIsValid = EmailValidator.validate(email);
-    usernameIsValid = UsernameValidator.validate(username);
-    passwordIsValid = PasswordValidator.validate(password);
-    passwordAgainIsValid = PasswordValidator.validate(password, passwordAgain);
+  @override
+  Sink<String> get inputPassword => _passwordController;
 
-    if (emailIsValid &&
-        usernameIsValid &&
-        passwordIsValid &&
-        passwordAgainIsValid) {
-      _viewStateController.add(ViewState.loading);
-      try {
-        await _authenticationService.signUp(
-            email: email,
-            password: password,
-            onSuccess: (uid) {
-              _databaseService.createUser(uid, username);
-            });
+  @override
+  Sink<String> get inputPasswordAgain => _passwordAgainController;
 
-        _viewStateController.add(ViewState.idle);
-      } on Error catch (e) {
-        _viewStateController.add(ViewState.idle);
-        throw e;
-      }
-    } else {
-      if (!emailIsValid) {
-        throw InvalidEmailAddressError();
-      } else if (!usernameIsValid) {
-        throw InvalidUsernameError();
-      } else if (!passwordIsValid) {
-        throw InvalidPasswordError();
-      } else {
-        throw new PasswordNotEqualPasswordAgainError();
-      }
+  @override
+  Future<Error> onRegisterPressed() async {
+    try {
+      inputViewState.add(ViewState.loading);
+      await _authenticationService.signUp(email: _emailController.stream.value, password: _passwordController.stream.value);
+      _databaseService.createUser(_authenticationService.user.uid, _usernameController.value);
+    } on Error catch(e) {
+      inputViewState.add(ViewState.idle);
+      return e;
     }
+    return null;
   }
+
+  /// OUTPUT
+  @override
+  ValueStream<Error> get outputErrorEmail => _emailController.stream
+      .map((email) => Error()); // TODO
+
+  @override
+  ValueStream<Error> get outputErrorUsername => _usernameController.stream
+      .map((username) => Error()); // TODO
+
+  @override
+  ValueStream<Error> get outputErrorPassword => _passwordController.stream
+      .map((password) => Error()); // TODO
+
+  @override
+  ValueStream<Error> get outputErrorPasswordAgain => _passwordAgainController.stream
+      .map((passwordAgain) => Error()); // TODO
+
+  @override
+  Stream<bool> get outputIsRegisterButtonEnabled => _emailController.stream
+      .mergeWith([_usernameController.stream, _passwordController.stream, _passwordAgainController.stream])
+      .map((event) => _isRegisterButtonEnabled());
+
 
   @override
   void dispose() {
-    _viewStateController.close();
+    _emailController.close();
+    _usernameController.close();
+    _passwordController.close();
+    _passwordAgainController.close();
+    super.dispose();
   }
+
 }

@@ -24,7 +24,7 @@ abstract class HomeViewModel extends ViewModel {
 
 }
 
-class HomeViewModelImpl implements HomeViewModel {
+class HomeViewModelImpl extends HomeViewModel {
   final AppModel _appModel = locator<AppModel>();
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
@@ -32,9 +32,6 @@ class HomeViewModelImpl implements HomeViewModel {
   /// IN
 
   /// OUT
-
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
 
   @override
   Stream<Profile> get outputProfile => _databaseService.profile(_appModel.uid);

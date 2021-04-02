@@ -27,26 +27,17 @@ class SignInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return View2(
+    return View(
       mobilePortrait: SignInViewMobilePortrait(model, pageController),
     );
   }
 }
 
-class SignInViewMobilePortrait extends StatefulWidget {
+class SignInViewMobilePortrait extends StatelessWidget {
   final SignInViewModel model;
   final PageController pageController;
 
   SignInViewMobilePortrait(this.model, this.pageController);
-
-  @override
-  _SignInViewMobilePortraitState createState() =>
-      _SignInViewMobilePortraitState();
-}
-
-class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +47,15 @@ class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
       final double width = boxConstraints.maxWidth;
       final double height = boxConstraints.maxHeight;
       return StreamBuilder<ViewState>(
-        stream: widget.model.outputViewState,
+        initialData: ViewState.idle,
+        stream: model.outputViewState,
         builder: (context, snapshot) => snapshot.data == ViewState.idle
             ? SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
                 child: Builder(
                   builder: (context) => ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width,
-                      maxHeight: MediaQuery.of(context).size.height,
-                    ),
+                    constraints:
+                        BoxConstraints(maxWidth: width, maxHeight: height),
                     child: Row(
                       children: [
                         Spacer(
@@ -100,9 +90,9 @@ class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
                               ),
                               Expanded(
                                 child: TextField(
+                                  outputText: model.inputEmail,
                                   placeholder:
                                       AppLocalizations.of(context).email,
-                                  controller: emailController,
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   onEditingComplete: () => node.nextFocus(),
@@ -114,9 +104,9 @@ class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
                               ),
                               Expanded(
                                 child: TextField(
+                                  outputText: model.inputPassword,
                                   placeholder:
                                       AppLocalizations.of(context).password,
-                                  controller: passwordController,
                                   obscureText: true,
                                   textInputAction: TextInputAction.done,
                                   onEditingComplete: () => node.unfocus(),
@@ -140,10 +130,8 @@ class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
                                                 .errorNetwork,
                                       };
 
-                                      widget.model
-                                          .onSignInPressed(
-                                              email: emailController.text,
-                                              password: passwordController.text)
+                                      model
+                                          .onSignInPressed()
                                           .catchError((error) {
                                         if (error
                                             is InvalidEmailAddressOrPasswordError) {
@@ -246,10 +234,10 @@ class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
                                 child: LinkButton(
                                   text:
                                       AppLocalizations.of(context).registerNow,
-                                  onPressed: () => widget.pageController
-                                      .animateToPage(1,
-                                          duration: Duration(milliseconds: 500),
-                                          curve: Curves.easeIn),
+                                  onPressed: () => pageController.animateToPage(
+                                      1,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.easeIn),
                                 ),
                                 flex: 17,
                               ),
@@ -270,12 +258,5 @@ class _SignInViewMobilePortraitState extends State<SignInViewMobilePortrait> {
             : LoadingView(),
       );
     });
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
   }
 }

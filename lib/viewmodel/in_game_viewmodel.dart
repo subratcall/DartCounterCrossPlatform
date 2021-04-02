@@ -1,7 +1,6 @@
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/playing_service.dart';
-import 'package:dart_counter/services/playing/service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
@@ -18,11 +17,8 @@ abstract class InGameViewModel extends ViewModel{
 
 }
 
-class InGameViewModelImpl implements InGameViewModel {
+class InGameViewModelImpl extends InGameViewModel {
   final PlayingService _playingService = locator<PlayingService>();
-
-  @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
 
   int inputPoints = 0;
   Game currentSnapshot;

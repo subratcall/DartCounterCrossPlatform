@@ -15,7 +15,7 @@ class CheckoutDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return View2(
+    return View(
       mobilePortrait: CheckoutDetailsViewMobilePortrait(model),
     );
   }

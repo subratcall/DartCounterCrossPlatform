@@ -5,9 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart' hide User;
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
 
-  AuthenticationService() : this._firebaseAuth = FirebaseAuth.instance;
+  AuthenticationService() : this._firebaseAuth = FirebaseAuth.instance {
+    authStateChanged.listen((user) {
+      this.user = user;
+    });
+  }
 
-  Stream<User> get authStateChanged => _firebaseAuth.authStateChanges().map((firebaseUser) => User(firebaseUser.uid));
+  Stream<User> get authStateChanged => _firebaseAuth.authStateChanges().map((firebaseUser) => firebaseUser != null ? User(firebaseUser.uid) : null);
+
+  User user;
 
   Future<void> signIn({String email, String password}) async {
     try {
@@ -39,12 +45,11 @@ class AuthenticationService {
   }
 
   Future<void> signUp(
-      {String email, String password, onSuccess(String uid)}) async {
+      {String email, String password}) async {
     try {
       // Try to create user
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      onSuccess(_firebaseAuth.currentUser.uid);
     } on FirebaseAuthException catch (e) {
       print("${e.message} ${e.code}");
       if (e.code == 'network-request-failed') {

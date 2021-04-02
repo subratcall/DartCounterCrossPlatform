@@ -3,7 +3,8 @@ import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
 
 class TextField extends StatelessWidget {
-  final TextEditingController controller;
+  final Sink<String> outputText;
+  final Stream<bool> inputIsValid;
   final bool autofocus;
   final bool autocorrect;
   final String placeholder;
@@ -11,13 +12,11 @@ class TextField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final VoidCallback onEditingComplete;
-  final Function(String) onChanged;
-
-  final bool isValid;
   final Color color;
 
   TextField(
-      {this.controller,
+      {this.outputText,
+      this.inputIsValid,
       this.autofocus = false,
       this.autocorrect: false,
       this.placeholder,
@@ -25,36 +24,13 @@ class TextField extends StatelessWidget {
       this.keyboardType,
       this.textInputAction,
       this.onEditingComplete,
-      this.onChanged,
-      this.isValid = true,
-      this.color = AppColors.gray});
+      this.color = AppColors.gray})
+      : assert(outputText != null);
 
   @override
   Widget build(BuildContext context) {
-    if (isValid) {
-      return CupertinoTextField(
-        controller: controller,
-        autofocus: autofocus,
-        autocorrect: autocorrect,
-        placeholder: placeholder,
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        textInputAction: textInputAction,
-        onEditingComplete: onEditingComplete,
-        onChanged: onChanged,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.all(
-            Radius.circular(AppPaddings.medium),
-          ),
-        ),
-      );
-    } else {
-      return Stack(
-        fit: StackFit.expand,
-        children: [
-          CupertinoTextField(
-            controller: controller,
+    return inputIsValid == null
+        ? CupertinoTextField(
             autofocus: autofocus,
             autocorrect: autocorrect,
             placeholder: placeholder,
@@ -62,30 +38,71 @@ class TextField extends StatelessWidget {
             keyboardType: keyboardType,
             textInputAction: textInputAction,
             onEditingComplete: onEditingComplete,
+            onChanged: outputText.add,
             decoration: BoxDecoration(
-              color: AppColors.gray,
+              color: color,
               borderRadius: BorderRadius.all(
                 Radius.circular(AppPaddings.medium),
               ),
-              border: Border.all(
-                color: AppColors.red,
-                width: 1,
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, AppPaddings.medium, 0),
-              child: Icon(
-                CupertinoIcons.xmark_circle,
-                color: AppColors.red,
-                size: 25,
-              ),
             ),
           )
-        ],
-      );
-    }
+        : StreamBuilder<bool>(
+            initialData: true,
+            stream: inputIsValid,
+            builder: (context, snapshot) => snapshot.data
+                ? CupertinoTextField(
+                    autofocus: autofocus,
+                    autocorrect: autocorrect,
+                    placeholder: placeholder,
+                    obscureText: obscureText,
+                    keyboardType: keyboardType,
+                    textInputAction: textInputAction,
+                    onEditingComplete: onEditingComplete,
+                    onChanged: outputText.add,
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(AppPaddings.medium),
+                      ),
+                    ),
+                  )
+                : Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      CupertinoTextField(
+                        autofocus: autofocus,
+                        autocorrect: autocorrect,
+                        placeholder: placeholder,
+                        obscureText: obscureText,
+                        keyboardType: keyboardType,
+                        textInputAction: textInputAction,
+                        onEditingComplete: onEditingComplete,
+                        onChanged: outputText.add,
+                        decoration: BoxDecoration(
+                          color: AppColors.gray,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(AppPaddings.medium),
+                          ),
+                          border: Border.all(
+                            color: AppColors.red,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                              0, 0, AppPaddings.medium, 0),
+                          child: Icon(
+                            CupertinoIcons.xmark_circle,
+                            color: AppColors.red,
+                            size: 25,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+          );
   }
 }

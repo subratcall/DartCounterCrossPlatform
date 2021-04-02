@@ -66,8 +66,7 @@ class _PlayerCardState extends State<PlayerCard> {
                         return AnonymousPlayerItem(
                           player,
                           onDismissed: widget.onRemovePlayer,
-                          onNameChanged: (name) =>
-                              widget.onNameChanged(player.id, name),
+                          //onNameChanged: (name) => widget.onNameChanged(player.id, name), TODO
                         );
                       }
                     },

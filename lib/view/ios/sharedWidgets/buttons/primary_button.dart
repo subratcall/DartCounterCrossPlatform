@@ -3,12 +3,16 @@ import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
 
 class PrimaryButton extends StatelessWidget {
+  final bool initialIsEnabled;
+  final Stream<bool> inputIsEnabled;
   final Widget Function(BuildContext, BoxConstraints) builder;
   final VoidCallback onPressed;
   final BorderRadius borderRadius;
 
   PrimaryButton(
-      {this.builder,
+      {this.initialIsEnabled,
+      this.inputIsEnabled,
+      this.builder,
       this.onPressed,
       this.borderRadius = const BorderRadius.all(
         Radius.circular(AppPaddings.big),
@@ -16,16 +20,32 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      color: AppColors.black,
-      padding: const EdgeInsets.all(AppPaddings.medium),
-      onPressed: onPressed,
-      borderRadius: borderRadius,
-      child: Center(
-        child: LayoutBuilder(
-          builder: builder,
-        ),
-      ),
-    );
+    return inputIsEnabled != null
+        ? StreamBuilder<bool>(
+            initialData: initialIsEnabled,
+            stream: inputIsEnabled,
+            builder: (context, snapshot) => CupertinoButton(
+              color: AppColors.black,
+              padding: const EdgeInsets.all(AppPaddings.medium),
+              onPressed: snapshot.data ? onPressed : null,
+              borderRadius: borderRadius,
+              child: Center(
+                child: LayoutBuilder(
+                  builder: builder,
+                ),
+              ),
+            ),
+          )
+        : CupertinoButton(
+            color: AppColors.black,
+            padding: const EdgeInsets.all(AppPaddings.medium),
+            onPressed: onPressed,
+            borderRadius: borderRadius,
+            child: Center(
+              child: LayoutBuilder(
+                builder: builder,
+              ),
+            ),
+          );
   }
 }

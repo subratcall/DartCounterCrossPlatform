@@ -4,13 +4,17 @@ import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_button.dart'
 import 'package:flutter/cupertino.dart';
 
 class PrimaryTextButton extends StatelessWidget {
+  final bool initialIsEnabled;
+  final Stream<bool> inputIsEnabled;
   final String text;
   final VoidCallback onPressed;
   final BorderRadius borderRadius;
   final double fontSize;
 
   PrimaryTextButton(
-      {this.text,
+      {this.initialIsEnabled,
+      this.inputIsEnabled,
+      this.text,
       this.onPressed,
       this.borderRadius = const BorderRadius.all(
         Radius.circular(AppPaddings.big),
@@ -21,6 +25,8 @@ class PrimaryTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PrimaryButton(
+      initialIsEnabled: initialIsEnabled,
+      inputIsEnabled: inputIsEnabled,
       onPressed: onPressed,
       builder: (context, boxConstraints) {
         return AutoSizeText(

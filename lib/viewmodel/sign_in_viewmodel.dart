@@ -5,44 +5,49 @@ import 'package:dart_counter/helper/validator.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/services/authentication_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class SignInViewModel extends ViewModel {
 
-  Future<void> onSignInPressed({String email, String password});
+  /// INPUT
+  Sink<String> get inputEmail;
+  Sink<String> get inputPassword;
+  Future<Error> onSignInPressed();
 }
 
+class SignInViewModelImpl extends SignInViewModel {
 
-class SignInViewModelImpl implements SignInViewModel {
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
-  final StreamController<ViewState> _viewStateController = StreamController.broadcast();
+  BehaviorSubject<String> _emailController = BehaviorSubject();
+  BehaviorSubject<String> _passwordController = BehaviorSubject();
+
+  /// INPUT
+  @override
+  Sink<String> get inputEmail => _emailController;
 
   @override
-  Stream<ViewState> get outputViewState => throw UnimplementedError();
+  Sink<String> get inputPassword => _passwordController;
 
-  final AuthenticationService _authenticationService =
-  locator<AuthenticationService>();
-
-  SignInViewModel() {
-    _viewStateController.add(ViewState.idle);
-  }
-
-  Future<void> onSignInPressed({String email, String password}) async {
-    if (!EmailValidator.validate(email) ||
-        !PasswordValidator.validate(password)) {
-      throw InvalidEmailAddressOrPasswordError();
+  @override
+  Future<Error> onSignInPressed() async {
+    if (!_emailController.hasValue || !_passwordController.hasValue ||!EmailValidator.validate(_emailController.value) || !PasswordValidator.validate(_passwordController.value)) {
+      return InvalidEmailAddressOrPasswordError();
     }
 
-    _viewStateController.add(ViewState.loading);
     try {
-      await _authenticationService.signIn(email: email, password: password);
-    } on Error catch (e) {
-      _viewStateController.add(ViewState.idle);
-      throw e;
+      inputViewState.add(ViewState.loading);
+      await _authenticationService.signIn(email: _emailController.value, password: _passwordController.value);
+    } on Error catch(e) {
+      inputViewState.add(ViewState.idle);
+      return e;
     }
+    return null;
   }
 
   @override
   void dispose() {
-    _viewStateController.close();
+    _emailController.close();
+    _passwordController.close();
   }
 }
