@@ -3,6 +3,8 @@ import 'package:dart_counter/viewmodel/settings_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'settings_view_mobile_portrait.dart';
+
 class SettingsView extends StatelessWidget {
 
   final SettingsViewModel model = SettingsViewModelImpl();
@@ -14,26 +16,6 @@ class SettingsView extends StatelessWidget {
         middle: Text(AppLocalizations.of(context).settings),
       ),
       mobilePortrait: SettingsViewMobilePortrait(model),
-    );
-  }
-}
-
-class SettingsViewMobilePortrait extends StatelessWidget {
-
-  final SettingsViewModel model;
-
-  SettingsViewMobilePortrait(this.model);
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints boxConstraints) {
-          final double width = boxConstraints.maxWidth;
-          final double height = boxConstraints.maxHeight;
-          return Center(
-            child: Text(this.toStringShort() + " -- IOS"),
-          );
-        }
     );
   }
 }

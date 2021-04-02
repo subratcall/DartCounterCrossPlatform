@@ -1,5 +1,4 @@
 import 'package:dart_counter/view/ios/views/view.dart';
-
 import 'package:dart_counter/viewmodel/social_media_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

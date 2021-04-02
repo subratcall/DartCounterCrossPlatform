@@ -13,7 +13,7 @@ class HomeViewTabletPortrait extends StatelessWidget {
     return Container(
       color: AppColors.red,
       child: Center(
-        child: Text(this.toStringShort()),
+        child: Text('${this.toStringShort()} -- IOS'),
       ),
     );
   }

@@ -17,7 +17,7 @@ class HomeViewMobileLandscape extends StatelessWidget {
           return Container(
             color: AppColors.red,
             child: Center(
-              child: Text(toStringShort()),
+              child: Text('${this.toStringShort()} -- IOS'),
             ),
           );
         }

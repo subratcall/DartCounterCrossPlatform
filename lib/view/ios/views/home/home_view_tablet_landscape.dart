@@ -3,7 +3,6 @@ import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
 class HomeViewTabletLandscape extends StatelessWidget {
-
   final HomeViewModel model;
 
   HomeViewTabletLandscape(this.model);
@@ -11,10 +10,10 @@ class HomeViewTabletLandscape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: AppColors.green,
-        child: Center(
-        child: Text(this.toStringShort()),
-    ),
+      color: AppColors.green,
+      child: Center(
+        child: Text('${this.toStringShort()} -- IOS'),
+      ),
     );
   }
 }
