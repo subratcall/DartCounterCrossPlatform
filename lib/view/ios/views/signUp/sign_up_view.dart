@@ -1,9 +1,11 @@
+import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/link_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_text_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
+import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/sign_up_viewmodel.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
@@ -82,7 +84,8 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                             Expanded(
                               child: TextField(
                                 outputText: model.inputEmail,
-                                inputIsValid: model.outputErrorEmail.map((error) => error == null),
+                                inputIsValid: model.outputErrorEmail
+                                    .map((error) => error == null),
                                 placeholder: AppLocalizations.of(context).email,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
@@ -96,8 +99,10 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                             Expanded(
                               child: TextField(
                                 outputText: model.inputUsername,
-                                inputIsValid: model.outputErrorUsername.map((error) => error == null),
-                                placeholder: AppLocalizations.of(context).username,
+                                inputIsValid: model.outputErrorUsername
+                                    .map((error) => error == null),
+                                placeholder:
+                                    AppLocalizations.of(context).username,
                                 textInputAction: TextInputAction.next,
                                 onEditingComplete: () => node.nextFocus(),
                               ),
@@ -109,8 +114,10 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                             Expanded(
                               child: TextField(
                                 outputText: model.inputPassword,
-                                inputIsValid: model.outputErrorPassword.map((error) => error == null),
-                                placeholder: AppLocalizations.of(context).password,
+                                inputIsValid: model.outputErrorPassword
+                                    .map((error) => error == null),
+                                placeholder:
+                                    AppLocalizations.of(context).password,
                                 obscureText: true,
                                 textInputAction: TextInputAction.next,
                                 onEditingComplete: () => node.nextFocus(),
@@ -123,8 +130,10 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                             Expanded(
                               child: TextField(
                                 outputText: model.inputPasswordAgain,
-                                inputIsValid: model.outputErrorPasswordAgain.map((error) => error == null),
-                                placeholder: AppLocalizations.of(context).passwordAgain,
+                                inputIsValid: model.outputErrorPasswordAgain
+                                    .map((error) => error == null),
+                                placeholder:
+                                    AppLocalizations.of(context).passwordAgain,
                                 obscureText: true,
                                 textInputAction: TextInputAction.done,
                                 onEditingComplete: () => node.unfocus(),
@@ -136,60 +145,25 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                             ),
                             Expanded(
                               child: PrimaryTextButton(
-                                initialIsEnabled: false,
-                                inputIsEnabled: model.outputIsRegisterButtonEnabled,
                                 text: AppLocalizations.of(context).register,
                                 onPressed: () {
-                                  /*                            // TODO this is only a workaround find a better solution for this e.g with global key
-                                var errorMessages = {
-                                  'errorInvalidEmailAddress':
-                                  AppLocalizations.of(context)
-                                      .errorInvalidEmailAddress,
-                                  'errorInvalidUsername':
-                                  AppLocalizations.of(context)
-                                      .errorInvalidUsername,
-                                  'errorInvalidPassword':
-                                  AppLocalizations.of(context)
-                                      .errorInvalidPassword,
-                                  'errorPasswordNotEqualPasswordAgain':
-                                  AppLocalizations.of(context)
-                                      .errorPasswordNotEqualPasswordAgain,
-                                  'errorEmailAddressAlreadyInUse':
-                                  AppLocalizations.of(context)
-                                      .errorEmailAddressAlreadyInUse,
-                                  'errorNetwork': AppLocalizations.of(context)
-                                      .errorNetwork,
-                                };
-
-                                widget.model.onRegisterPressed(
-                                    email: emailController.text,
-                                    username: usernameController.text,
-                                    password: passwordController.text,
-                                    passwordAgain:
-                                    passwordAgainController.text)
-                                    .catchError((error) {
-                                  if (error is InvalidEmailAddressError) {
-                                    Toast.showToast(errorMessages[
-                                    'errorInvalidEmailAddress']);
-                                  } else if (error is InvalidUsernameError) {
-                                    Toast.showToast(errorMessages[
-                                    'errorInvalidUsername']);
-                                  } else if (error is InvalidPasswordError) {
-                                    Toast.showToast(errorMessages[
-                                    'errorInvalidPassword']);
-                                  } else if (error
-                                  is PasswordNotEqualPasswordAgainError) {
-                                    Toast.showToast(errorMessages[
-                                    'errorPasswordNotEqualPasswordAgain']);
-                                  } else if (error
-                                  is EmailAddressAlreadyInUseError) {
-                                    Toast.showToast(errorMessages[
-                                    'errorEmailAddressAlreadyInUse']);
-                                  } else {
-                                    Toast.showToast(
-                                        errorMessages['errorNetwork']);
-                                  }
-                                });*/
+                                  model.onRegisterPressed().catchError((error) {
+                                    if (error is InvalidEmailAddressError) {
+                                      Toast.showToast(AppLocalizations.of(context).errorInvalidEmailAddress);
+                                    } else if (error is InvalidUsernameError) {
+                                      Toast.showToast(AppLocalizations.of(context).errorInvalidUsername);
+                                    } else if (error is InvalidPasswordError) {
+                                      Toast.showToast(AppLocalizations.of(context).errorInvalidPassword);
+                                    } else if (error
+                                        is PasswordNotEqualPasswordAgainError) {
+                                      Toast.showToast(AppLocalizations.of(context).errorPasswordNotEqualPasswordAgain);
+                                    } else if (error
+                                        is EmailAddressAlreadyInUseError) {
+                                      Toast.showToast(AppLocalizations.of(context).errorEmailAddressAlreadyInUse);
+                                    } else {
+                                      Toast.showToast(AppLocalizations.of(context).errorNetwork);
+                                    }
+                                  });
                                 },
                               ),
                               flex: 50,

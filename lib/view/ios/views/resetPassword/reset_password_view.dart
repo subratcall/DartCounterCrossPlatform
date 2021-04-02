@@ -134,25 +134,13 @@ class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
                       ),
                       Expanded(
                         child: PrimaryTextButton(
-                          initialIsEnabled: false,
-                          inputIsEnabled: model.outputIsConfirmButtonEnabled,
                           text: AppLocalizations.of(context).confirm,
                           onPressed: () {
-                            // TODO this is only a workaround find a better solution for this e.g with global key
-                            var errorMessages = {
-                              'errorInvalidEmailAddress':
-                                  AppLocalizations.of(context)
-                                      .errorInvalidEmailAddress,
-                              'errorNetwork':
-                                  AppLocalizations.of(context).errorNetwork,
-                            };
-
                             model.onConfirmPressed().catchError((error) {
                               if (error is InvalidEmailAddressError) {
-                                Toast.showToast(
-                                    errorMessages['errorInvalidEmailAddress']);
+                                Toast.showToast(AppLocalizations.of(context).errorInvalidEmailAddress);
                               } else {
-                                Toast.showToast(errorMessages['errorNetwork']);
+                                Toast.showToast(AppLocalizations.of(context).errorNetwork);
                               }
                             });
                           },

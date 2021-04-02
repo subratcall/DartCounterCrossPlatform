@@ -12,7 +12,7 @@ abstract class SignInViewModel extends ViewModel {
   /// INPUT
   Sink<String> get inputEmail;
   Sink<String> get inputPassword;
-  Future<Error> onSignInPressed();
+  Future<void> onSignInPressed();
 }
 
 class SignInViewModelImpl extends SignInViewModel {
@@ -30,9 +30,9 @@ class SignInViewModelImpl extends SignInViewModel {
   Sink<String> get inputPassword => _passwordController;
 
   @override
-  Future<Error> onSignInPressed() async {
+  Future<void> onSignInPressed() async {
     if (!_emailController.hasValue || !_passwordController.hasValue ||!EmailValidator.validate(_emailController.value) || !PasswordValidator.validate(_passwordController.value)) {
-      return InvalidEmailAddressOrPasswordError();
+      throw InvalidEmailAddressOrPasswordError();
     }
 
     try {
@@ -40,9 +40,8 @@ class SignInViewModelImpl extends SignInViewModel {
       await _authenticationService.signIn(email: _emailController.value, password: _passwordController.value);
     } on Error catch(e) {
       inputViewState.add(ViewState.idle);
-      return e;
+      throw e;
     }
-    return null;
   }
 
   @override

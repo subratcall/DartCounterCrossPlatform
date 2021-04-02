@@ -11,7 +11,7 @@ abstract class ResetPasswordViewModel extends ViewModel {
 
   /// INPUT
   Sink<String> get inputEmail;
-  Future<Error> onConfirmPressed();
+  Future<void> onConfirmPressed();
 
   /// OUTPUT
   Stream<bool> get outputIsConfirmButtonEnabled;
@@ -32,7 +32,7 @@ class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
   Sink<String> get inputEmail => _emailController;
 
   @override
-  Future<Error> onConfirmPressed() async {
+  Future<void> onConfirmPressed() async {
     if (!_emailController.hasValue || !EmailValidator.validate(_emailController.value)) {
       throw InvalidEmailAddressError();
     }
@@ -43,9 +43,8 @@ class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
       inputViewState.add(ViewState.success);
     } on Error catch (e) {
       inputViewState.add(ViewState.idle);
-      return  e;
+      throw e;
     }
-    return null;
   }
 
   /// OUTPUT

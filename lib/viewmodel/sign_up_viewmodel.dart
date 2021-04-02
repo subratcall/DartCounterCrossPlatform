@@ -13,14 +13,13 @@ abstract class SignUpViewModel extends ViewModel {
   Sink<String> get inputUsername;
   Sink<String> get inputPassword;
   Sink<String> get inputPasswordAgain;
-  Future<Error> onRegisterPressed();
+  Future<void> onRegisterPressed();
 
   /// OUTPUT
   Stream<Error> get outputErrorEmail;
   Stream<Error> get outputErrorUsername;
   Stream<Error> get outputErrorPassword;
   Stream<Error> get outputErrorPasswordAgain;
-  Stream<bool> get outputIsRegisterButtonEnabled;
 }
 
 class SignUpViewModelImpl extends SignUpViewModel {
@@ -54,16 +53,15 @@ class SignUpViewModelImpl extends SignUpViewModel {
   Sink<String> get inputPasswordAgain => _passwordAgainController;
 
   @override
-  Future<Error> onRegisterPressed() async {
+  Future<void> onRegisterPressed() async {
     try {
       inputViewState.add(ViewState.loading);
       await _authenticationService.signUp(email: _emailController.stream.value, password: _passwordController.stream.value);
       _databaseService.createUser(_authenticationService.user.uid, _usernameController.value);
     } on Error catch(e) {
       inputViewState.add(ViewState.idle);
-      return e;
+      throw e;
     }
-    return null;
   }
 
   /// OUTPUT
@@ -82,12 +80,6 @@ class SignUpViewModelImpl extends SignUpViewModel {
   @override
   ValueStream<Error> get outputErrorPasswordAgain => _passwordAgainController.stream
       .map((passwordAgain) => Error()); // TODO
-
-  @override
-  Stream<bool> get outputIsRegisterButtonEnabled => _emailController.stream
-      .mergeWith([_usernameController.stream, _passwordController.stream, _passwordAgainController.stream])
-      .map((event) => _isRegisterButtonEnabled());
-
 
   @override
   void dispose() {

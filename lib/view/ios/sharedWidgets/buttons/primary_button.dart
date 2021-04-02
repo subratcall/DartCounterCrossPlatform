@@ -10,7 +10,7 @@ class PrimaryButton extends StatelessWidget {
   final BorderRadius borderRadius;
 
   PrimaryButton(
-      {this.initialIsEnabled,
+      {this.initialIsEnabled = true,
       this.inputIsEnabled,
       this.builder,
       this.onPressed,

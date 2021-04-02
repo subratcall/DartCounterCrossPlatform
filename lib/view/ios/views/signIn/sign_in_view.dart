@@ -120,26 +120,11 @@ class SignInViewMobilePortrait extends StatelessWidget {
                                 child: PrimaryTextButton(
                                     text: AppLocalizations.of(context).login,
                                     onPressed: () {
-                                      // TODO this is only a workaround find a better solution for this e.g with global key
-                                      var errorMessages = {
-                                        'errorInvalidEmailAddressOrPassword':
-                                            AppLocalizations.of(context)
-                                                .errorInvalidEmailAddressOrPassword,
-                                        'errorNetwork':
-                                            AppLocalizations.of(context)
-                                                .errorNetwork,
-                                      };
-
-                                      model
-                                          .onSignInPressed()
-                                          .catchError((error) {
-                                        if (error
-                                            is InvalidEmailAddressOrPasswordError) {
-                                          Toast.showToast(errorMessages[
-                                              'errorInvalidEmailAddressOrPassword']);
+                                      model.onSignInPressed().catchError((error) {
+                                        if (error is InvalidEmailAddressOrPasswordError) {
+                                          Toast.showToast(AppLocalizations.of(context).errorInvalidEmailAddressOrPassword);
                                         } else {
-                                          Toast.showToast(
-                                              errorMessages['errorNetwork']);
+                                          Toast.showToast(AppLocalizations.of(context).errorNetwork);
                                         }
                                       });
                                     }),

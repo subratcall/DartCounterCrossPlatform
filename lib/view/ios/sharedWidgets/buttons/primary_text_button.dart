@@ -12,7 +12,7 @@ class PrimaryTextButton extends StatelessWidget {
   final double fontSize;
 
   PrimaryTextButton(
-      {this.initialIsEnabled,
+      {this.initialIsEnabled = true,
       this.inputIsEnabled,
       this.text,
       this.onPressed,
