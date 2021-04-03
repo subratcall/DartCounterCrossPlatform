@@ -4,8 +4,7 @@ import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-abstract class InGameViewModel extends ViewModel{
-
+abstract class InGameViewModel extends ViewModel {
   int inputPoints;
   Game currentSnapshot;
 
@@ -14,7 +13,6 @@ abstract class InGameViewModel extends ViewModel{
   void onPerformThrowPressed();
 
   void onKeyPressed(KeyType key);
-
 }
 
 class InGameViewModelImpl extends InGameViewModel {
@@ -25,7 +23,7 @@ class InGameViewModelImpl extends InGameViewModel {
 
   InGameViewModel() {
     currentSnapshot = _playingService.gameSnapshot;
-  /*  subscriptions.add(_playingService.onEvent().listen((event) {
+    /*  subscriptions.add(_playingService.onEvent().listen((event) {
       if (event is Event<Game>) {
         Game game = event.item;
         // TODO
@@ -118,7 +116,5 @@ class InGameViewModelImpl extends InGameViewModel {
   }
 
   @override
-  void dispose() {
-
-  }
+  void dispose() {}
 }

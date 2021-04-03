@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/assets/app_images.dart';
+import 'package:dart_counter/view/ios/extensions/extensions.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_text_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
 import 'package:dart_counter/view/ios/views/signUp/widgets/error_label.dart';
@@ -8,7 +8,6 @@ import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/reset_password_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:dart_counter/view/ios/extensions/extensions.dart';
 
 class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
   final ResetPasswordViewModel model;

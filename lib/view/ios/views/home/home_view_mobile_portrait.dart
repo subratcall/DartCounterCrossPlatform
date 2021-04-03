@@ -13,7 +13,6 @@ import 'widgets/settings_button.dart';
 import 'widgets/social_media_button.dart';
 
 class HomeViewMobilePortrait extends StatelessWidget {
-
   final HomeViewModel model;
 
   HomeViewMobilePortrait(this.model);
@@ -21,47 +20,51 @@ class HomeViewMobilePortrait extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints boxConstraints) {
-        return Padding(
-          padding: EdgeInsets.all(AppPaddings.small),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 3,
-                child: ProfileButton(
-                  profileStream: model.outputProfile,
-                  onPressed: () => Navigator.pushNamed(context, AppRoutes.profile),
-                ),
+        builder: (BuildContext context, BoxConstraints boxConstraints) {
+      return Padding(
+        padding: EdgeInsets.all(AppPaddings.small),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 3,
+              child: ProfileButton(
+                profileStream: model.outputProfile,
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.profile),
               ),
-              SizedBox(
-                height: AppPaddings.small,
+            ),
+            SizedBox(
+              height: AppPaddings.small,
+            ),
+            Expanded(
+              flex: 3,
+              child: PlayOnlineButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.createGame),
               ),
-              Expanded(
-                flex: 3,
-                child: PlayOnlineButton(
-                  onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
-                ),
+            ),
+            SizedBox(
+              height: AppPaddings.small,
+            ),
+            Expanded(
+              flex: 3,
+              child: PlayOfflineButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.createGame),
               ),
-              SizedBox(
-                height: AppPaddings.small,
-              ),
-              Expanded(
-                flex: 3,
-                child: PlayOfflineButton(
-                  onPressed: () => Navigator.pushNamed(context, AppRoutes.createGame),
-                ),
-              ),
-              SizedBox(
-                height: AppPaddings.small,
-              ),
-              Expanded(
+            ),
+            SizedBox(
+              height: AppPaddings.small,
+            ),
+            Expanded(
                 flex: 3,
                 child: Row(
                   children: [
                     Expanded(
                       child: InvitesButton(
                         newInvitesStream: model.outputNewInvites,
-                        onPressed: () => Navigator.pushNamed(context, AppRoutes.invite),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, AppRoutes.invite),
                       ),
                     ),
                     SizedBox(
@@ -70,49 +73,45 @@ class HomeViewMobilePortrait extends StatelessWidget {
                     Expanded(
                       child: FriendsButton(
                         newFriendRequestStream: model.outputNewFriendRequests,
-                        onPressed: () => Navigator.pushNamed(context, AppRoutes.friends),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, AppRoutes.friends),
                       ),
                     ),
                   ],
-                )
-              ),
-              SizedBox(
-                height: AppPaddings.small,
-              ),
-              Expanded(
-                  flex: 3,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: SocialMediaButton(
-                          onPressed: () => Navigator.pushNamed(context, AppRoutes.socialMedia),
-                        ),
+                )),
+            SizedBox(
+              height: AppPaddings.small,
+            ),
+            Expanded(
+                flex: 3,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SocialMediaButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, AppRoutes.socialMedia),
                       ),
-                      SizedBox(
-                        width: AppPaddings.small,
-                      ),
-                      Expanded(
-                        child: SettingsButton(
-                          onPressed: () => Navigator.pushNamed(context, AppRoutes.settings)
-                        ),
-                      ),
-                    ],
-                  )
-              ),
-              SizedBox(
-                height: AppPaddings.medium,
-              ),
-              Expanded(
-                flex: 2,
-                child: Image.asset(AppImages.adBanner),
-              ),
-            ],
-          ),
-        );
-      }
-    );
+                    ),
+                    SizedBox(
+                      width: AppPaddings.small,
+                    ),
+                    Expanded(
+                      child: SettingsButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, AppRoutes.settings)),
+                    ),
+                  ],
+                )),
+            SizedBox(
+              height: AppPaddings.medium,
+            ),
+            Expanded(
+              flex: 2,
+              child: Image.asset(AppImages.adBanner),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
-
-
-

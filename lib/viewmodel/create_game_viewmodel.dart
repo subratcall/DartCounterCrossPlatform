@@ -5,11 +5,8 @@ import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-
-abstract class CreateGameViewModel  extends ViewModel{
-
+abstract class CreateGameViewModel extends ViewModel {
   Game currentSnapshot;
-
 
   /// IN
   Sink get inputDartBotActive;
@@ -19,7 +16,6 @@ abstract class CreateGameViewModel  extends ViewModel{
   Stream<Game> get outputSnapshots;
 
   Stream<bool> get outputDartBotActive;
-
 
   /// METHODS
 
@@ -42,7 +38,6 @@ abstract class CreateGameViewModel  extends ViewModel{
   void onNameChanged(int id, String newName);
 
   void onReorderPlayer(int oldIndex, int newIndex);
-
 }
 
 class CreateGameViewModelImpl extends CreateGameViewModel {
@@ -50,12 +45,12 @@ class CreateGameViewModelImpl extends CreateGameViewModel {
 
   Game currentSnapshot = Game();
 
-  StreamController<bool> _dartBotActiveController = StreamController.broadcast();
+  StreamController<bool> _dartBotActiveController =
+      StreamController.broadcast();
 
   /// IN
   @override
   Sink get inputDartBotActive => _dartBotActiveController;
-
 
   /// OUT
 
@@ -63,8 +58,7 @@ class CreateGameViewModelImpl extends CreateGameViewModel {
   Stream<Game> get outputSnapshots => throw UnimplementedError();
 
   @override
-  Stream<bool> get outputDartBotActive  => throw UnimplementedError();
-
+  Stream<bool> get outputDartBotActive => throw UnimplementedError();
 
   @override
   void onDartBotAverageChanged(int average) {
@@ -120,5 +114,4 @@ class CreateGameViewModelImpl extends CreateGameViewModel {
   void dispose() {
     _dartBotActiveController.close();
   }
-
 }

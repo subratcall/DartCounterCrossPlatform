@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'post_game_view_mobile_portrait.dart';
 
 class PostGameView extends StatefulWidget {
-
   @override
   _PostGameViewState createState() => _PostGameViewState();
 }

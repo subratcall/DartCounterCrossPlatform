@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AppFonts {
-
   AppFonts._();
 
   static const mini = 9.0;

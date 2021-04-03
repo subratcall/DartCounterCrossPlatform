@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'game_history_details_view_mobile_portrait.dart';
 
 class GameHistoryDetailsView extends StatelessWidget {
-
   final Game game;
 
   GameHistoryDetailsView(this.game);
@@ -20,5 +19,3 @@ class GameHistoryDetailsView extends StatelessWidget {
     );
   }
 }
-
-

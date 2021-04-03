@@ -3,7 +3,6 @@ import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
 class HomeViewTabletPortrait extends StatelessWidget {
-
   final HomeViewModel model;
 
   HomeViewTabletPortrait(this.model);

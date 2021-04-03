@@ -13,7 +13,8 @@ class ProfileButton extends StatelessWidget {
 
   final VoidCallback onPressed;
 
-  ProfileButton({this.profileStream, this.onPressed}) : assert(profileStream != null);
+  ProfileButton({this.profileStream, this.onPressed})
+      : assert(profileStream != null);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,8 @@ class ProfileButton extends StatelessWidget {
                               ),
                               Spacer(),
                               AutoSizeText(
-                                profile?.careerStats?.average?.toString() ?? '--',
+                                profile?.careerStats?.average?.toString() ??
+                                    '--',
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 14,
@@ -89,7 +91,8 @@ class ProfileButton extends StatelessWidget {
                           child: Row(
                             children: [
                               AutoSizeText(
-                                AppLocalizations.of(context).checkoutPercentage +
+                                AppLocalizations.of(context)
+                                        .checkoutPercentage +
                                     ':',
                                 maxLines: 1,
                                 style: TextStyle(
@@ -100,7 +103,7 @@ class ProfileButton extends StatelessWidget {
                               Spacer(),
                               AutoSizeText(
                                 profile?.careerStats?.checkoutPercentage
-                                    ?.toString() ??
+                                        ?.toString() ??
                                     '--',
                                 maxLines: 1,
                                 style: TextStyle(
@@ -149,7 +152,8 @@ class ProfileButton extends StatelessWidget {
                               ),
                               Spacer(),
                               AutoSizeText(
-                                profile?.careerStats?.defeats?.toString() ?? '--',
+                                profile?.careerStats?.defeats?.toString() ??
+                                    '--',
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 14,

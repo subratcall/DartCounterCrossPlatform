@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'friends_view_mobile_portrait.dart';
 
 class FriendsView extends StatefulWidget {
-
   @override
   _FriendsViewState createState() => _FriendsViewState();
 }

@@ -10,7 +10,8 @@ class InvitesButton extends StatelessWidget {
 
   final VoidCallback onPressed;
 
-  InvitesButton({this.newInvitesStream, this.onPressed}) : assert(newInvitesStream != null);
+  InvitesButton({this.newInvitesStream, this.onPressed})
+      : assert(newInvitesStream != null);
 
   @override
   Widget build(BuildContext context) {

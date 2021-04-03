@@ -36,39 +36,39 @@ extension Neumorphism on Widget {
 
 extension ErrorMessage on Widget {
   String getErrorMessage(BuildContext context, Error error) {
-    if(error is InvalidEmailAddressOrPasswordError) {
+    if (error is InvalidEmailAddressOrPasswordError) {
       return AppLocalizations.of(context).errorInvalidEmailAddressOrPassword;
-    } else if(error is InvalidEmailAddressError) {
+    } else if (error is InvalidEmailAddressError) {
       return AppLocalizations.of(context).errorInvalidEmailAddress;
-    } else if(error is EmptyEmailAddressError) {
+    } else if (error is EmptyEmailAddressError) {
       return AppLocalizations.of(context).errorEmptyEmailAddress;
-    } else if(error is InvalidUsernameError) {
+    } else if (error is InvalidUsernameError) {
       return AppLocalizations.of(context).errorInvalidUsername;
-    } else if(error is EmptyUsernameError) {
+    } else if (error is EmptyUsernameError) {
       return AppLocalizations.of(context).errorEmptyUsername;
-    } else if(error is UsernameToShortError) {
+    } else if (error is UsernameToShortError) {
       return AppLocalizations.of(context).errorUsernameToShort;
-    } else if(error is UsernameToLongError) {
+    } else if (error is UsernameToLongError) {
       return AppLocalizations.of(context).errorUsernameToLong;
-    } else if(error is InvalidPasswordError) {
+    } else if (error is InvalidPasswordError) {
       return AppLocalizations.of(context).errorInvalidPassword;
-    } else if(error is EmptyPasswordError) {
+    } else if (error is EmptyPasswordError) {
       return AppLocalizations.of(context).errorEmptyPassword;
-    } else if(error is EmptyPasswordAgainError) {
+    } else if (error is EmptyPasswordAgainError) {
       return AppLocalizations.of(context).errorEmptyPasswordAgain;
-    } else if(error is PasswordNotEqualPasswordAgainError) {
+    } else if (error is PasswordNotEqualPasswordAgainError) {
       return AppLocalizations.of(context).errorPasswordNotEqualPasswordAgain;
-    } else if(error is PasswordToShortError) {
+    } else if (error is PasswordToShortError) {
       return AppLocalizations.of(context).errorPasswordToShort;
-    } else if(error is PasswordToLongError) {
+    } else if (error is PasswordToLongError) {
       return AppLocalizations.of(context).errorPasswordToLong;
-    } else if(error is NetworkError) {
+    } else if (error is NetworkError) {
       return AppLocalizations.of(context).errorNetwork;
-    } else if(error is EmailAddressAlreadyInUseError) {
+    } else if (error is EmailAddressAlreadyInUseError) {
       return AppLocalizations.of(context).errorEmailAddressAlreadyInUse;
-    } else if(error is UsernameAlreadyInUseError) {
+    } else if (error is UsernameAlreadyInUseError) {
       return AppLocalizations.of(context).errorUsernameAlreadyInUse;
-    } else if(error is InvalidFormDataError) {
+    } else if (error is InvalidFormDataError) {
       return AppLocalizations.of(context).errorInvalidFormData;
     }
   }

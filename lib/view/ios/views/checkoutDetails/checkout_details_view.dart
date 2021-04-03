@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'checkout_details_view_mobile_portrait.dart';
 
 class CheckoutDetailsView extends StatefulWidget {
-
   @override
   _CheckoutDetailsViewState createState() => _CheckoutDetailsViewState();
 }
@@ -27,5 +26,3 @@ class _CheckoutDetailsViewState extends State<CheckoutDetailsView> {
     super.dispose();
   }
 }
-
-

@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SocialMediaButton extends StatelessWidget {
-
   final VoidCallback onPressed;
 
   SocialMediaButton({this.onPressed});
@@ -27,20 +26,19 @@ class SocialMediaButton extends StatelessWidget {
                   children: [
                     Icon(
                       AppIcons.facebook,
-                      size: height/4,
+                      size: height / 4,
                       color: AppColors.white,
                     ),
                     Icon(
                       AppIcons.instagram,
-                      size: height/4,
+                      size: height / 4,
                       color: AppColors.white,
                     ),
                     Icon(
                       AppIcons.youtube,
-                      size: height/4,
+                      size: height / 4,
                       color: AppColors.white,
                     ),
-
                   ],
                 )),
             Spacer(),

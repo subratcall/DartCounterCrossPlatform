@@ -1,9 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_counter/app_errors.dart';
-import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/assets/app_fonts.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/assets/app_paddings.dart';
+import 'package:dart_counter/view/ios/extensions/extensions.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/link_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_text_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
@@ -14,7 +10,6 @@ import 'package:dart_counter/viewmodel/sign_up_viewmodel.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:dart_counter/view/ios/extensions/extensions.dart';
 
 class SignUpViewMobilePortrait extends StatelessWidget {
   final SignUpViewModel model;
@@ -98,9 +93,8 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                             )
                                           : Expanded(
                                               flex: 15,
-                                              child: ErrorLabel(
-                                                  getErrorMessage(
-                                                      context, snapshot.data)),
+                                              child: ErrorLabel(getErrorMessage(
+                                                  context, snapshot.data)),
                                             ),
                                 ),
                                 Expanded(
@@ -125,9 +119,8 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                             )
                                           : Expanded(
                                               flex: 15,
-                                              child: ErrorLabel(
-                                                  getErrorMessage(
-                                                      context, snapshot.data)),
+                                              child: ErrorLabel(getErrorMessage(
+                                                  context, snapshot.data)),
                                             ),
                                 ),
                                 Expanded(
@@ -153,7 +146,8 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                             )
                                           : Expanded(
                                               flex: 15,
-                                              child: ErrorLabel(getErrorMessage(context, snapshot.data)),
+                                              child: ErrorLabel(getErrorMessage(
+                                                  context, snapshot.data)),
                                             ),
                                 ),
                                 Expanded(
@@ -173,14 +167,15 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                   initialData: null,
                                   stream: model.outputErrorPasswordAgain,
                                   builder: (context, snapshot) =>
-                                  snapshot.data == null
-                                      ? Spacer(
-                                    flex: 15,
-                                  )
-                                      : Expanded(
-                                    flex: 15,
-                                    child: ErrorLabel(getErrorMessage(context, snapshot.data)),
-                                  ),
+                                      snapshot.data == null
+                                          ? Spacer(
+                                              flex: 15,
+                                            )
+                                          : Expanded(
+                                              flex: 15,
+                                              child: ErrorLabel(getErrorMessage(
+                                                  context, snapshot.data)),
+                                            ),
                                 ),
                                 Spacer(
                                   flex: 10,
@@ -192,7 +187,8 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                       model
                                           .onRegisterPressed()
                                           .catchError((error) {
-                                        Toast.showToast(getErrorMessage(context, error));
+                                        Toast.showToast(
+                                            getErrorMessage(context, error));
                                       });
                                     },
                                   ),

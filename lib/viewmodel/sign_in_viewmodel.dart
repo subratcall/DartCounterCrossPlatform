@@ -8,7 +8,6 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class SignInViewModel extends ViewModel {
-
   /// INPUT
   Sink<String> get inputEmail;
   Sink<String> get inputPassword;
@@ -16,8 +15,8 @@ abstract class SignInViewModel extends ViewModel {
 }
 
 class SignInViewModelImpl extends SignInViewModel {
-
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
   BehaviorSubject<String> _passwordController = BehaviorSubject();
@@ -31,14 +30,17 @@ class SignInViewModelImpl extends SignInViewModel {
 
   @override
   Future<void> onSignInPressed() async {
-    if (!_emailController.hasValue || !_passwordController.hasValue ||!EmailValidator.validate(_emailController.value)) {
+    if (!_emailController.hasValue ||
+        !_passwordController.hasValue ||
+        !EmailValidator.validate(_emailController.value)) {
       throw InvalidEmailAddressOrPasswordError();
     }
 
     try {
       inputViewState.add(ViewState.loading);
-      await _authenticationService.signIn(email: _emailController.value, password: _passwordController.value);
-    } on Error catch(e) {
+      await _authenticationService.signIn(
+          email: _emailController.value, password: _passwordController.value);
+    } on Error catch (e) {
       inputViewState.add(ViewState.idle);
       throw e;
     }

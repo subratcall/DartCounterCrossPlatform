@@ -6,8 +6,7 @@ import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-abstract class GameHistoryViewModel extends ViewModel{
-
+abstract class GameHistoryViewModel extends ViewModel {
   /// IN
 
   /// OUT
@@ -17,7 +16,6 @@ abstract class GameHistoryViewModel extends ViewModel{
   /// METHODS
 
   void fetchGames();
-
 }
 
 class GameHistoryViewModelImpl extends GameHistoryViewModel {
@@ -25,8 +23,8 @@ class GameHistoryViewModelImpl extends GameHistoryViewModel {
 
   final DatabaseService _databaseService = locator<DatabaseService>();
 
-  final StreamController<List<Game>> _gamesController = StreamController.broadcast();
-
+  final StreamController<List<Game>> _gamesController =
+      StreamController.broadcast();
 
   @override
   Stream<List<Game>> get outputGames => _gamesController.stream;

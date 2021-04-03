@@ -1,9 +1,5 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-abstract class CheckoutDetailsViewModel extends ViewModel {
+abstract class CheckoutDetailsViewModel extends ViewModel {}
 
-}
-
-class CheckoutDetailsViewModelImpl extends CheckoutDetailsViewModel {
-
-}
+class CheckoutDetailsViewModelImpl extends CheckoutDetailsViewModel {}

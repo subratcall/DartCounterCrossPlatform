@@ -8,7 +8,6 @@ import 'package:dart_counter/services/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 abstract class HomeViewModel extends ViewModel {
-
   /// IN
 
   /// OUT
@@ -21,12 +20,12 @@ abstract class HomeViewModel extends ViewModel {
 
   /// METHODS
   void onSignOutPressed();
-
 }
 
 class HomeViewModelImpl extends HomeViewModel {
   final AppModel _appModel = locator<AppModel>();
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 
   /// IN
@@ -37,10 +36,12 @@ class HomeViewModelImpl extends HomeViewModel {
   Stream<Profile> get outputProfile => _databaseService.profile(_appModel.uid);
 
   @override
-  Stream<int> get outputNewInvites => Stream<int>.periodic(Duration(seconds: 10), (index) => index);
+  Stream<int> get outputNewInvites =>
+      Stream<int>.periodic(Duration(seconds: 10), (index) => index);
 
   @override
-  Stream<int> get outputNewFriendRequests => Stream<int>.periodic(Duration(seconds: 10), (index) => index);
+  Stream<int> get outputNewFriendRequests =>
+      Stream<int>.periodic(Duration(seconds: 10), (index) => index);
 
   /// METHODS
   @override
@@ -49,8 +50,5 @@ class HomeViewModelImpl extends HomeViewModel {
   }
 
   @override
-  void dispose() {
-
-  }
-
+  void dispose() {}
 }

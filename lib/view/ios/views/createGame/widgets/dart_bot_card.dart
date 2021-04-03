@@ -5,12 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DartBotCard extends StatefulWidget {
-
   final Sink<bool> outputDartBotActive;
   final Sink<int> outputDartBotAverage;
   final Stream<bool> inputDartBotActive;
 
-  DartBotCard({this.outputDartBotActive, this.outputDartBotAverage, this.inputDartBotActive});
+  DartBotCard(
+      {this.outputDartBotActive,
+      this.outputDartBotAverage,
+      this.inputDartBotActive});
 
   @override
   _DartBotCardState createState() => _DartBotCardState();
@@ -76,7 +78,9 @@ class _DartBotCardState extends State<DartBotCard> {
                                     ? AppColors.yellow
                                     : AppColors.red,
                             value: sliderValue,
-                            onChangeEnd: (newValue) => widget.outputDartBotAverage.add(newValue.round()), //widget.onAverageChanged(newValue.round()),
+                            onChangeEnd: (newValue) =>
+                                widget.outputDartBotAverage.add(newValue
+                                    .round()), //widget.onAverageChanged(newValue.round()),
                             onChanged: (newValue) {
                               setState(() {
                                 sliderValue = newValue;

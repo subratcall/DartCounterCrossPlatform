@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'about_us_mobile_portrait.dart';
 
 class AboutUsView extends StatefulWidget {
-
   @override
   _AboutUsViewState createState() => _AboutUsViewState();
 }

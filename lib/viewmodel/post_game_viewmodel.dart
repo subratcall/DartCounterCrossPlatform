@@ -1,9 +1,5 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-abstract class PostGameViewModel extends ViewModel {
+abstract class PostGameViewModel extends ViewModel {}
 
-}
-
-class PostGameViewModelImpl extends PostGameViewModel {
-
-}
+class PostGameViewModelImpl extends PostGameViewModel {}

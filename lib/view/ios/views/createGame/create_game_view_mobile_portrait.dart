@@ -18,93 +18,90 @@ class CreateGameViewMobilePortrait extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints boxConstraints) {
-          final double width = boxConstraints.maxWidth;
-          final double height = boxConstraints.maxHeight;
-          return StreamBuilder<Game>(
-              stream: model.outputSnapshots,
-              builder: (context, snapshot) {
-                return SingleChildScrollView(
-                  child: SizedBox(
-                    width: width,
-                    height: height,
-                    child: Row(
-                      children: [
-                        Spacer(
-                          flex: 8,
-                        ),
-                        Expanded(
-                          flex: 359,
-                          child: Column(
-                            children: [
-                              Spacer(
-                                flex: 8,
-                              ),
-                              Expanded(
-                                flex: 115, // TODO sonst 41
-                                child: DartBotCard(
-                                  outputDartBotActive: model.inputDartBotActive,
-                                  inputDartBotActive: model.outputDartBotActive,
-                                ),
-                              ),
-                              Spacer(
-                                flex: 8,
-                              ),
-                              Expanded(
-                                flex: 94, // TODO +50 pro player
-                                child: PlayerCard(
-                                  model.currentSnapshot.players,
-                                  onAddPlayerPressed: model.onAddPlayerPressed,
-                                  onRemovePlayer: model.onRemovePlayer,
-                                  onNameChanged: model.onNameChanged,
-                                  onReordered: model.onReorderPlayer,
-                                ),
-                              ),
-                              Spacer(
-                                flex: 8,
-                              ),
-                              Expanded(
-                                flex: 281,
-                                child: GameSettingsCard(
-                                  onStartingPointsChanged: (startingPoints) =>
-                                      model.onStartingPointsChanged(
-                                          startingPoints),
-                                  onModeChanged: (mode) =>
-                                      model.onModeChanged(mode),
-                                  onSizeChanged: (size) =>
-                                      model.onSizeChanged(size),
-                                  onTypeChanged: (type) =>
-                                      model.onTypeChanged(type),
-                                ),
-                              ),
-                              Spacer(
-                                flex: 18,
-                              ),
-                              Expanded(
-                                flex: 75,
-                                child: ActionButton(
-                                  text: AppLocalizations.of(context).startGame,
-                                  onPressed: () {
-                                    model.onStartGamePressed();
-                                    Navigator.pushNamed(
-                                        context, AppRoutes.inGame);
-                                  },
-                                ),
-                              ),
-                              Spacer(
-                                flex: 18,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Spacer(
-                          flex: 8,
-                        ),
-                      ],
+      final double width = boxConstraints.maxWidth;
+      final double height = boxConstraints.maxHeight;
+      return StreamBuilder<Game>(
+          stream: model.outputSnapshots,
+          builder: (context, snapshot) {
+            return SingleChildScrollView(
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Row(
+                  children: [
+                    Spacer(
+                      flex: 8,
                     ),
-                  ),
-                );
-              }
-          );
-        });
+                    Expanded(
+                      flex: 359,
+                      child: Column(
+                        children: [
+                          Spacer(
+                            flex: 8,
+                          ),
+                          Expanded(
+                            flex: 115, // TODO sonst 41
+                            child: DartBotCard(
+                              outputDartBotActive: model.inputDartBotActive,
+                              inputDartBotActive: model.outputDartBotActive,
+                            ),
+                          ),
+                          Spacer(
+                            flex: 8,
+                          ),
+                          Expanded(
+                            flex: 94, // TODO +50 pro player
+                            child: PlayerCard(
+                              model.currentSnapshot.players,
+                              onAddPlayerPressed: model.onAddPlayerPressed,
+                              onRemovePlayer: model.onRemovePlayer,
+                              onNameChanged: model.onNameChanged,
+                              onReordered: model.onReorderPlayer,
+                            ),
+                          ),
+                          Spacer(
+                            flex: 8,
+                          ),
+                          Expanded(
+                            flex: 281,
+                            child: GameSettingsCard(
+                              onStartingPointsChanged: (startingPoints) =>
+                                  model.onStartingPointsChanged(startingPoints),
+                              onModeChanged: (mode) =>
+                                  model.onModeChanged(mode),
+                              onSizeChanged: (size) =>
+                                  model.onSizeChanged(size),
+                              onTypeChanged: (type) =>
+                                  model.onTypeChanged(type),
+                            ),
+                          ),
+                          Spacer(
+                            flex: 18,
+                          ),
+                          Expanded(
+                            flex: 75,
+                            child: ActionButton(
+                              text: AppLocalizations.of(context).startGame,
+                              onPressed: () {
+                                model.onStartGamePressed();
+                                Navigator.pushNamed(context, AppRoutes.inGame);
+                              },
+                            ),
+                          ),
+                          Spacer(
+                            flex: 18,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Spacer(
+                      flex: 8,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          });
+    });
   }
 }

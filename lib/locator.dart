@@ -16,5 +16,4 @@ void setupLocator() {
       () => AuthenticationService());
   locator.registerLazySingleton<DatabaseService>(() => DatabaseService());
   locator.registerLazySingleton<PlayingService>(() => PlayingService());
-
 }

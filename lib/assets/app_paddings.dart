@@ -6,5 +6,4 @@ class AppPaddings {
   static const medium = 8.0;
   static const big = 16.0;
   static const large = 32.0;
-
 }

@@ -11,7 +11,8 @@ class AuthenticationService {
     });
   }
 
-  Stream<User> get authStateChanged => _firebaseAuth.authStateChanges().map((firebaseUser) => firebaseUser != null ? User(firebaseUser.uid) : null);
+  Stream<User> get authStateChanged => _firebaseAuth.authStateChanges().map(
+      (firebaseUser) => firebaseUser != null ? User(firebaseUser.uid) : null);
 
   User user;
 
@@ -44,8 +45,7 @@ class AuthenticationService {
     }
   }
 
-  Future<void> signUp(
-      {String email, String password}) async {
+  Future<void> signUp({String email, String password}) async {
     try {
       // Try to create user
       await _firebaseAuth.createUserWithEmailAndPassword(

@@ -10,7 +10,8 @@ class FriendsButton extends StatelessWidget {
 
   final VoidCallback onPressed;
 
-  FriendsButton({this.newFriendRequestStream, this.onPressed}) : assert(newFriendRequestStream != null);
+  FriendsButton({this.newFriendRequestStream, this.onPressed})
+      : assert(newFriendRequestStream != null);
 
   @override
   Widget build(BuildContext context) {

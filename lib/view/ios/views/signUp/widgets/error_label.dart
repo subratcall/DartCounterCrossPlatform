@@ -5,7 +5,6 @@ import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
 
 class ErrorLabel extends StatelessWidget {
-
   final String errorMessage;
 
   ErrorLabel(this.errorMessage);
@@ -21,8 +20,7 @@ class ErrorLabel extends StatelessWidget {
           maxLines: 1,
           maxFontSize: AppFonts.mini,
           minFontSize: 1,
-          style:
-          TextStyle(color: AppColors.red),
+          style: TextStyle(color: AppColors.red),
         ),
       ),
     );

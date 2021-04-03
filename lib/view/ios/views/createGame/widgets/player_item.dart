@@ -86,7 +86,8 @@ class PlayerItem extends StatelessWidget {
                             expand: false,
                             context: context,
                             backgroundColor: AppColors.transparent,
-                            builder: (context) => AdvancedSettingsModalBottomSheet(),
+                            builder: (context) =>
+                                AdvancedSettingsModalBottomSheet(),
                           ),
                         ),
                       ),

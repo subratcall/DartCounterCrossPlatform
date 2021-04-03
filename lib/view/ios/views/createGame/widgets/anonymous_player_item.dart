@@ -84,11 +84,12 @@ class AnonymousPlayerItem extends StatelessWidget {
                         ),
                         onPressed: () =>
                             CupertinoScaffold.showCupertinoModalBottomSheet(
-                              expand: false,
-                              context: context,
-                              backgroundColor: AppColors.transparent,
-                              builder: (context) => AdvancedSettingsModalBottomSheet(),
-                            ),
+                          expand: false,
+                          context: context,
+                          backgroundColor: AppColors.transparent,
+                          builder: (context) =>
+                              AdvancedSettingsModalBottomSheet(),
+                        ),
                       ),
                     ),
                   ),
@@ -114,5 +115,3 @@ class AnonymousPlayerItem extends StatelessWidget {
     //return Placeholder();
   }
 }
-
-

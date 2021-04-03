@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'sign_up_view_mobile_portrait.dart';
 
-
 class SignUpView extends StatefulWidget {
   final PageController pageController;
 
@@ -30,5 +29,3 @@ class _SignUpViewState extends State<SignUpView> {
     super.dispose();
   }
 }
-
-

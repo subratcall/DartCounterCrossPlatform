@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayOfflineButton extends StatelessWidget {
-
   final VoidCallback onPressed;
 
   PlayOfflineButton({this.onPressed});

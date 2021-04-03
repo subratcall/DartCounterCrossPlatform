@@ -21,11 +21,13 @@ abstract class ProfileViewModel extends ViewModel {
 }
 
 class ProfileViewModelImpl extends ProfileViewModel {
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 
   @override
-  Stream<Profile> get outputProfile => _databaseService.profile(_authenticationService.user.uid);
+  Stream<Profile> get outputProfile =>
+      _databaseService.profile(_authenticationService.user.uid);
 
   void onDeletePhotoPressed() {
     _databaseService.removePhoto(_authenticationService.user.uid);
@@ -35,7 +37,8 @@ class ProfileViewModelImpl extends ProfileViewModel {
     var pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
     // TODO update database
     if (pickedImage != null) {
-      _databaseService.updatePhoto(_authenticationService.user.uid, File(pickedImage.path));
+      _databaseService.updatePhoto(
+          _authenticationService.user.uid, File(pickedImage.path));
     }
   }
 
@@ -43,7 +46,8 @@ class ProfileViewModelImpl extends ProfileViewModel {
     var pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
     // TODO update database
     if (pickedImage != null) {
-      _databaseService.updatePhoto(_authenticationService.user.uid, File(pickedImage.path));
+      _databaseService.updatePhoto(
+          _authenticationService.user.uid, File(pickedImage.path));
     }
   }
 

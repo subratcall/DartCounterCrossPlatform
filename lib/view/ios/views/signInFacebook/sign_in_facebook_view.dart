@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'sign_in_facebook_view_mobile_portrait.dart';
 
 class SignInFacebookView extends StatefulWidget {
-
   @override
   _SignInFacebookViewState createState() => _SignInFacebookViewState();
 }

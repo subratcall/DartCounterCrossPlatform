@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'settings_view_mobile_portrait.dart';
 
 class SettingsView extends StatefulWidget {
-
   @override
   _SettingsViewState createState() => _SettingsViewState();
 }

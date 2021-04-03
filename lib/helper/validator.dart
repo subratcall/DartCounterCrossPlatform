@@ -7,8 +7,9 @@ class EmailValidator {
   }
 
   static Error validateError(String email) {
-    if(email == null) return EmptyEmailAddressError();
-    if(!x.EmailValidator.validate(email.trim())) return InvalidEmailAddressError();
+    if (email == null) return EmptyEmailAddressError();
+    if (!x.EmailValidator.validate(email.trim()))
+      return InvalidEmailAddressError();
     return null;
   }
 }
@@ -32,10 +33,11 @@ class UsernameValidator {
   }
 
   static Error validateError(String username) {
-    if(username == null) return EmptyUsernameError();
-    if(username.length < 3) return UsernameToShortError();
-    if(username.length > 15) return UsernameToLongError();
-    if(false) return InvalidUsernameError(); // TODO invalid characters used only [A-z][0-9] allowed
+    if (username == null) return EmptyUsernameError();
+    if (username.length < 3) return UsernameToShortError();
+    if (username.length > 15) return UsernameToLongError();
+    if (false)
+      return InvalidUsernameError(); // TODO invalid characters used only [A-z][0-9] allowed
     return null;
   }
 }

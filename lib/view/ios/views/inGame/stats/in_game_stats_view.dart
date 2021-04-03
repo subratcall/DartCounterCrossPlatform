@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'in_game_stats_view_mobile_portrait.dart';
 
 class InGameStatsView extends StatelessWidget {
-
   final InGameStatsViewModel model = InGameStatsViewModelImpl();
 
   @override
@@ -15,4 +14,3 @@ class InGameStatsView extends StatelessWidget {
     );
   }
 }
-

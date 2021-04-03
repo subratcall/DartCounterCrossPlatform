@@ -60,7 +60,7 @@ class ResetPasswordViewMobilePortraitSuccess extends StatelessWidget {
                       AppLocalizations.of(context).emailSent,
                       maxLines: 1,
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
                     ),
                     flex: 21,
                   ),
@@ -69,7 +69,8 @@ class ResetPasswordViewMobilePortraitSuccess extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      AppLocalizations.of(context).checkMailAccountForPasswordResetLink,
+                      AppLocalizations.of(context)
+                          .checkMailAccountForPasswordResetLink,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14),
                       maxLines: 2,

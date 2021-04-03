@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'sign_in_instagram_view_mobile_portrait.dart';
 
 class SignInInstagramView extends StatefulWidget {
-
   @override
   _SignInInstagramViewState createState() => _SignInInstagramViewState();
 }

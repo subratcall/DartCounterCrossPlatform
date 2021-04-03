@@ -17,16 +17,15 @@ class LoadingViewMobilePortrait extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints boxConstraints) {
-          final double width = boxConstraints.maxWidth;
-          final double height = boxConstraints.maxHeight;
-          return Center(
-            child: Container(
-              width: 100,
-              height: 100,
-              child: Lottie.asset(AppAnimations.loading),
-            ),
-          );
-        }
-    );
+      final double width = boxConstraints.maxWidth;
+      final double height = boxConstraints.maxHeight;
+      return Center(
+        child: Container(
+          width: 100,
+          height: 100,
+          child: Lottie.asset(AppAnimations.loading),
+        ),
+      );
+    });
   }
 }

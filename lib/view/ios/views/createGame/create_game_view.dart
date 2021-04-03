@@ -29,5 +29,3 @@ class _CreateGameViewState extends State<CreateGameView> {
     super.dispose();
   }
 }
-
-

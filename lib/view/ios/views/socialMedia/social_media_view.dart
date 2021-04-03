@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'social_media_view_mobile_portrait.dart';
 
 class SocialMediaView extends StatefulWidget {
-
   @override
   _SocialMediaViewState createState() => _SocialMediaViewState();
 }

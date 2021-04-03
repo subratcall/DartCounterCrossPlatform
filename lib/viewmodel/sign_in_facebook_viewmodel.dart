@@ -1,9 +1,5 @@
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
-abstract class SignInFacebookViewModel extends ViewModel {
+abstract class SignInFacebookViewModel extends ViewModel {}
 
-}
-
-class SignInFacebookViewModelImpl extends SignInFacebookViewModel {
-
-}
+class SignInFacebookViewModelImpl extends SignInFacebookViewModel {}

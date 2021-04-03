@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'sign_in_google_view_mobile_portrait.dart';
 
 class SignInGoogleView extends StatefulWidget {
-
   @override
   _SignInGoogleViewState createState() => _SignInGoogleViewState();
 }

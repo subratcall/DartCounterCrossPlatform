@@ -8,18 +8,17 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class ResetPasswordViewModel extends ViewModel {
-
   /// INPUT
   Sink<String> get inputEmail;
   Future<void> onConfirmPressed();
 
   /// OUTPUT
   Stream<Error> get outputErrorEmail;
-
 }
 
 class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
 
@@ -29,7 +28,8 @@ class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
 
   @override
   Future<void> onConfirmPressed() async {
-    if (!_emailController.hasValue || !EmailValidator.validate(_emailController.value)) {
+    if (!_emailController.hasValue ||
+        !EmailValidator.validate(_emailController.value)) {
       throw InvalidEmailAddressError();
     }
 
@@ -47,7 +47,7 @@ class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
   @override
   ValueStream<Error> get outputErrorEmail =>
       ValueConnectableStream(_emailController.stream.map((email) =>
-      email == '' ? null : EmailValidator.validateError(email)))
+              email == '' ? null : EmailValidator.validateError(email)))
           .autoConnect();
 
   @override
