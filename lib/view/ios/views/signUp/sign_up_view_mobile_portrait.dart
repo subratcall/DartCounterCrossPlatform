@@ -71,8 +71,7 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                 Expanded(
                                   child: TextField(
                                     outputText: model.inputEmail,
-                                    inputIsValid: model.outputErrorEmail
-                                        .map((error) => error == null),
+                                    inputIsValid: model.outputErrorEmail.map((error) => error == null),
                                     placeholder:
                                     AppLocalizations.of(context).email,
                                     keyboardType: TextInputType.emailAddress,
@@ -102,7 +101,7 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                 Expanded(
                                   child: TextField(
                                     outputText: model.inputPassword,
-                                    inputIsValid: model.outputErrorPassword
+                                    inputIsValid: model.outputErrorPasswords
                                         .map((error) => error == null),
                                     placeholder:
                                     AppLocalizations.of(context).password,
@@ -118,7 +117,7 @@ class SignUpViewMobilePortrait extends StatelessWidget {
                                 Expanded(
                                   child: TextField(
                                     outputText: model.inputPasswordAgain,
-                                    inputIsValid: model.outputErrorPasswordAgain
+                                    inputIsValid: model.outputErrorPasswords
                                         .map((error) => error == null),
                                     placeholder: AppLocalizations.of(context)
                                         .passwordAgain,

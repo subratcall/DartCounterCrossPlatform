@@ -31,7 +31,7 @@ class SignInViewModelImpl extends SignInViewModel {
 
   @override
   Future<void> onSignInPressed() async {
-    if (!_emailController.hasValue || !_passwordController.hasValue ||!EmailValidator.validate(_emailController.value) || !PasswordValidator.validate(_passwordController.value)) {
+    if (!_emailController.hasValue || !_passwordController.hasValue ||!EmailValidator.validate(_emailController.value)) {
       throw InvalidEmailAddressOrPasswordError();
     }
 
