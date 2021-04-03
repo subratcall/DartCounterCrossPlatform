@@ -77,5 +77,15 @@
 
   "name" : "Name",
 
-  "player" : "Spieler"
+  "player" : "Spieler",
+
+  "errorEmptyEmailAddress" : "E-Mail-Adresse leer",
+  "errorEmptyUsername" : "Benutzername leer",
+  "errorUsernameToShort" : "Benutzername zu kurz (min. 3 Zeichen)",
+  "errorUsernameToLong" : "Benutzername zu lang (max. 15 Zeichen)",
+  "errorEmptyPassword" : "Passwort leer",
+  "errorEmptyPasswordAgain" : "Passwort wiederholen leer",
+  "errorPasswordToShort" : "Passwort zu kurz (min. 6 Zeichen)",
+  "errorPasswordToLong" : "Passwort zu lang",
+  "errorInvalidFormData" : "Ungültige Felder"
 }

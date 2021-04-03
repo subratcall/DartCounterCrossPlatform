@@ -5,8 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'sign_in_facebook_view_mobile_portrait.dart';
 
-class SignInFacebookView extends StatelessWidget {
+class SignInFacebookView extends StatefulWidget {
 
+  @override
+  _SignInFacebookViewState createState() => _SignInFacebookViewState();
+}
+
+class _SignInFacebookViewState extends State<SignInFacebookView> {
   final SignInFacebookViewModel model = SignInFacebookViewModelImpl();
 
   @override
@@ -24,5 +29,11 @@ class SignInFacebookView extends StatelessWidget {
       ),
       mobilePortrait: SignInFacebookViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

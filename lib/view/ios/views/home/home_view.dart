@@ -5,8 +5,13 @@ import 'package:dart_counter/viewmodel/home_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
 
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   final HomeViewModel model = HomeViewModelImpl();
 
   @override
@@ -26,5 +31,11 @@ class HomeView extends StatelessWidget {
       ),
       mobilePortrait: HomeViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

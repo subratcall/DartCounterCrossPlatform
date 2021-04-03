@@ -14,25 +14,14 @@ class EmailValidator {
 }
 
 class PasswordValidator {
-  static bool validate(String password, String passwordAgain) {
-    return validateError(password, passwordAgain) == null;
+  static bool validate(String password) {
+    return validateError(password) == null;
   }
 
-  static Error validateError(String password, String passwordAgain) {
-    if (password == null) return EmptyPasswordError();
-    if (passwordAgain == null) return EmptyPasswordAgainError();
-
-    var trimmedPassword = password.trim();
-    if (trimmedPassword != passwordAgain.trim()) return PasswordNotEqualPasswordAgainError();
-
-    return _validate(trimmedPassword);
-  }
-
-  static Error _validate(String password) {
-    // Check >= 6 letters
+  static Error validateError(String password) {
     // TODO only allow more complex passwords, only allow certain characters
     if (password.length < 6) return PasswordToShortError();
-    if (password.length < 32) return PasswordToLongError();
+    if (password.length > 32) return PasswordToLongError();
     return null;
   }
 }
@@ -45,7 +34,7 @@ class UsernameValidator {
   static Error validateError(String username) {
     if(username == null) return EmptyUsernameError();
     if(username.length < 3) return UsernameToShortError();
-    if(username.length < 12) return UsernameToLongError();
+    if(username.length > 15) return UsernameToLongError();
     if(false) return InvalidUsernameError(); // TODO invalid characters used only [A-z][0-9] allowed
     return null;
   }

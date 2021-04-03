@@ -8,13 +8,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'mobilePortrait/reset_password_view_mobile_portrait_idle.dart';
 import 'mobilePortrait/reset_password_view_mobile_portrait_success.dart';
 
-class ResetPasswordView extends StatelessWidget {
+class ResetPasswordView extends StatefulWidget {
+  @override
+  _ResetPasswordViewState createState() => _ResetPasswordViewState();
+}
+
+class _ResetPasswordViewState extends State<ResetPasswordView> {
   final ResetPasswordViewModel model = ResetPasswordViewModelImpl();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<ViewState>(
         initialData: ViewState.idle,
+        stream: model.outputViewState,
         builder: (context, snapshot) => snapshot.data == ViewState.idle
             ? View(
                 navigationBar: CupertinoNavigationBar(
@@ -34,5 +40,11 @@ class ResetPasswordView extends StatelessWidget {
                     mobilePortrait: ResetPasswordViewMobilePortraitSuccess(),
                   )
                 : LoadingView());
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

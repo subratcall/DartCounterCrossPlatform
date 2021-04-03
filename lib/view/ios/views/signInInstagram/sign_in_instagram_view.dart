@@ -5,8 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'sign_in_instagram_view_mobile_portrait.dart';
 
-class SignInInstagramView extends StatelessWidget {
+class SignInInstagramView extends StatefulWidget {
 
+  @override
+  _SignInInstagramViewState createState() => _SignInInstagramViewState();
+}
+
+class _SignInInstagramViewState extends State<SignInInstagramView> {
   final SignInInstagramViewModel model = SignInInstagramViewModelImpl();
 
   @override
@@ -24,5 +29,11 @@ class SignInInstagramView extends StatelessWidget {
       ),
       mobilePortrait: SignInInstagramViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

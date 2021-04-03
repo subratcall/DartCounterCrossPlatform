@@ -31,3 +31,7 @@ extension Neumorphism on Widget {
     );
   }
 }
+
+extension ErrorMessage on Widget {
+  // TODO
+}

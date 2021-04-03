@@ -5,8 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'sign_in_google_view_mobile_portrait.dart';
 
-class SignInGoogleView extends StatelessWidget {
+class SignInGoogleView extends StatefulWidget {
 
+  @override
+  _SignInGoogleViewState createState() => _SignInGoogleViewState();
+}
+
+class _SignInGoogleViewState extends State<SignInGoogleView> {
   final SignInGoogleViewModel model = SignInGoogleViewModelImpl();
 
   @override
@@ -24,5 +29,11 @@ class SignInGoogleView extends StatelessWidget {
       ),
       mobilePortrait: SignInGoogleViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

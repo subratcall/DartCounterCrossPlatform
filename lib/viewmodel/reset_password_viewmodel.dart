@@ -14,7 +14,7 @@ abstract class ResetPasswordViewModel extends ViewModel {
   Future<void> onConfirmPressed();
 
   /// OUTPUT
-  Stream<bool> get outputIsConfirmButtonEnabled;
+  Stream<Error> get outputErrorEmail;
 
 }
 
@@ -22,10 +22,6 @@ class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
   final AuthenticationService _authenticationService = locator<AuthenticationService>();
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
-
-  ResetPasswordViewModelImpl() {
-    inputViewState.add(ViewState.idle);
-  }
 
   /// INPUT
   @override
@@ -49,7 +45,10 @@ class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
 
   /// OUTPUT
   @override
-  Stream<bool> get outputIsConfirmButtonEnabled => _emailController.stream.map((email) => EmailValidator.validate(email));
+  ValueStream<Error> get outputErrorEmail =>
+      ValueConnectableStream(_emailController.stream.map((email) =>
+      email == '' ? null : EmailValidator.validateError(email)))
+          .autoConnect();
 
   @override
   void dispose() {

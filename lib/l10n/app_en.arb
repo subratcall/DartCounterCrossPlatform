@@ -29,6 +29,30 @@
   "@errorInvalidEmailAddressOrPassword": {
     "description": "phrase"
   },
+  "@errorEmptyEmailAddress": {
+    "description": "phrase"
+  },
+  "@errorEmptyUsername": {
+    "description": "phrase"
+  },
+  "@errorUsernameToShort": {
+    "description": "phrase"
+  },
+  "@errorUsernameToLong": {
+    "description": "phrase"
+  },
+  "@errorEmptyPassword": {
+    "description": "phrase"
+  },
+  "@errorEmptyPasswordAgain": {
+    "description": "phrase"
+  },
+  "@errorPasswordToShort": {
+    "description": "phrase"
+  },
+  "@errorPasswordToLong": {
+    "description": "phrase"
+  },
   "@errorInvalidPassword": {
     "description": "phrase"
   },
@@ -122,7 +146,6 @@
   "@showGameHistory": {
     "description": "phrase"
   },
-
   "@firstNine": {
     "description": "word"
   },
@@ -135,25 +158,21 @@
   "@noGamesFound": {
     "description": "phrase"
   },
-
   "@startGame": {
     "description": "word"
   },
-
-   "@deletePhoto": {
-     "description": "word"
-   },
+  "@deletePhoto": {
+    "description": "word"
+  },
   "@takePhoto": {
     "description": "word"
   },
   "@choosePhoto": {
     "description": "word"
   },
-
   "@dartsThrown": {
     "description": "word"
   },
-
   "@dartbot": {
     "description": "word"
   },
@@ -214,7 +233,9 @@
   "@player": {
     "description": "word"
   },
-
+  "@errorInvalidFormData": {
+    "description": "phrase"
+  },
   "aboutUs": "About Us",
   "cancel": "Cancel",
   "checkMailAccountForPasswordResetLink": "Check your email account to reset your password.",
@@ -246,7 +267,6 @@
   "socialMedia": "Social Media",
   "stats": "Stats",
   "username": "Username",
-
   "average": "Average",
   "checkoutPercentage": "Checkout%",
   "wins": "Wins",
@@ -257,41 +277,42 @@
   "invites": "Invitations",
   "careerStats": "Career Stats",
   "showGameHistory": "Show History",
-
   "firstNine": "First 9",
   "games": "Games",
   "errorLoadingProfile": "Error loading profile",
   "noGamesFound": "No games found",
-
   "startGame": "Start Game",
-
   "deletePhoto": "Delete Photo",
   "takePhoto": "Take Photo",
   "choosePhoto": "Choose Photo",
-
   "dartsThrown": "Darts thrown",
-
   "dartbot": "Dartbot",
-  "dartbotAverage" : "Dartbot average",
-  "players" : "Players",
-  "addPlayer" : "Add Player",
-  "modus" : "Modus",
-  "startingPoints" : "Points",
-  "gameMode" : "Gamemode",
-  "showAverage" : "Show Average",
-  "showCheckoutPercentage" : "Show CheckoutPercentage",
-  "removePlayer" : "Remove Player",
-  "done" : "Done",
-
-  "category" : "Category",
-  "sets" : "Sets",
-  "legs" : "Legs",
+  "dartbotAverage": "Dartbot average",
+  "players": "Players",
+  "addPlayer": "Add Player",
+  "modus": "Modus",
+  "startingPoints": "Points",
+  "gameMode": "Gamemode",
+  "showAverage": "Show Average",
+  "showCheckoutPercentage": "Show CheckoutPercentage",
+  "removePlayer": "Remove Player",
+  "done": "Done",
+  "category": "Category",
+  "sets": "Sets",
+  "legs": "Legs",
   "bestLeg": "Best leg",
   "worstLeg": "Worst leg",
-  "dartsPerLeg" : "Darts/leg",
-  "highestFinish" : "Highest Finish",
-
-  "name" : "Name",
-
-  "player" : "Player"
+  "dartsPerLeg": "Darts/leg",
+  "highestFinish": "Highest Finish",
+  "name": "Name",
+  "player": "Player",
+  "errorEmptyEmailAddress": "Email address can't be empty",
+  "errorEmptyUsername": "Username can't be empty",
+  "errorUsernameToShort": "Username must be at least 3 characters long",
+  "errorUsernameToLong": "Username to long (max. 15 characters)",
+  "errorEmptyPassword": "Password can't be empty",
+  "errorEmptyPasswordAgain": "Password again can't be empty",
+  "errorPasswordToShort": "Password must be at least 6 characters long",
+  "errorPasswordToLong": "Password to long",
+  "errorInvalidFormData" : "Invalid fields"
 }

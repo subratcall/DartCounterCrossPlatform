@@ -5,8 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'settings_view_mobile_portrait.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends StatefulWidget {
 
+  @override
+  _SettingsViewState createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView> {
   final SettingsViewModel model = SettingsViewModelImpl();
 
   @override
@@ -17,5 +22,11 @@ class SettingsView extends StatelessWidget {
       ),
       mobilePortrait: SettingsViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

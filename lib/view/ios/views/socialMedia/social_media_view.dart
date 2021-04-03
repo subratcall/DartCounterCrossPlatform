@@ -5,8 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'social_media_view_mobile_portrait.dart';
 
-class SocialMediaView extends StatelessWidget {
+class SocialMediaView extends StatefulWidget {
 
+  @override
+  _SocialMediaViewState createState() => _SocialMediaViewState();
+}
+
+class _SocialMediaViewState extends State<SocialMediaView> {
   final SocialMediaViewModel model = SocialMediaViewModelImpl();
 
   @override
@@ -17,5 +22,11 @@ class SocialMediaView extends StatelessWidget {
       ),
       mobilePortrait: SocialMediaViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

@@ -22,3 +22,5 @@ class NetworkError extends Error {}
 class EmailAddressAlreadyInUseError extends Error {}
 
 class UsernameAlreadyInUseError extends Error {}
+
+class InvalidFormDataError extends Error {}

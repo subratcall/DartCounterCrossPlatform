@@ -5,7 +5,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'create_game_view_mobile_portrait.dart';
 
-class CreateGameView extends StatelessWidget {
+class CreateGameView extends StatefulWidget {
+  @override
+  _CreateGameViewState createState() => _CreateGameViewState();
+}
+
+class _CreateGameViewState extends State<CreateGameView> {
   final CreateGameViewModel model = CreateGameViewModelImpl();
 
   @override
@@ -16,6 +21,12 @@ class CreateGameView extends StatelessWidget {
       ),
       mobilePortrait: CreateGameViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }
 

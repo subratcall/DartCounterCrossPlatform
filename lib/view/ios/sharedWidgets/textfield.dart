@@ -1,6 +1,7 @@
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_paddings.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TextField extends StatelessWidget {
   final Sink<String> outputText;
@@ -49,60 +50,48 @@ class TextField extends StatelessWidget {
         : StreamBuilder<bool>(
             initialData: true,
             stream: inputIsValid,
-            builder: (context, snapshot) => snapshot.data
-                ? CupertinoTextField(
-                    autofocus: autofocus,
-                    autocorrect: autocorrect,
-                    placeholder: placeholder,
-                    obscureText: obscureText,
-                    keyboardType: keyboardType,
-                    textInputAction: textInputAction,
-                    onEditingComplete: onEditingComplete,
-                    onChanged: outputText.add,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(AppPaddings.medium),
-                      ),
+            builder: (context, snapshot) => Stack(
+              fit: StackFit.expand,
+              children: [
+                CupertinoTextField(
+                  autofocus: autofocus,
+                  autocorrect: autocorrect,
+                  placeholder: placeholder,
+                  obscureText: obscureText,
+                  keyboardType: keyboardType,
+                  textInputAction: textInputAction,
+                  onEditingComplete: onEditingComplete,
+                  onChanged: outputText.add,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppPaddings.medium),
                     ),
-                  )
-                : Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      CupertinoTextField(
-                        autofocus: autofocus,
-                        autocorrect: autocorrect,
-                        placeholder: placeholder,
-                        obscureText: obscureText,
-                        keyboardType: keyboardType,
-                        textInputAction: textInputAction,
-                        onEditingComplete: onEditingComplete,
-                        onChanged: outputText.add,
-                        decoration: BoxDecoration(
-                          color: AppColors.gray,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(AppPaddings.medium),
-                          ),
-                          border: Border.all(
+                    border: snapshot.data
+                        ? null
+                        : Border.all(
                             color: AppColors.red,
                             width: 1,
                           ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              0, 0, AppPaddings.medium, 0),
-                          child: Icon(
-                            CupertinoIcons.xmark_circle,
-                            color: AppColors.red,
-                            size: 25,
-                          ),
-                        ),
-                      )
-                    ],
                   ),
+                ),
+                Visibility(
+                  visible: !snapshot.data,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                          0, 0, AppPaddings.medium, 0),
+                      child: Icon(
+                        CupertinoIcons.xmark_circle,
+                        color: AppColors.red,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           );
   }
 }

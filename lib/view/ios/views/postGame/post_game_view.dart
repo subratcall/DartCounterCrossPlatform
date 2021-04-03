@@ -4,8 +4,13 @@ import 'package:flutter/cupertino.dart';
 
 import 'post_game_view_mobile_portrait.dart';
 
-class PostGameView extends StatelessWidget {
+class PostGameView extends StatefulWidget {
 
+  @override
+  _PostGameViewState createState() => _PostGameViewState();
+}
+
+class _PostGameViewState extends State<PostGameView> {
   final PostGameViewModel model = PostGameViewModelImpl();
 
   @override
@@ -16,5 +21,11 @@ class PostGameView extends StatelessWidget {
       ),
       mobilePortrait: PostGameViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

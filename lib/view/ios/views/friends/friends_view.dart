@@ -3,8 +3,15 @@ import 'package:dart_counter/viewmodel/friends_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class FriendsView extends StatelessWidget {
+import 'friends_view_mobile_portrait.dart';
 
+class FriendsView extends StatefulWidget {
+
+  @override
+  _FriendsViewState createState() => _FriendsViewState();
+}
+
+class _FriendsViewState extends State<FriendsView> {
   final FriendsViewModel model = FriendsViewModelImpl();
 
   @override
@@ -16,24 +23,10 @@ class FriendsView extends StatelessWidget {
       mobilePortrait: FriendsViewMobilePortrait(model),
     );
   }
-}
-
-class FriendsViewMobilePortrait extends StatelessWidget {
-
-  final FriendsViewModel model;
-
-  FriendsViewMobilePortrait(this.model);
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints boxConstraints) {
-          final double width = boxConstraints.maxWidth;
-          final double height = boxConstraints.maxHeight;
-          return Center(
-            child: Text(this.toStringShort() + " -- IOS"),
-          );
-        }
-    );
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

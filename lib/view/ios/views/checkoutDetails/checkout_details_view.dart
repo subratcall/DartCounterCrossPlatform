@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 
 import 'checkout_details_view_mobile_portrait.dart';
 
-class CheckoutDetailsView extends StatelessWidget {
+class CheckoutDetailsView extends StatefulWidget {
 
+  @override
+  _CheckoutDetailsViewState createState() => _CheckoutDetailsViewState();
+}
+
+class _CheckoutDetailsViewState extends State<CheckoutDetailsView> {
   final CheckoutDetailsViewModel model = CheckoutDetailsViewModelImpl();
 
   @override
@@ -14,6 +19,12 @@ class CheckoutDetailsView extends StatelessWidget {
     return View(
       mobilePortrait: CheckoutDetailsViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }
 

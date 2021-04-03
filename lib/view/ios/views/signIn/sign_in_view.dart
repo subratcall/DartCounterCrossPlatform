@@ -4,16 +4,28 @@ import 'package:flutter/cupertino.dart';
 
 import 'sign_in_view_mobile_portrait.dart';
 
-class SignInView extends StatelessWidget {
-  final SignInViewModel model = SignInViewModelImpl();
+class SignInView extends StatefulWidget {
   final PageController pageController;
 
   SignInView(this.pageController);
 
   @override
+  _SignInViewState createState() => _SignInViewState();
+}
+
+class _SignInViewState extends State<SignInView> {
+  final SignInViewModel model = SignInViewModelImpl();
+
+  @override
   Widget build(BuildContext context) {
     return View(
-      mobilePortrait: SignInViewMobilePortrait(model, pageController),
+      mobilePortrait: SignInViewMobilePortrait(model, widget.pageController),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

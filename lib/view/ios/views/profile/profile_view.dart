@@ -8,7 +8,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'mobilePortrait/profile_view_mobile_portrait_error.dart';
 import 'mobilePortrait/profile_view_mobile_portrait_success.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
+  @override
+  _ProfileViewState createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
   final ProfileViewModel model = ProfileViewModelImpl();
 
   @override
@@ -27,5 +32,11 @@ class ProfileView extends StatelessWidget {
                     mobilePortrait: ProfileViewMobilePortraitError(),
                   )
                 : LoadingView());
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }

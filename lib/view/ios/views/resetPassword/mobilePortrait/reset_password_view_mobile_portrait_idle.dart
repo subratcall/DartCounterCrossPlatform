@@ -3,10 +3,12 @@ import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/assets/app_images.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/primary_text_button.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
+import 'package:dart_counter/view/ios/views/signUp/widgets/error_label.dart';
 import 'package:dart_counter/view/toast.dart';
 import 'package:dart_counter/viewmodel/reset_password_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:dart_counter/view/ios/extensions/extensions.dart';
 
 class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
   final ResetPasswordViewModel model;
@@ -88,6 +90,8 @@ class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
                       Expanded(
                         child: TextField(
                           outputText: model.inputEmail,
+                          inputIsValid: model.outputErrorEmail
+                              .map((error) => error == null),
                           placeholder: AppLocalizations.of(context).email,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.done,
@@ -95,19 +99,28 @@ class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
                         ),
                         flex: 36,
                       ),
+                      StreamBuilder<Error>(
+                        initialData: null,
+                        stream: model.outputErrorEmail,
+                        builder: (context, snapshot) => snapshot.data == null
+                            ? Spacer(
+                                flex: 15,
+                              )
+                            : Expanded(
+                                flex: 15,
+                                child: ErrorLabel(
+                                    getErrorMessage(context, snapshot.data)),
+                              ),
+                      ),
                       Spacer(
-                        flex: 47,
+                        flex: 32,
                       ),
                       Expanded(
                         child: PrimaryTextButton(
                           text: AppLocalizations.of(context).confirm,
                           onPressed: () {
                             model.onConfirmPressed().catchError((error) {
-                              if (error is InvalidEmailAddressError) {
-                                Toast.showToast(AppLocalizations.of(context).errorInvalidEmailAddress);
-                              } else {
-                                Toast.showToast(AppLocalizations.of(context).errorNetwork);
-                              }
+                              Toast.showToast(getErrorMessage(context, error));
                             });
                           },
                         ),
@@ -130,4 +143,3 @@ class ResetPasswordViewMobilePortraitIdle extends StatelessWidget {
     );
   }
 }
-

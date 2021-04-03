@@ -5,8 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'about_us_mobile_portrait.dart';
 
-class AboutUsView extends StatelessWidget {
+class AboutUsView extends StatefulWidget {
 
+  @override
+  _AboutUsViewState createState() => _AboutUsViewState();
+}
+
+class _AboutUsViewState extends State<AboutUsView> {
   final AboutUsViewModel model = AboutUsViewModelImpl();
 
   @override
@@ -17,5 +22,11 @@ class AboutUsView extends StatelessWidget {
       ),
       mobilePortrait: AboutUsViewMobilePortrait(model),
     );
+  }
+
+  @override
+  void dispose() {
+    model.dispose();
+    super.dispose();
   }
 }
