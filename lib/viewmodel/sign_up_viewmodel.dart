@@ -63,9 +63,7 @@ class SignUpViewModelImpl extends SignUpViewModel {
     if (_allValid()) {
       try {
         inputViewState.add(ViewState.loading);
-        await _authenticationService.signUp(
-            email: _emailController.stream.value,
-            password: _passwordController.stream.value);
+        await _authenticationService.signUp(_emailController.stream.value, _passwordController.stream.value);
         _databaseService.createUser(
             _authenticationService.user.uid, _usernameController.value);
       } on Error catch (e) {

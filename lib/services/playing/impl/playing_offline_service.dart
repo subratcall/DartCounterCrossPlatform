@@ -46,6 +46,7 @@ abstract class PlayingOfflineService {
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
   void undoThrow();
+
 }
 
 class PlayingOfflineServiceImpl implements PlayingOfflineService {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dart_client/dart_client.dart';
+import 'package:dart_client/dart_client.dart' as dartClient;
 import 'package:dart_counter/model/game.dart';
 
 abstract class PlayingOnlineService {
@@ -24,9 +24,15 @@ abstract class PlayingOnlineService {
 
   void createGame();
 
-  void changeGameConfig();
+  void joinGame(int gameCode);
 
-  void joinGame(String gameId);
+  void invitePlayer(String uid);
+
+  void reorderPlayer(int oldIndex, int newIndex);
+
+  void removePlayer(int uid);
+
+  void setStartingPoints(int startingPoints);
 
   void setMode(Mode mode);
 
@@ -34,13 +40,9 @@ abstract class PlayingOnlineService {
 
   void setType(Type type);
 
-  void setStartingPoints(int startingPoints);
-
-  bool addPlayer();
-
-  void removePlayer(int index);
-
   void startGame();
+
+  void cancelGame();
 
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
@@ -50,64 +52,68 @@ abstract class PlayingOnlineService {
 
 class PlayingOnlineServiceImpl implements PlayingOnlineService {
 
-  final Client _client = Client('localhost', 8888);
+  final dartClient.Client _client = dartClient.Client('localhost', 8888);
 
   PlayingOnlineServiceImpl._();
 
-  Future<bool> connect() {
-
+  Future<bool> connect() async {
+    return _client.connect();
   }
 
-  Future<bool> disconnect() {
-
+  Future<bool> disconnect() async {
+    return _client.connect();
   }
 
   void createGame() {
-
+    _client.createGame();
   }
 
-  void changeGameConfig() {
-
+  void joinGame(int gameCode) {
+    _client.joinGame(gameCode);
   }
 
-  void joinGame(String gameId) {
-
+  void invitePlayer(String uid) {
+    _client.invitePlayer(uid);
   }
 
-  void setMode(Mode mode) {
-
+  void reorderPlayer(int oldIndex, int newIndex) {
+    _client.reorderPlayer(oldIndex, newIndex);
   }
 
-  void setSize(int size) {
-
-  }
-
-  void setType(Type type) {
-
+  void removePlayer(int uid) {
+    _client.removePlayer(uid);
   }
 
   void setStartingPoints(int startingPoints) {
-
+    _client.setStartingPoints(startingPoints);
   }
 
-  bool addPlayer() {
-
+  void setMode(Mode mode) {
+    _client.setMode(mode == Mode.firstTo ? dartClient.Mode.firstTo : dartClient.Mode.bestOf);
   }
 
-  void removePlayer(int index) {
+  void setSize(int size) {
+    _client.setSize(size);
+  }
 
+  void setType(Type type) {
+    _client.setType(type == Type.legs ? dartClient.Type.legs : dartClient.Type.sets);
   }
 
   void startGame() {
+    _client.startGame();
+  }
 
+  void cancelGame() {
+    _client.cancelGame();
   }
 
   void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-
+    _client.performThrow(points, dartsThrown, dartsOnDouble);
   }
 
   void undoThrow() {
-
+    _client.undoThrow();
   }
 
 }
