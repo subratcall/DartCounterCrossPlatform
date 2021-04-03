@@ -2,7 +2,7 @@ import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/user.dart';
-import 'package:dart_counter/services/authentication_service.dart';
+import 'package:dart_counter/services/authentication/authentication_service.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

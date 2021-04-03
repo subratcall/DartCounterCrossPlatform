@@ -1,4 +1,3 @@
-import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
@@ -16,7 +15,7 @@ abstract class InGameViewModel extends ViewModel {
 }
 
 class InGameViewModelImpl extends InGameViewModel {
-  final PlayingService _playingService = locator<PlayingService>();
+  final PlayingService _playingService = PlayingService.instance;
 
   int inputPoints = 0;
   Game currentSnapshot;

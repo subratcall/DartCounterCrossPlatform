@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/helper/validator.dart';
-import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/services/authentication_service.dart';
+import 'package:dart_counter/services/authentication/authentication_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -15,8 +14,7 @@ abstract class SignInViewModel extends ViewModel {
 }
 
 class SignInViewModelImpl extends SignInViewModel {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
+  final AuthenticationService _authenticationService = AuthenticationService.instance;
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
   BehaviorSubject<String> _passwordController = BehaviorSubject();

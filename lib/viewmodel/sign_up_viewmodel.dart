@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:dart_counter/app_errors.dart';
 import 'package:dart_counter/helper/validator.dart';
-import 'package:dart_counter/locator.dart';
-import 'package:dart_counter/services/authentication_service.dart';
-import 'package:dart_counter/services/database_service.dart';
+import 'package:dart_counter/services/authentication/authentication_service.dart';
+import 'package:dart_counter/services/database/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -31,9 +30,8 @@ abstract class SignUpViewModel extends ViewModel {
 }
 
 class SignUpViewModelImpl extends SignUpViewModel {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
-  final DatabaseService _databaseService = locator<DatabaseService>();
+  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final DatabaseService _databaseService = DatabaseService.instance;
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
   BehaviorSubject<String> _usernameController = BehaviorSubject();

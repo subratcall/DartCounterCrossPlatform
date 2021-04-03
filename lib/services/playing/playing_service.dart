@@ -1,49 +1,56 @@
 import 'package:dart_counter/model/game.dart';
-import 'package:dart_counter/services/playing/offline/playing_offline_service.dart';
-import 'package:dart_counter/services/playing/online/playing_online_service.dart';
-import 'package:dart_counter/services/playing/service.dart';
-import 'package:dart_game/dart_game.dart' as DartGame;
+import 'package:dart_counter/model/leg.dart';
+import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/set.dart';
+import 'package:dart_counter/model/stats.dart';
+import 'package:dart_counter/model/throw.dart';
+import 'package:dart_counter/services/playing/impl/playing_online_service.dart';
+import 'package:dart_game/dart_game.dart' as dartGame;
 
-class PlayingService extends AbstractPlayingService {
-  final PlayingOfflineService _playingOfflineService =
-      PlayingOfflineService.instance;
-  final PlayingOnlineService _playingOnlineService =
-      PlayingOnlineService.instance;
+import 'impl/playing_offline_service.dart';
 
+abstract class PlayingService {
+
+  static PlayingService _instance = PlayingServiceImpl._();
+
+  /// SINGLETON INSTANCE
+  static PlayingService get instance {
+    if(_instance == null) {
+      _instance = PlayingServiceImpl._();
+    }
+    return _instance;
+  }
+
+  /// INTERFACE
+
+}
+
+class PlayingServiceImpl implements PlayingService {
+  
+  final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
+  final PlayingOnlineService _playingOnlineService = PlayingOnlineService.instance;
+  
   bool _online = false;
 
-  Game gameSnapshot;
-
-  PlayingService() {
-    onEvent().listen((event) {
-      if (event is Event<Game>) {
-        gameSnapshot = event.item;
-      }
-    });
-  }
-
-  @override
-  Stream<Event> onEvent() {
-    return _online
-        ? _playingOnlineService.onEvent()
-        : _playingOfflineService.onEvent();
-  }
+  PlayingServiceImpl._();
 
   bool get online => _online;
 
-  /// must call this method before a game TODO
+  /// must call this method before a game
   Future<bool> start([bool online = false]) async {
-    if (online) {
-      _playingOnlineService.connect();
-    }
     this._online = online;
+    if (_online) {
+      await _playingOnlineService.connect();
+    }
+    return true;
   }
 
-  /// call this method after a game TODO
-  Future<bool> finish() {
+  /// call this method after a game
+  Future<bool> finish() async {
     if (online) {
-      _playingOnlineService.disconnect();
+      await _playingOnlineService.disconnect();
     }
+    return true;
   }
 
   void createGame() {
@@ -102,7 +109,7 @@ class PlayingService extends AbstractPlayingService {
     if (online) {
       // TODO
     } else {
-      _playingOfflineService.setMode(mode);
+      _playingOfflineService.setMode(mode == Mode.firstTo ? dartGame.Mode.firstTo : dartGame.Mode.bestOf);
     }
   }
 
@@ -118,7 +125,7 @@ class PlayingService extends AbstractPlayingService {
     if (online) {
       // TODO
     } else {
-      _playingOfflineService.setType(type);
+      _playingOfflineService.setType(type == Type.legs ? dartGame.Type.legs : dartGame.Type.sets);
     }
   }
 
@@ -161,6 +168,83 @@ class PlayingService extends AbstractPlayingService {
 
   /// HELPER
   bool validatePoints(int points, int pointsLeft) {
-    return DartGame.ThrowValidator.validatePoints(points, pointsLeft);
+    return dartGame.ThrowValidator.validatePoints(points, pointsLeft);
+  }
+
+  Game _parseOfflineGame(dartGame.Game game) {
+    Status status = game.status == dartGame.Status.pending
+        ? Status.pending
+        : game.status == dartGame.Status.running
+        ? Status.running
+        : Status.pending;
+    Mode mode =
+    game.config.mode == dartGame.Mode.firstTo ? Mode.firstTo : Mode.bestOf;
+    int size = game.config.size;
+    Type type = game.config.type == dartGame.Type.legs ? Type.legs : Type.sets;
+    int startingPoints = game.config.startingPoints;
+    List<Player> players = [];
+
+    Stats parseStats(dartGame.Stats stats) => Stats(
+      average: stats.average,
+      checkoutPercentage: stats.checkoutPercentage,
+      firstNineAverage: stats.firstNineAverage,
+      bestLegDartsThrown: stats.bestLegDartsThrown,
+      bestLegAverage: stats.bestLegAverage,
+      worstLegDartsThrown: stats.worstLegDartsThrown,
+      worstLegAverage: stats.worstLegAverage,
+      averageDartsPerLeg: stats.averageDartsPerLeg,
+      highestFinish: stats.highestFinish,
+      fourtyPlus: stats.fourtyPlus,
+      sixtyPlus: stats.sixtyPlus,
+      eightyPlus: stats.eightyPlus,
+      hundredPlus: stats.hundredPlus,
+      hundredTwentyPlus: stats.hundredTwentyPlus,
+      hundredFourtyPlus: stats.hundredFourtyPlus,
+      hundredSixtyPlus: stats.hundredSixtyPlus,
+      hundredEighty: stats.hundredEighty,
+    );
+
+    Throw parseThrow(dartGame.Throw t) => Throw(
+        points: t.points,
+        dartsThrown: t.dartsThrown,
+        dartsOnDouble: t.dartsOnDouble);
+
+    Leg parseLeg(dartGame.Leg leg) => Leg(throws: leg.throws.map((t) => parseThrow(t)).toList());
+
+    Set parseSet(dartGame.Set set) => Set(
+      legs: set.legs.map((leg) => parseLeg(leg)).toList(),
+    );
+
+    Player parsePlayer(dartGame.Player player) => Player(
+      id: player.id,
+      name: player.name,
+      isCurrentTurn: player.isCurrentTurn,
+      won: player.won,
+      wonSets: player.wonSets,
+      wonLegsCurrentSet: player.wonLegsCurrentSet,
+      pointsLeft: player.pointsLeft,
+      finishRecommendation: player.finishRecommendation,
+      lastPoints: player.lastPoints,
+      dartsThrownCurrentLeg: player.dartsThrownCurrentLeg,
+      stats: parseStats(player.stats),
+      sets: player.sets.map((set) => parseSet(set)).toList(),
+    );
+
+    for (dartGame.Player player in game.players) {
+      players.add(parsePlayer(player));
+    }
+
+    return Game(
+      status: status,
+      mode: mode,
+      size: size,
+      type: type,
+      startingPoints: startingPoints,
+      players: players,
+    );
+  }
+
+  Game _parseOnlineGame() {
+    throw UnimplementedError();
   }
 }

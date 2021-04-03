@@ -1,34 +1,30 @@
 import 'dart:io';
 
-import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/profile.dart';
-import 'package:dart_counter/services/authentication_service.dart';
-import 'package:dart_counter/services/database_service.dart';
+import 'package:dart_counter/services/authentication/authentication_service.dart';
+import 'package:dart_counter/services/database/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class ProfileViewModel extends ViewModel {
   /// INPUT
+  void onDeletePhotoPressed();
+  void onTakePhotoPressed();
+  void onChoosePhotoPressed();
+  void fetchProfile();
 
   /// OUTPUT
-  Stream<Profile> get outputProfile;
-
-  void onDeletePhotoPressed();
-
-  void onTakePhotoPressed();
-
-  void onChoosePhotoPressed();
+  ValueStream<Profile> get outputProfile;
 }
 
 class ProfileViewModelImpl extends ProfileViewModel {
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
-  final DatabaseService _databaseService = locator<DatabaseService>();
+  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final DatabaseService _databaseService = DatabaseService.instance;
 
-  @override
-  Stream<Profile> get outputProfile =>
-      _databaseService.profile(_authenticationService.user.uid);
+  BehaviorSubject<Profile> _profileController = BehaviorSubject();
 
+  /// INPUT
   void onDeletePhotoPressed() {
     _databaseService.removePhoto(_authenticationService.user.uid);
   }
@@ -52,5 +48,19 @@ class ProfileViewModelImpl extends ProfileViewModel {
   }
 
   @override
-  void dispose() {}
+  void fetchProfile() async {
+    inputViewState.add(ViewState.loading);
+    Profile profile = await _databaseService.fetchProfile(_authenticationService.user.uid);
+    inputViewState.add(profile == null ? ViewState.error : ViewState.success);
+    _profileController.add(profile);
+  }
+
+  /// OUTPUT
+  @override
+  ValueStream<Profile> get outputProfile => _profileController.stream;
+
+  @override
+  void dispose() {
+    _profileController.close();
+  }
 }

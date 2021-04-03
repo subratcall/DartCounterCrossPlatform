@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:dart_counter/app_model.dart';
-import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/game.dart';
-import 'package:dart_counter/services/database_service.dart';
+import 'package:dart_counter/services/database/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 abstract class GameHistoryViewModel extends ViewModel {
@@ -19,9 +17,7 @@ abstract class GameHistoryViewModel extends ViewModel {
 }
 
 class GameHistoryViewModelImpl extends GameHistoryViewModel {
-  final AppModel _appModel = locator<AppModel>();
-
-  final DatabaseService _databaseService = locator<DatabaseService>();
+  final DatabaseService _databaseService = DatabaseService.instance;
 
   final StreamController<List<Game>> _gamesController =
       StreamController.broadcast();

@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/profile.dart';
-import 'package:dart_counter/services/authentication_service.dart';
-import 'package:dart_counter/services/database_service.dart';
+import 'package:dart_counter/services/authentication/authentication_service.dart';
+import 'package:dart_counter/services/database/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class HomeViewModel extends ViewModel {
   /// IN
@@ -23,10 +24,10 @@ abstract class HomeViewModel extends ViewModel {
 }
 
 class HomeViewModelImpl extends HomeViewModel {
-  final AppModel _appModel = locator<AppModel>();
-  final AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
-  final DatabaseService _databaseService = locator<DatabaseService>();
+  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final DatabaseService _databaseService = DatabaseService.instance;
+
+  BehaviorSubject<Profile> _profileController = BehaviorSubject();
 
   /// IN
 
@@ -50,5 +51,7 @@ class HomeViewModelImpl extends HomeViewModel {
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _profileController.close();
+  }
 }

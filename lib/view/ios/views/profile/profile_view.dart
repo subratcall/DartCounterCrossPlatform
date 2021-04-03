@@ -5,8 +5,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'mobilePortrait/profile_view_mobile_portrait_error.dart';
-import 'mobilePortrait/profile_view_mobile_portrait_success.dart';
+import 'profile_view_mobile_portrait.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -18,20 +17,12 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ViewState>(
-        initialData: ViewState.idle,
-        builder: (context, snapshot) => snapshot.data == ViewState.success
-            ? View(
-                navigationBar: CupertinoNavigationBar(
-                  middle: Text(AppLocalizations.of(context).profile),
-                ),
-                mobilePortrait: ProfileViewMobilePortraitSuccess(model),
-              )
-            : snapshot.data == ViewState.error
-                ? View(
-                    mobilePortrait: ProfileViewMobilePortraitError(),
-                  )
-                : LoadingView());
+    return View(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(AppLocalizations.of(context).profile),
+      ),
+      mobilePortrait: ProfileViewMobilePortrait(model),
+    );
   }
 
   @override
