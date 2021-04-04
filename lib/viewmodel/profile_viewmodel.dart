@@ -15,8 +15,6 @@ abstract class ProfileViewModel extends ViewModel {
 
   void onChoosePhotoPressed();
 
-  void fetchProfile();
-
   /// OUTPUT
   ValueStream<Profile> get outputProfile;
 }
@@ -30,7 +28,7 @@ class ProfileViewModelImpl extends ProfileViewModel {
 
   /// INPUT
   void onDeletePhotoPressed() {
-    _databaseService.removePhoto(_authenticationService.user.uid);
+    _databaseService.removePhoto(_authenticationService.currentUser.value.uid);
   }
 
   void onTakePhotoPressed() async {
@@ -38,7 +36,7 @@ class ProfileViewModelImpl extends ProfileViewModel {
     // TODO update database
     if (pickedImage != null) {
       _databaseService.updatePhoto(
-          _authenticationService.user.uid, File(pickedImage.path));
+          _authenticationService.currentUser.value.uid, File(pickedImage.path));
     }
   }
 
@@ -47,17 +45,8 @@ class ProfileViewModelImpl extends ProfileViewModel {
     // TODO update database
     if (pickedImage != null) {
       _databaseService.updatePhoto(
-          _authenticationService.user.uid, File(pickedImage.path));
+          _authenticationService.currentUser.value.uid, File(pickedImage.path));
     }
-  }
-
-  @override
-  void fetchProfile() async {
-    inputViewState.add(ViewState.loading);
-    Profile profile =
-        await _databaseService.fetchProfile(_authenticationService.user.uid);
-    inputViewState.add(profile == null ? ViewState.error : ViewState.success);
-    _profileController.add(profile);
   }
 
   /// OUTPUT

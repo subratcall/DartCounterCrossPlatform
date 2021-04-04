@@ -31,7 +31,6 @@ abstract class FireStoreService {
   void saveProfile(String uid, Profile profile);
 
   void updatePhotoUrl(String uid, String photoUrl);
-
 }
 
 class FireStoreServiceImpl implements FireStoreService {
@@ -45,7 +44,7 @@ class FireStoreServiceImpl implements FireStoreService {
         .collection('profiles')
         .doc(uid)
         .snapshots()
-        .map((snapshot) => Profile.fromJson(snapshot.data())));
+        .map((snapshot) => Profile.fromJson(snapshot.data()))).autoConnect();
   }
 
   @override
@@ -54,16 +53,21 @@ class FireStoreServiceImpl implements FireStoreService {
         .collection('invitations')
         .doc(uid)
         .snapshots()
-        .map((snapshot) => List<Invitation>.from(snapshot.data().values.map((json) => Invitation.fromJson(json)))));
+        .map((snapshot) => List<Invitation>.from(snapshot
+            .data()
+            .values
+            .map((json) => Invitation.fromJson(json))))).autoConnect();
   }
 
   @override
   ValueStream<List<Friend>> friends(String uid) {
     return ValueConnectableStream(_firestore
-        .collection('friends')
-        .doc(uid)
-        .snapshots()
-        .map((snapshot) => List<Friend>.from(snapshot.data().values.map((json) => Friend.fromJson(json)))));
+            .collection('friends')
+            .doc(uid)
+            .snapshots()
+            .map((snapshot) => List<Friend>.from(
+                snapshot.data().values.map((json) => Friend.fromJson(json)))))
+        .autoConnect();
   }
 
   @override
@@ -72,18 +76,22 @@ class FireStoreServiceImpl implements FireStoreService {
         .collection('friendRequests')
         .doc(uid)
         .snapshots()
-        .map((snapshot) => List<FriendRequest>.from(snapshot.data().values.map((json) => FriendRequest.fromJson(json)))));
+        .map((snapshot) => List<FriendRequest>.from(snapshot
+            .data()
+            .values
+            .map((json) => FriendRequest.fromJson(json))))).autoConnect();
   }
 
   @override
   ValueStream<List<Game>> gameHistory(String uid) {
     return ValueConnectableStream(_firestore
-        .collection('gameHistory')
-        .doc(uid)
-        .snapshots()
-        .map((snapshot) => List<Game>.from(snapshot.data().values.map((json) => Game.fromJson(json)))));
+            .collection('gameHistory')
+            .doc(uid)
+            .snapshots()
+            .map((snapshot) => List<Game>.from(
+                snapshot.data().values.map((json) => Game.fromJson(json)))))
+        .autoConnect();
   }
-
 
   @override
   void saveProfile(String uid, Profile profile) {

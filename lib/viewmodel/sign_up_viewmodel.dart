@@ -67,7 +67,8 @@ class SignUpViewModelImpl extends SignUpViewModel {
         await _authenticationService.signUp(
             _emailController.stream.value, _passwordController.stream.value);
         _databaseService.createUser(
-            _authenticationService.user.uid, _usernameController.value);
+            _authenticationService.currentUser.value.uid,
+            _usernameController.value);
       } on Error catch (e) {
         inputViewState.add(ViewState.idle);
         throw e;

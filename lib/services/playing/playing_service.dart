@@ -60,6 +60,8 @@ abstract class PlayingService {
   void performThrow(int points, {int dartsThrown, int dartsOnDouble});
 
   void undoThrow();
+
+  bool validatePoints(int points, int pointsLeft);
 }
 
 class PlayingServiceImpl implements PlayingService {
@@ -238,6 +240,7 @@ class PlayingServiceImpl implements PlayingService {
   }
 
   /// HELPER
+  @override
   bool validatePoints(int points, int pointsLeft) {
     return dartGame.ThrowValidator.validatePoints(points, pointsLeft);
   }

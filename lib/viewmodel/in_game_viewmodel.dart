@@ -20,17 +20,6 @@ class InGameViewModelImpl extends InGameViewModel {
   int inputPoints = 0;
   Game currentSnapshot;
 
-  InGameViewModel() {
-    currentSnapshot = _playingService.gameSnapshot;
-    /*  subscriptions.add(_playingService.onEvent().listen((event) {
-      if (event is Event<Game>) {
-        Game game = event.item;
-        // TODO
-        currentSnapshot = game;
-      }
-    }));*/
-  }
-
   void onUndoPressed() {
     // TODO reset only if true
     _playingService.undoThrow();

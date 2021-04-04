@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:dart_counter/app_model.dart';
-import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/services/authentication/authentication_service.dart';
 import 'package:dart_counter/services/database/database_service.dart';
@@ -35,7 +33,7 @@ class HomeViewModelImpl extends HomeViewModel {
   /// OUT
 
   @override
-  Stream<Profile> get outputProfile => _databaseService.profile(_appModel.uid);
+  Stream<Profile> get outputProfile => _databaseService.profile;
 
   @override
   Stream<int> get outputNewInvites =>

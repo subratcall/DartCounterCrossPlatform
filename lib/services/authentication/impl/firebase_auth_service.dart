@@ -1,5 +1,6 @@
 import 'package:dart_counter/app_errors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class FirebaseAuthService {
   static FirebaseAuthService _instance;
@@ -13,7 +14,7 @@ abstract class FirebaseAuthService {
   }
 
   /// INTERFACE
-  Stream<User> get currentUser;
+  ValueStream<User> get currentUser;
 
   Future<void> signIn(String email, String password);
 
@@ -34,7 +35,8 @@ class FirebaseAuthServiceImpl implements FirebaseAuthService {
   FirebaseAuthServiceImpl._() : _firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Stream<User> get currentUser => _firebaseAuth.authStateChanges();
+  ValueStream<User> get currentUser =>
+      ValueConnectableStream(_firebaseAuth.authStateChanges()).autoConnect();
 
   @override
   Future<void> signIn(String email, String password) async {

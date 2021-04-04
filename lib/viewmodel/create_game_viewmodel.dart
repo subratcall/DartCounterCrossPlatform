@@ -40,7 +40,7 @@ abstract class CreateGameViewModel extends ViewModel {
 }
 
 class CreateGameViewModelImpl extends CreateGameViewModel {
-  final PlayingService _playingService = locator<PlayingService>();
+  final PlayingService _playingService = PlayingService.instance;
 
   Game currentSnapshot = Game();
 
@@ -61,7 +61,7 @@ class CreateGameViewModelImpl extends CreateGameViewModel {
 
   @override
   void onDartBotAverageChanged(int average) {
-    _playingService.setDartBotAverage(average);
+    _playingService.setDartBotTargetAverage(average);
   }
 
   @override

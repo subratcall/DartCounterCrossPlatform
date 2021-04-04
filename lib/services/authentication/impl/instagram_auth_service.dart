@@ -1,3 +1,5 @@
+import 'package:rxdart/rxdart.dart';
+
 abstract class InstagramAuthService {
   static InstagramAuthService _instance = InstagramAuthServiceImpl._();
 
@@ -10,7 +12,7 @@ abstract class InstagramAuthService {
   }
 
   /// INTERFACE
-  Stream<dynamic> get currentUser;
+  ValueStream<dynamic> get currentUser;
 
   Future<void> signIn();
 
@@ -18,11 +20,12 @@ abstract class InstagramAuthService {
 }
 
 class InstagramAuthServiceImpl implements InstagramAuthService {
+  BehaviorSubject<dynamic> _userController = BehaviorSubject();
+
   InstagramAuthServiceImpl._();
 
   @override
-  Stream<dynamic> get currentUser =>
-      throw UnimplementedError(); // TODO implement
+  ValueStream<dynamic> get currentUser => _userController.stream;
 
   @override
   Future<void> signOut() {
@@ -34,5 +37,9 @@ class InstagramAuthServiceImpl implements InstagramAuthService {
   Future<void> signIn() {
     // TODO implement
     throw UnimplementedError();
+  }
+
+  void dispose() {
+    _userController.close();
   }
 }

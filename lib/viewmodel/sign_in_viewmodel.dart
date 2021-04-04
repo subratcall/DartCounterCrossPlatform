@@ -40,7 +40,7 @@ class SignInViewModelImpl extends SignInViewModel {
     try {
       inputViewState.add(ViewState.loading);
       await _authenticationService.signIn(
-          email: _emailController.value, password: _passwordController.value);
+          _emailController.value, _passwordController.value);
     } on Error catch (e) {
       inputViewState.add(ViewState.idle);
       throw e;

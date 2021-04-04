@@ -28,8 +28,10 @@ class StorageServiceImpl implements StorageService {
   @override
   Future<String> savePhoto(String uid, File rawData) async {
     var ref = _firebaseStorage.ref('profilePhotos/$uid');
-    var thumbnail = copyResize(decodeImage(rawData.readAsBytesSync()), width: 120);
-    await ref.putData(encodePng(thumbnail), SettableMetadata(contentType: 'image/png'));
+    var thumbnail =
+        copyResize(decodeImage(rawData.readAsBytesSync()), width: 120);
+    await ref.putData(
+        encodePng(thumbnail), SettableMetadata(contentType: 'image/png'));
     return ref.getDownloadURL();
   }
 

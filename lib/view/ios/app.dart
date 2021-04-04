@@ -1,6 +1,5 @@
 import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/app_routes.dart';
-import 'package:dart_counter/locator.dart';
 import 'package:dart_counter/model/user.dart';
 import 'package:dart_counter/services/authentication/authentication_service.dart';
 import 'package:device_preview/device_preview.dart';
@@ -36,24 +35,17 @@ class DartCounterAppIOS extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: Theme.theme,
       home: StreamBuilder<User>(
-          stream: locator<AuthenticationService>().authStateChanged,
-          builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-            final AppModel appModel = locator<AppModel>();
-            final User user = snapshot.data;
-            if (user != null) {
-              appModel.uid = user.uid;
-              return HomeView();
-            } else {
-              appModel.uid = null;
-              return PageView(
-                controller: _pageController,
-                children: [
-                  SignInView(_pageController),
-                  SignUpView(_pageController),
-                ],
-              );
-            }
-          }),
+          stream: AuthenticationService.instance.currentUser,
+          builder: (BuildContext context, AsyncSnapshot<User> snapshot) =>
+              snapshot.data == null
+                  ? PageView(
+                      controller: _pageController,
+                      children: [
+                        SignInView(_pageController),
+                        SignUpView(_pageController),
+                      ],
+                    )
+                  : HomeView()),
       routes: {
         AppRoutes.loading: (context) => LoadingView(),
         AppRoutes.home: (context) => HomeView(),
