@@ -2,11 +2,12 @@ library dart_game;
 
 import 'dart:math';
 
+part 'enums/language.dart';
+
 /// enums
 part 'enums/mode.dart';
 part 'enums/status.dart';
 part 'enums/type.dart';
-part 'enums/language.dart';
 
 /// helpers
 part 'helpers/finishes.dart';

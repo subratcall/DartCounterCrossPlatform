@@ -19,8 +19,7 @@ class Player {
 
   final List<Set> sets;
 
-  Player(this._game, this.id)
-       : sets = [];
+  Player(this._game, this.id) : sets = [];
 
   ///
   /// PRIVATE

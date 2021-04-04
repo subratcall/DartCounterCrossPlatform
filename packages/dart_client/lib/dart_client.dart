@@ -2,9 +2,9 @@ library dart_client;
 
 import 'package:dart_client/json/decoder.dart';
 import 'package:dart_client/json/encoder.dart';
-import 'package:dart_client/web_socket_client.dart';
-import 'package:dart_client/packets/outgoing/request_packet.dart';
 import 'package:dart_client/packets/incoming/response_packet.dart';
+import 'package:dart_client/packets/outgoing/request_packet.dart';
+import 'package:dart_client/web_socket_client.dart';
 
 /// client
 part 'client.dart';
@@ -24,8 +24,8 @@ part 'packets/incoming/snapshot_packet.dart';
 /// outgoing
 part 'packets/outgoing/cancel_game_packet.dart';
 part 'packets/outgoing/create_game_packet.dart';
-part 'packets/outgoing/join_game_packet.dart';
 part 'packets/outgoing/invite_player_packet.dart';
+part 'packets/outgoing/join_game_packet.dart';
 part 'packets/outgoing/perform_throw_packet.dart';
 part 'packets/outgoing/remove_player_packet.dart';
 part 'packets/outgoing/reorder_player_packet.dart';

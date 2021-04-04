@@ -1,5 +1,3 @@
 part of dart_client;
 
-class UndoThrowPacket extends RequestPacket {
-
-}
+class UndoThrowPacket extends RequestPacket {}

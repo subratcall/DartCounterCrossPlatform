@@ -2,7 +2,6 @@ import 'package:dart_game/dart_game.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class PlayingOfflineService {
-
   static PlayingOfflineService _instance = PlayingOfflineServiceImpl._();
 
   /// SINGLETON INSTANCE
@@ -46,7 +45,6 @@ abstract class PlayingOfflineService {
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
   void undoThrow();
-
 }
 
 class PlayingOfflineServiceImpl implements PlayingOfflineService {
@@ -145,5 +143,4 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
   dispose() {
     _gamesController.close();
   }
-
 }

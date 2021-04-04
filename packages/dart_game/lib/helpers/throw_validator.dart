@@ -141,7 +141,8 @@ class ThrowValidator {
     if (points < 0 || points > 180) return false;
 
     if (points > pointsLeft) return false;
-    if ([163, 166, 169, 172, 173, 175, 176, 178, 179].contains(points)) return false;
+    if ([163, 166, 169, 172, 173, 175, 176, 178, 179].contains(points))
+      return false;
     if (pointsLeft - points == 1) return false;
     return true;
   }

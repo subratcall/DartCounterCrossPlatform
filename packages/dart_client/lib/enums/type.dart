@@ -1,5 +1,3 @@
 part of dart_client;
 
-enum Type {
-  legs, sets
-}
+enum Type { legs, sets }

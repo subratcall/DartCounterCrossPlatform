@@ -2,12 +2,11 @@ import 'package:dart_counter/app_errors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class FirebaseAuthService {
-
   static FirebaseAuthService _instance;
 
   /// SINGLETON INSTANCE
   static FirebaseAuthService get instance {
-    if(_instance == null) {
+    if (_instance == null) {
       _instance = FirebaseAuthServiceImpl._();
     }
     return _instance;
@@ -27,11 +26,9 @@ abstract class FirebaseAuthService {
   Future<void> signInFacebook();
 
   Future<void> signOut();
-
 }
 
 class FirebaseAuthServiceImpl implements FirebaseAuthService {
-
   final FirebaseAuth _firebaseAuth;
 
   FirebaseAuthServiceImpl._() : _firebaseAuth = FirebaseAuth.instance;
@@ -42,7 +39,8 @@ class FirebaseAuthServiceImpl implements FirebaseAuthService {
   @override
   Future<void> signIn(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'network-request-failed') {
         throw NetworkError();
@@ -68,7 +66,8 @@ class FirebaseAuthServiceImpl implements FirebaseAuthService {
   @override
   Future<void> signUp(String email, String password) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'network-request-failed') {
         throw NetworkError();

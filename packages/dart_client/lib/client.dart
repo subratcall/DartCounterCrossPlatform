@@ -1,7 +1,6 @@
 part of dart_client;
 
 abstract class AbstractClient {
-
   /// INTERFACE
   Stream<ResponsePacket> get received;
 
@@ -10,7 +9,7 @@ abstract class AbstractClient {
   Future<bool> disconnect();
 
   void createGame();
-  
+
   void joinGame(int gameCode);
 
   void invitePlayer(String uid);
@@ -34,17 +33,17 @@ abstract class AbstractClient {
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
   void undoThrow();
-
 }
 
 class Client implements AbstractClient {
-
   final WebSocketClient _webSocketClient;
 
-  Client(String host, int port) : this._webSocketClient = WebSocketClient(host, port);
+  Client(String host, int port)
+      : this._webSocketClient = WebSocketClient(host, port);
 
   @override
-  Stream<ResponsePacket> get received => _webSocketClient.received.map((json) => JsonDecoder.decode(json));
+  Stream<ResponsePacket> get received =>
+      _webSocketClient.received.map((json) => JsonDecoder.decode(json));
 
   @override
   Future<bool> connect() async {
@@ -65,7 +64,7 @@ class Client implements AbstractClient {
   void joinGame(int gameCode) {
     _sendPacket(JoinGamePacket(gameCode));
   }
-  
+
   @override
   void invitePlayer(String uid) {
     _sendPacket(InvitePlayerPacket(uid));
@@ -121,9 +120,7 @@ class Client implements AbstractClient {
     _sendPacket(UndoThrowPacket());
   }
 
-
   void _sendPacket(RequestPacket packet) {
     _webSocketClient.send(JsonEncoder.encode(packet));
   }
-
 }

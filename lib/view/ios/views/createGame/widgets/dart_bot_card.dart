@@ -78,9 +78,10 @@ class _DartBotCardState extends State<DartBotCard> {
                                     ? AppColors.yellow
                                     : AppColors.red,
                             value: sliderValue,
-                            onChangeEnd: (newValue) =>
-                                widget.outputDartBotAverage.add(newValue
-                                    .round()), //widget.onAverageChanged(newValue.round()),
+                            onChangeEnd: (newValue) => widget
+                                .outputDartBotAverage
+                                .add(newValue.round()),
+                            //widget.onAverageChanged(newValue.round()),
                             onChanged: (newValue) {
                               setState(() {
                                 sliderValue = newValue;

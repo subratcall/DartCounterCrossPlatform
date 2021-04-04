@@ -1,10 +1,9 @@
 abstract class InstagramAuthService {
-
   static InstagramAuthService _instance = InstagramAuthServiceImpl._();
 
   /// SINGLETON INSTANCE
   static InstagramAuthService get instance {
-    if(_instance == null) {
+    if (_instance == null) {
       _instance = InstagramAuthServiceImpl._();
     }
     return _instance;
@@ -16,15 +15,14 @@ abstract class InstagramAuthService {
   Future<void> signIn();
 
   Future<void> signOut();
-
 }
 
 class InstagramAuthServiceImpl implements InstagramAuthService {
-
   InstagramAuthServiceImpl._();
 
   @override
-  Stream<dynamic> get currentUser => throw UnimplementedError(); // TODO implement
+  Stream<dynamic> get currentUser =>
+      throw UnimplementedError(); // TODO implement
 
   @override
   Future<void> signOut() {
@@ -37,5 +35,4 @@ class InstagramAuthServiceImpl implements InstagramAuthService {
     // TODO implement
     throw UnimplementedError();
   }
-
 }

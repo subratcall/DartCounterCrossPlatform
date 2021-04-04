@@ -6,6 +6,7 @@ abstract class ViewModel {
   final BehaviorSubject<ViewState> _viewStateController = BehaviorSubject();
 
   Sink<ViewState> get inputViewState => _viewStateController;
+
   ValueStream<ViewState> get outputViewState => _viewStateController.stream;
 
   void dispose() {

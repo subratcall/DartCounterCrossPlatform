@@ -1,5 +1,3 @@
 part of dart_client;
 
-class StartGamePacket extends RequestPacket {
-
-}
+class StartGamePacket extends RequestPacket {}

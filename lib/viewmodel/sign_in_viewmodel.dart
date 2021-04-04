@@ -9,12 +9,15 @@ import 'package:rxdart/rxdart.dart';
 abstract class SignInViewModel extends ViewModel {
   /// INPUT
   Sink<String> get inputEmail;
+
   Sink<String> get inputPassword;
+
   Future<void> onSignInPressed();
 }
 
 class SignInViewModelImpl extends SignInViewModel {
-  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final AuthenticationService _authenticationService =
+      AuthenticationService.instance;
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
   BehaviorSubject<String> _passwordController = BehaviorSubject();

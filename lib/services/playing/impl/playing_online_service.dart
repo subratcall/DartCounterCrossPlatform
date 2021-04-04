@@ -4,12 +4,11 @@ import 'package:dart_client/dart_client.dart' as dartClient;
 import 'package:dart_counter/model/game.dart';
 
 abstract class PlayingOnlineService {
-
   static PlayingOnlineService _instance = PlayingOnlineServiceImpl._();
 
   /// SINGLETON INSTANCE
   static PlayingOnlineService get instance {
-    if(_instance == null) {
+    if (_instance == null) {
       _instance = PlayingOnlineServiceImpl._();
     }
     return _instance;
@@ -47,11 +46,9 @@ abstract class PlayingOnlineService {
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
   void undoThrow();
-
 }
 
 class PlayingOnlineServiceImpl implements PlayingOnlineService {
-
   final dartClient.Client _client = dartClient.Client('localhost', 8888);
 
   PlayingOnlineServiceImpl._();
@@ -89,7 +86,9 @@ class PlayingOnlineServiceImpl implements PlayingOnlineService {
   }
 
   void setMode(Mode mode) {
-    _client.setMode(mode == Mode.firstTo ? dartClient.Mode.firstTo : dartClient.Mode.bestOf);
+    _client.setMode(mode == Mode.firstTo
+        ? dartClient.Mode.firstTo
+        : dartClient.Mode.bestOf);
   }
 
   void setSize(int size) {
@@ -97,7 +96,8 @@ class PlayingOnlineServiceImpl implements PlayingOnlineService {
   }
 
   void setType(Type type) {
-    _client.setType(type == Type.legs ? dartClient.Type.legs : dartClient.Type.sets);
+    _client.setType(
+        type == Type.legs ? dartClient.Type.legs : dartClient.Type.sets);
   }
 
   void startGame() {
@@ -115,5 +115,4 @@ class PlayingOnlineServiceImpl implements PlayingOnlineService {
   void undoThrow() {
     _client.undoThrow();
   }
-
 }

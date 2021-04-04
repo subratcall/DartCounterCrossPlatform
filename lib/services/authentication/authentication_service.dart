@@ -4,12 +4,11 @@ import 'impl/firebase_auth_service.dart';
 import 'impl/instagram_auth_service.dart';
 
 abstract class AuthenticationService {
-
   static AuthenticationService _instance = AuthenticationServiceImpl._();
 
   /// SINGLETON INSTANCE
   static AuthenticationService get instance {
-    if(_instance == null) {
+    if (_instance == null) {
       _instance = AuthenticationServiceImpl._();
     }
     return _instance;
@@ -31,11 +30,9 @@ abstract class AuthenticationService {
   Future<void> signInInstagram();
 
   Future<void> signOut();
-
 }
 
 class AuthenticationServiceImpl implements AuthenticationService {
-
   final FirebaseAuthService _firebaseAuth = FirebaseAuthService.instance;
   final InstagramAuthService _instagramAuth = InstagramAuthService.instance;
 
@@ -71,5 +68,4 @@ class AuthenticationServiceImpl implements AuthenticationService {
     // TODO implement
     throw new UnimplementedError();
   }
-
 }

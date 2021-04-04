@@ -314,5 +314,5 @@
   "errorEmptyPasswordAgain": "Password again can't be empty",
   "errorPasswordToShort": "Password must be at least 6 characters long",
   "errorPasswordToLong": "Password to long",
-  "errorInvalidFormData" : "Invalid fields"
+  "errorInvalidFormData": "Invalid fields"
 }

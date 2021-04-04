@@ -14,7 +14,7 @@ class AppFonts {
 
   static const defaultTextStyle = TextStyle();
 
-  /*static const TextTheme blackCupertino = TextTheme(
+/*static const TextTheme blackCupertino = TextTheme(
     headline1 : TextStyle(debugLabel: 'blackCupertino headline1', fontFamily: '.SF UI Display', inherit: true, color: Colors.black54, decoration: TextDecoration.none),
     headline2 : TextStyle(debugLabel: 'blackCupertino headline2', fontFamily: '.SF UI Display', inherit: true, color: Colors.black54, decoration: TextDecoration.none),
     headline3 : TextStyle(debugLabel: 'blackCupertino headline3', fontFamily: '.SF UI Display', inherit: true, color: Colors.black54, decoration: TextDecoration.none),

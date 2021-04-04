@@ -23,7 +23,9 @@ class SignUpViewMobilePortrait extends StatelessWidget {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints boxConstraints) {
       final double width = boxConstraints.maxWidth;
-      final double height = boxConstraints.maxHeight + MediaQuery.of(context).viewInsets.bottom - MediaQuery.of(context).viewPadding.bottom;
+      final double height = boxConstraints.maxHeight +
+          MediaQuery.of(context).viewInsets.bottom -
+          MediaQuery.of(context).viewPadding.bottom;
       return StreamBuilder<ViewState>(
           initialData: ViewState.idle,
           stream: model.outputViewState,

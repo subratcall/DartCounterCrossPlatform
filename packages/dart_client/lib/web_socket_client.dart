@@ -1,7 +1,6 @@
 import 'dart:io';
 
 class WebSocketClient {
-
   final String _host;
   final int _port;
 
@@ -32,11 +31,10 @@ class WebSocketClient {
   }
 
   void send(String json) {
-    if(_webSocket != null) {
+    if (_webSocket != null) {
       _webSocket.add(json);
     } else {
       print("Couldn't send message! -- Not connected to a Server");
     }
   }
-
 }

@@ -22,8 +22,8 @@ class ProfileViewMobilePortrait extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<ViewState>(
       initialData: ViewState.loading,
-      builder: (context, snapshot) =>
-      snapshot.data == ViewState.success ? StreamBuilder<Profile>(
+      builder: (context, snapshot) => snapshot.data == ViewState.success
+          ? StreamBuilder<Profile>(
               stream: model.outputProfile,
               builder: (context, snapshot) {
                 Profile profile = snapshot.data;
@@ -315,10 +315,11 @@ class ProfileViewMobilePortrait extends StatelessWidget {
                   ],
                 );
               })
-          : snapshot.data == ViewState.error ? Center(
+          : snapshot.data == ViewState.error
+              ? Center(
                   child: Text(AppLocalizations.of(context).errorLoadingProfile),
                 )
-          : LoadingView(),
+              : LoadingView(),
     );
   }
 }

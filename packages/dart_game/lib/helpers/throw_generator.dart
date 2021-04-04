@@ -4,9 +4,10 @@ class ThrowGenerator {
   static Throw generate(DartBot bot, Game game) {
     // only for testing purpose the targetaverage should be between 10-150 in a real world use
     if (bot.targetAverage == 0) return Throw(0);
-    if(bot.targetAverage == 180) {
+    if (bot.targetAverage == 180) {
       if (180 >= bot.pointsLeft) {
-        if (bot.pointsLeft >= 2 && bot.pointsLeft <= 170 &&
+        if (bot.pointsLeft >= 2 &&
+            bot.pointsLeft <= 170 &&
             ![159, 162, 163, 165, 166, 168, 169].contains(bot.pointsLeft)) {
           return Throw(bot.pointsLeft, dartsOnDouble: 1);
         } else {

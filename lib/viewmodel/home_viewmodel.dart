@@ -24,7 +24,8 @@ abstract class HomeViewModel extends ViewModel {
 }
 
 class HomeViewModelImpl extends HomeViewModel {
-  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final AuthenticationService _authenticationService =
+      AuthenticationService.instance;
   final DatabaseService _databaseService = DatabaseService.instance;
 
   BehaviorSubject<Profile> _profileController = BehaviorSubject();

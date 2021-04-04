@@ -9,6 +9,7 @@ import 'package:rxdart/rxdart.dart';
 abstract class ResetPasswordViewModel extends ViewModel {
   /// INPUT
   Sink<String> get inputEmail;
+
   Future<void> onConfirmPressed();
 
   /// OUTPUT
@@ -16,7 +17,8 @@ abstract class ResetPasswordViewModel extends ViewModel {
 }
 
 class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
-  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final AuthenticationService _authenticationService =
+      AuthenticationService.instance;
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
 

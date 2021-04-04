@@ -30,7 +30,8 @@ abstract class SignUpViewModel extends ViewModel {
 }
 
 class SignUpViewModelImpl extends SignUpViewModel {
-  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final AuthenticationService _authenticationService =
+      AuthenticationService.instance;
   final DatabaseService _databaseService = DatabaseService.instance;
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
@@ -63,7 +64,8 @@ class SignUpViewModelImpl extends SignUpViewModel {
     if (_allValid()) {
       try {
         inputViewState.add(ViewState.loading);
-        await _authenticationService.signUp(_emailController.stream.value, _passwordController.stream.value);
+        await _authenticationService.signUp(
+            _emailController.stream.value, _passwordController.stream.value);
         _databaseService.createUser(
             _authenticationService.user.uid, _usernameController.value);
       } on Error catch (e) {

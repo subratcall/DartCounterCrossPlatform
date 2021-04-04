@@ -10,8 +10,11 @@ import 'package:rxdart/rxdart.dart';
 abstract class ProfileViewModel extends ViewModel {
   /// INPUT
   void onDeletePhotoPressed();
+
   void onTakePhotoPressed();
+
   void onChoosePhotoPressed();
+
   void fetchProfile();
 
   /// OUTPUT
@@ -19,7 +22,8 @@ abstract class ProfileViewModel extends ViewModel {
 }
 
 class ProfileViewModelImpl extends ProfileViewModel {
-  final AuthenticationService _authenticationService = AuthenticationService.instance;
+  final AuthenticationService _authenticationService =
+      AuthenticationService.instance;
   final DatabaseService _databaseService = DatabaseService.instance;
 
   BehaviorSubject<Profile> _profileController = BehaviorSubject();
@@ -50,7 +54,8 @@ class ProfileViewModelImpl extends ProfileViewModel {
   @override
   void fetchProfile() async {
     inputViewState.add(ViewState.loading);
-    Profile profile = await _databaseService.fetchProfile(_authenticationService.user.uid);
+    Profile profile =
+        await _databaseService.fetchProfile(_authenticationService.user.uid);
     inputViewState.add(profile == null ? ViewState.error : ViewState.success);
     _profileController.add(profile);
   }
