@@ -6,7 +6,6 @@ import 'package:dart_counter/model/stats.dart';
 import 'package:dart_counter/model/throw.dart';
 import 'package:dart_counter/services/playing/impl/playing_online_service.dart';
 import 'package:dart_game/dart_game.dart' as dartGame;
-import 'package:dart_client/dart_client.dart' as dartClient show Mode, Type;
 
 import 'impl/playing_offline_service.dart';
 
