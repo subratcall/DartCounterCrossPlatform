@@ -41,17 +41,17 @@ class AuthenticationServiceImpl implements AuthenticationService {
 
   AuthenticationServiceImpl._();
 
-  // TODO usertype has to be determined
-  ValueStream<User> get currentUser => _firebaseAuth.currentUser
-          .map((firebaseUser) => firebaseUser != null
-              ? User(firebaseUser.uid, UserType.emailPassword,
-                  _databaseService.profile.value)
-              : null)
-          .mergeWith([
-        _databaseService.profile.map((profile) => currentUser != null
-            ? User(currentUser.value.uid, UserType.emailPassword, profile)
-            : null)
-      ]);
+  // TODO usertype has to be determined -- bug fix
+  ValueStream<User> get currentUser => ValueConnectableStream(_firebaseAuth.currentUser
+      .map((firebaseUser) => firebaseUser != null
+      ? User(firebaseUser.uid, UserType.emailPassword,
+      _databaseService.profile.value)
+      : null)
+      .mergeWith([
+    _databaseService.profile.map((profile) => currentUser != null
+        ? User(currentUser.value.uid, UserType.emailPassword, profile)
+        : null)
+  ])).autoConnect();
 
   Future<void> signIn(String email, String password) async {
     await _firebaseAuth.signIn(email, password);
