@@ -27,8 +27,6 @@ class Container {
         return PlayerJoinedPacket.fromJson(json);
       case 'playerExited':
         return PlayerExitedPacket.fromJson(json);
-      case 'gameCanceled':
-        return GameCanceledPacket.fromJson(json);
       default:
         throw Error(); // only happens if invalid packet was sent by server
     }

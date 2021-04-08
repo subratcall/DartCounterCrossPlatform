@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_counter/model/friend.dart';
 import 'package:dart_counter/model/friend_request.dart';
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/model/invitation.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:rxdart/rxdart.dart';
@@ -27,7 +27,7 @@ abstract class FireStoreService {
 
   Future<List<Friend>> fetchFriends(String uid);
 
-  Future<List<Game>> fetchGameHistory(String uid);
+  Future<List<OfflineGame>> fetchGameHistory(String uid);
 
   void saveProfile(String uid, Profile profile);
 
@@ -89,10 +89,10 @@ class FireStoreServiceImpl implements FireStoreService {
   }
 
   @override
-  Future<List<Game>> fetchGameHistory(String uid) async {
+  Future<List<OfflineGame>> fetchGameHistory(String uid) async {
     return _firestore.collection('gameHistory')
         .doc(uid)
-        .get().then((snapshot) => snapshot.data()['data'].length == 0 ? [] : List<Game>.from(snapshot.data().values.map((json) => Game.fromJson(json))));
+        .get().then((snapshot) => snapshot.data()['data'].length == 0 ? [] : List<OfflineGame>.from(snapshot.data().values.map((json) => OfflineGame.fromJson(json))));
   }
 
   @override

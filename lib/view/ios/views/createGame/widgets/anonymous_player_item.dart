@@ -1,6 +1,6 @@
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:dart_counter/view/ios/modalBottomSheets/advancedSettingsModalBottomSheet/advanced_settings_modal_bottom_sheet.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AnonymousPlayerItem extends StatelessWidget {
-  final Player player;
+  final OfflinePlayer player;
   final Function(int) onDismissed;
 
   AnonymousPlayerItem(this.player, {this.onDismissed});
@@ -20,7 +20,7 @@ class AnonymousPlayerItem extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 50 / 613,
       child: Dismissible(
-        key: ValueKey<Player>(player),
+        key: ValueKey<OfflinePlayer>(player),
         onDismissed: (_) => onDismissed(player.id),
         background: Container(
           color: AppColors.red,

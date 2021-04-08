@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:dart_client/dart_client.dart' as dartClient;
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_client/packets/incoming/response_packet.dart';
+import 'package:dart_counter/model/online_game.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class PlayingOnlineService {
@@ -55,7 +56,7 @@ class PlayingOnlineServiceImpl implements PlayingOnlineService {
   PlayingOnlineServiceImpl._();
 
   @override
-  ValueStream<dynamic> get events => ValueConnectableStream(_client.received.map((event) => throw UnimplementedError())); // TODO
+  ValueStream<dynamic> get events => ValueConnectableStream(_client.received.map((packet) => _mapToEvents(packet)));
 
   @override
   Future<bool> connect() async {
@@ -131,4 +132,33 @@ class PlayingOnlineServiceImpl implements PlayingOnlineService {
   void undoThrow() {
     _client.undoThrow();
   }
+
+  dynamic _mapToEvents(ResponsePacket packet) {
+    // TODO
+    throw UnimplementedError();
+  }
 }
+
+abstract class PlayingOnlineServiceEvent {}
+
+class SnapshotEvent extends PlayingOnlineServiceEvent {
+
+  OnlineGame game;
+
+  SnapshotEvent(this.game);
+}
+
+class PlayerJoined extends PlayingOnlineServiceEvent {
+
+  String username;
+
+  PlayerJoined(this.username);
+}
+
+class PlayerExited extends PlayingOnlineServiceEvent {
+
+  String username;
+
+  PlayerExited(this.username);
+}
+

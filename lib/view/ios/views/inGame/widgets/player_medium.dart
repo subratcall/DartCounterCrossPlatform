@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayerMedium extends StatelessWidget {
-  final Player player;
+  final OfflinePlayer player;
 
   PlayerMedium(this.player);
 

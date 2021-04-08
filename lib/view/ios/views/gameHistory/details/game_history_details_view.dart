@@ -1,11 +1,11 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/view/ios/views/view.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'game_history_details_view_mobile_portrait.dart';
 
 class GameHistoryDetailsView extends StatelessWidget {
-  final Game game;
+  final OfflineGame game;
 
   GameHistoryDetailsView(this.game);
 

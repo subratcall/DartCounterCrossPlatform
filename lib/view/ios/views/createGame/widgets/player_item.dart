@@ -1,12 +1,12 @@
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:dart_counter/view/ios/modalBottomSheets/advancedSettingsModalBottomSheet/advanced_settings_modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PlayerItem extends StatelessWidget {
-  final Player player;
+  final OfflinePlayer player;
   final Function(int) onDismissed;
 
   PlayerItem(this.player, {this.onDismissed});

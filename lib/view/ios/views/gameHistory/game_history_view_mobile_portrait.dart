@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/view/ios/views/gameHistory/details/game_history_details_view.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/viewmodel/game_history_viewmodel.dart';
@@ -32,11 +32,11 @@ class GameHistoryViewMobilePortrait extends StatelessWidget {
                 ),
                 Expanded(
                     flex: 607,
-                    child: StreamBuilder<List<Game>>(
+                    child: StreamBuilder<List<OfflineGame>>(
                       stream: model.outputGames,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          List<Game> games = snapshot.data;
+                          List<OfflineGame> games = snapshot.data;
                           return games.length != 0
                               ? ListView.builder(
                                   itemCount: games.length,

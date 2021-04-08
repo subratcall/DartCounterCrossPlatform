@@ -16,7 +16,6 @@ part 'enums/type.dart';
 /// ##### packets #####
 
 /// incoming
-part 'packets/incoming/game_canceled_packet.dart';
 part 'packets/incoming/player_exited_packet.dart';
 part 'packets/incoming/player_joined_packet.dart';
 part 'packets/incoming/snapshot_packet.dart';

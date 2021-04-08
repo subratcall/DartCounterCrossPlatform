@@ -1,6 +1,6 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/model/leg.dart';
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:dart_counter/model/set.dart';
 import 'package:dart_counter/model/stats.dart';
 import 'package:dart_counter/model/throw.dart';
@@ -20,7 +20,7 @@ abstract class PlayingOfflineService {
 
   /// INTERFACE
 
-  ValueStream<Game> get games;
+  ValueStream<OfflineGame> get games;
 
   void createGame();
 
@@ -48,6 +48,8 @@ abstract class PlayingOfflineService {
 
   void startGame();
 
+  void cancelGame();
+
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
   void undoThrow();
@@ -55,21 +57,21 @@ abstract class PlayingOfflineService {
 
 class PlayingOfflineServiceImpl implements PlayingOfflineService {
 
-  final BehaviorSubject<Game> _gamesController = new BehaviorSubject();
+  final BehaviorSubject<OfflineGame> _gamesController = new BehaviorSubject();
 
   dartGame.Game _game;
 
   PlayingOfflineServiceImpl._();
 
   @override
-  ValueStream<Game> get games => _gamesController.stream;
+  ValueStream<OfflineGame> get games => _gamesController.stream;
 
   @override
   void createGame() {
     _game = dartGame.Game();
     _gamesController.add(_mapGame(_game));
   }
-
+  
   @override
   void addDartBot() {
     _game.addDartBot();
@@ -137,6 +139,12 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
   }
 
   @override
+  void cancelGame() {
+    _game.cancel();
+    _gamesController.add(_mapGame(_game));
+  }
+
+  @override
   void performThrow(int points, int dartsThrown, int dartsOnDouble) {
     _game.performThrow(dartGame.Throw(points, dartsThrown: dartsThrown, dartsOnDouble: dartsOnDouble));
     _gamesController.add(_mapGame(_game));
@@ -152,7 +160,7 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
     _gamesController.close();
   }
 
-  Game _mapGame(dartGame.Game game) {
+  OfflineGame _mapGame(dartGame.Game game) {
     Status status = game.status == dartGame.Status.pending
         ? Status.pending
         : game.status == dartGame.Status.running
@@ -163,7 +171,7 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
     int size = game.config.size;
     Type type = game.config.type == dartGame.Type.legs ? Type.legs : Type.sets;
     int startingPoints = game.config.startingPoints;
-    List<Player> players = [];
+    List<OfflinePlayer> players = [];
 
     Stats parseStats(dartGame.Stats stats) => Stats(
       average: stats.average,
@@ -197,7 +205,7 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
       legs: set.legs.map((leg) => parseLeg(leg)).toList(),
     );
 
-    Player parsePlayer(dartGame.Player player) => Player(
+    OfflinePlayer parsePlayer(dartGame.Player player) => OfflinePlayer(
       id: player.id,
       name: player.name,
       isCurrentTurn: player.isCurrentTurn,
@@ -216,7 +224,7 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
       players.add(parsePlayer(player));
     }
 
-    return Game(
+    return OfflineGame(
       status: status,
       mode: mode,
       size: size,

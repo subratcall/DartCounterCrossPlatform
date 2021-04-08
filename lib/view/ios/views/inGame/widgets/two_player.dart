@@ -1,9 +1,9 @@
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/player_medium.dart';
 import 'package:flutter/cupertino.dart';
 
 class TwoPlayer extends StatelessWidget {
-  final List<Player> players;
+  final List<OfflinePlayer> players;
 
   TwoPlayer(this.players);
 

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/card.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/anonymous_player_item.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_item.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:reorderables/reorderables.dart';
 
 class PlayerCard extends StatefulWidget {
-  final List<Player> players;
+  final List<OfflinePlayer> players;
   final Function() onAddPlayerPressed;
   final Function(int) onRemovePlayer;
   final Function(int, String) onNameChanged;
@@ -54,7 +54,7 @@ class _PlayerCardState extends State<PlayerCard> {
                 ReorderableSliverList(
                   delegate: ReorderableSliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      Player player = widget.players[index];
+                      OfflinePlayer player = widget.players[index];
                       if (player.id == -1) {
                         return DartBotItem(player);
                       } else if (player.profile != null) {

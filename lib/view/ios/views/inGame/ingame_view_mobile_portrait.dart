@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/four_player.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/input_row.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/key_board.dart';
@@ -22,7 +22,7 @@ class InGameViewMobilePortrait extends StatelessWidget {
       final double width = boxConstraints.maxWidth;
       final double height = boxConstraints.maxHeight;
       return Builder(builder: (context) {
-        Game game = model.currentSnapshot;
+        OfflineGame game = model.currentSnapshot;
         return game != null
             ? Row(
                 children: [

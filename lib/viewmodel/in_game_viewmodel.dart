@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/services/playing/playing_offline_service.dart';
 import 'package:dart_counter/services/playing/playing_online_service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
@@ -6,7 +6,7 @@ import 'package:dart_counter/viewmodel/viewmodel.dart';
 
 abstract class InGameViewModel extends ViewModel {
   int inputPoints;
-  Game currentSnapshot;
+  OfflineGame currentSnapshot;
 
   void onUndoPressed();
 
@@ -24,7 +24,7 @@ class InGameViewModelImpl extends InGameViewModel {
   InGameViewModelImpl(this.online);
 
   int inputPoints = 0;
-  Game currentSnapshot;
+  OfflineGame currentSnapshot;
 
   void onUndoPressed() {
     // TODO reset only if true

@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/services/playing/playing_online_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
@@ -38,6 +38,8 @@ abstract class CreateOnlineGameViewModel extends ViewModel {
   void performThrow(int points, int dartsThrown, int dartsOnDouble);
 
   void undoThrow();
+
+  void onStartGamePressed();
 }
 
 class CreateOnlineGameViewModelImpl extends CreateOnlineGameViewModel {
@@ -123,4 +125,7 @@ class CreateOnlineGameViewModelImpl extends CreateOnlineGameViewModel {
     _playingOnlineService.undoThrow();
   }
 
+  void onStartGamePressed() {
+    _playingOnlineService.startGame();
+  }
 }

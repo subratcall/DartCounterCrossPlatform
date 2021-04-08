@@ -1,5 +1,5 @@
 import 'package:dart_counter/app_routes.dart';
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/action_button.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_card.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/game_settings_card.dart';
@@ -20,11 +20,11 @@ class CreateOfflineGameViewMobilePortrait extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints boxConstraints) {
       final double width = boxConstraints.maxWidth;
       final double height = boxConstraints.maxHeight;
-      return StreamBuilder<Game>(
+      return StreamBuilder<OfflineGame>(
           initialData: model.outputGames.value,
           stream: model.outputGames,
           builder: (context, snapshot) {
-            Game game = snapshot.data;
+            OfflineGame game = snapshot.data;
             if(game == null) {
               return Center(child: Text('Fehler'),);
             }

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dart_counter/model/career_stats.dart';
 import 'package:dart_counter/model/friend.dart';
 import 'package:dart_counter/model/friend_request.dart';
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/model/invitation.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/services/database/impl/firestore_service.dart';
@@ -32,7 +32,7 @@ abstract class DatabaseService {
 
   ValueStream<List<FriendRequest>> get friendRequests;
 
-  ValueStream<List<Game>> get gameHistory;
+  ValueStream<List<OfflineGame>> get gameHistory;
 
   void fetchProfile();
 
@@ -53,7 +53,7 @@ class DatabaseServiceImpl implements DatabaseService {
 
   final BehaviorSubject<Profile> _profilesController = BehaviorSubject();
   final BehaviorSubject<List<Friend>> _friendsController = BehaviorSubject();
-  final BehaviorSubject<List<Game>> _gameHistoryController = BehaviorSubject();
+  final BehaviorSubject<List<OfflineGame>> _gameHistoryController = BehaviorSubject();
 
   DatabaseServiceImpl._()
       : this._fireStoreService = FireStoreService.instance,
@@ -75,7 +75,7 @@ class DatabaseServiceImpl implements DatabaseService {
   ValueStream<List<FriendRequest>> get friendRequests => _fireStoreService.friendRequests;
 
   @override
-  ValueStream<List<Game>> get gameHistory => _gameHistoryController.stream;
+  ValueStream<List<OfflineGame>> get gameHistory => _gameHistoryController.stream;
 
   @override
   void fetchProfile() async {
@@ -91,7 +91,7 @@ class DatabaseServiceImpl implements DatabaseService {
 
   @override
   void fetchGameHistory() async {
-    List<Game> gameHistory = await _fireStoreService.fetchGameHistory(uid);
+    List<OfflineGame> gameHistory = await _fireStoreService.fetchGameHistory(uid);
     _gameHistoryController.add(gameHistory);
   }
 

@@ -2,7 +2,7 @@ import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/model/set.dart';
 import 'package:dart_counter/model/stats.dart';
 
-class Player {
+class OfflinePlayer {
   final Profile profile;
 
   final int id;
@@ -19,7 +19,7 @@ class Player {
 
   final List<Set> sets;
 
-  Player(
+  OfflinePlayer(
       {this.profile,
       this.id,
       this.name,
@@ -34,7 +34,7 @@ class Player {
       this.stats,
       this.sets});
 
-  Player.fromJson(Map<String, dynamic> json)
+  OfflinePlayer.fromJson(Map<String, dynamic> json)
       : profile =
             json['profile'] != null ? Profile.fromJson(json['profile']) : null,
         id = json['id'] != null ? json['id'] : null,

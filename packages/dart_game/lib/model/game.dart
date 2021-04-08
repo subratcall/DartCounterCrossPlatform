@@ -104,6 +104,21 @@ class Game {
     }
   }
 
+  void restart() {
+    if(_oldStatus == Status.pending) {
+      start();
+    } else {
+      _status = Status.running;
+    }
+  }
+
+  void cancel() {
+    if(_status == Status.pending || _status == Status.running) {
+      _oldStatus = _status;
+      _status = Status.canceled;
+    }
+  }
+
   void performThrow(Throw t) {
     if (_status == Status.running) {
       if (ThrowValidator.validateThrow(t, _currentTurn.pointsLeft)) {
@@ -174,11 +189,13 @@ class Game {
     }
   }
 
+
   ///
   /// PRIVATE
   ///
 
   Status _status;
+  Status _oldStatus;
   Config _config;
   List<Player> _players;
   int _turnIndex;

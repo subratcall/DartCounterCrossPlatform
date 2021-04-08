@@ -1,9 +1,9 @@
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 import 'package:flutter/cupertino.dart';
 
 class DartBotItem extends StatelessWidget {
-  final Player dartBot;
+  final OfflinePlayer dartBot;
 
   DartBotItem(this.dartBot);
 

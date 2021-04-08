@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/services/playing/playing_offline_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,7 +11,7 @@ abstract class CreateOfflineGameViewModel extends ViewModel {
   Sink get inputDartBotActive;
 
   /// OUT
-  ValueStream<Game> get outputGames;
+  ValueStream<OfflineGame> get outputGames;
 
   ValueStream<bool> get outputDartBotActive;
 
@@ -35,6 +35,8 @@ abstract class CreateOfflineGameViewModel extends ViewModel {
   void onNameChanged(int id, String newName);
 
   void onReorderPlayer(int oldIndex, int newIndex);
+  
+  void onCancelGamePressed();
 }
 
 class CreateOfflineGameViewModelImpl extends CreateOfflineGameViewModel {
@@ -54,7 +56,7 @@ class CreateOfflineGameViewModelImpl extends CreateOfflineGameViewModel {
 
   /// OUT
   @override
-  ValueStream<Game> get outputGames => _playingOfflineService.games;
+  ValueStream<OfflineGame> get outputGames => _playingOfflineService.games;
 
   @override
   ValueStream<bool> get outputDartBotActive => _dartBotActiveController.stream;
@@ -106,6 +108,11 @@ class CreateOfflineGameViewModelImpl extends CreateOfflineGameViewModel {
   @override
   void onReorderPlayer(int oldIndex, int newIndex) {
     _playingOfflineService.reorderPlayer(oldIndex, newIndex);
+  }
+
+  @override
+  void onCancelGamePressed() {
+    _playingOfflineService.cancelGame();
   }
 
   void dispose() {

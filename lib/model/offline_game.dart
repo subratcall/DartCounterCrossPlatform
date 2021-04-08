@@ -1,10 +1,10 @@
-import 'package:dart_counter/model/player.dart';
+import 'package:dart_counter/model/offline_player.dart';
 
-enum Status { pending, running, finished }
+enum Status { pending, canceled, running, finished }
 enum Mode { firstTo, bestOf }
 enum Type { legs, sets }
 
-class Game {
+class OfflineGame {
   final DateTime date;
 
   final Status status;
@@ -13,9 +13,9 @@ class Game {
   final Type type;
   final int startingPoints;
 
-  final List<Player> players;
+  final List<OfflinePlayer> players;
 
-  Game(
+  OfflineGame(
       {this.date,
       this.status,
       this.mode,
@@ -24,22 +24,22 @@ class Game {
       this.startingPoints,
       this.players});
 
-  Game.fromJson(Map<String, dynamic> json)
+  OfflineGame.fromJson(Map<String, dynamic> json)
       : date = DateTime.parse(json['date']),
-        status = json['mode'] == 'pending' ? Status.pending : json['mode'] == 'running' ? Status.running : Status.finished,
+        status = json['mode'] == 'pending' ? Status.pending : json['canceled'] == 'canceled' ? Status.canceled : json['mode'] == 'running' ? Status.running : Status.finished,
         mode = json['mode'] == 'firstTo' ? Mode.firstTo : Mode.bestOf,
         type = json['type'] == 'legs' ? Type.legs : Type.sets,
         size = json['size'],
         startingPoints = json['startingPoints'],
         players = json['players'] != null ? json['players']
-            .map((value) => Player.fromJson(value))
-            .cast<Player>()
+            .map((value) => OfflinePlayer.fromJson(value))
+            .cast<OfflinePlayer>()
             .toList()
             : null;
 
   Map<String, dynamic> toJson() => {
         'date': date.toIso8601String(),
-        'status': status == Status.running ? 'running' : status == Status.pending ? 'pending' : 'finished',
+        'status': status == Status.running ? 'running' : status == Status.canceled ? 'canceled' : status == Status.pending ? 'pending' : 'finished',
         'mode': mode == Mode.firstTo ? 'firstTo' : 'bestOf',
         'type': type == Type.legs ? 'legs' : 'sets',
         'size': size,
@@ -67,9 +67,9 @@ class Game {
     return modeString + ' ${size.toString()} ' + typeString;
   }
 
-  Player get winner {
+  OfflinePlayer get winner {
     if (status == Status.finished) {
-      for (Player player in players) {
+      for (OfflinePlayer player in players) {
         if (player.won) {
           return player;
         }
@@ -78,8 +78,8 @@ class Game {
     return null;
   }
 
-  Player get currentTurn {
-    for (Player player in players) {
+  OfflinePlayer get currentTurn {
+    for (OfflinePlayer player in players) {
       if (player.isCurrentTurn) {
         return player;
       }

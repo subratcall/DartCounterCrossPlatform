@@ -1,5 +1,5 @@
 import 'package:dart_counter/app_routes.dart';
-import 'package:dart_counter/model/game.dart';
+import 'package:dart_counter/model/offline_game.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/action_button.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_card.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/game_settings_card.dart';
@@ -25,7 +25,7 @@ class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
           initialData: model.outputEvents.value,
           stream: model.outputEvents,
           builder: (context, snapshot) {
-            Game game = snapshot.data; // TODO
+            OfflineGame game = snapshot.data; // TODO
             if(game == null) {
               return Center(child: Text('Fehler'),);
             }
@@ -43,17 +43,10 @@ class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
                       child: Column(
                         children: [
                           Spacer(
-                            flex: 8,
-                          ),
-                          Expanded(
-                            flex: 115, // TODO sonst 41
-                            child: DartBotCard(
-                              outputDartBotActive: model.inputDartBotActive,
-                              inputDartBotActive: model.outputDartBotActive,
-                            ),
+                            flex: 31,
                           ),
                           Spacer(
-                            flex: 8,
+                            flex: 31,
                           ),
                           Expanded(
                             flex: 94, // TODO +50 pro player
@@ -66,7 +59,7 @@ class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
                             ),
                           ),
                           Spacer(
-                            flex: 8,
+                            flex: 31,
                           ),
                           Expanded(
                             flex: 281,
@@ -82,7 +75,7 @@ class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
                             ),
                           ),
                           Spacer(
-                            flex: 18,
+                            flex: 41,
                           ),
                           Expanded(
                             flex: 75,
@@ -95,7 +88,7 @@ class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
                             ),
                           ),
                           Spacer(
-                            flex: 18,
+                            flex: 41,
                           ),
                         ],
                       ),
