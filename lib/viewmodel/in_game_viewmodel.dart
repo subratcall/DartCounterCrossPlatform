@@ -1,5 +1,6 @@
 import 'package:dart_counter/model/game.dart';
-import 'package:dart_counter/services/playing/playing_service.dart';
+import 'package:dart_counter/services/playing/playing_offline_service.dart';
+import 'package:dart_counter/services/playing/playing_online_service.dart';
 import 'package:dart_counter/viewmodel/enum/key_type.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 
@@ -15,21 +16,34 @@ abstract class InGameViewModel extends ViewModel {
 }
 
 class InGameViewModelImpl extends InGameViewModel {
-  final PlayingService _playingService = PlayingService.instance;
+  final PlayingOnlineService _playingOnlineService = PlayingOnlineService.instance;
+  final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
+
+  final bool online;
+
+  InGameViewModelImpl(this.online);
 
   int inputPoints = 0;
   Game currentSnapshot;
 
   void onUndoPressed() {
     // TODO reset only if true
-    _playingService.undoThrow();
+    if(online) {
+      _playingOnlineService.undoThrow();
+    } else {
+      _playingOfflineService.undoThrow();
+    }
     inputPoints = 0;
   }
 
   @override
   void onPerformThrowPressed() {
     // TODO reset only if true
-    _playingService.performThrow(inputPoints);
+    if(online) {
+      _playingOnlineService.undoThrow();
+    } else {
+      _playingOfflineService.undoThrow();
+    }
     inputPoints = 0;
   }
 
@@ -100,7 +114,8 @@ class InGameViewModelImpl extends InGameViewModel {
         int.parse(inputPoints.toString() + newDigit.toString());
 
     if (newInputPoints == 0) return false;
-    return _playingService.validatePoints(newInputPoints, pointsLeft);
+    return true;
+    //return _playingService.validatePoints(newInputPoints, pointsLeft);
   }
 
   @override

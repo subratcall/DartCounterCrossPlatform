@@ -9,12 +9,24 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'ingame_view_mobile_portrait.dart';
 
 class InGameView extends StatefulWidget {
+
+  final bool online;
+
+  InGameView(this.online);
+
   @override
   _InGameViewState createState() => _InGameViewState();
 }
 
 class _InGameViewState extends State<InGameView> {
-  final InGameViewModel model = InGameViewModelImpl();
+
+   InGameViewModel model;
+
+  @override
+  void initState() {
+    model = InGameViewModelImpl(widget.online);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

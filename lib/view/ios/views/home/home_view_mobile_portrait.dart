@@ -40,7 +40,7 @@ class HomeViewMobilePortrait extends StatelessWidget {
               flex: 3,
               child: PlayOnlineButton(
                 onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.createGame),
+                    Navigator.pushNamed(context, AppRoutes.createOnlineGame),
               ),
             ),
             SizedBox(
@@ -50,7 +50,7 @@ class HomeViewMobilePortrait extends StatelessWidget {
               flex: 3,
               child: PlayOfflineButton(
                 onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.createGame),
+                    Navigator.pushNamed(context, AppRoutes.createOfflineGame),
               ),
             ),
             SizedBox(

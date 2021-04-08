@@ -8,7 +8,9 @@ class AppRoutes {
   static const settings = 'settings';
   static const aboutUs = 'aboutUs';
   static const socialMedia = 'socialMedia';
-  static const createGame = 'createGame';
-  static const inGame = 'inGame';
+  static const createOfflineGame = 'createOfflineGame';
+  static const createOnlineGame = 'createOnlineGame';
+  static const inGameOnline = 'inGameOnline';
+  static const inGameOffline = 'inGameOffline';
   static const postGame = 'postGame';
 }

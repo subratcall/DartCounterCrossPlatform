@@ -1,18 +1,19 @@
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/action_button.dart';
-import 'package:dart_counter/viewmodel/create_game_viewmodel.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_card.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/game_settings_card.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/player_card.dart';
+import 'package:dart_counter/viewmodel/create_offline_game_viewmodel.dart';
+import 'package:dart_counter/viewmodel/create_online_game_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'widgets/dart_bot_card.dart';
-import 'widgets/game_settings_card.dart';
-import 'widgets/player_card.dart';
 
-class CreateGameViewMobilePortrait extends StatelessWidget {
-  final CreateGameViewModel model;
+class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
+  final CreateOnlineGameViewModel model;
 
-  CreateGameViewMobilePortrait(this.model);
+  CreateOnlineGameViewMobilePortrait(this.model);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,13 @@ class CreateGameViewMobilePortrait extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints boxConstraints) {
       final double width = boxConstraints.maxWidth;
       final double height = boxConstraints.maxHeight;
-      return StreamBuilder<Game>(
-          initialData: model.outputSnapshots.value,
-          stream: model.outputSnapshots,
+      return StreamBuilder<dynamic>(
+          initialData: model.outputEvents.value,
+          stream: model.outputEvents,
           builder: (context, snapshot) {
-            Game game = snapshot.data;
+            Game game = snapshot.data; // TODO
             if(game == null) {
-              return Center(child: Text('Fhler'),);
+              return Center(child: Text('Fehler'),);
             }
             return SingleChildScrollView(
               child: SizedBox(
@@ -89,7 +90,7 @@ class CreateGameViewMobilePortrait extends StatelessWidget {
                               text: AppLocalizations.of(context).startGame,
                               onPressed: () {
                                 model.onStartGamePressed();
-                                Navigator.pushNamed(context, AppRoutes.inGame);
+                                Navigator.pushNamed(context, AppRoutes.inGameOnline);
                               },
                             ),
                           ),

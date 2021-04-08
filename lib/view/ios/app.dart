@@ -3,13 +3,14 @@ import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/model/user.dart';
 import 'package:dart_counter/services/authentication/authentication_service.dart';
 import 'package:dart_counter/services/database/database_service.dart';
+import 'package:dart_counter/view/ios/views/createGame/createOfflineGame/create_offline_game_view.dart';
+import 'package:dart_counter/view/ios/views/createGame/createOnlineGame/create_online_game_view.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'theme.dart';
 import 'views/aboutUs/about_us_view.dart';
-import 'views/createGame/create_game_view.dart';
 import 'views/friends/friends_view.dart';
 import 'views/gameHistory/game_history_view.dart';
 import 'views/home/home_view.dart';
@@ -56,8 +57,10 @@ class DartCounterAppIOS extends StatelessWidget {
         AppRoutes.settings: (context) => SettingsView(),
         AppRoutes.aboutUs: (context) => AboutUsView(),
         AppRoutes.socialMedia: (context) => SocialMediaView(),
-        AppRoutes.createGame: (context) => CreateGameView(),
-        AppRoutes.inGame: (context) => InGameView(),
+        AppRoutes.createOfflineGame: (context) => CreateOfflineGameView(),
+        AppRoutes.createOnlineGame: (context) => CreateOnlineGameView(),
+        AppRoutes.inGameOffline: (context) => InGameView(false),
+        AppRoutes.inGameOnline: (context) => InGameView(true),
         AppRoutes.postGame: (context) => PostGameView(),
       },
     );
