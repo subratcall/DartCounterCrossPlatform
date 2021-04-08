@@ -21,8 +21,13 @@ class CreateGameViewMobilePortrait extends StatelessWidget {
       final double width = boxConstraints.maxWidth;
       final double height = boxConstraints.maxHeight;
       return StreamBuilder<Game>(
+          initialData: model.outputSnapshots.value,
           stream: model.outputSnapshots,
           builder: (context, snapshot) {
+            Game game = snapshot.data;
+            if(game == null) {
+              return Center(child: Text('Fhler'),);
+            }
             return SingleChildScrollView(
               child: SizedBox(
                 width: width,
@@ -52,7 +57,7 @@ class CreateGameViewMobilePortrait extends StatelessWidget {
                           Expanded(
                             flex: 94, // TODO +50 pro player
                             child: PlayerCard(
-                              model.currentSnapshot.players,
+                              game.players,
                               onAddPlayerPressed: model.onAddPlayerPressed,
                               onRemovePlayer: model.onRemovePlayer,
                               onNameChanged: model.onNameChanged,

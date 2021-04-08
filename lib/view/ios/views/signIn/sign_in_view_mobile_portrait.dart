@@ -40,7 +40,7 @@ class SignInViewMobilePortrait extends StatelessWidget {
             ? SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
                 child: Builder(
-                  builder: (context) => ConstrainedBox(
+                  builder: (c) => ConstrainedBox(
                     constraints:
                         BoxConstraints(maxWidth: width, maxHeight: height),
                     child: Row(

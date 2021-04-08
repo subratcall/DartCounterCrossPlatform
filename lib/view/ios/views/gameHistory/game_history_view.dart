@@ -14,6 +14,12 @@ class _GameHistoryViewState extends State<GameHistoryView> {
   final GameHistoryViewModel model = GameHistoryViewModelImpl();
 
   @override
+  void initState() {
+    model.fetchGameHistory();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return View(
       navigationBar: CupertinoNavigationBar(

@@ -6,6 +6,7 @@ import 'package:dart_counter/model/stats.dart';
 import 'package:dart_counter/model/throw.dart';
 import 'package:dart_counter/services/playing/impl/playing_online_service.dart';
 import 'package:dart_game/dart_game.dart' as dartGame;
+import 'package:rxdart/rxdart.dart';
 
 import 'impl/playing_offline_service.dart';
 
@@ -21,6 +22,9 @@ abstract class PlayingService {
   }
 
   /// INTERFACE
+
+  ValueStream<Game> get games;
+
   Future<bool> start([bool online]);
 
   Future<bool> finish();
@@ -65,16 +69,18 @@ abstract class PlayingService {
 }
 
 class PlayingServiceImpl implements PlayingService {
-  final PlayingOfflineService _playingOfflineService =
-      PlayingOfflineService.instance;
-  final PlayingOnlineService _playingOnlineService =
-      PlayingOnlineService.instance;
+  final PlayingOfflineService _playingOfflineService = PlayingOfflineService.instance;
+  final PlayingOnlineService _playingOnlineService = PlayingOnlineService.instance;
 
   bool _online = false;
 
   PlayingServiceImpl._();
 
   bool get online => _online;
+
+
+  @override
+  ValueStream<Game> get games => _playingOfflineService.games.map((game) => _mapGame(game));
 
   /// must call this method before a game
   @override
@@ -245,7 +251,7 @@ class PlayingServiceImpl implements PlayingService {
     return dartGame.ThrowValidator.validatePoints(points, pointsLeft);
   }
 
-  Game _parseOfflineGame(dartGame.Game game) {
+  Game _mapGame(dartGame.Game game) {
     Status status = game.status == dartGame.Status.pending
         ? Status.pending
         : game.status == dartGame.Status.running

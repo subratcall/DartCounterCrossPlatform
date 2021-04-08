@@ -26,36 +26,25 @@ class Game {
 
   Game.fromJson(Map<String, dynamic> json)
       : date = DateTime.parse(json['date']),
-        status = json['mode'] == 'pending'
-            ? Status.pending
-            : json['mode'] == 'running'
-                ? Status.running
-                : Status.finished,
+        status = json['mode'] == 'pending' ? Status.pending : json['mode'] == 'running' ? Status.running : Status.finished,
         mode = json['mode'] == 'firstTo' ? Mode.firstTo : Mode.bestOf,
         type = json['type'] == 'legs' ? Type.legs : Type.sets,
         size = json['size'],
         startingPoints = json['startingPoints'],
-        players = json['players'] != null
-            ? json['players']
-                .map((value) => Player.fromJson(value))
-                .cast<Player>()
-                .toList()
+        players = json['players'] != null ? json['players']
+            .map((value) => Player.fromJson(value))
+            .cast<Player>()
+            .toList()
             : null;
 
   Map<String, dynamic> toJson() => {
         'date': date.toIso8601String(),
-        'status': status == Status.running
-            ? 'running'
-            : status == Status.pending
-                ? 'pending'
-                : 'finished',
+        'status': status == Status.running ? 'running' : status == Status.pending ? 'pending' : 'finished',
         'mode': mode == Mode.firstTo ? 'firstTo' : 'bestOf',
         'type': type == Type.legs ? 'legs' : 'sets',
         'size': size,
         'startingPoints': startingPoints,
-        'players': players != null
-            ? players.map((player) => player.toJson()).toList()
-            : null,
+        'players': players != null ? players.map((player) => player.toJson()).toList() : null,
       };
 
   String get description {

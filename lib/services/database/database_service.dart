@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dart_counter/model/carrer_stats.dart';
+import 'package:dart_counter/model/career_stats.dart';
 import 'package:dart_counter/model/friend.dart';
 import 'package:dart_counter/model/friend_request.dart';
 import 'package:dart_counter/model/game.dart';
@@ -22,7 +22,9 @@ abstract class DatabaseService {
   }
 
   /// INTERFACE
-  ValueStream<Profile> get profile;
+  String uid;
+
+  ValueStream<Profile> get profiles;
 
   ValueStream<List<Invitation>> get invitations;
 
@@ -32,55 +34,91 @@ abstract class DatabaseService {
 
   ValueStream<List<Game>> get gameHistory;
 
-  void createUser(String uid, String username);
+  void fetchProfile();
 
-  void updatePhoto(String uid, File rawData);
+  void fetchFriends();
 
-  void removePhoto(String uid);
+  void fetchGameHistory();
+
+  void createUser(String username);
+
+  void updatePhoto(File rawData);
+
+  void removePhoto();
 }
 
 class DatabaseServiceImpl implements DatabaseService {
   final FireStoreService _fireStoreService;
   final StorageService _storageService;
 
-  String _uid = 'dodod';
+  final BehaviorSubject<Profile> _profilesController = BehaviorSubject();
+  final BehaviorSubject<List<Friend>> _friendsController = BehaviorSubject();
+  final BehaviorSubject<List<Game>> _gameHistoryController = BehaviorSubject();
 
   DatabaseServiceImpl._()
       : this._fireStoreService = FireStoreService.instance,
         this._storageService = StorageService.instance;
 
   @override
-  ValueStream<Profile> get profile => _fireStoreService.profile(_uid);
+  String uid;
 
   @override
-  ValueStream<List<Invitation>> get invitations =>
-      _fireStoreService.invitations(_uid);
+  ValueStream<Profile> get profiles => _profilesController.stream;
 
   @override
-  ValueStream<List<Friend>> get friends => _fireStoreService.friends(_uid);
+  ValueStream<List<Invitation>> get invitations => _fireStoreService.invitations;
 
   @override
-  ValueStream<List<FriendRequest>> get friendRequests =>
-      _fireStoreService.friendRequests(_uid);
+  ValueStream<List<Friend>> get friends => _friendsController.stream;
 
   @override
-  ValueStream<List<Game>> get gameHistory =>
-      _fireStoreService.gameHistory(_uid);
+  ValueStream<List<FriendRequest>> get friendRequests => _fireStoreService.friendRequests;
 
   @override
-  void createUser(String uid, String username) {
+  ValueStream<List<Game>> get gameHistory => _gameHistoryController.stream;
+
+  @override
+  void fetchProfile() async {
+    Profile profile = await _fireStoreService.fetchProfile(uid);
+    _profilesController.add(profile);
+  }
+
+  @override
+  void fetchFriends() async {
+    List<Friend> friends = await _fireStoreService.fetchFriends(uid);
+    _friendsController.add(friends);
+  }
+
+  @override
+  void fetchGameHistory() async {
+    List<Game> gameHistory = await _fireStoreService.fetchGameHistory(uid);
+    _gameHistoryController.add(gameHistory);
+  }
+
+  @override
+  void createUser(String username) {
     _fireStoreService.saveProfile(uid, Profile(null, username, CareerStats()));
+    _fireStoreService.updateIsOnline(uid, true);
+    _fireStoreService.initFriendRequests(uid);
+    _fireStoreService.initFriends(uid);
+    _fireStoreService.initInvitations(uid);
+    _fireStoreService.initGameHistory(uid);
   }
 
   @override
-  void updatePhoto(String uid, File rawData) async {
-    _fireStoreService.updatePhotoUrl(
-        uid, await _storageService.savePhoto(uid, rawData));
+  void updatePhoto(File rawData) async {
+    _fireStoreService.updatePhotoUrl(uid, await _storageService.savePhoto(uid, rawData));
   }
 
   @override
-  void removePhoto(String uid) async {
+  void removePhoto() async {
     await _storageService.deletePhoto(uid);
     _fireStoreService.updatePhotoUrl(uid, null);
+  }
+
+  void dispose() {
+    _profilesController.close();
+    _friendsController.close();
+    _gameHistoryController.close();
   }
 }

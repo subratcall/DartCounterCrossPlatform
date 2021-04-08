@@ -4,8 +4,9 @@ enum UserType { anonymous, emailPassword, google, facebook, instagram, remote }
 
 class User {
   final String uid;
-  final UserType userType;
-  final Profile profile;
+  UserType userType;
+  Profile profile;
 
-  User(this.uid, this.userType, this.profile);
+
+  User({this.uid, this.userType, this.profile});
 }

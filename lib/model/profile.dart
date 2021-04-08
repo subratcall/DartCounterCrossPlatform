@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/carrer_stats.dart';
+import 'package:dart_counter/model/career_stats.dart';
 
 class Profile {
   final String photoUrl;
@@ -19,4 +19,9 @@ class Profile {
         'username': username,
         'careerStats': careerStats.toJson(),
       };
+
+  @override
+  String toString() {
+    return 'Profile{photoUrl: $photoUrl, username: $username, careerStats: $careerStats}';
+  }
 }

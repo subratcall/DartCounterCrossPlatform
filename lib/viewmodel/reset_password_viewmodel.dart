@@ -17,8 +17,7 @@ abstract class ResetPasswordViewModel extends ViewModel {
 }
 
 class ResetPasswordViewModelImpl extends ResetPasswordViewModel {
-  final AuthenticationService _authenticationService =
-      AuthenticationService.instance;
+  final AuthenticationService _authenticationService = AuthenticationService.instance;
 
   BehaviorSubject<String> _emailController = BehaviorSubject();
 

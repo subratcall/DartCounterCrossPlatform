@@ -1,7 +1,6 @@
-import 'package:dart_counter/model/user.dart';
-import 'package:dart_counter/services/database/database_service.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../database/database_service.dart';
 import 'impl/firebase_auth_service.dart';
 import 'impl/instagram_auth_service.dart';
 
@@ -17,7 +16,7 @@ abstract class AuthenticationService {
   }
 
   /// INTERFACE
-  ValueStream<User> get currentUser;
+  ValueStream<String> get currentUid;
 
   Future<void> signIn(String email, String password);
 
@@ -37,21 +36,15 @@ abstract class AuthenticationService {
 class AuthenticationServiceImpl implements AuthenticationService {
   final FirebaseAuthService _firebaseAuth = FirebaseAuthService.instance;
   final InstagramAuthService _instagramAuth = InstagramAuthService.instance;
-  final DatabaseService _databaseService = DatabaseService.instance;
 
   AuthenticationServiceImpl._();
 
-  // TODO usertype has to be determined -- bug fix
-  ValueStream<User> get currentUser => ValueConnectableStream(_firebaseAuth.currentUser
-      .map((firebaseUser) => firebaseUser != null
-      ? User(firebaseUser.uid, UserType.emailPassword,
-      _databaseService.profile.value)
-      : null)
-      .mergeWith([
-    _databaseService.profile.map((profile) => currentUser != null
-        ? User(currentUser.value.uid, UserType.emailPassword, profile)
-        : null)
-  ])).autoConnect();
+  ValueStream<String> get currentUid => ValueConnectableStream(_firebaseAuth.currentUser
+      .map((firebaseUser) {
+        // TODO remove this reference to db service for more modularity
+        DatabaseService.instance.uid = firebaseUser.uid;
+    return firebaseUser != null ? firebaseUser.uid : null;
+  })).autoConnect();
 
   Future<void> signIn(String email, String password) async {
     await _firebaseAuth.signIn(email, password);
@@ -78,10 +71,11 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   Future<void> signOut() async {
-    if (currentUser.value.userType == UserType.emailPassword) {
+    // todo firebase auth
+    if (true) {
       await _firebaseAuth.signOut();
     } else {
-      // TODO
+      // todo ig
       throw UnimplementedError();
     }
   }

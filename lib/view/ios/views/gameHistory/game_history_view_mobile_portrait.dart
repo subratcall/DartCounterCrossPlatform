@@ -37,31 +37,38 @@ class GameHistoryViewMobilePortrait extends StatelessWidget {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           List<Game> games = snapshot.data;
-                          // TODO no hardcoded stuff
-                          return ListView.builder(
-                            itemCount: games.length,
-                            itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  0, 0, 0, index == games.length - 1 ? 0 : 4),
-                              child: CupertinoButton(
-                                padding: EdgeInsets.zero,
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: (MediaQuery.of(context).size.height -
-                                          34) /
-                                      7,
-                                  child: GameHistoryCard(games[index]),
-                                ),
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) =>
-                                        GameHistoryDetailsView(games[index]),
+                          return games.length != 0
+                              ? ListView.builder(
+                                  itemCount: games.length,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 0,
+                                        index == games.length - 1 ? 0 : 4),
+                                    child: CupertinoButton(
+                                      padding: EdgeInsets.zero,
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: (MediaQuery.of(context)
+                                                    .size
+                                                    .height -
+                                                34) /
+                                            7,
+                                        child: GameHistoryCard(games[index]),
+                                      ),
+                                      onPressed: () => Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              GameHistoryDetailsView(
+                                                  games[index]),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          );
+                                )
+                              : Center(
+                                  child: Text(AppLocalizations.of(context).noGamesFound),
+                                );
                         } else if (snapshot.hasError) {
                           return Center(
                             child:

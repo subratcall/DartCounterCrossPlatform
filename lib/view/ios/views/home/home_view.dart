@@ -14,6 +14,12 @@ class _HomeViewState extends State<HomeView> {
   final HomeViewModel model = HomeViewModelImpl();
 
   @override
+  void initState() {
+    model.fetchProfile();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return View(
       navigationBar: CupertinoNavigationBar(

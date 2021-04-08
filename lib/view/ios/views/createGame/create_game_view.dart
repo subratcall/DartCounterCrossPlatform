@@ -14,6 +14,12 @@ class _CreateGameViewState extends State<CreateGameView> {
   final CreateGameViewModel model = CreateGameViewModelImpl();
 
   @override
+  void initState() {
+    model.createGame();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return View(
       navigationBar: CupertinoNavigationBar(

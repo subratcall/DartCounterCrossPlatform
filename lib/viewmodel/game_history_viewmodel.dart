@@ -6,6 +6,7 @@ import 'package:rxdart/rxdart.dart';
 abstract class GameHistoryViewModel extends ViewModel {
   /// IN
 
+  void fetchGameHistory();
   /// OUT
 
   ValueStream<List<Game>> get outputGames;
@@ -15,6 +16,11 @@ abstract class GameHistoryViewModel extends ViewModel {
 
 class GameHistoryViewModelImpl extends GameHistoryViewModel {
   final DatabaseService _databaseService = DatabaseService.instance;
+
+  @override
+  void fetchGameHistory() {
+    _databaseService.fetchGameHistory();
+  }
 
   @override
   ValueStream<List<Game>> get outputGames => _databaseService.gameHistory;

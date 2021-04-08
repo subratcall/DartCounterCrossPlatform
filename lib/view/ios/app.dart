@@ -2,6 +2,7 @@ import 'package:dart_counter/app_model.dart';
 import 'package:dart_counter/app_routes.dart';
 import 'package:dart_counter/model/user.dart';
 import 'package:dart_counter/services/authentication/authentication_service.dart';
+import 'package:dart_counter/services/database/database_service.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,18 +35,17 @@ class DartCounterAppIOS extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       builder: DevicePreview.appBuilder,
       theme: Theme.theme,
-      home: StreamBuilder<User>(
-          stream: AuthenticationService.instance.currentUser,
-          builder: (BuildContext context, AsyncSnapshot<User> snapshot) =>
-              snapshot.data == null
-                  ? PageView(
-                      controller: _pageController,
-                      children: [
-                        SignInView(_pageController),
-                        SignUpView(_pageController),
-                      ],
-                    )
-                  : HomeView()),
+      home: StreamBuilder<String>(
+          stream: AuthenticationService.instance.currentUid,
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            if (snapshot.data == null) {
+              return PageView(controller: _pageController, children: [
+                SignInView(_pageController),
+                SignUpView(_pageController),
+              ]);
+            }
+            return HomeView();
+          }),
       routes: {
         AppRoutes.loading: (context) => LoadingView(),
         AppRoutes.home: (context) => HomeView(),

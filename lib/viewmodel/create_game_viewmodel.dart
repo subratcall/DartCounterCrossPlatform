@@ -3,16 +3,18 @@ import 'dart:async';
 import 'package:dart_counter/model/game.dart';
 import 'package:dart_counter/services/playing/playing_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class CreateGameViewModel extends ViewModel {
-  Game currentSnapshot;
 
   /// IN
+  void createGame();
+
   Sink get inputDartBotActive;
 
   /// OUT
 
-  Stream<Game> get outputSnapshots;
+  ValueStream<Game> get outputSnapshots;
 
   Stream<bool> get outputDartBotActive;
 
@@ -42,22 +44,25 @@ abstract class CreateGameViewModel extends ViewModel {
 class CreateGameViewModelImpl extends CreateGameViewModel {
   final PlayingService _playingService = PlayingService.instance;
 
-  Game currentSnapshot = Game();
-
   StreamController<bool> _dartBotActiveController =
       StreamController.broadcast();
 
   /// IN
+  @override
+  void createGame() {
+    _playingService.createGame();
+  }
+
   @override
   Sink get inputDartBotActive => _dartBotActiveController;
 
   /// OUT
 
   @override
-  Stream<Game> get outputSnapshots => throw UnimplementedError();
+  ValueStream<Game> get outputSnapshots => _playingService.games;
 
   @override
-  Stream<bool> get outputDartBotActive => throw UnimplementedError();
+  Stream<bool> get outputDartBotActive => _dartBotActiveController.stream;
 
   @override
   void onDartBotAverageChanged(int average) {

@@ -11,46 +11,47 @@ abstract class HomeViewModel extends ViewModel {
 
   /// OUT
 
-  Stream<Profile> get outputProfile;
+  ValueStream<Profile> get outputProfile;
 
-  Stream<int> get outputNewInvites;
+  ValueStream<int> get outputNewInvites;
 
-  Stream<int> get outputNewFriendRequests;
+  ValueStream<int> get outputNewFriendRequests;
 
   /// METHODS
+
+  void fetchProfile();
+
   void onSignOutPressed();
 }
 
 class HomeViewModelImpl extends HomeViewModel {
-  final AuthenticationService _authenticationService =
-      AuthenticationService.instance;
+  final AuthenticationService _authenticationService = AuthenticationService.instance;
   final DatabaseService _databaseService = DatabaseService.instance;
-
-  BehaviorSubject<Profile> _profileController = BehaviorSubject();
 
   /// IN
 
   /// OUT
 
   @override
-  Stream<Profile> get outputProfile => _databaseService.profile;
+  ValueStream<Profile> get outputProfile => _databaseService.profiles;
 
+  // TODO get real data
   @override
-  Stream<int> get outputNewInvites =>
-      Stream<int>.periodic(Duration(seconds: 10), (index) => index);
+  ValueStream<int> get outputNewInvites => ValueConnectableStream(Stream<int>.periodic(Duration(seconds: 10), (index) => index)).autoConnect();
 
+  // TODO get real data
   @override
-  Stream<int> get outputNewFriendRequests =>
-      Stream<int>.periodic(Duration(seconds: 10), (index) => index);
+  ValueStream<int> get outputNewFriendRequests => ValueConnectableStream(Stream<int>.periodic(Duration(seconds: 10), (index) => index)).autoConnect();
 
   /// METHODS
+  @override
+  void fetchProfile() async {
+    _databaseService.fetchProfile();
+  }
+
   @override
   void onSignOutPressed() {
     _authenticationService.signOut();
   }
 
-  @override
-  void dispose() {
-    _profileController.close();
-  }
 }

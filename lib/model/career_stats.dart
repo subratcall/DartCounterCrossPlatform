@@ -55,4 +55,9 @@ class CareerStats {
         'wins': wins,
         'defeats': defeats,
       };
+
+  @override
+  String toString() {
+    return 'CareerStats{average: $average, averageTrend: $averageTrend, checkoutPercentage: $checkoutPercentage, checkoutPercentageTrend: $checkoutPercentageTrend, firstNine: $firstNine, firstNineTrend: $firstNineTrend, games: $games, wins: $wins, defeats: $defeats}';
+  }
 }
