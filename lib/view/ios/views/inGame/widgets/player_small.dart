@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/player/player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlayerSmall extends StatelessWidget {
-  final OfflinePlayer player;
+  final Player player;
 
   PlayerSmall(this.player);
 
@@ -38,9 +38,7 @@ class PlayerSmall extends StatelessWidget {
                           flex: 96,
                           child: Center(
                             child: AutoSizeText(
-                              player.id == -1
-                                  ? 'Dartbot'
-                                  : player.name ??
+                              player.name ??
                                       '${AppLocalizations.of(context).player} ${player.id}',
                               maxLines: 1,
                               style: TextStyle(

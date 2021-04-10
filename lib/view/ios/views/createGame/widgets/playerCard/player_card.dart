@@ -1,16 +1,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/player/dartbot.dart';
+import 'package:dart_counter/model/player/offline_player.dart';
+import 'package:dart_counter/model/player/player.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/card.dart';
-import 'package:dart_counter/view/ios/views/createGame/widgets/anonymous_player_item.dart';
-import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_item.dart';
-import 'package:dart_counter/view/ios/views/createGame/widgets/player_item.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/playerCard/widgets/dart_bot_item.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/playerCard/widgets/offline_player_item.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/playerCard/widgets/online_player_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:reorderables/reorderables.dart';
 
 class PlayerCard extends StatefulWidget {
-  final List<OfflinePlayer> players;
+  final List<Player> players;
   final Function() onAddPlayerPressed;
   final Function(int) onRemovePlayer;
   final Function(int, String) onNameChanged;
@@ -54,16 +56,16 @@ class _PlayerCardState extends State<PlayerCard> {
                 ReorderableSliverList(
                   delegate: ReorderableSliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      OfflinePlayer player = widget.players[index];
-                      if (player.id == -1) {
+                      Player player = widget.players[index];
+                      if (player is DartBot) {
                         return DartBotItem(player);
-                      } else if (player.profile != null) {
-                        return PlayerItem(
+                      } else if (player is OfflinePlayer) {
+                        return OfflinePlayerItem(
                           player,
                           onDismissed: widget.onRemovePlayer,
                         );
                       } else {
-                        return AnonymousPlayerItem(
+                        return OnlinePlayerItem(
                           player,
                           onDismissed: widget.onRemovePlayer,
                           //onNameChanged: (name) => widget.onNameChanged(player.id, name), TODO

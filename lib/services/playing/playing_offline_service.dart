@@ -1,6 +1,7 @@
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/model/leg.dart';
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/player/offline_player.dart';
 import 'package:dart_counter/model/set.dart';
 import 'package:dart_counter/model/stats.dart';
 import 'package:dart_counter/model/throw.dart';
@@ -206,7 +207,6 @@ class PlayingOfflineServiceImpl implements PlayingOfflineService {
     );
 
     OfflinePlayer parsePlayer(dartGame.Player player) => OfflinePlayer(
-      id: player.id,
       name: player.name,
       isCurrentTurn: player.isCurrentTurn,
       won: player.won,

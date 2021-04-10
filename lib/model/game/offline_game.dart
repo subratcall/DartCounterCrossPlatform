@@ -1,10 +1,7 @@
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/game/game.dart';
+import 'package:dart_counter/model/player/offline_player.dart';
 
-enum Status { pending, canceled, running, finished }
-enum Mode { firstTo, bestOf }
-enum Type { legs, sets }
-
-class OfflineGame {
+class OfflineGame extends Game{
   final DateTime date;
 
   final Status status;

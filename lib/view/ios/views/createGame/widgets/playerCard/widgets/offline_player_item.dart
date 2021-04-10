@@ -1,17 +1,17 @@
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/player/offline_player.dart';
 import 'package:dart_counter/view/ios/modalBottomSheets/advancedSettingsModalBottomSheet/advanced_settings_modal_bottom_sheet.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class AnonymousPlayerItem extends StatelessWidget {
+class OfflinePlayerItem extends StatelessWidget {
   final OfflinePlayer player;
   final Function(int) onDismissed;
 
-  AnonymousPlayerItem(this.player, {this.onDismissed});
+  OfflinePlayerItem(this.player, {this.onDismissed});
 
   @override
   Widget build(BuildContext context) {

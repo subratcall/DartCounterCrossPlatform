@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/services/database/database_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';

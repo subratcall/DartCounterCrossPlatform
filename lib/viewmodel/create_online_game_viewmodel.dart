@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/game.dart';
 import 'package:dart_counter/services/playing/playing_online_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';
@@ -6,40 +6,30 @@ import 'package:rxdart/rxdart.dart';
 abstract class CreateOnlineGameViewModel extends ViewModel {
 
   /// OUT
-  ValueStream<dynamic> get outputEvents;
+  ValueStream<PlayingOnlineServiceEvent> get outputEvents;
 
+  /// METHODS
   Future<bool> connect();
 
   Future<bool> disconnect();
 
-  /// METHODS
-  void createGame();
+  void onAddPlayerPressed();
 
-  void joinGame(int gameCode);
+  void onStartingPointsChanged(int startingPoints);
 
-  void invitePlayer(String uid);
+  void onModeChanged(Mode mode);
 
-  void reorderPlayer(int oldIndex, int newIndex);
+  void onSizeChanged(int size);
 
-  void removePlayer(int uid);
-
-  void setStartingPoints(int startingPoints);
-
-  void setMode(Mode mode);
-
-  void setSize(int size);
-
-  void setType(Type type);
-
-  void startGame();
-
-  void cancelGame();
-
-  void performThrow(int points, int dartsThrown, int dartsOnDouble);
-
-  void undoThrow();
+  void onTypeChanged(Type type);
 
   void onStartGamePressed();
+
+  void onRemovePlayer(int id);
+
+  void onReorderPlayer(int oldIndex, int newIndex);
+
+  void onCancelGamePressed();
 }
 
 class CreateOnlineGameViewModelImpl extends CreateOnlineGameViewModel {
@@ -48,7 +38,7 @@ class CreateOnlineGameViewModelImpl extends CreateOnlineGameViewModel {
 
   /// OUT
   @override
-  ValueStream<dynamic> get outputEvents => _playingOnlineService.events;
+  ValueStream<PlayingOnlineServiceEvent> get outputEvents => _playingOnlineService.events;
 
   @override
   Future<bool> connect() async {
@@ -60,72 +50,39 @@ class CreateOnlineGameViewModelImpl extends CreateOnlineGameViewModel {
     return _playingOnlineService.connect();
   }
 
-  @override
-  void createGame() {
-    _playingOnlineService.createGame();
+  void onAddPlayerPressed() {
+    throw UnimplementedError(); // TODO
   }
 
-  @override
-  void joinGame(int gameCode) {
-    _playingOnlineService.joinGame(gameCode);
-  }
-
-  @override
-  void invitePlayer(String uid) {
-    _playingOnlineService.invitePlayer(uid);
-  }
-
-  @override
-  void reorderPlayer(int oldIndex, int newIndex) {
-    _playingOnlineService.reorderPlayer(oldIndex, newIndex);
-  }
-
-  @override
-  void removePlayer(int uid) {
-    _playingOnlineService.removePlayer(uid);
-  }
-
-  @override
-  void setStartingPoints(int startingPoints) {
+  void onStartingPointsChanged(int startingPoints) {
     _playingOnlineService.setStartingPoints(startingPoints);
   }
 
-  @override
-  void setMode(Mode mode) {
+  void onModeChanged(Mode mode) {
     _playingOnlineService.setMode(mode);
   }
 
-  @override
-  void setSize(int size) {
+  void onSizeChanged(int size) {
     _playingOnlineService.setSize(size);
   }
 
-  @override
-  void setType(Type type) {
+  void onTypeChanged(Type type) {
     _playingOnlineService.setType(type);
-  }
-
-  @override
-  void startGame() {
-    _playingOnlineService.startGame();
-  }
-
-  @override
-  void cancelGame() {
-    _playingOnlineService.cancelGame();
-  }
-
-  @override
-  void performThrow(int points, int dartsThrown, int dartsOnDouble) {
-    _playingOnlineService.performThrow(points, dartsThrown, dartsOnDouble);
-  }
-
-  @override
-  void undoThrow() {
-    _playingOnlineService.undoThrow();
   }
 
   void onStartGamePressed() {
     _playingOnlineService.startGame();
+  }
+
+  void onRemovePlayer(int id) {
+    _playingOnlineService.removePlayer(id);
+  }
+
+  void onReorderPlayer(int oldIndex, int newIndex) {
+    _playingOnlineService.reorderPlayer(oldIndex, newIndex);
+  }
+
+  void onCancelGamePressed() {
+    _playingOnlineService.cancelGame();
   }
 }

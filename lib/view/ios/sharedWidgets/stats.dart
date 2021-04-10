@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dart_counter/assets/app_colors.dart';
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/player/player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'card.dart';
 
 class Stats extends StatelessWidget {
-  final List<OfflinePlayer> players;
+  final List<Player> players;
 
   Stats(this.players)
       : assert(players != null),
@@ -265,7 +265,7 @@ class DescriptionItem extends StatelessWidget {
 }
 
 class PlayerItem extends StatelessWidget {
-  final OfflinePlayer player;
+  final Player player;
 
   PlayerItem(this.player);
 

@@ -1,4 +1,5 @@
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/services/playing/playing_offline_service.dart';
 import 'package:dart_counter/viewmodel/viewmodel.dart';
 import 'package:rxdart/rxdart.dart';

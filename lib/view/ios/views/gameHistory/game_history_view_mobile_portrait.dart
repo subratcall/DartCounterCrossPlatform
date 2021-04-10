@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/view/ios/views/gameHistory/details/game_history_details_view.dart';
 import 'package:dart_counter/view/ios/views/loading_view.dart';
 import 'package:dart_counter/viewmodel/game_history_viewmodel.dart';

@@ -1,15 +1,15 @@
 import 'package:dart_counter/assets/app_colors.dart';
 import 'package:dart_counter/assets/app_images.dart';
-import 'package:dart_counter/model/offline_player.dart';
+import 'package:dart_counter/model/player/online_player.dart';
 import 'package:dart_counter/view/ios/modalBottomSheets/advancedSettingsModalBottomSheet/advanced_settings_modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class PlayerItem extends StatelessWidget {
-  final OfflinePlayer player;
+class OnlinePlayerItem extends StatelessWidget {
+  final OnlinePlayer player;
   final Function(int) onDismissed;
 
-  PlayerItem(this.player, {this.onDismissed});
+  OnlinePlayerItem(this.player, {this.onDismissed});
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +58,7 @@ class PlayerItem extends StatelessWidget {
                       flex: 167,
                       child: Center(
                         child: Text(
-                          player.profile?.username != null
-                              ? player.profile.username
-                              : player.id == -1
-                                  ? 'Dartbot'
-                                  : player.name,
+                          player.name,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),

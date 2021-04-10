@@ -1,4 +1,4 @@
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/four_player.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/input_row.dart';
 import 'package:dart_counter/view/ios/views/inGame/widgets/key_board.dart';

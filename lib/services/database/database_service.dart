@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dart_counter/model/career_stats.dart';
 import 'package:dart_counter/model/friend.dart';
 import 'package:dart_counter/model/friend_request.dart';
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/model/invitation.dart';
 import 'package:dart_counter/model/profile.dart';
 import 'package:dart_counter/services/database/impl/firestore_service.dart';

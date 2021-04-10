@@ -1,10 +1,8 @@
 import 'package:dart_counter/app_routes.dart';
-import 'package:dart_counter/model/offline_game.dart';
+import 'package:dart_counter/model/game/offline_game.dart';
 import 'package:dart_counter/view/ios/sharedWidgets/buttons/action_button.dart';
-import 'package:dart_counter/view/ios/views/createGame/widgets/dart_bot_card.dart';
 import 'package:dart_counter/view/ios/views/createGame/widgets/game_settings_card.dart';
-import 'package:dart_counter/view/ios/views/createGame/widgets/player_card.dart';
-import 'package:dart_counter/viewmodel/create_offline_game_viewmodel.dart';
+import 'package:dart_counter/view/ios/views/createGame/widgets/playerCard/player_card.dart';
 import 'package:dart_counter/viewmodel/create_online_game_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -54,7 +52,7 @@ class CreateOnlineGameViewMobilePortrait extends StatelessWidget {
                               game.players,
                               onAddPlayerPressed: model.onAddPlayerPressed,
                               onRemovePlayer: model.onRemovePlayer,
-                              onNameChanged: model.onNameChanged,
+                              onNameChanged: null,
                               onReordered: model.onReorderPlayer,
                             ),
                           ),
